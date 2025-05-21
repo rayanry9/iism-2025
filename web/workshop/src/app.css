@@ -2,6 +2,12 @@
 
 @theme{
 	--color-primary:oklch(0.6593 0.230058 35.2202);
+	--color-secondary: oklch(0.4444 0.075555 199.7694);
 	--color-backgroud: oklch(1 0 0);
 	--color-foreground: oklch(0.2178 0 0);
+}
+
+.jost {
+  font-family: "Jost", sans-serif;
+  font-style: normal;
 }

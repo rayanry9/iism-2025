@@ -1,0 +1,74 @@
+<script lang="ts"></script>
+
+{#snippet TeamItem(name: string, designation: string, imgSrc: string, phone: string, email: string)}
+	<div class="flex flex-col">
+		<div class="flex flex-row">
+			<div class="relative size-[16rem]">
+				<img src={imgSrc} alt="face" class="absolute left-4" />
+			</div>
+			<div class="mt-auto flex flex-col items-end">
+				<p class="text-[1.75rem] font-medium">{name}</p>
+				<p class="text-xl">{designation}</p>
+				<div
+					class="mt-4 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-6 py-4 text-2xl text-[#AE9C74]"
+				>
+					<p class="skew-x-12">{phone}</p>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="mt-4 mr-5 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-6 py-4 text-2xl text-[#AE9C74]"
+		>
+			<p class="flex skew-x-12 flex-row items-center gap-x-4">
+				<span>
+					<img src="icons/mail.svg" alt="mail" />
+				</span>
+				{email}
+			</p>
+		</div>
+	</div>
+{/snippet}
+
+{#snippet Header(text: string)}
+	<div class="bg-primary w-fit skew-2">
+		<div class="text-backgroud -skew-6 bg-black px-24 py-5">
+			<p class="skew-4 text-2xl font-medium">{text}</p>
+		</div>
+	</div>
+{/snippet}
+
+<main class="flex flex-col items-center gap-y-32 px-52 pt-32 pb-24">
+	{@render Header('STUDENT HEADS')}
+	<section class="grid grid-cols-3">
+		{@render TeamItem('Pritam Kumar M.', 'Overall Convenor', 'team/pritam.png', '+91 7602790672')}
+		{@render TeamItem('Aryan Jain', 'Co-Convenor', 'team/aryan.png')}
+		{@render TeamItem('Parth B.', 'Co-Convenor', 'team/parth.png')}
+	</section>
+
+	{@render Header('CORE TEAM')}
+	<section class="grid grid-cols-3">
+		{@render TeamItem('Shiven Mathur', 'Sponsorship Head', 'team/shiven.png')}
+		{@render TeamItem('Palem Rakesh V.', 'Sponsorship Head', 'team/palem.png')}
+		{@render TeamItem('Sai Kumar R.', 'Events Head', 'team/sai-kumar.png')}
+
+		{@render TeamItem('Nikhil Deshmukh', 'Events Head', 'team/nikhil.png')}
+		{@render TeamItem('Kush Upadhyay', 'Media Head', 'team/kush.png')}
+		{@render TeamItem('Siya Shah', 'Media Head', 'team/siya.png')}
+
+		{@render TeamItem('Smaron Boruah', 'Design & Creatives Head', 'team/smaron.png')}
+		{@render TeamItem('Eshaani Gupta', 'Design & Creatives Head', 'team/eshaani.png')}
+		{@render TeamItem('Nihar Kartikeya', 'Operations Head', 'team/nihar.png')}
+
+		{@render TeamItem('Rohit Gundeti', 'Medical & Security Head', 'team/rohit.png')}
+		{@render TeamItem('Gayatri Priya', 'Hospitality Head', 'team/gayatri.png')}
+		{@render TeamItem('Utkarsh Dwivedi', 'Hospitality Head', 'team/gayatri.png')}
+
+		{@render TeamItem('Hanzala Akhter', 'Transport Head', 'team/hanzala.png')}
+		{@render TeamItem('Rayan Halder', 'Web Head', 'team/rayan.png')}
+		{@render TeamItem('Dhruv Sharma', 'PR & Web Head', 'team/dhruv.png')}
+
+		{@render TeamItem('M. Shees', 'Production Head', 'team/shees.png')}
+		{@render TeamItem('Vinit Shimpi', 'UX Design - Web & App', 'team/vinit.png')}
+	</section>
+</main>
