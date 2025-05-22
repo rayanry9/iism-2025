@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 </script>
 
-<section class="text-background relative hidden">
+<section class="text-background relative">
 	<img src="home/landing.jpg" alt="Landing" />
 	<div
 		class="from-foreground absolute top-0 bottom-0 flex flex-col justify-center gap-y-6 bg-linear-to-r to-transparent pr-20 pl-52"
@@ -188,7 +188,7 @@
 	</section>
 </article>
 
-<section class="bg-foreground text-background flex flex-row pl-52">
+<section class="bg-foreground text-background grid h-full grid-cols-[35%_65%] pl-52">
 	<div class="flex flex-col py-48 pr-24">
 		<h2 class="text-5xl font-medium text-nowrap">About Campus</h2>
 		<div class="mt-16 flex max-w-[64rem] flex-col gap-y-4">
@@ -212,7 +212,7 @@
 			onclick={() => {
 				goto('register');
 			}}
-			class="bg-primary mt-auto flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer"
+			class="bg-primary mt-24 flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer"
 		>
 			<p class="skew-x-[15deg]">EXPLORE FACILITES</p>
 			<img
@@ -222,8 +222,9 @@
 			/>
 		</button>
 	</div>
-	<div class="grow">
-		<img src="home/sncc.png" class="w-fit" alt="SNCC" />
+
+	<div style="clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);" class="h-full">
+		<img src="home/sncc.png" class="h-full object-cover" alt="SNCC" />
 	</div>
 </section>
 
