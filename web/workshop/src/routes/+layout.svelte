@@ -14,7 +14,7 @@
 {/snippet}
 
 <nav
-	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-12 sm:relative sm:py-0"
+	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-8 sm:relative sm:py-0"
 >
 	<div class="divide-background/50 flex h-full flex-row divide-x">
 		<a href="/">

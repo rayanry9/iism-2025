@@ -32,7 +32,7 @@
 
 {#snippet Header(text: string)}
 	<div class="bg-primary w-fit skew-2">
-		<div class="text-backgroud -skew-6 bg-black px-24 py-5">
+		<div class="text-background -skew-6 bg-black px-24 py-5">
 			<p class="skew-4 text-2xl font-medium">{text}</p>
 		</div>
 	</div>
