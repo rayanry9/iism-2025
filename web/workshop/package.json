@@ -36,7 +36,11 @@
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
+			"@tailwindcss/oxide",
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"bits-ui": "^1.5.3"
 	}
 }

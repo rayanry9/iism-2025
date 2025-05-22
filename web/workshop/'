@@ -1,74 +1,141 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+	import '../app.css';
 
-{#snippet TeamItem(name: string, designation: string, imgSrc: string, phone: string, email: string)}
-	<div class="flex flex-col">
-		<div class="flex flex-row">
-			<div class="relative size-[16rem]">
-				<img src={imgSrc} alt="face" class="absolute left-4" />
-			</div>
-			<div class="mt-auto flex flex-col items-end">
-				<p class="text-[1.75rem] font-medium">{name}</p>
-				<p class="text-xl">{designation}</p>
-				<div
-					class="mt-4 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-6 py-4 text-2xl text-[#AE9C74]"
+	let navMenuOpen = $state(false);
+	let { children } = $props();
+</script>
+
+{#snippet NavItem(text: string, href: string)}
+	<a {href} class="ml-8 {page.url.pathname == '/' + href ? 'text-primary' : 'text-background'}"
+		>{text.toUpperCase()}</a
+	>
+{/snippet}
+
+<nav
+	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-12 sm:relative sm:py-0"
+>
+	<div class="divide-background/50 flex h-full flex-row divide-x">
+		<a href="/">
+			<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-9 pr-3" />
+		</a>
+
+		<a href="https://iith.ac.in">
+			<img src="iith-logo.png" alt="IITH Logo" class="h-8 pl-4" />
+		</a>
+	</div>
+	<div class="ml-auto hidden flex-row items-center gap-x-2 sm:flex">
+		{@render NavItem('About & Facilities', 'about')}
+		{@render NavItem('Gallery', 'gallery')}
+		{@render NavItem('team', 'team')}
+		<a
+			class="bg-primary relative ml-4 flex h-14 -skew-x-12 flex-row items-center px-10"
+			href="register"
+		>
+			<div class="bg-foreground absolute right-1.5 h-full w-1"></div>
+			<div class="bg-foreground absolute right-3.5 h-full w-1"></div>
+			<p class="skew-x-12">REGISTER</p>
+		</a>
+	</div>
+
+	<button
+		onclick={() => {
+			navMenuOpen = !navMenuOpen;
+		}}
+		class="ml-auto block cursor-pointer sm:hidden"
+	>
+		{#if !navMenuOpen}
+			<img src="icons/menu.svg" alt="menu open" />
+		{:else}
+			<img src="icons/cross.svg" alt="menu close" />
+		{/if}
+	</button>
+	{#if navMenuOpen}
+		<div
+			class="bg-foreground text-background *:border-y-background/20 absolute top-[4.25rem] left-0 flex w-full flex-col items-center *:flex *:w-full *:flex-col *:items-center *:border-t *:py-4"
+		>
+			<a href="about">ABOUT & FACILITIES</a>
+			<a href="gallery">GALLERY</a>
+			<a href="team">TEAM</a>
+			<div>
+				<button
+					onclick={() => {
+						goto('register');
+					}}
+					class="text-background bg-primary mx-12 my-4 w-full -skew-x-[15deg] text-lg font-medium hover:cursor-pointer"
 				>
-					<p class="skew-x-12">{phone}</p>
+					<p class="skew-x-[15deg]">REGISTER NOW</p>
+				</button>
+			</div>
+		</div>
+	{/if}
+</nav>
+
+{@render children()}
+
+<footer class="text-background bg-foreground mt-auto flex flex-col items-center px-52 pt-24 pb-4">
+	<div class="mb-20 grid w-full grid-cols-3">
+		<section class="grid grid-cols-subgrid">
+			<div class="row-span-1 mb-8 flex flex-row items-center">
+				<div class="divide-background/70 flex flex-row items-center divide-x">
+					<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-9 pr-3" />
+					<img src="iith-logo.png" alt="IITH Logo" class="h-8 pl-4" />
+				</div>
+				<p class="ml-6">IIT HYDERABAD</p>
+			</div>
+			<div class="row-span-1">
+				<h3 class="mb-6 text-[2rem] font-medium">58th INTER IIT<br />SPORTS MEET<br />2025</h3>
+				<div class="flex flex-row gap-x-4 *:*:skew-x-12 *:-skew-x-12 *:p-2.5">
+					<div class="bg-[#D6E8E6]">
+						<img src="icons/linkedin.svg" class="size-5" alt="Linkedin" />
+					</div>
+					<div class="bg-[#D6E8E6]">
+						<img src="icons/instagram.svg" class="size-5" alt="Instagram" />
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 
-		<div
-			class="mt-4 mr-5 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-6 py-4 text-2xl text-[#AE9C74]"
-		>
-			<p class="flex skew-x-12 flex-row items-center gap-x-4">
-				<span>
-					<img src="icons/mail.svg" alt="mail" />
-				</span>
-				{email}
-			</p>
-		</div>
+		<section class="grid grid-cols-subgrid">
+			<h5 class="font font-semibold">QUICK LINKS</h5>
+			<div class="row-span-1 flex flex-col gap-y-3 *:font-medium">
+				<a
+					class="w-fit {page.url.pathname == '/home' ? 'text-primary' : 'text-background'}"
+					href="/">HOME</a
+				>
+				<a
+					class="w-fit {page.url.pathname == '/about' ? 'text-primary' : 'text-background'}"
+					href="/about">ABOUT & FACILITIES</a
+				>
+				<a
+					class="w-fit {page.url.pathname == '/gallery' ? 'text-primary' : 'text-background'}"
+					href="gallery">GALLERY</a
+				>
+				<a
+					class="w-fit {page.url.pathname == '/team' ? 'text-primary' : 'text-background'}"
+					href="team">TEAM</a
+				>
+				<a href="register" class="text-primary w-fit">REGISTER</a>
+			</div>
+		</section>
+
+		<section class="grid grid-cols-subgrid">
+			<h5 class="font-semibold">REACH US</h5>
+			<div class="grid grid-cols-2">
+				<p>Get in Touch -</p>
+				<p>SNCC Sports Complex, IIT Hyderabad, Kandi, 522084</p>
+				<p>Call -</p>
+				<div class="flex flex-col">
+					<p>Pritam (Overall Convenor ) - +91 7602790672</p>
+					<p>Health Center - +91 7602790672</p>
+					<p>Security Control Office - +91 7602790672</p>
+				</div>
+
+				<p>Mail -</p>
+				<p>interiit.oc@iith.ac.in</p>
+			</div>
+		</section>
 	</div>
-{/snippet}
-
-{#snippet Header(text: string)}
-	<div class="bg-primary w-fit skew-2">
-		<div class="text-backgroud -skew-6 bg-black px-24 py-5">
-			<p class="skew-4 text-2xl font-medium">{text}</p>
-		</div>
-	</div>
-{/snippet}
-
-<main class="flex flex-col items-center gap-y-32 px-52 pt-32 pb-24">
-	{@render Header('STUDENT HEADS')}
-	<section class="grid grid-cols-3">
-		{@render TeamItem('Pritam Kumar M.', 'Overall Convenor', 'team/pritam.png', '+91 7602790672')}
-		{@render TeamItem('Aryan Jain', 'Co-Convenor', 'team/aryan.png')}
-		{@render TeamItem('Parth B.', 'Co-Convenor', 'team/parth.png')}
-	</section>
-
-	{@render Header('CORE TEAM')}
-	<section class="grid grid-cols-3">
-		{@render TeamItem('Shiven Mathur', 'Sponsorship Head', 'team/shiven.png')}
-		{@render TeamItem('Palem Rakesh V.', 'Sponsorship Head', 'team/palem.png')}
-		{@render TeamItem('Sai Kumar R.', 'Events Head', 'team/sai-kumar.png')}
-
-		{@render TeamItem('Nikhil Deshmukh', 'Events Head', 'team/nikhil.png')}
-		{@render TeamItem('Kush Upadhyay', 'Media Head', 'team/kush.png')}
-		{@render TeamItem('Siya Shah', 'Media Head', 'team/siya.png')}
-
-		{@render TeamItem('Smaron Boruah', 'Design & Creatives Head', 'team/smaron.png')}
-		{@render TeamItem('Eshaani Gupta', 'Design & Creatives Head', 'team/eshaani.png')}
-		{@render TeamItem('Nihar Kartikeya', 'Operations Head', 'team/nihar.png')}
-
-		{@render TeamItem('Rohit Gundeti', 'Medical & Security Head', 'team/rohit.png')}
-		{@render TeamItem('Gayatri Priya', 'Hospitality Head', 'team/gayatri.png')}
-		{@render TeamItem('Utkarsh Dwivedi', 'Hospitality Head', 'team/gayatri.png')}
-
-		{@render TeamItem('Hanzala Akhter', 'Transport Head', 'team/hanzala.png')}
-		{@render TeamItem('Rayan Halder', 'Web Head', 'team/rayan.png')}
-		{@render TeamItem('Dhruv Sharma', 'PR & Web Head', 'team/dhruv.png')}
-
-		{@render TeamItem('M. Shees', 'Production Head', 'team/shees.png')}
-		{@render TeamItem('Vinit Shimpi', 'UX Design - Web & App', 'team/vinit.png')}
-	</section>
-</main>
+	<p class="opacity-50">© Copyright by Inter IIT Sports Meet 2025</p>
+</footer>

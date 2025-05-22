@@ -10,7 +10,7 @@
 				<p class="text-[1.75rem] font-medium">{name}</p>
 				<p class="text-xl">{designation}</p>
 				<div
-					class="mt-4 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-6 py-4 text-2xl text-[#AE9C74]"
+					class="mt-4 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-4 py-4 text-2xl text-[#AE9C74]"
 				>
 					<p class="skew-x-12">{phone}</p>
 				</div>
@@ -40,7 +40,7 @@
 
 <main class="flex flex-col items-center gap-y-32 px-52 pt-32 pb-24">
 	{@render Header('STUDENT HEADS')}
-	<section class="grid grid-cols-3 gap-8">
+	<section class="grid grid-cols-3 gap-4">
 		{@render TeamItem(
 			'Pritam Kumar M.',
 			'Overall Convenor',
