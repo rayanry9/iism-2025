@@ -3,14 +3,14 @@
 {#snippet TeamItem(name: string, designation: string, imgSrc: string, phone: string, email: string)}
 	<div class="flex flex-col">
 		<div class="flex flex-row">
-			<div class="relative size-[16rem]">
-				<img src={imgSrc} alt="face" class="absolute left-4" />
+			<div class="relative size-[10rem] sm:size-[16rem]">
+				<img src={imgSrc} alt="face" class="absolute bottom-0 left-4" />
 			</div>
-			<div class="mt-auto flex flex-col items-end">
-				<p class="text-[1.75rem] font-medium">{name}</p>
-				<p class="text-xl">{designation}</p>
+			<div class="mt-auto ml-3 flex flex-col items-end sm:ml-0">
+				<p class="text-xl font-semibold sm:text-[1.75rem]">{name}</p>
+				<p class="text-sm sm:text-xl">{designation}</p>
 				<div
-					class="mt-4 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-4 py-4 text-2xl text-[#AE9C74]"
+					class="mt-4 flex w-[10rem] -skew-x-[15deg] flex-col items-center border border-[#AE9C74] bg-[#E9E4CE] px-2 py-2 text-base text-[#AE9C74] sm:w-auto sm:px-4 sm:py-4 sm:text-2xl"
 				>
 					<p class="skew-x-12">{phone}</p>
 				</div>
@@ -18,11 +18,11 @@
 		</div>
 
 		<div
-			class="mt-4 mr-5 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-6 py-4 text-2xl text-[#AE9C74]"
+			class="mt-2 mr-4 ml-1 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-4 py-2 text-base text-[#AE9C74] sm:mt-4 sm:mr-5 sm:ml-0 sm:px-6 sm:py-4 sm:text-2xl"
 		>
-			<p class="flex skew-x-12 flex-row items-center gap-x-4">
+			<p class="flex skew-x-12 flex-row items-center gap-x-2 sm:gap-x-4">
 				<span>
-					<img src="icons/mail.svg" alt="mail" />
+					<img src="icons/mail.svg" class="size-4 sm:size-8" alt="mail" />
 				</span>
 				{email}
 			</p>
@@ -32,15 +32,15 @@
 
 {#snippet Header(text: string)}
 	<div class="bg-primary w-fit skew-2">
-		<div class="text-background -skew-6 bg-black px-24 py-5">
-			<p class="skew-4 text-2xl font-medium">{text}</p>
+		<div class="text-background -skew-6 bg-black px-16 py-4 sm:px-24 sm:py-5">
+			<p class="skew-4 text-xl font-medium sm:text-2xl">{text}</p>
 		</div>
 	</div>
 {/snippet}
 
-<main class="flex flex-col items-center gap-y-32 px-52 pt-32 pb-24">
+<main class="flex flex-col items-center gap-y-12 px-8 pt-16 pb-24 sm:gap-y-32 sm:px-52 sm:pt-32">
 	{@render Header('STUDENT HEADS')}
-	<section class="grid grid-cols-3 gap-4">
+	<section class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 		{@render TeamItem(
 			'Pritam Kumar M.',
 			'Overall Convenor',
@@ -65,7 +65,7 @@
 	</section>
 
 	{@render Header('CORE TEAM')}
-	<section class="grid grid-cols-3 gap-x-4 gap-y-14">
+	<section class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-y-14">
 		{@render TeamItem(
 			'Shiven Mathur',
 			'Sponsorship Head',
