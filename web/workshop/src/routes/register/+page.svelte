@@ -12,33 +12,33 @@
 
 		<form use:enhance class="mt-24 grid grid-cols-3 gap-x-20 gap-y-20">
 			<label>
-				<p class="label-text">Name</p>
-				<input class="input" placeholder="Enter Here" type="text" />
+				<p class="label-text">Full Name</p>
+				<input class="input" placeholder="Enter Here" type="text" required />
 			</label>
 
 			<label>
-				<p class="label-text">Contact No.</p>
-				<input class="input" placeholder="Enter Here" type="text" />
+				<p class="label-text">Contact No. (Whatsapp Preferred)</p>
+				<input class="input" placeholder="Enter Here" required type="text" />
 			</label>
 
 			<label>
 				<p class="label-text">Emergency No. (Parents)</p>
-				<input class="input" placeholder="Enter Here" type="text" />
+				<input class="input" placeholder="Enter Here" type="text" required />
 			</label>
 
 			<label>
 				<p class="label-text">Email ID</p>
-				<input class="input" placeholder="Enter Here" type="email" />
+				<input class="input" placeholder="Enter Here" type="email" required />
 			</label>
 
 			<label>
-				<p class="label-text">Age</p>
-				<input class="input" placeholder="Enter Here" type="number" />
+				<p class="label-text">Age (10-28)</p>
+				<input class="input" placeholder="Enter Here" type="number" min={10} max={28} required />
 			</label>
 
 			<label>
 				<p class="label-text">Gender</p>
-				<select class="input select">
+				<select class="input select" required>
 					<option class="option">Male</option>
 					<option class="option">Female</option>
 					<option class="option">Others</option>
@@ -48,7 +48,7 @@
 
 			<label>
 				<p class="label-text">Blood Group</p>
-				<select class="input select">
+				<select class="input select" required>
 					<option class="option">A+</option>
 					<option class="option">A-</option>
 					<option class="option">B+</option>
@@ -62,7 +62,7 @@
 
 			<label>
 				<p class="label-text">Sport You are Interested in</p>
-				<select class="input select">
+				<select class="input select" required>
 					<option class="option">Football</option>
 					<option class="option">Basketball</option>
 					<option class="option">Badminton</option>
@@ -81,11 +81,40 @@
 			</label>
 
 			<label>
-				<p class="label-text">Your Instituition Name</p>
+				<p class="label-text">School / College / Institute Name</p>
+				<input class="input" placeholder="Enter Here" type="text" required />
+			</label>
+
+			<label>
+				<p class="label-text">Medical Conditions or Allergies (If Any)</p>
 				<input class="input" placeholder="Enter Here" type="text" />
 			</label>
 
+			<label>
+				<p class="label-text">Date of Birth</p>
+				<input class="input" placeholder="Enter Here" type="date" required />
+			</label>
+
+			<label>
+				<p class="label-text">Current Class / Year of Study</p>
+				<input class="input" placeholder="Enter Here" type="text" required />
+			</label>
+
+			<label>
+				<p class="label-text">Will you stay in the campus hostel?</p>
+				<select class="input select" required>
+					<option class="option">Yes</option>
+					<option class="option">No</option>
+				</select>
+			</label>
+
+			<label>
+				<p class="label-text">Gaurdian Name (Required for under 18)</p>
+				<input class="input" placeholder="Enter Here" type="text" required />
+			</label>
+
 			<h1 class="col-span-3 text-[3.5rem] font-medium">Payment</h1>
+			<div class="col-span-3 text-3xl">Details will be provided through Email or Whatsapp.</div>
 			<div class="col-span-2"></div>
 			<button
 				type="submit"
