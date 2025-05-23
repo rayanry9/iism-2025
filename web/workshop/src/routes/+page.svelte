@@ -248,7 +248,7 @@
 			)}
 		</div>
 
-		<div class="flex flex-row">
+		<div class="flex flex-row sm:hidden">
 			<button
 				class="size-12 -skew-x-[15deg] border-2 border-[#B6CAC8]"
 				onclick={() => {
