@@ -1,16 +1,88 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	let dialog = $state();
 </script>
 
-<main class="px-52 pt-24 pb-32">
+<dialog
+	closedby="any"
+	bind:this={dialog}
+	class="bg-background text-foreground mx-auto mt-auto h-[70vh] w-screen max-w-none grow p-12 sm:my-auto sm:h-fit sm:w-[75vw] sm:p-16"
+>
+	<div class="flex flex-col">
+		<div class="flex flex-row items-center">
+			<h2 class="text-[2rem] font-medium sm:text-[2.5rem]">Terms and Conditions</h2>
+			<button
+				onclick={() => {
+					(dialog as HTMLDialogElement).close();
+				}}
+				class="ml-auto flex size-12 -skew-x-[15deg] cursor-pointer flex-col bg-[#016064] sm:size-16"
+			>
+				<img
+					src="icons/cross.svg"
+					class="mx-auto my-auto skew-x-[15deg] items-center"
+					alt="cross"
+				/>
+			</button>
+		</div>
+		<hr class="my-6 sm:my-12" />
+		{#snippet Card(header: string, points: string[])}
+			<div class="flex flex-col">
+				<h4 class="text-xl font-semibold sm:text-2xl">{header}</h4>
+				<ul class="mt-2.5 list-disc pl-4 sm:pl-6 sm:text-lg">
+					{#each points as point (point)}
+						<li>{point}</li>
+					{/each}
+				</ul>
+			</div>
+		{/snippet}
+		<div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+			{@render Card('ACCOMODATION & MEALS', [
+				'Hostel stay and meals are included in the fee',
+				'No refunds for skipped meals or early exits from campus',
+				'Participants must follow hostel guidelines and maintain decorum'
+			])}
+			{@render Card('CODE OF CONDUCT', [
+				'Unethical behavior, harassment, or rule violations will result in expulsion from the camp',
+				'No refunds will be issued in such cases',
+				'Respect for peers, staff, and campus property is mandatory'
+			])}
+			{@render Card('DAMAGE & PENALTY', [
+				'Participants are liable for any damage to campus property',
+				'Monetary penalties will be applied for any damage',
+				'Repeated or serious offenses may lead to suspension from the camp without refund'
+			])}
+			{@render Card('WEATHER & SCHEDULE FLEXIBILITY', [
+				'In case of rain or other disruptions, outdoor sports will be shifted to indoor venues or alternative activities arranged',
+				'The schedule may be adjusted for safety or logistical reasons'
+			])}
+			{@render Card('SAFETY & LIABILITY', [
+				'Basic medical assistance will be available on-site',
+				'Organizers are not responsible for injuries during the camp',
+				'All participants are expected to follow staff and coach instructions'
+			])}
+			{@render Card('GENERAL TERMS', [
+				'Organizers reserve the right to alter the schedule, sports lineup, and policies as necessary',
+				'The camp fee is non-refundable except in rare medical emergencies with valid proof'
+			])}
+		</div>
+	</div>
+</dialog>
+
+<main class="px-8 pt-16 pb-16 sm:px-52 sm:pt-24 sm:pb-32">
 	<section>
-		<h1 class="text-[3.5rem] font-medium">Register</h1>
-		<p class="text-xl">
+		<h1 class="text-[2rem] font-medium sm:text-[3.5rem]">Register</h1>
+		<p class="sm:text-xl">
 			Workshop is pen to school and college students around Hyderabad. Limited seats<br />available.
 			Fill the form below to confirm your spot!
 		</p>
 
-		<form use:enhance class="mt-24 grid grid-cols-3 gap-x-20 gap-y-20">
+		<form
+			method="POST"
+			use:enhance
+			class="mt-12 grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-3 sm:gap-y-20"
+		>
+			<h1 class=" text-xl font-medium sm:col-span-3 sm:-mb-10 sm:text-[2rem]">About You</h1>
+
 			<label>
 				<p class="label-text">Full Name</p>
 				<input class="input" placeholder="Enter Here" type="text" required />
@@ -22,18 +94,8 @@
 			</label>
 
 			<label>
-				<p class="label-text">Emergency No. (Parents)</p>
-				<input class="input" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<label>
 				<p class="label-text">Email ID</p>
 				<input class="input" placeholder="Enter Here" type="email" required />
-			</label>
-
-			<label>
-				<p class="label-text">Age (10-28)</p>
-				<input class="input" placeholder="Enter Here" type="number" min={10} max={28} required />
 			</label>
 
 			<label>
@@ -47,6 +109,36 @@
 			</label>
 
 			<label>
+				<p class="label-text">Age (10-28)</p>
+				<input class="input" placeholder="Enter Here" type="number" min={10} max={28} required />
+			</label>
+
+			<label>
+				<p class="label-text">Date of Birth</p>
+				<input class="input" placeholder="Enter Here" type="date" required />
+			</label>
+
+			<label class="">
+				<p class="label-text">Address</p>
+				<input class="input" placeholder="Enter Here" type="text" />
+			</label>
+
+			<label class="">
+				<p class="label-text">Pincode</p>
+				<input class="input" placeholder="Enter Here" type="number" />
+			</label>
+
+			<label>
+				<p class="label-text">School / College / Institute Name</p>
+				<input class="input" placeholder="Enter Here" type="text" required />
+			</label>
+
+			<label>
+				<p class="label-text">Current Class / Year of Study</p>
+				<input class="input" placeholder="Enter Here" type="text" required />
+			</label>
+
+			<label>
 				<p class="label-text">Blood Group</p>
 				<select class="input select" required>
 					<option class="option">A+</option>
@@ -57,6 +149,19 @@
 					<option class="option">AB-</option>
 					<option class="option">O+</option>
 					<option class="option">O-</option>
+				</select>
+			</label>
+
+			<label>
+				<p class="label-text">Medical Conditions or Allergies (If Any)</p>
+				<input class="input" placeholder="Enter Here" type="text" />
+			</label>
+
+			<label>
+				<p class="label-text">Will you stay in the campus hostel?</p>
+				<select class="input select" required>
+					<option class="option">Yes</option>
+					<option class="option">No</option>
 				</select>
 			</label>
 
@@ -75,50 +180,45 @@
 				<input type="text" class="input" placeholder="Enter Here" />
 			</label>
 
-			<label class="col-span-2">
-				<p class="label-text">Address (with city & pincode)</p>
-				<input class="input" placeholder="Enter Here" type="text" />
-			</label>
+			<h1 class="mb-6 text-2xl font-medium sm:col-span-3 sm:mt-8 sm:mb-0 sm:text-[2rem]">
+				Gaurdian Details (Required for under 18)
+			</h1>
 
-			<label>
-				<p class="label-text">School / College / Institute Name</p>
+			<label class="-mt-8">
+				<p class="label-text">Gaurdian Full Name</p>
 				<input class="input" placeholder="Enter Here" type="text" required />
 			</label>
 
-			<label>
-				<p class="label-text">Medical Conditions or Allergies (If Any)</p>
-				<input class="input" placeholder="Enter Here" type="text" />
+			<label class="sm:col-span-2 sm:-mt-8 sm:grid sm:grid-cols-subgrid">
+				<p class="label-text sm:col-span-2">Gaurdian Contact No. (WhatsApp Preferred)</p>
+				<input class="input sm:col-span-1" placeholder="Enter Here" type="text" required />
 			</label>
 
-			<label>
-				<p class="label-text">Date of Birth</p>
-				<input class="input" placeholder="Enter Here" type="date" required />
-			</label>
-
-			<label>
-				<p class="label-text">Current Class / Year of Study</p>
-				<input class="input" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<label>
-				<p class="label-text">Will you stay in the campus hostel?</p>
-				<select class="input select" required>
-					<option class="option">Yes</option>
-					<option class="option">No</option>
-				</select>
-			</label>
-
-			<label>
-				<p class="label-text">Gaurdian Name (Required for under 18)</p>
-				<input class="input" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<h1 class="col-span-3 text-[3.5rem] font-medium">Payment</h1>
-			<div class="col-span-3 text-3xl">Details will be provided through Email or Whatsapp.</div>
-			<div class="col-span-2"></div>
+			<h1 class="text-2xl font-medium sm:col-span-3 sm:text-[2rem]">Payment</h1>
+			<div class="-mt-4 sm:col-span-3 sm:-mt-16 sm:text-2xl">
+				Details will be provided through Email or Whatsapp.
+			</div>
+			<div class="sm:col-span-2">
+				<label class="sm:text-2xl">
+					<input type="checkbox" class="size-4 sm:size-5" required />
+					<span>
+						I Agree to all Terms and Conditions
+						<span
+							onclick={(ev) => {
+								ev.preventDefault();
+								ev.stopImmediatePropagation();
+								(dialog as HTMLDialogElement).showModal();
+							}}
+							role="button"
+							tabindex={0}
+							class="text-primary underline">Read Here</span
+						>
+					</span>
+				</label>
+			</div>
 			<button
 				type="submit"
-				class="bg-primary text-background hover:bg-primary/75 w-full py-3.5 text-2xl hover:cursor-pointer"
+				class="bg-primary text-background hover:bg-primary/75 w-full py-3 text-xl hover:cursor-pointer sm:py-3.5 sm:text-2xl"
 				>SUBMIT</button
 			>
 		</form>
@@ -129,16 +229,16 @@
 	@reference "../../app.css";
 
 	.label-text {
-		@apply mb-4 text-2xl;
+		@apply mb-4 sm:text-2xl;
 	}
 
 	.input {
-		@apply focus:border-primary w-full border-2 border-[#016064] bg-[#D6E8E6] px-5 py-3 text-2xl text-[#016064] hover:brightness-90 focus:outline-none;
+		@apply focus:border-primary w-full border-2 border-[#016064] bg-[#D6E8E6] px-5 py-3 text-[#016064] hover:brightness-90 focus:outline-none sm:text-2xl;
 	}
 
 	.select {
 	}
 	.option {
-		@apply py-2 pl-4 text-lg;
+		@apply py-2 pl-4 text-sm sm:text-lg;
 	}
 </style>
