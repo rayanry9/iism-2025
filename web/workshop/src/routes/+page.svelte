@@ -1,34 +1,49 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	let expectCards = $state(new Array(5));
+	let currentCard = $state(1);
 </script>
 
 <section class="text-background relative">
-	<img src="home/landing.jpg" alt="Landing" />
+	<img
+		src="home/landing.jpg"
+		alt="Landing"
+		class="h-[calc(100vh-4rem)] object-cover object-center sm:h-auto"
+	/>
 	<div
-		class="from-foreground absolute top-0 bottom-0 flex flex-col justify-center gap-y-6 bg-linear-to-r to-transparent pr-20 pl-52"
+		class="from-foreground to-foreground absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 pr-8 pl-8 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0 sm:pr-20 sm:pl-52"
 	>
 		<div class="flex flex-row items-center gap-x-6">
 			<div class="divide-background/70 flex flex-row items-center divide-x">
-				<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-9 pr-3" />
-				<img src="iith-logo.png" alt="IITH Logo" class="h-8 pl-4" />
+				<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-7 pr-3 sm:h-9" />
+				<img src="iith-logo.png" alt="IITH Logo" class="h-6 pl-4 sm:h-8" />
 			</div>
 		</div>
 		<div class="flex flex-col gap-y-3">
-			<p class="text-[3.5rem] leading-[4.5rem] font-medium">5-Day Sports<br />Summer Camp</p>
+			<p class="text-4xl leading-snug font-medium sm:text-[3.5rem] sm:leading-[4.5rem]">
+				5-Day Sports <br class="hidden sm:block" />Summer Camp
+
+				<span
+					class="inline-flex w-fit flex-row gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-sm font-normal text-nowrap sm:hidden"
+				>
+					<img src="home/pin.svg" alt="pin" />
+					IIT HYDERABAD
+				</span>
+			</p>
 			<div
-				class="flex w-fit flex-row gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-nowrap"
+				class="hidden w-fit flex-row gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-nowrap sm:flex"
 			>
 				<img src="home/pin.svg" alt="pin" />
 				IIT HYDERABAD
 			</div>
 		</div>
-		<p class="text-xl font-medium">
+		<p class="text-base sm:text-xl sm:font-medium">
 			Experience Student Life.<br />
 			Explore Sports.<br />
 			Escape Boring Holidays.
 		</p>
 
-		<div class="flex flex-col gap-y-4">
+		<div class="mt-auto flex flex-col gap-y-4 sm:mt-0">
 			<button
 				onclick={() => {
 					goto('about');
@@ -46,17 +61,19 @@
 				<p class="skew-x-[15deg]">REGISTER</p>
 			</button>
 		</div>
-		<div class=" absolute bottom-12 self-center">
+		<div class=" self-center sm:absolute sm:bottom-12">
 			<img src="icons/triple-chevron-down.svg" alt="Chevron Down" />
 		</div>
 	</div>
 </section>
 
-<article class="flex flex-row gap-x-28 py-24 pr-32 pl-52">
-	<div class="flex w-[84rem] flex-col gap-y-16">
-		<section class="flex flex-col gap-y-8">
-			<h2 class="text-5xl font-medium">About Inter IIT Workshop...</h2>
-			<div class="flex flex-col gap-y-4 text-xl">
+<article
+	class="flex flex-col gap-x-28 gap-y-16 py-24 pr-8 pl-8 sm:flex-row sm:gap-y-0 sm:pr-32 sm:pl-52"
+>
+	<div class="flex flex-col gap-y-16 sm:w-[90rem]">
+		<section class="flex flex-col gap-y-4 sm:gap-y-8">
+			<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
+			<div class="flex flex-col gap-y-4 sm:text-xl">
 				<p>Are you looking for an active and meaningful way to spend your summer break?</p>
 
 				<p>
@@ -73,23 +90,23 @@
 			</div>
 		</section>
 
-		<section class="flex flex-col gap-y-8">
+		<section class="flex flex-col gap-y-4 sm:gap-y-8">
 			{#snippet SportItem(text: string, imgSrc: string)}
 				<div
-					class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-[1.375rem] font-medium text-[#016064]"
+					class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-xl font-medium text-[#016064] sm:text-[1.375rem]"
 				>
 					<p class="skew-x-[15deg]">{text}</p>
-					<img src={imgSrc} alt={text} class="absolute right-8 bottom-0 skew-x-[15deg]" />
+					<img src={imgSrc} alt={text} class="absolute right-4 bottom-0 skew-x-[15deg]" />
 				</div>
 			{/snippet}
 
-			<h2 class="text-5xl font-medium">Sports</h2>
-			<p class="text-xl">
+			<h2 class="text-[2rem] font-medium sm:text-5xl">Sports</h2>
+			<p class="mb-4 sm:mb-0 sm:text-xl">
 				This workshop will focus on Sports like Football, Volleyball, Cricket, Hockey, Athletics and
 				more which will lorem ipsum lorem ipsum
 			</p>
 
-			<div class="grid grid-cols-2 gap-8">
+			<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
 				{@render SportItem('FOOTBALL', 'home/football.svg')}
 				{@render SportItem('BASKETBALL', 'home/basketball.svg')}
 				{@render SportItem('BADMINTON', 'home/badminton.svg')}
@@ -100,9 +117,10 @@
 				onclick={() => {
 					goto('about');
 				}}
-				class="bg-foreground text-background mt-auto flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer"
+				class="bg-foreground text-background mt-4 flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer sm:mt-auto"
 			>
-				<p class="skew-x-[15deg]">SCHEDULE, REWARDS & MORE...</p>
+				<p class="hidden skew-x-[15deg] sm:block">SCHEDULE, REWARDS & MORE...</p>
+				<p class="block skew-x-[15deg] sm:hidden">SCHEDULE & MORE...</p>
 				<img
 					src="icons/triple-chevron-right.svg"
 					alt="Chevron Right"
@@ -113,7 +131,7 @@
 	</div>
 
 	<section class="flex w-full grow flex-col gap-y-8">
-		<h2 class="text-5xl font-medium">What To Expect ?</h2>
+		<h2 class="text-[2rem] font-medium sm:text-5xl">What To Expect ?</h2>
 
 		{#snippet ExpectCard(title: string, points: string[], imgSrc: string, index: number)}
 			<div class="relative max-h-full w-full">
@@ -143,7 +161,142 @@
 			</div>
 		{/snippet}
 
-		<div class="grid h-full grid-cols-1 gap-y-6">
+		<!-- Mobile Version -->
+		<div
+			style="scrollbar-width: none; -ms-overflow-style: none; ::-webkit-scrollbar:display: none;"
+			class="flex w-full snap-x snap-mandatory flex-row gap-x-12 overflow-x-scroll sm:hidden"
+		>
+			{#snippet ExpectMobileCard(title: string, points: string[], imgSrc: string, index: number)}
+				<div
+					bind:this={expectCards[index]}
+					class="relative flex w-full shrink-0 snap-center snap-always flex-col"
+				>
+					<div class="absolute top-0 left-1 mx-7 h-[10rem] w-12 skew-x-[10deg] bg-[#D6E8E6] p-2">
+						<p class="-skew-x-[10deg] text-xl font-medium text-[#016064]">{index}</p>
+					</div>
+					<div
+						class="mx-7 flex -skew-x-[15deg] flex-col border-2 border-l-8 border-l-[#016064] bg-[#EFEFEF]"
+					>
+						<div class="ml-auto h-full skew-x-[15deg]">
+							<div class="h-full -skew-x-[15deg] overflow-hidden">
+								<img
+									src={imgSrc}
+									alt={title}
+									class="h-full scale-150 skew-x-[15deg] object-cover"
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div class="mt-8 flex flex-col">
+						<h3 class="mb-4 text-xl font-semibold">{title}</h3>
+						<ul class="list-disc pl-4 text-xl leading-5 font-normal *:mb-2">
+							{#each points as point, idx (idx)}
+								<li>{@html point}</li>
+							{/each}
+							{#if index == 4}
+								<li class="invisible"></li>
+							{/if}
+						</ul>
+					</div>
+				</div>
+			{/snippet}
+
+			{@render ExpectMobileCard(
+				'Live the IIT Hyderabad Student Experience',
+				[
+					'Soak in the energy and culture of a top-ranked institution',
+					'Stay in campus hostels and dine in mess halls',
+					'Explore academic zones, & Open spaces'
+				],
+				'gallery/image-4.png',
+				1
+			)}
+
+			{@render ExpectMobileCard(
+				'Hands-On Sports Training',
+				[
+					'Professionally guided beginner-friendly sessions<br/>in selected sports',
+					'Structured schedules and skill-building drills'
+				],
+				'gallery/image-4.png',
+				2
+			)}
+
+			{@render ExpectMobileCard(
+				'Live the IIT Hyderabad Student Experience',
+				[
+					'Capture your journey through group photographs<br/>& video highlights',
+					'Participate in fun events like campus tours &  activities'
+				],
+				'gallery/image-4.png',
+				3
+			)}
+
+			{@render ExpectMobileCard(
+				'Live the IIT Hyderabad Student Experience',
+				[
+					'Camp finale features a mini-competition',
+					'Prizes and recognition for standout performances'
+				],
+				'gallery/image-4.png',
+				4
+			)}
+		</div>
+
+		<div class="flex flex-row">
+			<button
+				class="size-12 -skew-x-[15deg] border-2 border-[#B6CAC8]"
+				onclick={() => {
+					if (currentCard <= 1) {
+						(expectCards[4] as HTMLDivElement).scrollIntoView({
+							behavior: 'smooth',
+							block: 'nearest'
+						});
+						currentCard = 4;
+					} else {
+						(expectCards[currentCard - 1] as HTMLDivElement).scrollIntoView({
+							behavior: 'smooth',
+							block: 'nearest'
+						});
+						currentCard -= 1;
+					}
+				}}
+			>
+				<img class="mx-auto skew-x-[15deg]" src="icons/chevron-left.svg" alt="scroll left" />
+			</button>
+
+			<div class="mx-auto my-auto flex -skew-x-[15deg] flex-row gap-x-1.5">
+				<div class="{currentCard == 1 ? 'bg-primary' : 'bg-[#B6CAC8]'} size-3"></div>
+				<div class="{currentCard == 2 ? 'bg-primary' : 'bg-[#B6CAC8]'} size-3"></div>
+				<div class="{currentCard == 3 ? 'bg-primary' : 'bg-[#B6CAC8]'} size-3"></div>
+				<div class="{currentCard == 4 ? 'bg-primary' : 'bg-[#B6CAC8]'} size-3"></div>
+			</div>
+
+			<button
+				class=" size-12 -skew-x-[15deg] border-2 border-[#B6CAC8]"
+				onclick={() => {
+					if (currentCard >= 4) {
+						(expectCards[1] as HTMLDivElement).scrollIntoView({
+							behavior: 'smooth',
+							block: 'nearest'
+						});
+						currentCard = 1;
+					} else {
+						(expectCards[currentCard + 1] as HTMLDivElement).scrollIntoView({
+							behavior: 'smooth',
+							block: 'nearest'
+						});
+						currentCard += 1;
+					}
+				}}
+			>
+				<img src="icons/chevron-right.svg" class="mx-auto skew-x-[15deg]" alt="scroll right" />
+			</button>
+		</div>
+
+		<!-- Desktop Version -->
+		<div class="hidden h-full grid-cols-1 gap-y-6 sm:grid">
 			{@render ExpectCard(
 				'Live the IIT Hyderabad Student Experience',
 				[
@@ -188,10 +341,24 @@
 	</section>
 </article>
 
-<section class="bg-foreground text-background grid h-full grid-cols-[35%_65%] pl-52">
-	<div class="flex flex-col py-48 pr-24">
-		<h2 class="text-5xl font-medium text-nowrap">About Campus</h2>
-		<div class="mt-16 flex max-w-[64rem] flex-col gap-y-4">
+<section
+	class="sm:bg-foreground text-background grid h-full grid-cols-1 sm:grid-cols-[35%_65%] sm:pl-52"
+>
+	<div style="" class="relative h-full sm:hidden">
+		<div
+			style="clip-path: polygon(0% 15%, 100% 40%, 100% 100%, 0% 100%);"
+			class="absolute top-0 left-0 h-full w-full bg-[#016064]"
+		></div>
+		<img
+			src="home/sncc.png"
+			style="clip-path: polygon(0% 30%, 100% 10%, 100% 100%, 0% 100%);"
+			class="h-full object-cover sm:hidden"
+			alt="SNCC"
+		/>
+	</div>
+	<div class="bg-foreground flex flex-col py-16 pr-8 pl-8 sm:py-48 sm:pr-24 sm:pl-8">
+		<h2 class="text-[2rem] font-medium text-nowrap sm:text-5xl">About Campus</h2>
+		<div class="mt-12 flex flex-col gap-y-4 sm:mt-16 sm:max-w-[64rem]">
 			<p>
 				IIT Hyderabad is located just outside the city near Kandi, Sngareddy, with a peaceful and
 				modern campus. Along with academics, sports is a big part of campus life here.
@@ -212,7 +379,7 @@
 			onclick={() => {
 				goto('register');
 			}}
-			class="bg-primary mt-24 flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer"
+			class="bg-primary mt-16 flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer sm:mt-24"
 		>
 			<p class="skew-x-[15deg]">EXPLORE FACILITES</p>
 			<img
@@ -224,43 +391,70 @@
 	</div>
 
 	<div style="clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);" class="h-full">
-		<img src="home/sncc.png" class="h-full object-cover" alt="SNCC" />
+		<img src="home/sncc.png" class="hidden h-full object-cover sm:block" alt="SNCC" />
 	</div>
 </section>
 
-<section class="text-foreground overflow-x-clip py-48">
-	<div class="grid scale-110 -skew-x-[15deg] grid-cols-6 gap-2.5">
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<div class="flex flex-col pt-8">
+<section
+	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mb-0 sm:block sm:py-48"
+>
+	<h2 class="mx-auto mt-24 mb-20 w-fit text-[2rem] font-medium text-nowrap sm:hidden sm:text-5xl">
+		Gallery
+	</h2>
+	<div class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 sm:scale-110 sm:grid-cols-6">
+		<img src="gallery/image-2.png" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
+		<img src="gallery/image-2.png" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
+		<img src="gallery/image-2.png" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
+		<div class="hidden flex-col pt-8 sm:flex">
 			<h2 class="mr-4 skew-x-[15deg] self-end text-5xl font-medium">Gallery</h2>
 			<div class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8">
 				<h4 class="text-background skew-x-[15deg] text-2xl font-medium">SHOW ALL</h4>
 				<img src="icons/triple-chevron-right.svg" alt="Go To" class="ml-auto skew-x-[15deg]" />
 			</div>
 		</div>
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img class="col-span-2 row-span-2" src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
-		<img src="gallery/image-2.png" alt="gallery img" />
+		<img src="gallery/image-2.png" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img
+			class="col-span-2 row-span-2 hidden sm:block"
+			src="gallery/image-2.png"
+			alt="gallery img"
+		/>
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+	</div>
+
+	<div class="mt-24 w-full grow self-center px-8 sm:hidden">
+		<button
+			onclick={() => {
+				goto('gallery');
+			}}
+			class="bg-foreground text-background flex w-full -skew-x-[15deg] flex-row self-center px-8 py-4 text-xl font-medium hover:cursor-pointer sm:mt-24"
+		>
+			<p class="skew-x-[15deg]">SHOW ALL</p>
+			<img
+				src="icons/triple-chevron-right.svg"
+				alt="Chevron Right"
+				class="ml-auto skew-x-[15deg]"
+			/>
+		</button>
 	</div>
 </section>
 
-<section class="flex flex-row items-center border-t border-t-[#016064] bg-[#D6E8E6] px-52 py-12">
-	<h3 class="text-3xl font-medium">Ready to take the field?</h3>
+<section
+	class="flex flex-col items-center gap-y-8 border-t border-t-[#016064] bg-[#D6E8E6] px-8 py-12 sm:flex-row sm:gap-y-0 sm:px-52"
+>
+	<h3 class="text-[2rem] font-medium sm:text-3xl">Ready to take the field?</h3>
 	<button
 		onclick={() => {
 			goto('register');
 		}}
-		class="border-background text-background bg-secondary ml-auto -skew-x-[15deg] border px-24 py-2 text-xl font-medium hover:cursor-pointer"
+		class="border-background text-background bg-secondary ml-auto -skew-x-[15deg] border px-24 py-4 text-xl font-medium hover:cursor-pointer sm:py-2"
 	>
 		<p class="skew-x-[15deg]">REGISTER NOW</p>
 	</button>

@@ -41,6 +41,7 @@
 		]
 	},
 	"dependencies": {
-		"bits-ui": "^1.5.3"
+		"bits-ui": "^1.5.3",
+		"postgres": "^3.4.7"
 	}
 }
