@@ -3,21 +3,32 @@
 	import { SportItem } from '../+page.svelte';
 </script>
 
-<header class="relative">
+<header class="relative h-56 sm:h-auto">
 	<div
-		class="absolute top-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-r from-[#5A85D0] to-[#5B84D3]/0 pr-96 pl-32"
+		class="absolute top-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-r from-[#5A85D0] to-[#5B84D3]/0 pl-8 sm:h-auto sm:pr-96 sm:pl-32"
 	>
-		<p class="text-background text-[4rem] leading-snug font-medium">ABOUT & <br />FACILITIES</p>
+		<p class="text-background text-4xl leading-snug font-medium sm:text-[4rem]">
+			ABOUT & <br />FACILITIES
+		</p>
 		<div class=" relative w-full">
-			<hr class="bg-background text-background absolute top-0 mt-4 h-1.5 w-full" />
+			<hr class="bg-background text-background top-0 mt-2 h-1.5 w-full sm:absolute sm:mt-4" />
 		</div>
+		<img
+			src="icons/triple-chevron-down.svg"
+			alt="chevron down"
+			class="mt-4 size-7 self-start sm:hidden"
+		/>
 	</div>
-	<img src="about/arrows.png" alt="arrows" class="absolute top-0 bottom-0 left-0 h-full" />
-	<img src="about/header.png" alt="header" />
+	<img
+		src="about/arrows.png"
+		alt="arrows"
+		class="absolute top-0 bottom-0 left-0 hidden h-full sm:block"
+	/>
+	<img src="about/header.png" alt="header" class="h-full object-cover" />
 </header>
 
 <article
-	class="grid grid-cols-2 gap-x-28 gap-y-16 py-24 pr-8 pl-8 sm:flex-row sm:gap-y-0 sm:pr-32 sm:pl-52"
+	class="grid grid-cols-1 gap-x-28 gap-y-12 py-12 pr-8 pl-8 sm:grid-cols-2 sm:flex-row sm:gap-y-0 sm:py-24 sm:pr-32 sm:pl-52"
 >
 	<section class="flex flex-col gap-y-4 sm:gap-y-8">
 		<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
@@ -54,13 +65,48 @@
 	</section>
 </article>
 
-<article class="flex flex-col py-12 pr-8 pl-8 sm:pr-32 sm:pl-52">
+<article class="flex flex-col py-8 pr-8 pl-8 sm:pr-32 sm:pl-52">
 	<h2 class="text-[2rem] font-medium sm:text-5xl">
 		Schedule <span class="text-primary text-[2rem] font-normal">(Tentative)</span>
 	</h2>
 
+	<!-- Mobile Version -->
+	{#snippet Card1(day: number, morning: string, evening: string)}
+		<div class="flex flex-col">
+			<div class="bg-[#CAC19B]">
+				<div
+					style="clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%);"
+					class="text-background bg-[#AE9C74] py-4 pl-8 text-xl font-medium"
+				>
+					Day {day}
+				</div>
+			</div>
+
+			<div class="flex flex-col gap-y-4 bg-[#E9E4CE] px-8 py-4">
+				<div class="flex flex-col gap-y-1">
+					<p class="text-[#AE9C74]">Morning- 7:00 AM - 10:00 AM</p>
+					<p class="text-xl font-medium text-[#605439]">{morning}</p>
+				</div>
+
+				<div class="flex flex-col gap-y-1">
+					<p class="text-[#AE9C74]">Evening (Optional)</p>
+					<p class="text-xl font-medium text-[#605439]">{evening}</p>
+				</div>
+			</div>
+		</div>
+	{/snippet}
+
+	<section class="mt-8 grid grid-cols-1 gap-y-4 sm:hidden">
+		{@render Card1(1, 'Welcome, Orientation, Light Training', 'Campus Tour, Icebreaker Sessions')}
+		{@render Card1(2, 'Sports Training', 'Group Games, Fitness Challenges')}
+		{@render Card1(3, 'Sports Rotation', 'Team Building, Fun Quiz')}
+		{@render Card1(4, 'Team Building, Fun Quiz', 'Movie Night or Talent Hour')}
+		{@render Card1(5, 'Mini Tournament, Closing Ceremony', 'Departure')}
+	</section>
+
+	<!-- Desktop Version -->
 	<section
-		class="my-16 grid grid-cols-[10%_45%_45%] gap-y-2 text-2xl font-medium *:bg-[#E9E4CE] *:text-[#AE9C74] *:odd:mr-4"
+		class="my-16 hidden grid-cols-[10%_45%_45%] gap-y-2 text-2xl font-medium *:bg-[#E9E4CE] *:text-[#AE9C74] *:odd:mr-4 sm:grid"
 	>
 		<div class="!text-background grid-cell !bg-[#AE9C74]">Day</div>
 		<div class="!text-background col-span-2 grid grid-cols-subgrid !bg-[#AE9C74]">
@@ -135,27 +181,69 @@
 	</section>
 </article>
 
-<article class="relative my-24">
+<article class="relative my-12 sm:my-24">
 	<div
-		class=" absolute h-full w-full bg-[#D6E8E6]"
-		style="clip-path: polygon(0% 0%, 100% 30%, 100% 100%, 0% 70%);"
+		class=" absolute hidden h-full w-full bg-[#D6E8E6] sm:block"
+		style="clip-path: polygon(0% 0%, 100% 20%, 100% 100%, 0% 80%);"
 	></div>
+
 	<div
-		class="bg-foreground text-background flex flex-col px-52 py-44"
-		style="clip-path: polygon(0% 15%, 100% 0%, 100% 85%, 0% 100%);"
+		class=" absolute h-full w-full bg-[#D6E8E6] sm:hidden"
+		style="clip-path: polygon(0% 0%, 100% 2%, 100% 100%, 0% 98%);"
+	></div>
+
+	{#snippet Card(imgSrc: string, header: string, text: string)}
+		<div class="grid grid-cols-[20%_80%] flex-row gap-x-4 sm:flex">
+			<img src={imgSrc} alt={header} />
+			<div class="flex flex-col justify-center gap-y-2">
+				<p class="text-xl font-medium sm:text-2xl">{header}</p>
+				<p class="sm:text-xl">{text}</p>
+			</div>
+		</div>
+	{/snippet}
+
+	<div
+		class="bg-foreground text-background flex flex-col px-8 py-12 sm:hidden sm:px-52 sm:py-44"
+		style="clip-path: polygon(0% 3%, 100% 0%, 100% 97%, 0% 100%);"
+	>
+		<h2 class="mt-16 text-[2rem] font-medium sm:mt-20 sm:text-5xl">What You will Receive!</h2>
+		<div class="mt-20 mb-16 grid grid-cols-1 gap-x-20 gap-y-16 sm:mb-0 sm:grid-cols-2">
+			{@render Card(
+				'about/1.svg',
+				'CERTIFICATE',
+				'Official Certificate of Participation from IIT Hyderabad'
+			)}
+			{@render Card(
+				'about/2.svg',
+				'CAMP KIT (TBD)',
+				'Includes T-shirt, wristband, water bottle (subject to sponsors)'
+			)}
+			{@render Card(
+				'about/3.svg',
+				'ACCOMMODATION',
+				'Hostel stay and meals for the full 5-day duration'
+			)}
+			{@render Card('about/4.svg', 'SKILL FEEDBACK SHEET', 'Optional feedback from coaches')}
+			{@render Card(
+				'about/5.svg',
+				'CAMPUS TOUR',
+				'Guided exploration of campus facilities and labs'
+			)}
+			{@render Card('about/6.svg', 'PHOTOS & VIDEOS', 'Access to media content post-camp')}
+			{@render Card(
+				'about/7.svg',
+				'COMPETITION & PRIZES',
+				'Friendly finale tournament with awards'
+			)}
+		</div>
+	</div>
+
+	<div
+		class="bg-foreground text-background hidden flex-col px-52 py-44 sm:flex"
+		style="clip-path: polygon(0% 10%, 100% 0%, 100% 90%, 0% 100%);"
 	>
 		<h2 class="mt-20 text-5xl font-medium sm:text-5xl">What You will Receive!</h2>
 		<div class="mt-20 grid grid-cols-2 gap-x-20 gap-y-16">
-			{#snippet Card(imgSrc: string, header: string, text: string)}
-				<div class="flex flex-row gap-x-4">
-					<img src={imgSrc} alt={header} />
-					<div class="flex flex-col justify-center gap-y-2">
-						<p class="text-2xl font-medium">{header}</p>
-						<p class="text-xl">{text}</p>
-					</div>
-				</div>
-			{/snippet}
-
 			{@render Card(
 				'about/1.svg',
 				'CERTIFICATE',
@@ -187,13 +275,15 @@
 	</div>
 </article>
 
-<article class="mb-48 grid grid-cols-2 px-8 py-12 sm:px-52">
-	<section class="flex flex-col gap-y-16">
+<article class="mb-32 grid grid-cols-1 px-8 py-12 sm:mb-48 sm:grid-cols-2 sm:px-52">
+	<section class="flex flex-col gap-y-12 sm:gap-y-16">
 		<h2 class="text-[2rem] font-medium sm:text-5xl">Registration & Fees</h2>
 
-		<div class="mt-6 grid grid-cols-[35%_60%] gap-y-4 text-2xl font-medium">
+		<div
+			class="grid grid-cols-1 gap-y-2 text-xl font-medium sm:mt-6 sm:grid-cols-[35%_60%] sm:gap-y-4 sm:text-2xl"
+		>
 			<p>EARLY BIRD OFFER:</p>
-			<p><span class="text-primary">1999/-</span> (VALID TILL 20 JULY)</p>
+			<p class="mb-5"><span class="text-primary">1999/-</span> (VALID TILL 20 JULY)</p>
 
 			<p>STANDARD FEE:</p>
 			<p>2299/- (POST EARLY BIRD PERIOD)</p>
@@ -218,12 +308,12 @@
 			onclick={() => {
 				goto('register');
 			}}
-			class="bg-primary text-background w-fit -skew-x-[15deg] px-48 py-2 text-xl font-medium hover:cursor-pointer"
+			class="bg-primary text-background -skew-x-[15deg] py-2 text-xl font-medium hover:cursor-pointer sm:w-fit sm:px-48"
 		>
 			<p class="skew-x-[15deg]">REGISTER</p>
 		</button>
 	</section>
-	<div class="relative flex h-full flex-col items-center px-8">
+	<div class="relative hidden h-full flex-col items-center px-8 sm:flex">
 		<div class="absolute z-[-1] h-full w-full px-8">
 			<div
 				class=" h-full w-full bg-[#016064]"
