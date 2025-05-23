@@ -1,5 +1,6 @@
 import { DB_URL } from "$env/static/private";
 import postgres from "postgres";
+import 'dotenv/config'
 
 export const DB = postgres(DB_URL)
 
