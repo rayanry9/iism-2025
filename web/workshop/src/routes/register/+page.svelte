@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { PageProps } from './$types';
 	let dialog = $state();
+	let { form }: PageProps = $props();
 </script>
 
 <dialog
@@ -67,162 +69,190 @@
 		</div>
 	</div>
 </dialog>
-
 <main class="px-8 pt-16 pb-16 sm:px-52 sm:pt-24 sm:pb-32">
-	<section>
-		<h1 class="text-[2rem] font-medium sm:text-[3.5rem]">Register</h1>
-		<p class="sm:text-xl">
-			Workshop is pen to school and college students around Hyderabad. Limited seats<br />available.
-			Fill the form below to confirm your spot!
-		</p>
+	{#if form == null}
+		<section>
+			<h1 class="text-[2rem] font-medium sm:text-[3.5rem]">Register</h1>
+			<p class="sm:text-xl">
+				Workshop is pen to school and college students around Hyderabad. Limited seats<br
+				/>available. Fill the form below to confirm your spot!
+			</p>
 
-		<form
-			method="POST"
-			use:enhance
-			class="mt-12 grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-3 sm:gap-y-20"
-		>
-			<h1 class=" text-xl font-medium sm:col-span-3 sm:-mb-10 sm:text-[2rem]">About You</h1>
-
-			<label>
-				<p class="label-text">Full Name</p>
-				<input class="input" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<label>
-				<p class="label-text">Contact No. (Whatsapp Preferred)</p>
-				<input class="input" placeholder="Enter Here" required type="text" />
-			</label>
-
-			<label>
-				<p class="label-text">Email ID</p>
-				<input class="input" placeholder="Enter Here" type="email" required />
-			</label>
-
-			<label>
-				<p class="label-text">Gender</p>
-				<select class="input select" required>
-					<option class="option">Male</option>
-					<option class="option">Female</option>
-					<option class="option">Others</option>
-					<option class="option">Prefer Not to Say</option>
-				</select>
-			</label>
-
-			<label>
-				<p class="label-text">Age (10-28)</p>
-				<input class="input" placeholder="Enter Here" type="number" min={10} max={28} required />
-			</label>
-
-			<label>
-				<p class="label-text">Date of Birth</p>
-				<input class="input" placeholder="Enter Here" type="date" required />
-			</label>
-
-			<label class="">
-				<p class="label-text">Address</p>
-				<input class="input" placeholder="Enter Here" type="text" />
-			</label>
-
-			<label class="">
-				<p class="label-text">Pincode</p>
-				<input class="input" placeholder="Enter Here" type="number" />
-			</label>
-
-			<label>
-				<p class="label-text">School / College / Institute Name</p>
-				<input class="input" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<label>
-				<p class="label-text">Current Class / Year of Study</p>
-				<input class="input" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<label>
-				<p class="label-text">Blood Group</p>
-				<select class="input select" required>
-					<option class="option">A+</option>
-					<option class="option">A-</option>
-					<option class="option">B+</option>
-					<option class="option">B-</option>
-					<option class="option">AB+</option>
-					<option class="option">AB-</option>
-					<option class="option">O+</option>
-					<option class="option">O-</option>
-				</select>
-			</label>
-
-			<label>
-				<p class="label-text">Medical Conditions or Allergies (If Any)</p>
-				<input class="input" placeholder="Enter Here" type="text" />
-			</label>
-
-			<label>
-				<p class="label-text">Will you stay in the campus hostel?</p>
-				<select class="input select" required>
-					<option class="option">Yes</option>
-					<option class="option">No</option>
-				</select>
-			</label>
-
-			<label>
-				<p class="label-text">Sport You are Interested in</p>
-				<select class="input select" required>
-					<option class="option">Football</option>
-					<option class="option">Basketball</option>
-					<option class="option">Badminton</option>
-					<option class="option">Hockey</option>
-				</select>
-			</label>
-
-			<label>
-				<p class="label-text">Previous Sports Experience</p>
-				<input type="text" class="input" placeholder="Enter Here" />
-			</label>
-
-			<h1 class="mb-6 text-2xl font-medium sm:col-span-3 sm:mt-8 sm:mb-0 sm:text-[2rem]">
-				Gaurdian Details (Required for under 18)
-			</h1>
-
-			<label class="-mt-8">
-				<p class="label-text">Gaurdian Full Name</p>
-				<input class="input" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<label class="sm:col-span-2 sm:-mt-8 sm:grid sm:grid-cols-subgrid">
-				<p class="label-text sm:col-span-2">Gaurdian Contact No. (WhatsApp Preferred)</p>
-				<input class="input sm:col-span-1" placeholder="Enter Here" type="text" required />
-			</label>
-
-			<h1 class="text-2xl font-medium sm:col-span-3 sm:text-[2rem]">Payment</h1>
-			<div class="-mt-4 sm:col-span-3 sm:-mt-16 sm:text-2xl">
-				Details will be provided through Email or Whatsapp.
-			</div>
-			<div class="sm:col-span-2">
-				<label class="sm:text-2xl">
-					<input type="checkbox" class="size-4 sm:size-5" required />
-					<span>
-						I Agree to all Terms and Conditions
-						<span
-							onclick={(ev) => {
-								ev.preventDefault();
-								ev.stopImmediatePropagation();
-								(dialog as HTMLDialogElement).showModal();
-							}}
-							role="button"
-							tabindex={0}
-							class="text-primary underline">Read Here</span
-						>
-					</span>
-				</label>
-			</div>
-			<button
-				type="submit"
-				class="bg-primary text-background hover:bg-primary/75 w-full py-3 text-xl hover:cursor-pointer sm:py-3.5 sm:text-2xl"
-				>SUBMIT</button
+			<form
+				method="POST"
+				use:enhance
+				class="mt-12 grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-3 sm:gap-y-20"
 			>
-		</form>
-	</section>
+				<h1 class=" text-xl font-medium sm:col-span-3 sm:-mb-10 sm:text-[2rem]">About You</h1>
+
+				<label>
+					<p class="label-text">Full Name</p>
+					<input class="input" name="name" placeholder="Enter Here" type="text" required />
+				</label>
+
+				<label>
+					<p class="label-text">Contact No. (Whatsapp Preferred)</p>
+					<input class="input" name="phone" placeholder="Enter Here" required type="text" />
+				</label>
+
+				<label>
+					<p class="label-text">Email ID</p>
+					<input class="input" name="email" placeholder="Enter Here" type="email" required />
+				</label>
+
+				<label>
+					<p class="label-text">Gender</p>
+					<select class="input select" name="gender" required>
+						<option class="option">Male</option>
+						<option class="option">Female</option>
+						<option class="option">Others</option>
+						<option class="option">Prefer Not to Say</option>
+					</select>
+				</label>
+
+				<label>
+					<p class="label-text">Age (10-28)</p>
+					<input
+						class="input"
+						name="age"
+						placeholder="Enter Here"
+						type="number"
+						min={10}
+						max={28}
+						required
+					/>
+				</label>
+
+				<label>
+					<p class="label-text">Date of Birth</p>
+					<input class="input" name="dob" placeholder="Enter Here" type="date" required />
+				</label>
+
+				<label class="">
+					<p class="label-text">Address</p>
+					<input class="input" name="address" placeholder="Enter Here" type="text" />
+				</label>
+
+				<label class="">
+					<p class="label-text">Pincode</p>
+					<input class="input" name="pincode" placeholder="Enter Here" type="number" />
+				</label>
+
+				<label>
+					<p class="label-text">School / College / Institute Name</p>
+					<input class="input" name="institute" placeholder="Enter Here" type="text" required />
+				</label>
+
+				<label>
+					<p class="label-text">Current Class / Year of Study</p>
+					<input class="input" name="class" placeholder="Enter Here" type="text" required />
+				</label>
+
+				<label>
+					<p class="label-text">Blood Group</p>
+					<select class="input select" name="blood" required>
+						<option class="option">A+</option>
+						<option class="option">A-</option>
+						<option class="option">B+</option>
+						<option class="option">B-</option>
+						<option class="option">AB+</option>
+						<option class="option">AB-</option>
+						<option class="option">O+</option>
+						<option class="option">O-</option>
+					</select>
+				</label>
+
+				<label>
+					<p class="label-text">Medical Conditions or Allergies (If Any)</p>
+					<input class="input" name="medical" placeholder="Enter Here" type="text" />
+				</label>
+
+				<label>
+					<p class="label-text">Will you stay in the campus hostel?</p>
+					<select class="input select" name="hostel" required>
+						<option class="option">Yes</option>
+						<option class="option">No</option>
+					</select>
+				</label>
+
+				<label>
+					<p class="label-text">Sport You are Interested in</p>
+					<select class="input select" name="sport" required>
+						<option class="option">Football</option>
+						<option class="option">Basketball</option>
+						<option class="option">Badminton</option>
+						<option class="option">Hockey</option>
+					</select>
+				</label>
+
+				<label>
+					<p class="label-text">Previous Sports Experience</p>
+					<input type="text" class="input" name="experience" placeholder="Enter Here" />
+				</label>
+
+				<h1 class="mb-6 text-2xl font-medium sm:col-span-3 sm:mt-8 sm:mb-0 sm:text-[2rem]">
+					Gaurdian Details (Required for under 18)
+				</h1>
+
+				<label class="-mt-8">
+					<p class="label-text">Gaurdian Full Name</p>
+					<input class="input" placeholder="Enter Here" name="gaurdian_name" type="text" required />
+				</label>
+
+				<label class="sm:col-span-2 sm:-mt-8 sm:grid sm:grid-cols-subgrid">
+					<p class="label-text sm:col-span-2">Gaurdian Contact No. (WhatsApp Preferred)</p>
+					<input
+						class="input sm:col-span-1"
+						placeholder="Enter Here"
+						name="gaurdian_phone"
+						type="text"
+						required
+					/>
+				</label>
+
+				<h1 class="text-2xl font-medium sm:col-span-3 sm:text-[2rem]">Payment</h1>
+				<div class="-mt-4 sm:col-span-3 sm:-mt-16 sm:text-2xl">
+					Details will be provided through Email or Whatsapp.
+				</div>
+				<div class="sm:col-span-2">
+					<label class="sm:text-2xl">
+						<input type="checkbox" class="size-4 sm:size-5" required />
+						<span>
+							I Agree to all Terms and Conditions
+							<span
+								onclick={(ev) => {
+									ev.preventDefault();
+									ev.stopImmediatePropagation();
+									(dialog as HTMLDialogElement).showModal();
+								}}
+								role="button"
+								tabindex={0}
+								class="text-primary underline">Read Here</span
+							>
+						</span>
+					</label>
+				</div>
+				<button
+					type="submit"
+					class="bg-primary text-background hover:bg-primary/75 w-full py-3 text-xl hover:cursor-pointer sm:py-3.5 sm:text-2xl"
+					>SUBMIT</button
+				>
+			</form>
+		</section>
+	{:else if form.success}
+		<section class="mx-auto w-fit">
+			<h1 class=" text-xl font-medium sm:text-[2rem]">
+				You have <span class="text-primary">Successfully</span> Registered for the Summer Camp.
+			</h1>
+		</section>
+	{:else}
+		<section class="mx-auto w-fit">
+			<h1 class=" text-xl font-medium sm:text-[2rem]">
+				We encountered issues while registering you for the Camp. Please try again later or email us
+				directly.
+			</h1>
+		</section>
+	{/if}
 </main>
 
 <style>
