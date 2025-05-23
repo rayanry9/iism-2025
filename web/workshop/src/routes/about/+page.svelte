@@ -1,0 +1,247 @@
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { SportItem } from '../+page.svelte';
+</script>
+
+<header class="relative">
+	<div
+		class="absolute top-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-r from-[#5A85D0] to-[#5B84D3]/0 pr-96 pl-32"
+	>
+		<p class="text-background text-[4rem] leading-snug font-medium">ABOUT & <br />FACILITIES</p>
+		<div class=" relative w-full">
+			<hr class="bg-background text-background absolute top-0 mt-4 h-1.5 w-full" />
+		</div>
+	</div>
+	<img src="about/arrows.png" alt="arrows" class="absolute top-0 bottom-0 left-0 h-full" />
+	<img src="about/header.png" alt="header" />
+</header>
+
+<article
+	class="grid grid-cols-2 gap-x-28 gap-y-16 py-24 pr-8 pl-8 sm:flex-row sm:gap-y-0 sm:pr-32 sm:pl-52"
+>
+	<section class="flex flex-col gap-y-4 sm:gap-y-8">
+		<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
+		<div class="flex flex-col gap-y-4 sm:text-xl">
+			<p>Are you looking for an active and meaningful way to spend your summer break?</p>
+
+			<p>
+				Join us at the 5-Day Sports Summer Camp hosted at the prestigious IIT Hyderabad. This
+				immersive camp combines sports training, engaging activities, and a first-hand experience of
+				the student lifestyle at one of India’s top institutes.
+			</p>
+
+			<p>
+				Participants will stay on campus, receive expert coaching, and explore IITH's world-class
+				academic and sports infrastructure. Whether you're a beginner or just curious about trying
+				new sports, this is the perfect way to beat summer boredom.
+			</p>
+		</div>
+	</section>
+
+	<section class="flex flex-col gap-y-4 sm:gap-y-8">
+		<h2 class="text-[2rem] font-medium sm:text-5xl">Sports</h2>
+		<p class="mb-4 sm:mb-0 sm:text-xl">
+			This workshop will focus on Sports like Football, Volleyball, Cricket, Hockey, Athletics and
+			more which will lorem ipsum lorem ipsum
+		</p>
+
+		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+			{@render SportItem('FOOTBALL', 'home/football.svg')}
+			{@render SportItem('BASKETBALL', 'home/basketball.svg')}
+			{@render SportItem('BADMINTON', 'home/badminton.svg')}
+			{@render SportItem('HOCKEY', 'home/hockey.svg')}
+		</div>
+	</section>
+</article>
+
+<article class="flex flex-col py-12 pr-8 pl-8 sm:pr-32 sm:pl-52">
+	<h2 class="text-[2rem] font-medium sm:text-5xl">
+		Schedule <span class="text-primary text-[2rem] font-normal">(Tentative)</span>
+	</h2>
+
+	<section
+		class="my-16 grid grid-cols-[10%_45%_45%] gap-y-2 text-2xl font-medium *:bg-[#E9E4CE] *:text-[#AE9C74] *:odd:mr-4"
+	>
+		<div class="!text-background grid-cell !bg-[#AE9C74]">Day</div>
+		<div class="!text-background col-span-2 grid grid-cols-subgrid !bg-[#AE9C74]">
+			<div class="grid-cell">Morning- 7:00 AM - 10:00 AM</div>
+			<div class="grid-cell">Evening (Optional)</div>
+		</div>
+
+		<div class="!bg-[#CAC19B]">
+			<div
+				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
+				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
+			>
+				1
+			</div>
+		</div>
+		<div class=" col-span-2 grid grid-cols-subgrid">
+			<div class="grid-cell">Welcome, Orientation, Light Training</div>
+			<div class="grid-cell">Campus Tour, Icebreaker Sessions</div>
+		</div>
+
+		<div class="!bg-[#CAC19B]">
+			<div
+				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
+				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
+			>
+				2
+			</div>
+		</div>
+		<div class="col-span-2 grid grid-cols-subgrid">
+			<div class="grid-cell">Sports Training</div>
+			<div class="grid-cell">Group Games, Fitness Challenges</div>
+		</div>
+
+		<div class="!bg-[#CAC19B]">
+			<div
+				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
+				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
+			>
+				3
+			</div>
+		</div>
+		<div class="col-span-2 grid grid-cols-subgrid">
+			<div class="grid-cell">Sports Rotation</div>
+			<div class="grid-cell">Team Building, Fun Quiz</div>
+		</div>
+
+		<div class="!bg-[#CAC19B]">
+			<div
+				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
+				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
+			>
+				4
+			</div>
+		</div>
+		<div class="col-span-2 grid grid-cols-subgrid">
+			<div class="grid-cell">Focused Coaching</div>
+			<div class="grid-cell">Movie Night or Talent Hour</div>
+		</div>
+
+		<div class="!bg-[#CAC19B]">
+			<div
+				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
+				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
+			>
+				5
+			</div>
+		</div>
+		<div class="col-span-2 grid grid-cols-subgrid">
+			<div class="grid-cell">Mini Tournament, Closing Ceremony</div>
+			<div class="grid-cell">Departure</div>
+		</div>
+	</section>
+</article>
+
+<article class="relative my-24">
+	<div
+		class=" absolute h-full w-full bg-[#D6E8E6]"
+		style="clip-path: polygon(0% 0%, 100% 30%, 100% 100%, 0% 70%);"
+	></div>
+	<div
+		class="bg-foreground text-background flex flex-col px-52 py-44"
+		style="clip-path: polygon(0% 15%, 100% 0%, 100% 85%, 0% 100%);"
+	>
+		<h2 class="mt-20 text-5xl font-medium sm:text-5xl">What You will Receive!</h2>
+		<div class="mt-20 grid grid-cols-2 gap-x-20 gap-y-16">
+			{#snippet Card(imgSrc: string, header: string, text: string)}
+				<div class="flex flex-row gap-x-4">
+					<img src={imgSrc} alt={header} />
+					<div class="flex flex-col justify-center gap-y-2">
+						<p class="text-2xl font-medium">{header}</p>
+						<p class="text-xl">{text}</p>
+					</div>
+				</div>
+			{/snippet}
+
+			{@render Card(
+				'about/1.svg',
+				'CERTIFICATE',
+				'Official Certificate of Participation from IIT Hyderabad'
+			)}
+			{@render Card(
+				'about/5.svg',
+				'CAMPUS TOUR',
+				'Guided exploration of campus facilities and labs'
+			)}
+			{@render Card(
+				'about/2.svg',
+				'CAMP KIT (TBD)',
+				'Includes T-shirt, wristband, water bottle (subject to sponsors)'
+			)}
+			{@render Card('about/6.svg', 'PHOTOS & VIDEOS', 'Access to media content post-camp')}
+			{@render Card(
+				'about/3.svg',
+				'ACCOMMODATION',
+				'Hostel stay and meals for the full 5-day duration'
+			)}
+			{@render Card(
+				'about/7.svg',
+				'COMPETITION & PRIZES',
+				'Friendly finale tournament with awards'
+			)}
+			{@render Card('about/4.svg', 'SKILL FEEDBACK SHEET', 'Optional feedback from coaches')}
+		</div>
+	</div>
+</article>
+
+<article class="mb-48 grid grid-cols-2 px-8 py-12 sm:px-52">
+	<section class="flex flex-col gap-y-16">
+		<h2 class="text-[2rem] font-medium sm:text-5xl">Registration & Fees</h2>
+
+		<div class="mt-6 grid grid-cols-[35%_60%] gap-y-4 text-2xl font-medium">
+			<p>EARLY BIRD OFFER:</p>
+			<p><span class="text-primary">1999/-</span> (VALID TILL 20 JULY)</p>
+
+			<p>STANDARD FEE:</p>
+			<p>2299/- (POST EARLY BIRD PERIOD)</p>
+		</div>
+
+		<div class="flex flex-col">
+			<h4 class="text-2xl font-medium">THE FEE INCLUDES:</h4>
+			<ul class="mt-4 list-disc pl-8 text-lg">
+				<li>Accommodation (5 days, 4 nights)</li>
+				<li>Meals and refreshments</li>
+				<li>Sports coaching and facility access</li>
+				<li>Participation in all camp sessions and events</li>
+				<li>Camp merchandise</li>
+				<li>Certification and entry into the final tournament</li>
+			</ul>
+			<ul class="mt-8 list-disc pl-8 text-lg">
+				<li>Note: Limited slots per sport. Register early to secure your place.</li>
+			</ul>
+		</div>
+
+		<button
+			onclick={() => {
+				goto('register');
+			}}
+			class="bg-primary text-background w-fit -skew-x-[15deg] px-48 py-2 text-xl font-medium hover:cursor-pointer"
+		>
+			<p class="skew-x-[15deg]">REGISTER</p>
+		</button>
+	</section>
+	<div class="relative flex h-full flex-col items-center px-8">
+		<div class="absolute z-[-1] h-full w-full px-8">
+			<div
+				class=" h-full w-full bg-[#016064]"
+				style="clip-path: polygon(0% 30%, 100% 70%, 100% 100%, 0% 100%);"
+			></div>
+		</div>
+		<img
+			src="home/sncc.png"
+			style="clip-path: polygon(0% 30%, 100% 0%, 100% 100%, 0% 100%);"
+			alt="sncc"
+			class="mx-auto mt-auto"
+		/>
+	</div>
+</article>
+
+<style>
+	.grid-cell {
+		@apply flex flex-col items-center;
+		padding: 1rem 0rem;
+	}
+</style>

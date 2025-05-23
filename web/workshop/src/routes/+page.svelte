@@ -1,8 +1,21 @@
+<script module>
+	export { SportItem };
+</script>
+
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	let expectCards = $state(new Array(5));
 	let currentCard = $state(1);
 </script>
+
+{#snippet SportItem(text: string, imgSrc: string)}
+	<div
+		class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-xl font-medium text-[#016064] sm:text-[1.375rem]"
+	>
+		<p class="skew-x-[15deg]">{text}</p>
+		<img src={imgSrc} alt={text} class="absolute right-4 bottom-0 skew-x-[15deg]" />
+	</div>
+{/snippet}
 
 <section class="text-background relative">
 	<img
@@ -91,15 +104,6 @@
 		</section>
 
 		<section class="flex flex-col gap-y-4 sm:gap-y-8">
-			{#snippet SportItem(text: string, imgSrc: string)}
-				<div
-					class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-xl font-medium text-[#016064] sm:text-[1.375rem]"
-				>
-					<p class="skew-x-[15deg]">{text}</p>
-					<img src={imgSrc} alt={text} class="absolute right-4 bottom-0 skew-x-[15deg]" />
-				</div>
-			{/snippet}
-
 			<h2 class="text-[2rem] font-medium sm:text-5xl">Sports</h2>
 			<p class="mb-4 sm:mb-0 sm:text-xl">
 				This workshop will focus on Sports like Football, Volleyball, Cricket, Hockey, Athletics and
