@@ -461,7 +461,7 @@
 		onclick={() => {
 			goto('register');
 		}}
-		class="border-background text-background bg-secondary ml-auto -skew-x-[15deg] border px-24 py-4 text-xl font-medium hover:cursor-pointer sm:py-2"
+		class="border-background text-background bg-secondary ml-auto w-full -skew-x-[15deg] border py-4 text-xl font-medium hover:cursor-pointer sm:w-auto sm:px-24 sm:py-2"
 	>
 		<p class="skew-x-[15deg]">REGISTER NOW</p>
 	</button>

@@ -2,7 +2,7 @@
 	<div class="mb-12 flex flex-col sm:mb-24">
 		<h1 class="text-[2rem] font-medium sm:text-[3.5rem]">Gallery</h1>
 		<p class="sm:text-xl sm:font-medium">
-			Last years Inter IIT Moments at inter IIT sports meet 2024 IIT Kanpur Lorem Ipsum
+			Last years Inter IIT Moments at inter IIT sports meet 2024 IIT Kanpur
 		</p>
 	</div>
 

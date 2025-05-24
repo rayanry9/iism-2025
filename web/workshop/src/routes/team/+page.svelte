@@ -3,14 +3,14 @@
 {#snippet TeamItem(name: string, designation: string, imgSrc: string, phone: string, email: string)}
 	<div class="flex flex-col">
 		<div class="flex flex-row">
-			<div class="relative size-[10rem] sm:size-[16rem]">
+			<div class="relative size-[10rem] sm:size-[14rem]">
 				<img src={imgSrc} alt="face" class="absolute bottom-0 left-4" />
 			</div>
 			<div class="mt-auto ml-3 flex flex-col items-end sm:ml-0">
 				<p class="text-xl font-semibold sm:text-[1.75rem]">{name}</p>
 				<p class="text-sm sm:text-xl">{designation}</p>
 				<div
-					class="mt-4 flex w-[10rem] -skew-x-[15deg] flex-col items-center border border-[#AE9C74] bg-[#E9E4CE] px-2 py-2 text-base text-[#AE9C74] sm:w-auto sm:px-4 sm:py-4 sm:text-2xl"
+					class="mt-4 flex w-[10rem] -skew-x-[15deg] flex-col items-center justify-center border border-[#AE9C74] bg-[#E9E4CE] px-2 py-2 text-base text-[#AE9C74] sm:w-[15rem] sm:px-4 sm:py-4 sm:text-2xl"
 				>
 					<a href="tel:{phone}" class="skew-x-12">{phone}</a>
 				</div>
@@ -18,7 +18,7 @@
 		</div>
 
 		<div
-			class="mt-2 mr-4 ml-1 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-4 py-2 text-base text-[#AE9C74] sm:mt-4 sm:mr-5 sm:ml-0 sm:px-6 sm:py-4 sm:text-2xl"
+			class="mt-2 mr-3 ml-2 -skew-x-[15deg] border border-[#AE9C74] bg-[#E9E4CE] px-4 py-2 text-base text-[#AE9C74] sm:mt-4 sm:mr-5 sm:ml-0 sm:px-6 sm:py-4 sm:text-2xl"
 		>
 			<a href="mailto:{email}" class="flex skew-x-12 flex-row items-center gap-x-2 sm:gap-x-4">
 				<span>
@@ -40,7 +40,7 @@
 
 <main class="flex flex-col items-center gap-y-12 px-8 pt-16 pb-24 sm:gap-y-32 sm:px-52 sm:pt-32">
 	{@render Header('STUDENT HEADS')}
-	<section class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+	<section class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-3">
 		{@render TeamItem(
 			'Pritam Kumar M.',
 			'Overall Convenor',
@@ -65,7 +65,7 @@
 	</section>
 
 	{@render Header('CORE TEAM')}
-	<section class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-y-14">
+	<section class="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-3 sm:gap-y-14">
 		{@render TeamItem(
 			'Shiven Mathur',
 			'Sponsorship Head',
