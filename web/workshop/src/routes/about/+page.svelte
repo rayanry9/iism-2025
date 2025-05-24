@@ -3,6 +3,18 @@
 	import { SportItem } from '../+page.svelte';
 </script>
 
+<svelte:head>
+	<title>IISM 2025 About</title>
+	<meta
+		name="description"
+		content="Inter IIT Sports Meet 2025 About Page. Details about the inter iit 2025 sports meet workshop, which is being conducted in IIT Hyderabad."
+	/>
+	<meta
+		name="keywords"
+		content="Inter IIT Sports Meet 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, Hyderabad, IIT, IIT Hyderabad, IIT Hyderabad Sports Meet, IISM 2024, Inter IIT, Sports Meet, About, Details, Info, Information "
+	/>
+</svelte:head>
+
 <header class="relative h-56 sm:h-auto">
 	<div
 		class="absolute top-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-r from-[#5A85D0] to-[#5B84D3]/0 pl-8 sm:h-auto sm:pr-96 sm:pl-32"

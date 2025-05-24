@@ -8,6 +8,18 @@
 	let currentCard = $state(1);
 </script>
 
+<svelte:head>
+	<title>Inter IIT Sports Meet 2025</title>
+	<meta
+		name="description"
+		content="Inter IIT Sports Meet 2025 Home Page. Landing page for IISM 2025. Gives an overview for the workshop attendees."
+	/>
+	<meta
+		name="keywords"
+		content="Inter IIT Sports Meet 2025, IIT, Hyderabad, Sports, Sports Meet, Neet, 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, IIT Hyderabad, IIT Hyderabad Sports Meet, Home page, Landing page"
+	/>
+</svelte:head>
+
 {#snippet SportItem(text: string, imgSrc: string)}
 	<div
 		class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-xl font-medium text-[#016064] sm:text-[1.375rem]"

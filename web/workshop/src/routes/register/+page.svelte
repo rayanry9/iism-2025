@@ -5,6 +5,18 @@
 	let { form }: PageProps = $props();
 </script>
 
+<svelte:head>
+	<title>IISM 2025 Registration</title>
+	<meta
+		name="description"
+		content="Inter IIT Sports Meet 2025 Workshop Registration Page. Registration form for the workshop being conducted for Inter IIT Sports Meet by IIT Hyderabad."
+	/>
+	<meta
+		name="keywords"
+		content="Inter IIT Sports Meet 2025, IIT, Sports Meet, Sports, Hyderabad, 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, IIT Hyderabad, IIT Hyderabad Sports Meet, Register, Form, Registration, Signup, Join"
+	/>
+</svelte:head>
+
 <dialog
 	closedby="any"
 	bind:this={dialog}

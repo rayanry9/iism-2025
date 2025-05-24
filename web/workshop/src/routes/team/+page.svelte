@@ -1,5 +1,17 @@
 <script lang="ts"></script>
 
+<svelte:head>
+	<title>IISM 2025 Team</title>
+	<meta
+		name="description"
+		content="Inter IIT Sports Meet 2025 Team Page. Pictures of the head and convenor of Inter IIT Sports Meet 2025."
+	/>
+	<meta
+		name="keywords"
+		content="Inter IIT Sports Meet 2025, IIT, Sports, Meet, Sports Meet, Hyderabad, 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, IIT Hyderabad, IIT Hyderabad Sports Meet, Team"
+	/>
+</svelte:head>
+
 {#snippet TeamItem(name: string, designation: string, imgSrc: string, phone: string, email: string)}
 	<div class="flex flex-col">
 		<div class="flex flex-row">
@@ -39,7 +51,7 @@
 {/snippet}
 
 <main class="flex flex-col items-center gap-y-12 px-8 pt-16 pb-24 sm:gap-y-32 sm:px-52 sm:pt-32">
-	{@render Header('STUDENT HEADS')}
+	{@render Header('CONVENOR')}
 	<section class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-3">
 		{@render TeamItem(
 			'Pritam Kumar M.',
@@ -64,7 +76,7 @@
 		)}
 	</section>
 
-	{@render Header('CORE TEAM')}
+	{@render Header('HEADS')}
 	<section class="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-3 sm:gap-y-14">
 		{@render TeamItem(
 			'Shiven Mathur',
