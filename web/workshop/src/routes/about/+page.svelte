@@ -20,11 +20,11 @@
 		/>
 	</div>
 	<img
-		src="about/arrows.png"
+		src="about/arrows.webp"
 		alt="arrows"
 		class="absolute top-0 bottom-0 left-0 hidden h-full sm:block"
 	/>
-	<img src="about/header.png" alt="header" class="h-full object-cover" />
+	<img src="about/header.webp" alt="header" class="h-full object-cover" />
 </header>
 
 <article
@@ -321,7 +321,7 @@
 			></div>
 		</div>
 		<img
-			src="home/sncc.png"
+			src="home/sncc.webp"
 			style="clip-path: polygon(0% 30%, 100% 0%, 100% 100%, 0% 100%);"
 			alt="sncc"
 			class="mx-auto mt-auto"

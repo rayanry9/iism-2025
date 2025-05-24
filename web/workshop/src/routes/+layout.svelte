@@ -107,12 +107,15 @@
 					58th INTER IIT<br />SPORTS MEET <br class="after hidden sm:block" />2025
 				</h3>
 				<div class="flex flex-row gap-x-4 *:*:skew-x-12 *:-skew-x-12 *:p-2.5">
-					<div class="bg-[#D6E8E6]">
+					<a
+						href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/"
+						class="bg-[#D6E8E6]"
+					>
 						<img src="icons/linkedin.svg" class="size-5" alt="Linkedin" />
-					</div>
-					<div class="bg-[#D6E8E6]">
+					</a>
+					<a href="https://www.instagram.com/interiit_sports2025/" class="bg-[#D6E8E6]">
 						<img src="icons/instagram.svg" class="size-5" alt="Instagram" />
-					</div>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -161,7 +164,7 @@
 				</div>
 
 				<p>Mail -</p>
-				<p>interiit.oc@iith.ac.in</p>
+				<a href="mailto:interiit.oc@iith.ac.in">interiit.oc@iith.ac.in</a>
 			</div>
 		</section>
 	</div>

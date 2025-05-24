@@ -19,7 +19,7 @@
 
 <section class="text-background relative">
 	<img
-		src="home/landing.jpg"
+		src="home/landing.webp"
 		alt="Landing"
 		class="h-[calc(100vh-4rem)] object-cover object-center sm:h-auto"
 	/>
@@ -213,7 +213,7 @@
 					'Stay in campus hostels and dine in mess halls',
 					'Explore academic zones, & Open spaces'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				1
 			)}
 
@@ -223,7 +223,7 @@
 					'Professionally guided beginner-friendly sessions<br/>in selected sports',
 					'Structured schedules and skill-building drills'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				2
 			)}
 
@@ -233,7 +233,7 @@
 					'Capture your journey through group photographs<br/>& video highlights',
 					'Participate in fun events like campus tours &  activities'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				3
 			)}
 
@@ -243,7 +243,7 @@
 					'Camp finale features a mini-competition',
 					'Prizes and recognition for standout performances'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				4
 			)}
 		</div>
@@ -308,7 +308,7 @@
 					'Stay in campus hostels and dine in mess halls',
 					'Explore academic zones, & Open spaces'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				1
 			)}
 
@@ -318,7 +318,7 @@
 					'Professionally guided beginner-friendly sessions<br/>in selected sports',
 					'Structured schedules and skill-building drills'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				2
 			)}
 
@@ -328,7 +328,7 @@
 					'Capture your journey through group photographs<br/>& video highlights',
 					'Participate in fun events like campus tours &  activities'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				3
 			)}
 
@@ -338,7 +338,7 @@
 					'Camp finale features a mini-competition',
 					'Prizes and recognition for standout performances'
 				],
-				'gallery/image-4.png',
+				'gallery/image-4.webp',
 				4
 			)}
 		</div>
@@ -354,7 +354,7 @@
 			class="absolute top-0 left-0 h-full w-full bg-[#016064]"
 		></div>
 		<img
-			src="home/sncc.png"
+			src="home/sncc.webp"
 			style="clip-path: polygon(0% 30%, 100% 10%, 100% 100%, 0% 100%);"
 			class="h-full object-cover sm:hidden"
 			alt="SNCC"
@@ -395,7 +395,7 @@
 	</div>
 
 	<div style="clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);" class="h-full">
-		<img src="home/sncc.png" class="hidden h-full object-cover sm:block" alt="SNCC" />
+		<img src="home/sncc.webp" class="hidden h-full object-cover sm:block" alt="SNCC" />
 	</div>
 </section>
 
@@ -406,31 +406,34 @@
 		Gallery
 	</h2>
 	<div class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 sm:scale-110 sm:grid-cols-6">
-		<img src="gallery/image-2.png" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
-		<img src="gallery/image-2.png" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
-		<img src="gallery/image-2.png" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
 		<div class="hidden flex-col pt-8 sm:flex">
 			<h2 class="mr-4 skew-x-[15deg] self-end text-5xl font-medium">Gallery</h2>
-			<div class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8">
+			<a
+				href="gallery"
+				class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8"
+			>
 				<h4 class="text-background skew-x-[15deg] text-2xl font-medium">SHOW ALL</h4>
 				<img src="icons/triple-chevron-right.svg" alt="Go To" class="ml-auto skew-x-[15deg]" />
-			</div>
+			</a>
 		</div>
-		<img src="gallery/image-2.png" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
 		<img
 			class="col-span-2 row-span-2 hidden sm:block"
-			src="gallery/image-2.png"
+			src="gallery/image-2.webp"
 			alt="gallery img"
 		/>
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.png" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
 	</div>
 
 	<div class="mt-24 w-full grow self-center px-8 sm:hidden">
