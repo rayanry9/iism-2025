@@ -33,10 +33,10 @@
 	<img
 		src="home/landing.webp"
 		alt="Landing"
-		class="h-[calc(100vh-4rem)] object-cover object-center sm:h-auto"
+		class="h-[calc(100vh-4rem)] object-cover object-center sm:h-[calc(100vh-3rem)] lg:h-auto"
 	/>
 	<div
-		class="from-foreground to-foreground absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 pr-8 pl-8 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0 sm:pr-20 sm:pl-52"
+		class="from-foreground to-foreground absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 pr-8 pl-8 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0 sm:pr-20 sm:pl-12 lg:pl-52"
 	>
 		<div class="flex flex-row items-center gap-x-6">
 			<div class="divide-background/70 flex flex-row items-center divide-x">
@@ -93,9 +93,9 @@
 </section>
 
 <article
-	class="flex flex-col gap-x-28 gap-y-16 py-24 pr-8 pl-8 sm:flex-row sm:gap-y-0 sm:pr-32 sm:pl-52"
+	class="flex flex-col gap-x-28 gap-y-16 py-24 pr-8 pl-8 sm:pr-12 sm:pl-12 lg:flex-row lg:gap-y-0 lg:pr-32 lg:pl-52"
 >
-	<div class="flex flex-col gap-y-16 sm:w-[90rem]">
+	<div class="flex flex-col gap-y-16 lg:w-[90rem]">
 		<section class="flex flex-col gap-y-4 sm:gap-y-8">
 			<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
 			<div class="flex flex-col gap-y-4 sm:text-xl">
@@ -151,7 +151,7 @@
 
 		{#snippet ExpectCard(title: string, points: string[], imgSrc: string, index: number)}
 			<div class="relative max-h-full w-full">
-				<div class="absolute top-0 left-0 h-full w-12 skew-x-[10deg] bg-[#D6E8E6] p-2">
+				<div class="absolute top-0 left-0 h-full w-24 skew-x-[10deg] bg-[#D6E8E6] p-2">
 					<p class="-skew-x-[10deg] text-xl font-medium text-[#016064]">{index}</p>
 				</div>
 				<div
@@ -358,21 +358,30 @@
 </article>
 
 <section
-	class="sm:bg-foreground text-background grid h-full grid-cols-1 sm:grid-cols-[35%_65%] sm:pl-52"
+	class="lg:bg-foreground text-background grid h-full grid-cols-1 lg:grid-cols-[35%_65%] lg:pl-52"
 >
-	<div style="" class="relative h-full sm:hidden">
+	<div style="" class="relative h-full lg:hidden">
 		<div
 			style="clip-path: polygon(0% 15%, 100% 40%, 100% 100%, 0% 100%);"
-			class="absolute top-0 left-0 h-full w-full bg-[#016064]"
+			class="absolute top-0 left-0 h-full w-full bg-[#016064] lg:hidden"
 		></div>
+
 		<img
 			src="home/sncc.webp"
 			style="clip-path: polygon(0% 30%, 100% 10%, 100% 100%, 0% 100%);"
 			class="h-full object-cover sm:hidden"
 			alt="SNCC"
 		/>
+		<img
+			src="home/sncc.webp"
+			style="clip-path: polygon(0% 30%, 100% 0%, 100% 100%, 0% 100%);"
+			class="hidden h-full object-cover sm:block"
+			alt="SNCC"
+		/>
 	</div>
-	<div class="bg-foreground flex flex-col py-16 pr-8 pl-8 sm:py-48 sm:pr-24 sm:pl-8">
+	<div
+		class="bg-foreground flex flex-col py-16 pr-8 pl-8 sm:py-24 sm:pr-12 sm:pl-12 lg:py-48 lg:pr-24 lg:pl-8"
+	>
 		<h2 class="text-[2rem] font-medium text-nowrap sm:text-5xl">About Campus</h2>
 		<div class="mt-12 flex flex-col gap-y-4 sm:mt-16 sm:max-w-[64rem]">
 			<p>
@@ -407,21 +416,23 @@
 	</div>
 
 	<div style="clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);" class="h-full">
-		<img src="home/sncc.webp" class="hidden h-full object-cover sm:block" alt="SNCC" />
+		<img src="home/sncc.webp" class="hidden h-full object-cover lg:block" alt="SNCC" />
 	</div>
 </section>
 
 <section
-	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mb-0 sm:block sm:py-48"
+	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mt-0 sm:mb-0 sm:py-24 lg:mt-12 lg:mb-24 lg:block lg:py-48"
 >
-	<h2 class="mx-auto mt-24 mb-20 w-fit text-[2rem] font-medium text-nowrap sm:hidden sm:text-5xl">
+	<h2
+		class="mx-auto mt-24 mb-20 w-fit text-[2rem] font-medium text-nowrap sm:mt-0 sm:mb-32 sm:text-5xl lg:hidden"
+	>
 		Gallery
 	</h2>
-	<div class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 sm:scale-110 sm:grid-cols-6">
-		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 sm:-translate-x-0" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
-		<div class="hidden flex-col pt-8 sm:flex">
+	<div class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 lg:scale-110 lg:grid-cols-6">
+		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 lg:-translate-x-0" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 lg:-translate-x-0" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 lg:translate-x-0" />
+		<div class="hidden flex-col pt-8 lg:flex">
 			<h2 class="mr-4 skew-x-[15deg] self-end text-5xl font-medium">Gallery</h2>
 			<a
 				href="gallery"
@@ -431,29 +442,29 @@
 				<img src="icons/triple-chevron-right.svg" alt="Go To" class="ml-auto skew-x-[15deg]" />
 			</a>
 		</div>
-		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 sm:translate-x-0" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 lg:translate-x-0" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
 		<img
-			class="col-span-2 row-span-2 hidden sm:block"
+			class="col-span-2 row-span-2 hidden lg:block"
 			src="gallery/image-2.webp"
 			alt="gallery img"
 		/>
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden sm:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
 	</div>
 
-	<div class="mt-24 w-full grow self-center px-8 sm:hidden">
+	<div class="mt-24 w-full grow self-center px-8 lg:hidden">
 		<button
 			onclick={() => {
 				goto('gallery');
 			}}
-			class="bg-foreground text-background flex w-full -skew-x-[15deg] flex-row self-center px-8 py-4 text-xl font-medium hover:cursor-pointer sm:mt-24"
+			class="bg-foreground text-background flex w-full -skew-x-[15deg] flex-row self-center px-8 py-4 text-xl font-medium hover:cursor-pointer lg:mt-24"
 		>
 			<p class="skew-x-[15deg]">SHOW ALL</p>
 			<img
@@ -466,7 +477,7 @@
 </section>
 
 <section
-	class="flex flex-col items-center gap-y-8 border-t border-t-[#016064] bg-[#D6E8E6] px-8 py-12 sm:flex-row sm:gap-y-0 sm:px-52"
+	class="flex flex-col items-center gap-y-8 border-t border-t-[#016064] bg-[#D6E8E6] px-8 py-12 sm:flex-row sm:gap-y-0 sm:px-12 lg:px-52"
 >
 	<h3 class="text-[2rem] font-medium sm:text-3xl">Ready to take the field?</h3>
 	<button

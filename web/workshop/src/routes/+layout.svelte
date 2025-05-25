@@ -91,9 +91,11 @@
 {@render children()}
 
 <footer
-	class="text-background bg-foreground mt-auto flex flex-col items-center px-6 pt-16 pb-4 sm:px-52 sm:pt-24"
+	class="text-background bg-foreground :px-12 mt-auto flex flex-col items-center px-8 pt-16 pb-4 sm:pt-12 lg:px-52 lg:pt-24"
 >
-	<div class="mb-12 grid w-full grid-cols-1 gap-y-20 sm:mb-20 sm:grid-cols-3 sm:gap-y-0">
+	<div
+		class="mb-12 grid w-full grid-cols-1 gap-y-20 sm:mb-20 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-0"
+	>
 		<section class="grid grid-cols-subgrid">
 			<div class="row-span-1 mb-8 flex flex-row items-center">
 				<div class="divide-background/70 flex flex-row items-center divide-x">
@@ -121,7 +123,7 @@
 		</section>
 
 		<section class="grid grid-cols-subgrid">
-			<h5 class="font mb-8 font-semibold sm:mb-0">QUICK LINKS</h5>
+			<h5 class="font mb-8 font-semibold sm:mt-2 sm:mb-0 lg:mt-0">QUICK LINKS</h5>
 			<div
 				class="row-span-1 grid grid-cols-2 flex-col gap-x-4 gap-y-3 *:font-medium sm:flex sm:gap-x-0"
 			>
@@ -151,9 +153,11 @@
 			</div>
 		</section>
 
-		<section class="grid grid-cols-1 sm:grid-cols-subgrid">
-			<h5 class="mb-8 font-semibold sm:mb-0">REACH US</h5>
-			<div class="grid grid-cols-[0.5fr_1fr] gap-y-4 sm:grid-cols-2 sm:gap-y-0">
+		<section class="grid grid-cols-1 sm:col-span-2 sm:grid-cols-subgrid lg:col-span-1">
+			<h5 class="mb-8 font-semibold sm:col-span-2 lg:col-span-1 lg:mb-0">REACH US</h5>
+			<div
+				class="grid grid-cols-[0.5fr_1fr] gap-y-4 sm:col-span-2 sm:grid-cols-subgrid sm:gap-y-0 lg:col-span-1 lg:grid-cols-2"
+			>
 				<p>Get in Touch -</p>
 				<p>SNCC Sports Complex, IIT Hyderabad, Kandi, 522084</p>
 				<p>Call -</p>
