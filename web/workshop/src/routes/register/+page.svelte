@@ -81,7 +81,8 @@
 		</div>
 	</div>
 </dialog>
-<main class="px-8 pt-16 pb-16 sm:px-52 sm:pt-24 sm:pb-32">
+
+<main class="px-8 pt-16 pb-16 sm:px-12 sm:pt-24 sm:pb-32 lg:px-52">
 	{#if form == null}
 		<section>
 			<h1 class="text-[2rem] font-medium sm:text-[3.5rem]">Register</h1>
@@ -93,29 +94,33 @@
 			<form
 				method="POST"
 				use:enhance
-				class="mt-12 grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-3 sm:gap-y-20"
+				class="mt-12 grid grid-cols-1 gap-x-20 gap-y-6 *:flex *:flex-col sm:grid-cols-2 sm:gap-y-20 lg:grid-cols-3"
 			>
-				<h1 class=" text-xl font-medium sm:col-span-3 sm:-mb-10 sm:text-[2rem]">About You</h1>
+				<h1 class=" text-xl font-medium sm:col-span-2 sm:-mb-10 sm:text-[2rem] lg:col-span-3">
+					About You
+				</h1>
 
 				<label>
-					<p class="label-text">Full Name</p>
+					<p class="label-text">Full Name<span class="text-red-500">*</span></p>
 					<input class="input" name="name" placeholder="Enter Here" type="text" required />
 				</label>
 
 				<label>
-					<p class="label-text">Contact No. (Whatsapp Preferred)</p>
+					<p class="label-text">
+						Contact No. (Whatsapp Preferred)<span class="text-red-500">*</span>
+					</p>
 					<input class="input" name="phone" placeholder="Enter Here" required type="text" />
 				</label>
 
 				<label>
-					<p class="label-text">Email ID</p>
+					<p class="label-text">Email ID<span class="text-red-500">*</span></p>
 					<input class="input" name="email" placeholder="Enter Here" type="email" required />
 				</label>
 
 				<label>
-					<p class="label-text">Gender</p>
+					<p class="label-text">Gender<span class="text-red-500">*</span></p>
 					<select class="input select" name="gender" required>
-						<option class="option">Male</option>
+						<option selected={true} value="Male" class="option">Male</option>
 						<option class="option">Female</option>
 						<option class="option">Others</option>
 						<option class="option">Prefer Not to Say</option>
@@ -123,7 +128,7 @@
 				</label>
 
 				<label>
-					<p class="label-text">Age (10-28)</p>
+					<p class="label-text">Age (10-28)<span class="text-red-500">*</span></p>
 					<input
 						class="input"
 						name="age"
@@ -136,34 +141,36 @@
 				</label>
 
 				<label>
-					<p class="label-text">Date of Birth</p>
+					<p class="label-text">Date of Birth<span class="text-red-500">*</span></p>
 					<input class="input" name="dob" placeholder="Enter Here" type="date" required />
 				</label>
 
 				<label class="">
-					<p class="label-text">Address</p>
+					<p class="label-text">Address<span class="text-red-500">*</span></p>
 					<input class="input" name="address" placeholder="Enter Here" type="text" />
 				</label>
 
 				<label class="">
-					<p class="label-text">Pincode</p>
+					<p class="label-text">Pincode<span class="text-red-500">*</span></p>
 					<input class="input" name="pincode" placeholder="Enter Here" type="number" />
 				</label>
 
 				<label>
-					<p class="label-text">School / College / Institute Name</p>
+					<p class="label-text">
+						School / College / Institute Name<span class="text-red-500">*</span>
+					</p>
 					<input class="input" name="institute" placeholder="Enter Here" type="text" required />
 				</label>
 
 				<label>
-					<p class="label-text">Current Class / Year of Study</p>
+					<p class="label-text">Current Class / Year of Study<span class="text-red-500">*</span></p>
 					<input class="input" name="class" placeholder="Enter Here" type="text" required />
 				</label>
 
 				<label>
-					<p class="label-text">Blood Group</p>
+					<p class="label-text">Blood Group<span class="text-red-500">*</span></p>
 					<select class="input select" name="blood" required>
-						<option class="option">A+</option>
+						<option value="A+" selected={true} class="option">A+</option>
 						<option class="option">A-</option>
 						<option class="option">B+</option>
 						<option class="option">B-</option>
@@ -175,22 +182,26 @@
 				</label>
 
 				<label>
-					<p class="label-text">Medical Conditions or Allergies (If Any)</p>
+					<p class="label-text">
+						Medical Conditions or Allergies (If Any)<span class="text-red-500">*</span>
+					</p>
 					<input class="input" name="medical" placeholder="Enter Here" type="text" />
 				</label>
 
 				<label>
-					<p class="label-text">Will you stay in the campus hostel?</p>
+					<p class="label-text">
+						Will you stay in the campus hostel?<span class="text-red-500">*</span>
+					</p>
 					<select class="input select" name="hostel" required>
-						<option class="option">Yes</option>
+						<option selected={true} value="Yes" class="option">Yes</option>
 						<option class="option">No</option>
 					</select>
 				</label>
 
 				<label>
-					<p class="label-text">Sport You are Interested in</p>
+					<p class="label-text">Sport You are Interested in<span class="text-red-500">*</span></p>
 					<select class="input select" name="sport" required>
-						<option class="option">Football</option>
+						<option selected={true} value="Football" class="option">Football</option>
 						<option class="option">Basketball</option>
 						<option class="option">Badminton</option>
 						<option class="option">Hockey</option>
@@ -202,7 +213,9 @@
 					<input type="text" class="input" name="experience" placeholder="Enter Here" />
 				</label>
 
-				<h1 class="mb-6 text-2xl font-medium sm:col-span-3 sm:mt-8 sm:mb-0 sm:text-[2rem]">
+				<h1
+					class="mb-6 text-2xl font-medium sm:col-span-2 sm:text-[2rem] lg:col-span-3 lg:mt-8 lg:mb-0"
+				>
 					Gaurdian Details (Required for under 18)
 				</h1>
 
@@ -211,7 +224,7 @@
 					<input class="input" placeholder="Enter Here" name="gaurdian_name" type="text" required />
 				</label>
 
-				<label class="sm:col-span-2 sm:-mt-8 sm:grid sm:grid-cols-subgrid">
+				<label class="sm:-mt-8 lg:col-span-2 lg:grid lg:grid-cols-subgrid">
 					<p class="label-text sm:col-span-2">Gaurdian Contact No. (WhatsApp Preferred)</p>
 					<input
 						class="input sm:col-span-1"
@@ -222,14 +235,14 @@
 					/>
 				</label>
 
-				<h1 class="text-2xl font-medium sm:col-span-3 sm:text-[2rem]">Payment</h1>
-				<div class="-mt-4 sm:col-span-3 sm:-mt-16 sm:text-2xl">
+				<h1 class="text-2xl font-medium sm:col-span-2 sm:text-[2rem] lg:col-span-3">Payment</h1>
+				<div class="-mt-4 sm:col-span-2 sm:text-2xl lg:col-span-3 lg:-mt-16">
 					Details will be provided through Email or Whatsapp.
 				</div>
-				<div class="sm:col-span-2">
+				<div class="col-span-2">
 					<label class="sm:text-2xl">
-						<input type="checkbox" class="size-4 sm:size-5" required />
-						<span>
+						<input type="checkbox" class="size-4 hover:cursor-pointer sm:size-5" required />
+						<span class="hover:cursor-pointer">
 							I Agree to all Terms and Conditions
 							<span
 								onclick={(ev) => {
@@ -275,7 +288,7 @@
 	}
 
 	.input {
-		@apply focus:border-primary w-full border-2 border-[#016064] bg-[#D6E8E6] px-5 py-3 text-[#016064] hover:brightness-90 focus:outline-none sm:text-2xl;
+		@apply focus:border-primary mt-auto w-full border-2 border-[#016064] bg-[#D6E8E6] px-5 py-3 text-[#016064] hover:brightness-90 focus:outline-none sm:text-2xl;
 	}
 
 	.select {

@@ -10,7 +10,7 @@
 	/>
 </svelte:head>
 
-<main class="px-8 py-16 sm:px-52 sm:py-36">
+<main class=":px-52 px-8 py-16 sm:px-12 sm:py-24 lg:py-36">
 	<div class="mb-12 flex flex-col sm:mb-24">
 		<h1 class="text-[2rem] font-medium sm:text-[3.5rem]">Gallery</h1>
 		<p class="sm:text-xl sm:font-medium">
