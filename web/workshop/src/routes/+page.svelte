@@ -33,17 +33,18 @@
 	<img
 		src="home/landing.webp"
 		alt="Landing"
-		class="h-[calc(100vh-4rem)] object-cover object-center sm:h-[calc(100vh-3rem)] lg:h-auto"
+		class="h-[calc(100vh-4rem)] object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center xl:h-auto"
 	/>
 	<div
-		class="from-foreground to-foreground absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 pr-8 pl-8 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0 sm:pr-20 sm:pl-12 lg:pl-52"
+		class="from-foreground to-foreground body-spacing absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0"
 	>
-		<div class="flex flex-row items-center gap-x-6">
+		<div class="hidden flex-row items-center gap-x-6 sm:flex">
 			<div class="divide-background/70 flex flex-row items-center divide-x">
 				<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-7 pr-3 sm:h-9" />
 				<img src="iith-logo.png" alt="IITH Logo" class="h-6 pl-4 sm:h-8" />
 			</div>
 		</div>
+
 		<div class="flex flex-col gap-y-3">
 			<p class="text-4xl leading-snug font-medium sm:text-[3.5rem] sm:leading-[4.5rem]">
 				5-Day Sports <br class="hidden sm:block" />Summer Camp
@@ -92,10 +93,8 @@
 	</div>
 </section>
 
-<article
-	class="flex flex-col gap-x-28 gap-y-16 py-24 pr-8 pl-8 sm:pr-12 sm:pl-12 lg:flex-row lg:gap-y-0 lg:pr-32 lg:pl-52"
->
-	<div class="flex flex-col gap-y-16 lg:w-[90rem]">
+<article class="body-spacing flex flex-col gap-x-28 gap-y-16 py-24 xl:flex-row xl:gap-y-0">
+	<div class="flex flex-col gap-y-16 xl:w-[90rem]">
 		<section class="flex flex-col gap-y-4 sm:gap-y-8">
 			<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
 			<div class="flex flex-col gap-y-4 sm:text-xl">
@@ -147,7 +146,7 @@
 	</div>
 
 	<section class="flex w-full grow flex-col gap-y-8">
-		<h2 class="text-[2rem] font-medium sm:text-5xl">What To Expect ?</h2>
+		<h2 class="text-[2rem font-medium sm:text-5xl">What To Expect ?</h2>
 
 		{#snippet ExpectCard(title: string, points: string[], imgSrc: string, index: number)}
 			<div class="relative max-h-full w-full">
@@ -358,7 +357,7 @@
 </article>
 
 <section
-	class="lg:bg-foreground text-background grid h-full grid-cols-1 lg:grid-cols-[35%_65%] lg:pl-52"
+	class="lg:bg-foreground text-background grid h-full grid-cols-1 lg:grid-cols-[55%_45%] xl:grid-cols-[35%_65%] xl:pl-52"
 >
 	<div style="" class="relative h-full lg:hidden">
 		<div
@@ -380,7 +379,7 @@
 		/>
 	</div>
 	<div
-		class="bg-foreground flex flex-col py-16 pr-8 pl-8 sm:py-24 sm:pr-12 sm:pl-12 lg:py-48 lg:pr-24 lg:pl-8"
+		class="bg-foreground flex flex-col py-16 pr-8 pl-8 sm:py-24 sm:pr-12 sm:pl-12 lg:pl-16 xl:py-48 xl:pr-24 xl:pl-8"
 	>
 		<h2 class="text-[2rem] font-medium text-nowrap sm:text-5xl">About Campus</h2>
 		<div class="mt-12 flex flex-col gap-y-4 sm:mt-16 sm:max-w-[64rem]">
@@ -421,42 +420,60 @@
 </section>
 
 <section
-	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mt-0 sm:mb-0 sm:py-24 lg:mt-12 lg:mb-24 lg:block lg:py-48"
+	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mt-0 sm:mb-0 sm:py-24 lg:mt-12 lg:mb-24 lg:block xl:py-48"
 >
 	<h2
 		class="mx-auto mt-24 mb-20 w-fit text-[2rem] font-medium text-nowrap sm:mt-0 sm:mb-32 sm:text-5xl lg:hidden"
 	>
 		Gallery
 	</h2>
-	<div class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 lg:scale-110 lg:grid-cols-6">
-		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 lg:-translate-x-0" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="-translate-x-8 lg:-translate-x-0" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 lg:translate-x-0" />
+	<div
+		class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 lg:scale-110 lg:grid-cols-4 xl:grid-cols-6"
+	>
+		<img
+			src="gallery/image-2.webp"
+			alt="gallery img"
+			class="-translate-x-8 lg:translate-x-0 xl:-translate-x-0"
+		/>
+		<img
+			src="gallery/image-2.webp"
+			alt="gallery img"
+			class="-translate-x-8 lg:translate-x-0 xl:-translate-x-0"
+		/>
+		<img
+			src="gallery/image-2.webp"
+			alt="gallery img"
+			class="translate-x-12 lg:hidden lg:translate-x-0 xl:block xl:translate-x-0"
+		/>
 		<div class="hidden flex-col pt-8 lg:flex">
-			<h2 class="mr-4 skew-x-[15deg] self-end text-5xl font-medium">Gallery</h2>
+			<h2 class="skew-x-[15deg] self-end text-4xl font-medium xl:mr-4 xl:text-5xl">Gallery</h2>
 			<a
 				href="gallery"
 				class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8"
 			>
-				<h4 class="text-background skew-x-[15deg] text-2xl font-medium">SHOW ALL</h4>
+				<h4 class="text-background skew-x-[15deg] text-xl font-medium xl:text-2xl">SHOW ALL</h4>
 				<img src="icons/triple-chevron-right.svg" alt="Go To" class="ml-auto skew-x-[15deg]" />
 			</a>
 		</div>
-		<img src="gallery/image-2.webp" alt="gallery img" class="translate-x-12 lg:translate-x-0" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
 		<img
-			class="col-span-2 row-span-2 hidden lg:block"
 			src="gallery/image-2.webp"
 			alt="gallery img"
+			class="translate-x-12 lg:translate-x-0 xl:translate-x-0"
 		/>
 		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
 		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
 		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img
+			class="col-span-2 row-span-2 hidden xl:block"
+			src="gallery/image-2.webp"
+			alt="gallery img"
+		/>
 		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
+		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
 	</div>
 
 	<div class="mt-24 w-full grow self-center px-8 lg:hidden">
@@ -477,7 +494,7 @@
 </section>
 
 <section
-	class="flex flex-col items-center gap-y-8 border-t border-t-[#016064] bg-[#D6E8E6] px-8 py-12 sm:flex-row sm:gap-y-0 sm:px-12 lg:px-52"
+	class="body-spacing flex flex-col items-center gap-y-8 border-t border-t-[#016064] bg-[#D6E8E6] py-12 sm:flex-row sm:gap-y-0"
 >
 	<h3 class="text-[2rem] font-medium sm:text-3xl">Ready to take the field?</h3>
 	<button

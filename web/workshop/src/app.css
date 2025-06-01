@@ -1,15 +1,20 @@
 @import 'tailwindcss';
 
-@theme{
-	--color-primary:oklch(0.6593 0.230058 35.2202);
+@theme {
+	--color-primary: oklch(0.6593 0.230058 35.2202);
 	--color-secondary: oklch(0.4444 0.075555 199.7694);
 	--color-background: oklch(1 0 0);
 	--color-foreground: oklch(0.2178 0 0);
-  --breakpoint-3xl: 120rem;
-  --breakpoint-4xl: 152rem;
+	--breakpoint-3xl: 120rem; /* 1080p */
+	--breakpoint-4xl: 160rem; /* 2k */
+	--breakpoint-5xl: 240rem; /* 4k */
 }
 
 .jost {
-  font-family: "Jost", sans-serif;
-  font-style: normal;
+	font-family: 'Jost', sans-serif;
+	font-style: normal;
+}
+
+.body-spacing {
+	@apply px-8 sm:px-12 lg:px-16 xl:px-52;
 }

@@ -82,7 +82,7 @@
 	</div>
 </dialog>
 
-<main class="px-8 pt-16 pb-16 sm:px-12 sm:pt-24 sm:pb-32 lg:px-52">
+<main class="body-spacing pt-16 pb-16 sm:pt-24 sm:pb-32">
 	{#if form == null}
 		<section>
 			<h1 class="text-[2rem] font-medium sm:text-[3.5rem]">Register</h1>
@@ -291,8 +291,15 @@
 		@apply focus:border-primary mt-auto w-full border-2 border-[#016064] bg-[#D6E8E6] px-5 py-3 text-[#016064] hover:brightness-90 focus:outline-none sm:text-2xl;
 	}
 
-	.select {
+	select,
+	::picker(select) {
+		appearance: base-select;
 	}
+
+	select:open::picker-icon {
+		rotate: 180deg;
+	}
+
 	.option {
 		@apply py-2 pl-4 text-sm sm:text-lg;
 	}

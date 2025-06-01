@@ -15,7 +15,7 @@
 	/>
 </svelte:head>
 
-<header class="relative h-56 sm:h-96 lg:h-auto">
+<header class="relative h-56 sm:h-96 xl:h-auto">
 	<div
 		class="absolute top-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-r from-[#5A85D0] to-[#5B84D3]/0 pl-8 sm:h-auto sm:pr-96 sm:pl-32"
 	>
@@ -40,7 +40,7 @@
 </header>
 
 <article
-	class="grid grid-cols-1 gap-x-28 gap-y-12 py-12 pr-8 pl-8 sm:py-24 sm:pr-12 sm:pl-12 lg:grid-cols-2 lg:flex-row lg:gap-y-0 lg:pr-32 lg:pl-52"
+	class="body-spacing grid grid-cols-1 gap-x-28 gap-y-12 py-12 sm:py-24 xl:grid-cols-2 xl:flex-row xl:gap-y-0"
 >
 	<section class="flex flex-col gap-y-4 sm:gap-y-8">
 		<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
@@ -77,7 +77,7 @@
 	</section>
 </article>
 
-<article class="flex flex-col py-8 pr-8 pl-8 sm:pr-12 sm:pl-12 lg:pr-32 lg:pl-52">
+<article class="body-spacing flex flex-col py-8">
 	<h2 class="text-[2rem] font-medium sm:text-5xl">
 		Schedule <span class="text-primary text-[2rem] font-normal">(Tentative)</span>
 	</h2>
@@ -251,7 +251,7 @@
 	</div>
 
 	<div
-		class="bg-foreground text-background hidden flex-col px-52 py-44 lg:flex"
+		class="bg-foreground text-background body-spacing hidden flex-col py-44 lg:flex"
 		style="clip-path: polygon(0% 10%, 100% 0%, 100% 90%, 0% 100%);"
 	>
 		<h2 class="mt-20 text-5xl font-medium sm:text-5xl">What You will Receive!</h2>
@@ -287,7 +287,7 @@
 	</div>
 </article>
 
-<article class="mb-32 grid grid-cols-1 px-8 py-12 sm:mb-48 sm:px-12 lg:grid-cols-2 lg:px-52">
+<article class="body-spacing mb-32 grid grid-cols-1 py-12 sm:mb-48 xl:grid-cols-2">
 	<section class="flex flex-col gap-y-12 sm:gap-y-16">
 		<h2 class="text-[2rem] font-medium sm:text-5xl">Registration & Fees</h2>
 
@@ -295,10 +295,10 @@
 			class="grid grid-cols-1 gap-y-2 text-xl font-medium sm:mt-6 sm:grid-cols-[35%_60%] sm:gap-y-4 sm:text-2xl"
 		>
 			<p>EARLY BIRD OFFER:</p>
-			<p class="mb-5"><span class="text-primary">1999/-</span> (VALID TILL 20 JULY)</p>
+			<p class="mb-5"><span class="text-primary">XXXX/-</span> (VALID TILL 20 JULY)</p>
 
 			<p>STANDARD FEE:</p>
-			<p>2299/- (POST EARLY BIRD PERIOD)</p>
+			<p>XXXX/- (POST EARLY BIRD PERIOD)</p>
 		</div>
 
 		<div class="flex flex-col">
@@ -325,7 +325,7 @@
 			<p class="skew-x-[15deg]">REGISTER</p>
 		</button>
 	</section>
-	<div class="relative hidden h-full flex-col items-center px-8 lg:flex">
+	<div class="relative hidden h-full flex-col items-center px-8 xl:flex">
 		<div class="absolute z-[-1] h-full w-full px-8">
 			<div
 				class=" h-full w-full bg-[#016064]"
@@ -342,8 +342,9 @@
 </article>
 
 <style>
+	@reference "../../app.css";
+
 	.grid-cell {
-		@apply flex flex-col items-center;
-		padding: 1rem 0.5rem;
+		@apply flex flex-col items-center px-2 py-4;
 	}
 </style>

@@ -51,10 +51,10 @@
 {/snippet}
 
 <main
-	class="flex flex-col items-center gap-y-12 px-8 pt-16 pb-24 sm:gap-y-16 sm:px-12 sm:pt-32 lg:gap-y-32 lg:px-52 lg:pt-32"
+	class="body-spacing flex flex-col items-center gap-y-12 pt-16 pb-24 sm:gap-y-16 sm:pt-32 lg:gap-y-32 xl:pt-32"
 >
 	{@render Header('CONVENOR')}
-	<section class="grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3">
+	<section class="grid grid-cols-1 gap-x-8 gap-y-4 xl:grid-cols-3">
 		{@render TeamItem(
 			'Pritam Kumar M.',
 			'Overall Convenor',
@@ -79,7 +79,7 @@
 	</section>
 
 	{@render Header('HEADS')}
-	<section class="grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-3 lg:gap-y-14">
+	<section class="grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-2 lg:gap-y-14 xl:grid-cols-3">
 		{@render TeamItem(
 			'Shiven Mathur',
 			'Sponsorship Head',

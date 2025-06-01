@@ -14,7 +14,7 @@
 {/snippet}
 
 <nav
-	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-8 sm:relative sm:py-0"
+	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-8 sm:sticky sm:py-0"
 >
 	<div class="divide-background/50 flex h-full flex-row divide-x">
 		<a href="/">
@@ -91,7 +91,7 @@
 {@render children()}
 
 <footer
-	class="text-background bg-foreground :px-12 mt-auto flex flex-col items-center px-8 pt-16 pb-4 sm:pt-12 lg:px-52 lg:pt-24"
+	class="text-background bg-foreground body-spacing mt-auto flex flex-col items-center pt-16 pb-4 sm:pt-12 lg:pt-16 xl:pt-24"
 >
 	<div
 		class="mb-12 grid w-full grid-cols-1 gap-y-20 sm:mb-20 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-0"
@@ -106,7 +106,7 @@
 			</div>
 			<div class="row-span-1">
 				<h3 class="mb-6 text-[2rem] font-medium">
-					58th INTER IIT<br />SPORTS MEET <br class="after hidden sm:block" />2025
+					58th INTER IIT<br />SPORTS MEET <br class="hidden sm:block" />2025
 				</h3>
 				<div class="flex flex-row gap-x-4 *:*:skew-x-12 *:-skew-x-12 *:p-2.5">
 					<a
@@ -123,7 +123,9 @@
 		</section>
 
 		<section class="grid grid-cols-subgrid">
-			<h5 class="font mb-8 font-semibold sm:mt-2 sm:mb-0 lg:mt-0">QUICK LINKS</h5>
+			<h5 class="font mb-8 font-semibold sm:mt-2 sm:mb-0 lg:mt-7 lg:mb-auto xl:mt-0">
+				QUICK LINKS
+			</h5>
 			<div
 				class="row-span-1 grid grid-cols-2 flex-col gap-x-4 gap-y-3 *:font-medium sm:flex sm:gap-x-0"
 			>
@@ -154,7 +156,9 @@
 		</section>
 
 		<section class="grid grid-cols-1 sm:col-span-2 sm:grid-cols-subgrid lg:col-span-1">
-			<h5 class="mb-8 font-semibold sm:col-span-2 lg:col-span-1 lg:mb-0">REACH US</h5>
+			<h5 class="mb-8 font-semibold sm:col-span-2 lg:col-span-1 lg:mt-7 xl:mt-0 xl:mb-0">
+				REACH US
+			</h5>
 			<div
 				class="grid grid-cols-[0.5fr_1fr] gap-y-4 sm:col-span-2 sm:grid-cols-subgrid sm:gap-y-0 lg:col-span-1 lg:grid-cols-2"
 			>
