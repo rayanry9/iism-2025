@@ -239,7 +239,7 @@
 				<div class="-mt-4 sm:col-span-2 sm:text-2xl lg:col-span-3 lg:-mt-16">
 					Details will be provided through Email or Whatsapp.
 				</div>
-				<div class="col-span-2">
+				<div class="md:col-span-2">
 					<label class="sm:text-2xl">
 						<input type="checkbox" class="size-4 hover:cursor-pointer sm:size-5" required />
 						<span class="hover:cursor-pointer">
