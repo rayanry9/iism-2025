@@ -401,7 +401,7 @@
 
 		<button
 			onclick={() => {
-				goto('register');
+				goto('about');
 			}}
 			class="bg-primary mt-16 flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer sm:mt-24"
 		>
