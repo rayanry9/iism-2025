@@ -1,1 +1,90 @@
 @import 'tailwindcss';
+
+@theme {
+	--color-custom-orange: oklch(0.6374 0.2093 33.71);
+	--color-custom-yellow: oklch(0.8184 0.1631 77.69);
+	--color-custom-blue: oklch(0.3861 0.1473 270.17);
+	--color-custom-teal: oklch(0.5347 0.0808 200.58);
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProLight.otf');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProRegular.otf');
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProItalic.otf');
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProRegular.otf');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProItalic.otf');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProMedium.otf');
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProDemi.otf');
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProDemiItalic.otf');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProBold.otf');
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProBoldItalic.otf');
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProHeavy.otf');
+	font-weight: 800;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProHeavyItalic.otf');
+	font-weight: 800;
+}
+
+@font-face {
+	font-family: 'OptimaNovaLTPro';
+	src: url('optima-nova-lt-pro/OptimaNovaLTProBlack.otf');
+	font-weight: 900;
+}
+
+:root {
+	font-family: 'OptimaNovaLTPro';
+}
