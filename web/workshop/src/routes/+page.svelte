@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Inter IIT Sports Meet 2025</title>
+	<title>IIT Hyderabad Sports Workshop 2025</title>
 	<link rel="canonical" href="https://iism25.sports.iith.ac.in/workshop" />
 	<meta
 		name="description"

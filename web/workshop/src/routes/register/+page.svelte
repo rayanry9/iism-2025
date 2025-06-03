@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>IISM 2025 Registration</title>
+	<title>IITH Sports Workshop 2025 Registration</title>
 	<meta
 		name="description"
 		content="5-day Sports Workshop Registration Page. Registration form for the workshop being conducted for Inter IIT Sports Meet by IIT Hyderabad."

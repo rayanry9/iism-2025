@@ -1,7 +1,7 @@
 <script lang="ts"></script>
 
 <svelte:head>
-	<title>IISM 2025 Team</title>
+	<title>Inter IIT Sports Meet 2025 Team</title>
 	<meta
 		name="description"
 		content="Inter IIT Sports Meet 2025 Team Page. Pictures of the heads and convenors of Inter IIT Sports Meet 2025."

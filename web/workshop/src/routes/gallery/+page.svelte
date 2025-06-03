@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>IISM 2025 Gallery</title>
+	<title>IITH Sports Workshop 2025 Gallery</title>
 	<meta
 		name="description"
 		content="5-Day Sports Workshop, IIT Hyderabad 2025 Gallery Page. Pictures of IIT Hyderabad Campus and Sport Events."
