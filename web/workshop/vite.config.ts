@@ -4,9 +4,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	server: {
-		allowedHosts: [
-			"iism2025.sports.iith.ac.in"
-		]
+		allowedHosts: ['iism2025.sports.iith.ac.in']
 	},
 	plugins: [tailwindcss(), sveltekit()]
 });
