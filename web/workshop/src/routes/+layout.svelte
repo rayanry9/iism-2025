@@ -14,7 +14,7 @@
 {/snippet}
 
 <nav
-	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-8 sm:sticky sm:py-0"
+	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-8 sm:py-0"
 >
 	<div class="divide-background/50 flex h-full flex-row divide-x">
 		<a href="/">
@@ -91,7 +91,7 @@
 {@render children()}
 
 <footer
-	class="text-background bg-foreground body-spacing mt-auto flex flex-col items-center pt-16 pb-4 sm:pt-12 lg:pt-16 xl:pt-24"
+	class="text-background bg-foreground body-spacing mt-auto flex flex-col items-center pt-16 pb-4 sm:pt-12 lg:pt-16 2xl:pt-24"
 >
 	<div
 		class="mb-12 grid w-full grid-cols-1 gap-y-20 sm:mb-20 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-0"

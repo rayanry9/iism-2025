@@ -9,11 +9,7 @@
 	<title>IISM 2025 Registration</title>
 	<meta
 		name="description"
-		content="Inter IIT Sports Meet 2025 Workshop Registration Page. Registration form for the workshop being conducted for Inter IIT Sports Meet by IIT Hyderabad."
-	/>
-	<meta
-		name="keywords"
-		content="Inter IIT Sports Meet 2025, IIT, Sports Meet, Sports, Hyderabad, 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, IIT Hyderabad, IIT Hyderabad Sports Meet, Register, Form, Registration, Signup, Join"
+		content="5-day Sports Workshop Registration Page. Registration form for the workshop being conducted for Inter IIT Sports Meet by IIT Hyderabad."
 	/>
 </svelte:head>
 
@@ -94,7 +90,7 @@
 			<form
 				method="POST"
 				use:enhance
-				class="mt-12 grid grid-cols-1 gap-x-20 gap-y-6 *:flex *:flex-col sm:grid-cols-2 sm:gap-y-20 lg:grid-cols-3"
+				class="mt-12 grid grid-cols-1 gap-x-20 gap-y-6 *:flex *:flex-col sm:grid-cols-2 sm:gap-y-20 lg:grid-cols-3 xl:gap-16 2xl:gap-20"
 			>
 				<h1 class=" text-xl font-medium sm:col-span-2 sm:-mb-10 sm:text-[2rem] lg:col-span-3">
 					About You

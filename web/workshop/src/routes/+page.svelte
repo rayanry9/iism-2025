@@ -10,14 +10,18 @@
 
 <svelte:head>
 	<title>Inter IIT Sports Meet 2025</title>
+	<link rel="canonical" href="https://iism25.sports.iith.ac.in/workshop" />
 	<meta
 		name="description"
-		content="Inter IIT Sports Meet 2025 Home Page. Landing page for IISM 2025. Gives an overview for the workshop attendees."
+		content="5 Day Sports Summer Camp hosted by IIT Hyderabad. This immersive camp combines sports training, engaging activities, and a first-hand experience of the student lifestyle at one of India’s top institutes."
 	/>
+	<meta property="og:title" content="5-Day Sports Summer Camp | IIT Hyderabad" />
 	<meta
-		name="keywords"
-		content="Inter IIT Sports Meet 2025, IIT, Hyderabad, Sports, Sports Meet, Neet, 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, IIT Hyderabad, IIT Hyderabad Sports Meet, Home page, Landing page"
+		property="og:description"
+		content="Explore, train, and compete at IIT Hyderabad's 5-day sports camp. A great summer opportunity for youth."
 	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://iism25.sports.iith.ac.in" />
 </svelte:head>
 
 {#snippet SportItem(text: string, imgSrc: string)}
@@ -33,7 +37,7 @@
 	<img
 		src="home/landing.webp"
 		alt="Landing"
-		class="h-[calc(100vh-4rem)] object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center xl:h-auto"
+		class="h-[calc(100vh-4rem)] object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center 2xl:h-auto"
 	/>
 	<div
 		class="from-foreground to-foreground body-spacing absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0"
@@ -87,14 +91,16 @@
 				<p class="skew-x-[15deg]">REGISTER</p>
 			</button>
 		</div>
-		<div class=" self-center sm:absolute sm:bottom-12">
+		<div class=" self-center sm:absolute sm:bottom-12 xl:bottom-6 2xl:bottom-12">
 			<img src="icons/triple-chevron-down.svg" alt="Chevron Down" />
 		</div>
 	</div>
 </section>
 
-<article class="body-spacing flex flex-col gap-x-28 gap-y-16 py-24 xl:flex-row xl:gap-y-0">
-	<div class="flex flex-col gap-y-16 xl:w-[90rem]">
+<article class="body-spacing 3xl:flex-row 3xl:gap-y-0 flex flex-col gap-x-28 gap-y-16 py-24">
+	<div
+		class="3xl:w-[90rem] 3xl:flex-col 3xl:flex flex flex-col gap-y-16 2xl:grid 2xl:grid-cols-2 2xl:gap-x-8"
+	>
 		<section class="flex flex-col gap-y-4 sm:gap-y-8">
 			<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
 			<div class="flex flex-col gap-y-4 sm:text-xl">
@@ -311,7 +317,9 @@
 		</div>
 
 		<!-- Desktop Version -->
-		<div class="hidden h-full grid-cols-1 gap-y-6 sm:grid">
+		<div
+			class="3xl:grid-cols-1 hidden h-full grid-cols-1 gap-y-6 sm:grid 2xl:grid-cols-2 2xl:gap-x-16"
+		>
 			{@render ExpectCard(
 				'Live the IIT Hyderabad Student Experience',
 				[
@@ -357,7 +365,7 @@
 </article>
 
 <section
-	class="lg:bg-foreground text-background grid h-full grid-cols-1 lg:grid-cols-[55%_45%] xl:grid-cols-[35%_65%] xl:pl-52"
+	class="lg:bg-foreground text-background 3xl:pl-44 grid h-full grid-cols-1 lg:grid-cols-[55%_45%] xl:pl-12 2xl:grid-cols-[35%_65%] 2xl:pl-24"
 >
 	<div style="" class="relative h-full lg:hidden">
 		<div
@@ -379,7 +387,7 @@
 		/>
 	</div>
 	<div
-		class="bg-foreground flex flex-col py-16 pr-8 pl-8 sm:py-24 sm:pr-12 sm:pl-12 lg:pl-16 xl:py-48 xl:pr-24 xl:pl-8"
+		class="bg-foreground flex flex-col px-8 py-16 sm:px-12 sm:py-24 lg:pl-16 2xl:py-48 2xl:pr-24 2xl:pl-8"
 	>
 		<h2 class="text-[2rem] font-medium text-nowrap sm:text-5xl">About Campus</h2>
 		<div class="mt-12 flex flex-col gap-y-4 sm:mt-16 sm:max-w-[64rem]">
@@ -420,7 +428,7 @@
 </section>
 
 <section
-	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mt-0 sm:mb-0 sm:py-24 lg:mt-12 lg:mb-24 lg:block xl:py-48"
+	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mt-0 sm:mb-0 sm:py-24 lg:mt-12 lg:mb-24 lg:block xl:mb-12 xl:py-24 2xl:mb-24 2xl:py-48"
 >
 	<h2
 		class="mx-auto mt-24 mb-20 w-fit text-[2rem] font-medium text-nowrap sm:mt-0 sm:mb-32 sm:text-5xl lg:hidden"
@@ -446,12 +454,12 @@
 			class="translate-x-12 lg:hidden lg:translate-x-0 xl:block xl:translate-x-0"
 		/>
 		<div class="hidden flex-col pt-8 lg:flex">
-			<h2 class="skew-x-[15deg] self-end text-4xl font-medium xl:mr-4 xl:text-5xl">Gallery</h2>
+			<h2 class="skew-x-[15deg] self-end text-4xl font-medium xl:mr-4 2xl:text-5xl">Gallery</h2>
 			<a
 				href="gallery"
-				class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8"
+				class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8 xl:py-6 2xl:py-8"
 			>
-				<h4 class="text-background skew-x-[15deg] text-xl font-medium xl:text-2xl">SHOW ALL</h4>
+				<h4 class="text-background skew-x-[15deg] text-xl font-medium 2xl:text-2xl">SHOW ALL</h4>
 				<img src="icons/triple-chevron-right.svg" alt="Go To" class="ml-auto skew-x-[15deg]" />
 			</a>
 		</div>
@@ -494,7 +502,7 @@
 </section>
 
 <section
-	class="body-spacing flex flex-col items-center gap-y-8 border-t border-t-[#016064] bg-[#D6E8E6] py-12 sm:flex-row sm:gap-y-0"
+	class="body-spacing flex flex-col items-center gap-y-8 border-t border-t-[#016064] bg-[#D6E8E6] py-12 sm:flex-row sm:gap-y-0 xl:py-8 2xl:py-12"
 >
 	<h3 class="text-[2rem] font-medium sm:text-3xl">Ready to take the field?</h3>
 	<button

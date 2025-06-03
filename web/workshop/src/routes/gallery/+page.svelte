@@ -2,15 +2,11 @@
 	<title>IISM 2025 Gallery</title>
 	<meta
 		name="description"
-		content="Inter IIT Sports Meet 2025 Gallery Page. Pictures of last Inter IIT Sports Meet held at Kanpur, Indore."
-	/>
-	<meta
-		name="keywords"
-		content="Inter IIT Sports Meet 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, Hyderabad, IIT, IIT Hyderabad, IIT Hyderabad Sports Meet, Gallery, Pictures, IISM 2024, Inter IIT, Sports Meet, IIT, Kanpur"
+		content="5-Day Sports Workshop, IIT Hyderabad 2025 Gallery Page. Pictures of IIT Hyderabad Campus and Sport Events."
 	/>
 </svelte:head>
 
-<main class="px-8 py-16 sm:px-12 sm:py-24 lg:px-16 xl:px-52 xl:py-36">
+<main class="body-spacing px-8 py-16 sm:py-24">
 	<div class="mb-12 flex flex-col sm:mb-24">
 		<h1 class="text-[2rem] font-medium lg:text-[3rem] xl:text-[3.5rem]">Gallery</h1>
 		<p class="sm:text-xl xl:font-medium">

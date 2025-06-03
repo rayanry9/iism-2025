@@ -7,17 +7,13 @@
 	<title>IISM 2025 About</title>
 	<meta
 		name="description"
-		content="Inter IIT Sports Meet 2025 About Page. Details about the inter iit 2025 sports meet workshop, which is being conducted in IIT Hyderabad."
-	/>
-	<meta
-		name="keywords"
-		content="Inter IIT Sports Meet 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, Hyderabad, IIT, IIT Hyderabad, IIT Hyderabad Sports Meet, IISM 2024, Inter IIT, Sports Meet, About, Details, Info, Information "
+		content="5-Day Sports Workshop 2025 About Page. Registration and event details about the 5-Day Sports Workshop which is being conducted in IIT Hyderabad."
 	/>
 </svelte:head>
 
-<header class="relative h-56 sm:h-96 xl:h-auto">
+<header class="relative h-56 sm:h-96 2xl:h-auto">
 	<div
-		class="absolute top-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-r from-[#5A85D0] to-[#5B84D3]/0 pl-8 sm:h-auto sm:pr-96 sm:pl-32"
+		class="absolute top-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-r from-[#5A85D0] to-[#5B84D3]/0 pl-8 sm:h-auto sm:pr-96 sm:pl-32 xl:pl-24 2xl:pl-32"
 	>
 		<p class="text-background text-4xl leading-snug font-medium sm:text-[4rem]">
 			ABOUT & <br />FACILITIES
@@ -40,7 +36,7 @@
 </header>
 
 <article
-	class="body-spacing grid grid-cols-1 gap-x-28 gap-y-12 py-12 sm:py-24 xl:grid-cols-2 xl:flex-row xl:gap-y-0"
+	class="body-spacing grid grid-cols-1 gap-x-28 gap-y-12 py-12 sm:py-24 2xl:grid-cols-2 2xl:flex-row 2xl:gap-y-0"
 >
 	<section class="flex flex-col gap-y-4 sm:gap-y-8">
 		<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>

@@ -4,11 +4,7 @@
 	<title>IISM 2025 Team</title>
 	<meta
 		name="description"
-		content="Inter IIT Sports Meet 2025 Team Page. Pictures of the head and convenor of Inter IIT Sports Meet 2025."
-	/>
-	<meta
-		name="keywords"
-		content="Inter IIT Sports Meet 2025, IIT, Sports, Meet, Sports Meet, Hyderabad, 2025, IISM 2025, IISM, IISSM, IISSM 2025, Workshop, IIT Hyderabad, IIT Hyderabad Sports Meet, Team"
+		content="Inter IIT Sports Meet 2025 Team Page. Pictures of the heads and convenors of Inter IIT Sports Meet 2025."
 	/>
 </svelte:head>
 
@@ -51,10 +47,10 @@
 {/snippet}
 
 <main
-	class="body-spacing flex flex-col items-center gap-y-12 pt-16 pb-24 sm:gap-y-16 sm:pt-32 lg:gap-y-32 xl:pt-32"
+	class="body-spacing flex flex-col items-center gap-y-12 pt-16 pb-24 sm:gap-y-16 sm:pt-32 lg:gap-y-32 xl:gap-y-24 xl:pt-32 2xl:gap-y-32"
 >
 	{@render Header('CONVENOR')}
-	<section class="grid grid-cols-1 gap-x-8 gap-y-4 xl:grid-cols-3">
+	<section class="grid grid-cols-1 gap-x-8 gap-y-4 2xl:grid-cols-3">
 		{@render TeamItem(
 			'Pritam Kumar M.',
 			'Overall Convenor',
@@ -79,7 +75,7 @@
 	</section>
 
 	{@render Header('HEADS')}
-	<section class="grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-2 lg:gap-y-14 xl:grid-cols-3">
+	<section class="grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-2 lg:gap-y-14 2xl:grid-cols-3">
 		{@render TeamItem(
 			'Shiven Mathur',
 			'Sponsorship Head',
