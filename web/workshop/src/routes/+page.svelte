@@ -29,7 +29,7 @@
 		class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-xl font-medium text-[#016064] sm:text-[1.375rem]"
 	>
 		<p class="skew-x-[15deg]">{text}</p>
-		<img src={imgSrc} alt={text} class="absolute right-4 bottom-0 skew-x-[15deg]" />
+		<img src={imgSrc} alt={text} class="absolute right-4 bottom-0 w-32 skew-x-[15deg]" />
 	</div>
 {/snippet}
 
@@ -128,10 +128,10 @@
 			</p>
 
 			<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
-				{@render SportItem('FOOTBALL', 'home/football.svg')}
-				{@render SportItem('BASKETBALL', 'home/basketball.svg')}
-				{@render SportItem('BADMINTON', 'home/badminton.svg')}
-				{@render SportItem('HOCKEY', 'home/hockey.svg')}
+				{@render SportItem('FOOTBALL', 'home/football.webp')}
+				{@render SportItem('BASKETBALL', 'home/basketball.webp')}
+				{@render SportItem('BADMINTON', 'home/badminton.webp')}
+				{@render SportItem('HOCKEY', 'home/hockey.webp')}
 			</div>
 
 			<button
