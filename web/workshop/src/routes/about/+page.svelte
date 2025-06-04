@@ -69,10 +69,10 @@
 		</p>
 
 		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
-			{@render SportItem('FOOTBALL', 'home/football.svg')}
-			{@render SportItem('BASKETBALL', 'home/basketball.svg')}
-			{@render SportItem('BADMINTON', 'home/badminton.svg')}
-			{@render SportItem('HOCKEY', 'home/hockey.svg')}
+			{@render SportItem('FOOTBALL', 'home/football.webp')}
+			{@render SportItem('BASKETBALL', 'home/basketball.webp')}
+			{@render SportItem('BADMINTON', 'home/badminton.webp')}
+			{@render SportItem('HOCKEY', 'home/hockey.webp')}
 		</div>
 	</section>
 </article>
