@@ -1,72 +1,122 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 </script>
 
 <svelte:head>
-    <title>58TH INTER IIT SPORTS MEET 2025 | IIT Hyderabad</title>
-    <meta name="description" content="Official page for 58th Inter IIT Sports Meet 2025 hosted by IIT Hyderabad" />
+	<title>58TH INTER IIT SPORTS MEET 2025 | IIT Hyderabad</title>
+	<meta
+		name="description"
+		content="Official page for 58th Inter IIT Sports Meet 2025 hosted by IIT Hyderabad"
+	/>
 </svelte:head>
 
 <section class="text-background relative">
-	<img
-		src="image-5.webp"
-		alt="Official Website"
-		class="h-[calc(100vh-4rem)] object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center xl:h-auto"
-	/>
-	<div
-		class="from-foreground to-foreground body-spacing absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0"
-	>
-		<div class="hidden flex-row items-center gap-x-6 sm:flex">
-			<div class="divide-background/70 flex flex-row items-center divide-x">
-				<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-7 pr-3 sm:h-9" />
-				<img src="iith-logo.png" alt="IITH Logo" class="h-6 pl-4 sm:h-8" />
+	<div class="relative px-4">
+		<!-- Main image -->
+		<img
+			src="image-5.webp"
+			alt="Official Website"
+			class="my-4 h-[calc(100vh-4rem)] w-full rounded-xl object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center xl:h-auto"
+		/>
+
+		<!-- Logo + Text container positioned on top of the image -->
+		<div
+			class="absolute left-4 top-0 flex items-center space-x-3 bg-white pb-2 pr-8 pt-2"
+			style="clip-path: polygon(0% 0%, 100% 0%, 86.5% 100%, 0% 100%)"
+		>
+			<img src="/logo.png" alt="Logo" class="h-10 w-10" />
+			<div class="text-xs font-semibold leading-tight text-gray-800">
+				58TH<br />
+				INTER IIT<br />
+				SPORTS MEET<br />
+				2025
 			</div>
 		</div>
 
-		<div class="flex flex-col gap-y-3">
-			<p class="text-4xl leading-snug font-medium sm:text-[3.5rem] sm:leading-[4.5rem]">
-				5-Day Sports <br class="hidden sm:block" />Summer Camp
+		<!-- Right side: Navigation menu -->
+		<nav class="right-15 absolute top-6 flex space-x-10 text-sm font-medium text-white">
+			<a href="#schedule" class="cursor-pointer hover:underline">SCHEDULE</a>
+			<a href="#teams" class="cursor-pointer hover:underline">TEAMS AND PLAYERS</a>
+			<a href="#live-score" class="cursor-pointer hover:underline">LIVE SOCRE</a>
+			<a href="#results" class="cursor-pointer hover:underline">RESULTS</a>
+			<a href="#gallery" class="cursor-pointer hover:underline">GALLERY</a>
+			<a href="#contact" class="cursor-pointer hover:underline">CONTACT</a>
+		</nav>
 
-				<span
-					class="inline-flex w-fit flex-row gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-sm font-normal text-nowrap sm:hidden"
-				>
-					<img src="home/pin.svg" alt="pin" />
-					IIT HYDERABAD
-				</span>
-			</p>
+		<div
+			class="absolute left-12 top-1/2 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
+		>
+			<!-- IITH logo -->
+			<div class="flex justify-start">
+				<img src="/iith-logo-full.png" alt="IITH Logo" class="h-10 sm:h-12" />
+			</div>
+
+			<!-- Event Title -->
+			<div class="text-xs font-semibold leading-tight sm:text-5xl">
+				<p>58TH</p>
+				<p>INTER IIT</p>
+				<p>SPORTS MEET</p>
+				<p>2025</p>
+			</div>
+
+			<!-- IIT HYDERABAD location -->
 			<div
-				class="hidden w-fit flex-row gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-nowrap sm:flex"
+				class="inline-flex w-fit items-center gap-2 rounded-full border border-[#707070] bg-black/30 px-4 py-1 text-xs font-normal sm:text-sm"
 			>
-				<img src="home/pin.svg" alt="pin" />
+				<img src="/pin.svg" alt="pin" class="h-3 w-3" />
 				IIT HYDERABAD
 			</div>
-		</div>
-		<p class="text-base sm:text-xl sm:font-medium">
-			Experience Student Life.<br />
-			Explore Sports.<br />
-			Escape Boring Holidays.
-		</p>
 
-		<div class="mt-auto flex flex-col gap-y-4 sm:mt-0">
-			<button
-				onclick={() => {
-					goto('about');
-				}}
-				class="border-background -skew-x-[15deg] border bg-transparent py-2 text-xl font-medium hover:cursor-pointer"
+			<!-- Dates -->
+			<div
+				class="inline-flex w-fit items-center gap-2 border border-[#707070] bg-black/30 px-4 py-1 text-xs font-normal sm:text-sm"
 			>
-				<p class="skew-x-[15deg]">KNOW MORE</p>
-			</button>
-			<button
-				onclick={() => {
-					goto('register');
-				}}
-				class="bg-primary -skew-x-[15deg] py-2 text-xl font-medium hover:cursor-pointer"
-			>
-				<p class="skew-x-[15deg]">REGISTER</p>
-			</button>
+				10th to 17th December 2025
+			</div>
 		</div>
-		<div class=" self-center sm:absolute sm:bottom-12">
-			<img src="icons/triple-chevron-down.svg" alt="Chevron Down" />
+
+		<div
+			class="absolute bottom-0 right-4 flex w-full max-w-2xl flex-col gap-3 bg-white pb-4 pl-28 pt-4 text-white"
+			style="clip-path: polygon(13.5% 0, 100% 0, 100% 100%, 0% 100%)"
+		>
+			<!-- Top Row: Circle + Heading -->
+			<div class="flex items-center gap-2 pl-4">
+				<!-- Orange circle -->
+				<div class="h-3 w-3 rounded-full bg-orange-500"></div>
+
+				<!-- Orange text -->
+				<p class="text-lg font-medium text-orange-500">What's happening?</p>
+				<div class="flex items-center gap-1">
+					<img src="basketball.svg" alt="event 1" class="h-3 w-3 rounded-full" />
+					<img src="football.svg" alt="event 2" class="h-3 w-3 rounded-full" />
+					<img src="hockey.svg" alt="event 3" class="h-3 w-3 rounded-full" />
+					<img src="badminton.sg" alt="event 4" class="h-3 w-3 rounded-full" />
+				</div>
+			</div>
+
+			<!-- Title -->
+			<p class="text-3xl font-semibold leading-snug text-black">5-DAY SPORTS SUMMER CAMP</p>
+
+			<!-- Two lines of text -->
+			<div class="text-s leading-relaxed text-black">
+				<p>Open to school and college students in Hyderabad.</p>
+				<p>Train at IIT Hyderabad this summer with expert coaches and top facilites.</p>
+			</div>
+
+			<div class="mt-4 flex gap-4">
+				<button
+					onclick={() => goto('/register')}
+					class="-skew-x-[20deg] rounded bg-orange-500 px-6 py-2 text-lg font-semibold text-white transition hover:bg-orange-600"
+				>
+					<span class="skew-x-[20deg]">KNOW MORE & REGISTER</span>
+				</button>
+
+				<div
+					class="-skew-x-[20deg] rounded border border-black/50 bg-white px-6 py-2 text-lg font-semibold text-black"
+				>
+					<span class="skew-x-[20deg]">DATES – 6–11 JULY 2025</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
