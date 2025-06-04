@@ -21,10 +21,10 @@
 
 		<!-- Logo + Text container positioned on top of the image -->
 		<div
-			class="absolute top-0 left-0 flex -skew-x-[20deg] items-center space-x-3 rounded-br-2xl bg-white pt-2 pr-8 pb-2 pl-8"
+			class="absolute left-0 top-0 flex -skew-x-[20deg] items-center space-x-3 rounded-br-2xl bg-white pb-2 pl-8 pr-8 pt-2"
 		>
 			<div
-				class="absolute top-0 -right-[26px] size-4 bg-white"
+				class="absolute -right-[26px] top-0 size-4 bg-white"
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
@@ -33,7 +33,7 @@
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
 			></div>
 			<img src="/logo.png" alt="Logo" class="h-10 w-10 skew-x-[20deg]" />
-			<div class="skew-x-[20deg] text-xs leading-tight font-semibold text-gray-800">
+			<div class="skew-x-[20deg] text-xs font-semibold leading-tight text-gray-800">
 				58TH<br />
 				INTER IIT<br />
 				SPORTS MEET<br />
@@ -42,7 +42,7 @@
 		</div>
 
 		<!-- Right side: Navigation menu -->
-		<nav class="absolute top-6 right-15 flex space-x-10 text-sm font-medium text-white">
+		<nav class="right-15 absolute top-6 flex space-x-10 text-sm font-medium text-white">
 			<a href="#schedule" class="cursor-pointer hover:underline">SCHEDULE</a>
 			<a href="#teams" class="cursor-pointer hover:underline">TEAMS AND PLAYERS</a>
 			<a href="#live-score" class="cursor-pointer hover:underline">LIVE SOCRE</a>
@@ -52,7 +52,7 @@
 		</nav>
 
 		<div
-			class="absolute top-1/2 left-12 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
+			class="absolute left-12 top-1/2 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
 		>
 			<!-- IITH logo -->
 			<div class="flex justify-start">
@@ -60,7 +60,7 @@
 			</div>
 
 			<!-- Event Title -->
-			<div class="text-xs leading-tight font-semibold sm:text-5xl">
+			<div class="text-xs font-semibold leading-tight sm:text-5xl">
 				<p>58TH</p>
 				<p>INTER IIT</p>
 				<p>SPORTS MEET</p>
@@ -84,7 +84,7 @@
 		</div>
 
 		<div
-			class="absolute -right-8 -bottom-[0.2px] flex w-fit -skew-x-[20deg] flex-col gap-3 rounded-tl-2xl bg-white pt-4 pr-24 pb-4 pl-16 text-white"
+			class="absolute -bottom-[0.2px] -right-8 flex w-fit -skew-x-[20deg] flex-col gap-3 rounded-tl-2xl bg-white pb-4 pl-16 pr-24 pt-4 text-white"
 		>
 			<div
 				class="absolute -top-4 right-[6rem] size-4 skew-x-[20deg] bg-white"
@@ -96,44 +96,44 @@
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at top left, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
-			<!-- Top Row: Circle + Heading -->
-			<div class="flex skew-x-[20deg] items-center gap-2 pl-4">
-				<!-- Orange circle -->
-				<div class="h-3 w-3 rounded-full bg-orange-500"></div>
-
-				<!-- Orange text -->
-				<p class="text-lg font-medium text-orange-500">What's happening?</p>
-				<div class="flex items-center gap-1">
-					<img src="basketball.svg" alt="event 1" class="h-3 w-3 rounded-full" />
-					<img src="football.svg" alt="event 2" class="h-3 w-3 rounded-full" />
-					<img src="hockey.svg" alt="event 3" class="h-3 w-3 rounded-full" />
-					<img src="badminton.svg" alt="event 4" class="h-3 w-3 rounded-full" />
+			<div class="flex skew-x-[20deg] flex-col gap-3 pl-10 text-black">
+				<!-- Top Row: Circle + Heading -->
+				<div class="flex items-center gap-2">
+					<div class="h-3 w-3 rounded-full bg-orange-500"></div>
+					<p class="text-lg font-medium text-orange-500">What's happening?</p>
+					<div class="flex items-center gap-1">
+						<img src="basketball.svg" alt="event 1" class="h-3 w-3 rounded-full" />
+						<img src="football.svg" alt="event 2" class="h-3 w-3 rounded-full" />
+						<img src="hockey.svg" alt="event 3" class="h-3 w-3 rounded-full" />
+						<img src="badminton.svg" alt="event 4" class="h-3 w-3 rounded-full" />
+					</div>
 				</div>
-			</div>
 
-			<!-- Title -->
-			<p class="skew-x-[20deg] text-3xl leading-snug font-semibold text-black">
-				5-DAY SPORTS SUMMER CAMP
-			</p>
+				<!-- Title -->
+				<p class="text-3xl font-semibold leading-snug">5-DAY SPORTS SUMMER CAMP</p>
 
-			<!-- Two lines of text -->
-			<div class="text-s skew-x-[20deg] leading-relaxed text-black">
-				<p>Open to school and college students in Hyderabad.</p>
-				<p>Train at IIT Hyderabad this summer with expert coaches and top facilites.</p>
-			</div>
+				<!-- Two lines of text -->
+				<div class="text-sm leading-relaxed">
+					<p>Open to school and college students in Hyderabad.</p>
+					<p>Train at IIT Hyderabad this summer with expert coaches and top facilites.</p>
+				</div>
 
-			<div class="mt-4 flex gap-4">
-				<button
-					onclick={() => goto('/register')}
-					class="rounded bg-orange-500 px-6 py-2 text-lg font-semibold text-white transition *:skew-x-[20deg] hover:bg-orange-600"
-				>
-					<p>KNOW MORE & REGISTER</p>
-				</button>
+				<!-- Buttons -->
+				<div class="mt-4 flex -skew-x-[20deg] gap-4">
+					<!-- Skewed Button -->
+					<button
+						onclick={() => goto('/register')}
+						class="rounded bg-orange-500 px-6 py-2 text-lg font-semibold text-white transition hover:bg-orange-600"
+					>
+						<p class="skew-x-[20deg]">KNOW MORE & REGISTER</p>
+					</button>
 
-				<div
-					class=" rounded border border-black/50 bg-white px-6 py-2 text-lg font-semibold text-black *:skew-x-[20deg]"
-				>
-					<p>DATES – 6–11 JULY 2025</p>
+					<!-- Skewed Date Box -->
+					<div
+						class="rounded border border-black/50 bg-white px-6 py-2 text-lg font-semibold text-black"
+					>
+						<p class="skew-x-[20deg]">DATES – 6–11 JULY 2025</p>
+					</div>
 				</div>
 			</div>
 		</div>
