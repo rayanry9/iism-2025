@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 	let expectCards = $state(new Array(5));
 	let currentCard = $state(1);
 </script>
@@ -76,7 +77,7 @@
 		<div class="mt-auto flex flex-col gap-y-4 sm:mt-0">
 			<button
 				onclick={() => {
-					goto('about');
+					goto(base + '/about');
 				}}
 				class="border-background -skew-x-[15deg] border bg-transparent py-2 text-xl font-medium hover:cursor-pointer"
 			>
@@ -84,7 +85,7 @@
 			</button>
 			<button
 				onclick={() => {
-					goto('register');
+					goto(base + '/register');
 				}}
 				class="bg-primary -skew-x-[15deg] py-2 text-xl font-medium hover:cursor-pointer"
 			>
@@ -136,7 +137,7 @@
 
 			<button
 				onclick={() => {
-					goto('about');
+					goto(base + '/about');
 				}}
 				class="bg-foreground text-background mt-4 flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer sm:mt-auto"
 			>
@@ -409,7 +410,7 @@
 
 		<button
 			onclick={() => {
-				goto('about');
+				goto(base + '/about');
 			}}
 			class="bg-primary mt-16 flex -skew-x-[15deg] flex-row px-8 py-4 text-xl font-medium hover:cursor-pointer sm:mt-24"
 		>
@@ -456,7 +457,7 @@
 		<div class="hidden flex-col pt-8 lg:flex">
 			<h2 class="skew-x-[15deg] self-end text-4xl font-medium xl:mr-4 2xl:text-5xl">Gallery</h2>
 			<a
-				href="gallery"
+				href="{base}/gallery"
 				class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8 xl:py-6 2xl:py-8"
 			>
 				<h4 class="text-background skew-x-[15deg] text-xl font-medium 2xl:text-2xl">SHOW ALL</h4>
@@ -487,7 +488,7 @@
 	<div class="mt-24 w-full grow self-center px-8 lg:hidden">
 		<button
 			onclick={() => {
-				goto('gallery');
+				goto(base + '/gallery');
 			}}
 			class="bg-foreground text-background flex w-full -skew-x-[15deg] flex-row self-center px-8 py-4 text-xl font-medium hover:cursor-pointer lg:mt-24"
 		>
@@ -507,7 +508,7 @@
 	<h3 class="text-[2rem] font-medium sm:text-3xl">Ready to take the field?</h3>
 	<button
 		onclick={() => {
-			goto('register');
+			goto(base + '/register');
 		}}
 		class="border-background text-background bg-secondary ml-auto w-full -skew-x-[15deg] border py-4 text-xl font-medium hover:cursor-pointer sm:w-auto sm:px-24 sm:py-2"
 	>

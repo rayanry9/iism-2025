@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 	import { page } from '$app/state';
 	import '../app.css';
 
@@ -17,7 +18,7 @@
 	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-8 sm:py-0"
 >
 	<div class="divide-background/50 flex h-full flex-row divide-x">
-		<a href="/">
+		<a href={base}>
 			<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-9 pr-3" />
 		</a>
 
@@ -31,7 +32,7 @@
 		{@render NavItem('team', 'team')}
 		<a
 			class="bg-primary relative ml-4 flex h-14 -skew-x-12 flex-row items-center px-10"
-			href="register"
+			href="{base}/register"
 		>
 			<div class="bg-foreground absolute right-1.5 h-full w-1"></div>
 			<div class="bg-foreground absolute right-3.5 h-full w-1"></div>
@@ -59,24 +60,24 @@
 				onclick={() => {
 					navMenuOpen = !navMenuOpen;
 				}}
-				href="about">ABOUT & FACILITIES</a
+				href="{base}/about">ABOUT & FACILITIES</a
 			>
 			<a
 				onclick={() => {
 					navMenuOpen = !navMenuOpen;
 				}}
-				href="gallery">GALLERY</a
+				href="{base}/gallery">GALLERY</a
 			>
 			<a
 				onclick={() => {
 					navMenuOpen = !navMenuOpen;
 				}}
-				href="team">TEAM</a
+				href="{base}/team">TEAM</a
 			>
 			<div class="px-8">
 				<button
 					onclick={() => {
-						goto('register');
+						goto(base + '/register');
 						navMenuOpen = !navMenuOpen;
 					}}
 					class="text-background bg-primary w-full -skew-x-[15deg] py-2 text-lg font-medium hover:cursor-pointer"
@@ -131,27 +132,27 @@
 			>
 				<a
 					class="order-1 w-fit {page.url.pathname == '/home' ? 'text-primary' : 'text-background'}"
-					href="/">HOME</a
+					href="{base}/">HOME</a
 				>
 				<a
 					class="order-3 w-fit sm:order-2 {page.url.pathname == '/about'
 						? 'text-primary'
 						: 'text-background'}"
-					href="/about">ABOUT & FACILITIES</a
+					href="{base}/about">ABOUT & FACILITIES</a
 				>
 				<a
 					class="order-5 w-fit sm:order-3 {page.url.pathname == '/gallery'
 						? 'text-primary'
 						: 'text-background'}"
-					href="gallery">GALLERY</a
+					href="{base}/gallery">GALLERY</a
 				>
 				<a
 					class="order-2 w-fit sm:order-4 {page.url.pathname == '/team'
 						? 'text-primary'
 						: 'text-background'}"
-					href="team">TEAM</a
+					href="{base}/team">TEAM</a
 				>
-				<a href="register" class="text-primary order-4 w-fit sm:order-5">REGISTER</a>
+				<a href="{base}/register" class="text-primary order-4 w-fit sm:order-5">REGISTER</a>
 			</div>
 		</section>
 
