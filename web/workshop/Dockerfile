@@ -9,7 +9,7 @@ COPY build/ ./build/
 RUN pnpm install --frozen-lockfile --prod
 
 ENV PORT=3000
-ENV ORIGIN=https://iism25.sports.iith.ac.in
+ENV ORIGIN=https://iism25.sports.iith.ac.in/workshop
 
 EXPOSE 3000
 
