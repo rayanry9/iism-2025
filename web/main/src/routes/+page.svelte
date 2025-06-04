@@ -109,11 +109,11 @@
 						</div>
 					</div>
 					<p class="text-custom-orange ml-2 text-xl font-medium">What's happening?</p>
-					<div class="flex items-center gap-1">
-						<img src="basketball.svg" alt="event 1" class="h-3 w-3 rounded-full" />
-						<img src="football.svg" alt="event 2" class="h-3 w-3 rounded-full" />
-						<img src="hockey.svg" alt="event 3" class="h-3 w-3 rounded-full" />
-						<img src="badminton.svg" alt="event 4" class="h-3 w-3 rounded-full" />
+					<div class="flex items-center gap-1 *:size-6">
+						<img src="basketball.webp" alt="event 1" />
+						<img src="football.webp" alt="event 2" />
+						<img src="hockey.webp" alt="event 3" />
+						<img src="badminton.webp" alt="event 4" />
 					</div>
 				</div>
 
