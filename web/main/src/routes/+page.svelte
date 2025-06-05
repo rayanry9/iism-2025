@@ -1,4 +1,5 @@
 <script lang="ts">
+	let menuOpen = false;
 </script>
 
 <svelte:head>
@@ -12,28 +13,36 @@
 <section class="text-background relative overflow-x-clip">
 	<div class="relative px-4">
 		<!-- Main image -->
+
 		<img
 			src="image-5.webp"
 			alt="Official Website"
-			class="my-4 h-[calc(100vh-4rem)] w-full rounded-xl object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center xl:h-auto"
+			class="3xl:h-[10800px] my-4 h-[calc(100vh-4rem)] w-full rounded-xl object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center lg:h-[80vh] xl:h-[720px] 2xl:h-[900px]"
 		/>
 
 		<!-- Logo + Text container positioned on top of the image -->
 		<div
-			class="absolute top-0 left-0 flex -skew-x-15 items-center space-x-3 rounded-br-2xl bg-white pt-4 pr-8 pb-4 pl-8"
+			class="-skew-x-15 absolute left-0 top-0 flex items-center space-x-3 rounded-br-2xl bg-white pb-2 pl-3 pr-3 pt-2 sm:pb-3 sm:pl-5 sm:pr-5 sm:pt-3 lg:pl-6 lg:pr-6 xl:pl-6 xl:pr-6 2xl:pl-7 2xl:pr-7"
 		>
 			<div
-				class="absolute top-0 -right-[26px] size-4 bg-white"
+				class="absolute -right-[26px] top-0 size-4 bg-white"
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
 			<div
-				class="absolute -bottom-4 left-7 size-4 skew-x-15 bg-white"
+				class="skew-x-15 absolute -bottom-4 left-7 size-4 bg-white"
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
-			<img src="/logo.png" alt="Logo" class=" size-20 skew-x-15" />
-			<div class="skew-x-15 text-sm leading-tight font-semibold text-gray-800">
+			<img
+				src="/logo.png"
+				alt="Logo"
+				class="skew-x-15 lg:size-18 size-14 sm:size-16 xl:size-20 2xl:size-24"
+			/>
+
+			<div
+				class="skew-x-15 text-[0.65rem] font-semibold leading-tight text-gray-800 sm:text-sm lg:text-base xl:text-base 2xl:text-lg"
+			>
 				58TH<br />
 				INTER IIT<br />
 				SPORTS MEET<br />
@@ -41,18 +50,49 @@
 			</div>
 		</div>
 
-		<!-- Right side: Navigation menu -->
-		<nav class="absolute top-10 right-15 flex space-x-10 font-semibold text-white">
-			<a href="#schedule" class="cursor-pointer hover:underline">SCHEDULE</a>
-			<a href="#teams" class="cursor-pointer hover:underline">TEAMS AND PLAYERS</a>
-			<a href="#live-score" class="cursor-pointer hover:underline">LIVE SCORE</a>
-			<a href="#results" class="cursor-pointer hover:underline">RESULTS</a>
-			<a href="#gallery" class="cursor-pointer hover:underline">GALLERY</a>
-			<a href="#contact" class="cursor-pointer hover:underline">CONTACT</a>
+		<nav class="right-15 absolute top-8 z-50 text-white sm:right-8 lg:top-10">
+			<button
+				class="block sm:hidden"
+				on:click={() => (menuOpen = !menuOpen)}
+				aria-label="Toggle menu"
+			>
+				<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+				</svg>
+			</button>
+
+			<div
+				class="3xl:gap-x-12 3xl:text-xl hidden flex-wrap justify-end gap-x-2 text-[0.65rem] font-semibold sm:flex sm:gap-x-4 sm:text-xs lg:gap-x-6 lg:text-sm xl:gap-x-8 xl:text-base 2xl:gap-x-10 2xl:text-lg"
+			>
+				<a href="#schedule" class="hover:underline">SCHEDULE</a>
+				<a href="#teams" class="hover:underline">TEAMS AND PLAYERS</a>
+				<a href="#live-score" class="hover:underline">LIVE SCORE</a>
+				<a href="#results" class="hover:underline">RESULTS</a>
+				<a href="#gallery" class="hover:underline">GALLERY</a>
+				<a href="#contact" class="hover:underline">CONTACT</a>
+			</div>
+
+			<!-- Mobile dropdown menu -->
+			{#if menuOpen}
+				<div class="mt-2 flex flex-col gap-2 rounded bg-black/80 p-4 text-xs shadow-lg sm:hidden">
+					<a href="#schedule" on:click={() => (menuOpen = false)} class="hover:underline"
+						>SCHEDULE</a
+					>
+					<a href="#teams" on:click={() => (menuOpen = false)} class="hover:underline"
+						>TEAMS AND PLAYERS</a
+					>
+					<a href="#live-score" on:click={() => (menuOpen = false)} class="hover:underline"
+						>LIVE SCORE</a
+					>
+					<a href="#results" on:click={() => (menuOpen = false)} class="hover:underline">RESULTS</a>
+					<a href="#gallery" on:click={() => (menuOpen = false)} class="hover:underline">GALLERY</a>
+					<a href="#contact" on:click={() => (menuOpen = false)} class="hover:underline">CONTACT</a>
+				</div>
+			{/if}
 		</nav>
 
 		<div
-			class="absolute top-1/2 left-24 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
+			class="absolute left-24 top-1/2 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
 		>
 			<!-- IITH logo -->
 			<div class="flex justify-start">
@@ -60,7 +100,7 @@
 			</div>
 
 			<!-- Event Title -->
-			<div class="text-xs leading-tight font-semibold text-nowrap italic sm:text-[4rem]">
+			<div class="text-nowrap text-xs font-semibold italic leading-tight sm:text-[4rem]">
 				<p>58TH</p>
 				<p>INTER IIT</p>
 				<p>SPORTS MEET</p>
@@ -84,10 +124,10 @@
 		</div>
 
 		<div
-			class="absolute -right-8 -bottom-[0.2px] flex w-fit -skew-x-15 flex-col gap-3 rounded-tl-2xl bg-white pt-8 pr-20 pb-4 pl-8 text-white"
+			class="-skew-x-15 absolute -bottom-[0.2px] -right-8 flex w-fit flex-col gap-3 rounded-tl-2xl bg-white pb-4 pl-8 pr-20 pt-8 text-white"
 		>
 			<div
-				class="absolute -top-[1rem] right-[5.56rem] size-4 skew-x-15 bg-white"
+				class="skew-x-15 absolute -top-[1rem] right-[5.56rem] size-4 bg-white"
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at top left, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
@@ -96,7 +136,7 @@
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at top left, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
-			<div class="flex skew-x-15 flex-col gap-3 pb-4 pl-12 text-black">
+			<div class="skew-x-15 flex flex-col gap-3 pb-4 pl-12 text-black">
 				<!-- Top Row: Circle + Heading -->
 				<div class="flex items-center gap-2">
 					<div
@@ -118,7 +158,7 @@
 				</div>
 
 				<!-- Title -->
-				<p class="text-[2.5rem] leading-snug font-semibold">5-DAY SPORTS SUMMER CAMP</p>
+				<p class="text-[2.5rem] font-semibold leading-snug">5-DAY SPORTS SUMMER CAMP</p>
 
 				<!-- Two lines of text -->
 				<div class="text-xl leading-relaxed">
@@ -127,14 +167,14 @@
 				</div>
 
 				<!-- Buttons -->
-				<div class="mt-2 flex -skew-x-15 gap-x-8 *:py-3">
+				<div class="-skew-x-15 mt-2 flex gap-x-8 *:py-3">
 					<!-- Skewed Button -->
 					<button
 						class="bg-custom-orange hover:bg-custom-orange/90 flex flex-row flex-nowrap items-center rounded px-12 text-lg font-bold text-white transition hover:cursor-pointer"
 					>
 						<a href="/workshop" target="_blank" class="flex flex-nowrap items-center">
 							<p class="skew-x-15">KNOW MORE & REGISTER</p>
-							<div class="my-auto ml-3 size-4 skew-x-15">
+							<div class="skew-x-15 my-auto ml-3 size-4">
 								<img src="diag-up-arrow.svg" alt="Arrow" />
 							</div>
 						</a>
