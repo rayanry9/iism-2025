@@ -81,12 +81,12 @@
 
 			<!-- Full-screen menu content -->
 			{#if showMenu}
-				<div class="fixed inset-0 z-40 bg-[#283891] pt-20">
+				<div class="bg-custom-blue fixed inset-0 z-40 pt-20">
 					<!-- Close Button (X mark) -->
 
-					<div class="fixed left-0 top-0 z-40 flex items-center rounded-br-xl p-3">
-						<img src="/logo.png" alt="Logo" class="h-12 w-12" />
-						<div class="ml-2 text-xs leading-tight text-white">
+					<div class="fixed left-0 top-2 z-40 flex items-center rounded-br-xl p-3">
+						<img src="/logo-white.svg" alt="Logo" class="h-12 w-12" />
+						<div class="ml-2 text-xs leading-tight text-white" style="font-size: 8px;">
 							58TH<br />
 							INTER IIT<br />
 							SPORTS MEET<br />
@@ -95,7 +95,7 @@
 					</div>
 					<button
 						on:click={toggleMenu}
-						class="absolute right-6 top-6 text-5xl font-bold text-white"
+						class="absolute right-6 top-4 text-5xl font-bold text-white"
 						aria-label="Close menu"
 					>
 						×
@@ -105,38 +105,38 @@
 						<!-- Regular Menu Items -->
 						<a
 							href="#"
-							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
 						>
 							HOME
 						</a>
 						<a
 							href="#"
-							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
 						>
 							SCHEDULE
 						</a><a
 							href="#"
-							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
 						>
 							TEAMS AND PLAYERS
 						</a><a
 							href="#"
-							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
 						>
 							LIVE SCORE
 						</a><a
 							href="#"
-							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
 						>
 							RESULTS
 						</a><a
 							href="#"
-							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
 						>
 							GALLERY
 						</a><a
 							href="#"
-							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
 						>
 							CONTACT
 						</a>
@@ -144,7 +144,7 @@
 					<div
 						class="absolute bottom-20 left-0 right-0 mx-4 mb-10 rounded-lg bg-white p-6 shadow-lg"
 					>
-						<div class="flex flex-col items-start gap-4">
+						<div class="flex flex-col items-start gap-1">
 							<p class="text-center text-3xl font-bold text-black">
 								5-DAY SPORTS<br />SUMMER CAMP
 							</p>
@@ -154,17 +154,17 @@
 								<img src="hockey.webp" alt="event 3" />
 								<img src="badminton.webp" alt="event 4" />
 							</div>
-							<div class="flex items-center justify-center">
+							<div class="flex items-end justify-evenly gap-1">
 								<!-- Center alignment container -->
 								<p class="text-black-600">Open to school and college students</p>
 
 								<button
-									class="h-15 w-15 -skew-x-15 ml-3 flex items-center justify-center rounded-md bg-[#ef4823] transition-all hover:bg-blue-600"
+									class="h-15 w-15 -skew-x-15 bg-custom-orange ml-3 flex items-center justify-center rounded-md"
 								>
 									<img
-										src="/arrow.svg"
+										src="/diag-up-arrow.svg"
 										alt="Northeast arrow"
-										class="h-4 w-4 rotate-45 transform text-white"
+										class="skew-x-15 h-4 w-4 rotate-45 transform text-white"
 									/>
 								</button>
 							</div>
