@@ -1,5 +1,9 @@
 <script lang="ts">
-	let menuOpen = false;
+	let showMenu = false;
+
+	const toggleMenu = () => {
+		showMenu = !showMenu;
+	};
 </script>
 
 <svelte:head>
@@ -49,47 +53,131 @@
 				2025
 			</div>
 		</div>
+		<!--Nav bar for the layouts other than mobile-->
+		<!-- <div
+			class="3xl:gap-x-12 3xl:text-xl hidden flex-wrap justify-end gap-x-2 text-[0.65rem] font-semibold sm:flex sm:gap-x-4 sm:text-xs lg:gap-x-6 lg:text-sm xl:gap-x-8 xl:text-base 2xl:gap-x-10 2xl:text-lg"
+		>
+			<a href="#schedule" class="hover:underline">SCHEDULE</a>
+			<a href="#teams" class="hover:underline">TEAMS AND PLAYERS</a>
+			<a href="#live-score" class="hover:underline">LIVE SCORE</a>
+			<a href="#results" class="hover:underline">RESULTS</a>
+			<a href="#gallery" class="hover:underline">GALLERY</a>
+			<a href="#contact" class="hover:underline">CONTACT</a>
+		</div> -->
 
-		<nav class="right-15 absolute top-8 z-50 text-white sm:right-8 lg:top-10">
-			<button
-				class="block sm:hidden"
-				on:click={() => (menuOpen = !menuOpen)}
-				aria-label="Toggle menu"
-			>
-				<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-				</svg>
-			</button>
-
-			<div
-				class="3xl:gap-x-12 3xl:text-xl hidden flex-wrap justify-end gap-x-2 text-[0.65rem] font-semibold sm:flex sm:gap-x-4 sm:text-xs lg:gap-x-6 lg:text-sm xl:gap-x-8 xl:text-base 2xl:gap-x-10 2xl:text-lg"
-			>
-				<a href="#schedule" class="hover:underline">SCHEDULE</a>
-				<a href="#teams" class="hover:underline">TEAMS AND PLAYERS</a>
-				<a href="#live-score" class="hover:underline">LIVE SCORE</a>
-				<a href="#results" class="hover:underline">RESULTS</a>
-				<a href="#gallery" class="hover:underline">GALLERY</a>
-				<a href="#contact" class="hover:underline">CONTACT</a>
+		<!-- Mobile dropdown menu-->
+		<div class="absolute left-0 top-0 z-50 w-full">
+			<!-- Menu button at top right -->
+			<div class="relative py-4">
+				<!-- Increased horizontal padding -->
+				<button
+					on:click={toggleMenu}
+					class="absolute right-10 text-4xl italic text-white focus:outline-none"
+					aria-label="Toggle menu"
+				>
+					☰
+				</button>
 			</div>
 
-			<!-- Mobile dropdown menu -->
-			{#if menuOpen}
-				<div class="mt-2 flex flex-col gap-2 rounded bg-black/80 p-4 text-xs shadow-lg sm:hidden">
-					<a href="#schedule" on:click={() => (menuOpen = false)} class="hover:underline"
-						>SCHEDULE</a
+			<!-- Full-screen menu content -->
+			{#if showMenu}
+				<div class="fixed inset-0 z-40 bg-[#283891] pt-20">
+					<!-- Close Button (X mark) -->
+
+					<div class="fixed left-0 top-0 z-40 flex items-center rounded-br-xl p-3">
+						<img src="/logo.png" alt="Logo" class="h-12 w-12" />
+						<div class="ml-2 text-xs leading-tight text-white">
+							58TH<br />
+							INTER IIT<br />
+							SPORTS MEET<br />
+							2025
+						</div>
+					</div>
+					<button
+						on:click={toggleMenu}
+						class="absolute right-6 top-6 text-5xl font-bold text-white"
+						aria-label="Close menu"
 					>
-					<a href="#teams" on:click={() => (menuOpen = false)} class="hover:underline"
-						>TEAMS AND PLAYERS</a
+						×
+					</button>
+
+					<div class="flex flex-col space-y-4 pt-10">
+						<!-- Regular Menu Items -->
+						<a
+							href="#"
+							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+						>
+							HOME
+						</a>
+						<a
+							href="#"
+							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+						>
+							SCHEDULE
+						</a><a
+							href="#"
+							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+						>
+							TEAMS AND PLAYERS
+						</a><a
+							href="#"
+							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+						>
+							LIVE SCORE
+						</a><a
+							href="#"
+							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+						>
+							RESULTS
+						</a><a
+							href="#"
+							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+						>
+							GALLERY
+						</a><a
+							href="#"
+							class="hover:border-l-5 py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-[#fdb424] hover:text-[#fdb424]"
+						>
+							CONTACT
+						</a>
+					</div>
+					<div
+						class="absolute bottom-20 left-0 right-0 mx-4 mb-10 rounded-lg bg-white p-6 shadow-lg"
 					>
-					<a href="#live-score" on:click={() => (menuOpen = false)} class="hover:underline"
-						>LIVE SCORE</a
-					>
-					<a href="#results" on:click={() => (menuOpen = false)} class="hover:underline">RESULTS</a>
-					<a href="#gallery" on:click={() => (menuOpen = false)} class="hover:underline">GALLERY</a>
-					<a href="#contact" on:click={() => (menuOpen = false)} class="hover:underline">CONTACT</a>
+						<div class="flex flex-col items-start gap-4">
+							<p class="text-center text-3xl font-bold text-black">
+								5-DAY SPORTS<br />SUMMER CAMP
+							</p>
+							<div class="flex items-center gap-1 *:size-6">
+								<img src="basketball.webp" alt="event 1" />
+								<img src="football.webp" alt="event 2" />
+								<img src="hockey.webp" alt="event 3" />
+								<img src="badminton.webp" alt="event 4" />
+							</div>
+							<div class="flex items-center justify-center">
+								<!-- Center alignment container -->
+								<p class="text-black-600">Open to school and college students</p>
+
+								<button
+									class="h-15 w-15 -skew-x-15 ml-3 flex items-center justify-center rounded-md bg-[#ef4823] transition-all hover:bg-blue-600"
+								>
+									<img
+										src="/arrow.svg"
+										alt="Northeast arrow"
+										class="h-4 w-4 rotate-45 transform text-white"
+									/>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="absolute bottom-10 ml-10 flex items-center gap-8 *:size-8">
+						<img src="instagram.svg" alt="event 1" />
+						<img src="linkedin.svg" alt="event 2" />
+						<img src="medium.svg" alt="event 3" />
+					</div>
 				</div>
 			{/if}
-		</nav>
+		</div>
 
 		<div
 			class="absolute left-24 top-1/2 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
