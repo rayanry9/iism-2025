@@ -1,9 +1,5 @@
 <script lang="ts">
-	let showMenu = false;
-
-	const toggleMenu = () => {
-		showMenu = !showMenu;
-	};
+	let showMenu = $state(false);
 </script>
 
 <svelte:head>
@@ -14,7 +10,9 @@
 	/>
 </svelte:head>
 
-<header class="3xl:p-6 3xl:rounded-2xl relative h-full overflow-x-clip rounded-lg p-2">
+<header
+	class="3xl:p-5 3xl:rounded-2xl relative h-full overflow-x-clip rounded-lg p-2 sm:p-3 2xl:p-4"
+>
 	<div class="relative z-10 h-full">
 		<!-- Gradients -->
 		<div
@@ -33,7 +31,7 @@
 
 		<!-- Logo + Text container positioned on top left of the image -->
 		<section
-			class="3xl:-left-4 3xl:gap-x-5 3xl:pl-9 3xl:pr-7 3xl:rounded-br-2xl 3xl:py-5 absolute -top-[0.3px] -left-2 flex -skew-x-15 items-center gap-x-2 rounded-br-lg bg-white py-3 pr-3 pl-4"
+			class="3xl:-left-4 3xl:gap-x-5 3xl:pl-9 3xl:pr-7 3xl:rounded-br-2xl 3xl:py-5 absolute -top-[0.3px] -left-2 flex -skew-x-15 items-center gap-x-2 rounded-br-lg bg-white py-3 pr-3 pl-4 sm:pr-4"
 		>
 			<!-- Rounded Corner top right -->
 			<div
@@ -44,9 +42,11 @@
 				class="top-left-corner 3xl:size-4 3xl:left-8 3xl:-bottom-[15px] absolute -bottom-2 left-[17.2px] size-2 skew-x-15 bg-white"
 			></div>
 
-			<img src="/logo.png" alt="Logo" class="3xl:size-[4.5rem] size-9 skew-x-15" />
+			<img src="/logo.png" alt="Logo" class="3xl:size-[4.5rem] size-9 skew-x-15 sm:size-12" />
 
-			<div class="3xl:text-sm skew-x-15 text-[8px] leading-none font-medium text-[#121212]">
+			<div
+				class="3xl:text-sm skew-x-15 text-[8px] leading-none font-medium text-[#121212] sm:text-[10px]"
+			>
 				58TH<br />
 				INTER IIT<br />
 				SPORTS MEET<br />
@@ -56,7 +56,7 @@
 
 		<!--Nav bar for the layouts other than mobile-->
 		<nav
-			class="3xl:flex absolute top-0 right-0 hidden justify-end gap-x-12 p-12 font-semibold text-white"
+			class="3xl:p-12 3xl:gap-x-12 absolute top-0 right-0 hidden justify-end gap-x-6 font-semibold text-white lg:flex lg:p-8"
 		>
 			<a href="#schedule" class="hover:underline">SCHEDULE</a>
 			<a href="#teams" class="hover:underline">TEAMS AND PLAYERS</a>
@@ -67,12 +67,14 @@
 		</nav>
 
 		<!-- Mobile dropdown menu-->
-		<nav class="3xl:hidden absolute top-0 left-0 z-50 w-full">
+		<nav class="absolute top-0 left-0 z-50 w-full lg:hidden">
 			<!-- Menu button at top right -->
 			<div class="relative py-4">
 				<!-- Increased horizontal padding -->
 				<button
-					on:click={toggleMenu}
+					onclick={() => {
+						showMenu = !showMenu;
+					}}
 					class="absolute right-10 text-4xl text-white italic focus:outline-none"
 					aria-label="Toggle menu"
 				>
@@ -95,7 +97,9 @@
 						</div>
 					</div>
 					<button
-						on:click={toggleMenu}
+						onclick={() => {
+							showMenu = !showMenu;
+						}}
 						class="absolute top-4 right-6 text-5xl font-bold text-white"
 						aria-label="Close menu"
 					>
@@ -173,9 +177,12 @@
 						</div>
 					</div>
 					<div class="absolute bottom-10 ml-10 flex items-center gap-8 *:size-8">
-						<img src="instagram.svg" alt="event 1" />
-						<img src="linkedin.svg" alt="event 2" />
-						<img src="medium.svg" alt="event 3" />
+						<a href="https://www.instagram.com/interiit_sports2025/">
+							<img src="instagram.svg" alt="event 1" />
+						</a>
+						<a href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/">
+							<img src="linkedin.svg" alt="event 2" />
+						</a>
 					</div>
 				</div>
 			{/if}
@@ -183,15 +190,17 @@
 
 		<!-- Header Text -->
 		<section
-			class="3xl:pl-28 3xl:gap-8 3xl:bottom-0 3xl:top-0 absolute top-32 flex flex-col justify-center gap-4 pl-14 text-white"
+			class="3xl:pl-28 3xl:gap-8 absolute top-32 flex flex-col justify-center gap-4 pl-14 text-white sm:top-40 sm:gap-6 sm:pl-16 lg:top-0 lg:bottom-0"
 		>
 			<!-- IITH logo -->
 			<div class="flex justify-start">
-				<img src="/iith-logo-full.png" alt="IITH Logo" class="3xl:h-10 mb-4 h-7" />
+				<img src="/iith-logo-full.png" alt="IITH Logo" class="3xl:h-10 mb-4 h-7 sm:h-8" />
 			</div>
 
 			<!-- Event Title -->
-			<div class="3xl:text-[4rem] text-[2.5rem] leading-none font-semibold text-nowrap italic">
+			<div
+				class="3xl:text-[4rem] text-[2.5rem] leading-none font-semibold text-nowrap italic sm:text-5xl"
+			>
 				<p>58TH</p>
 				<p>INTER IIT</p>
 				<p>SPORTS MEET</p>
@@ -200,15 +209,15 @@
 
 			<!-- IIT HYDERABAD location -->
 			<div
-				class="3xl:text-xl -mt-2 flex w-fit items-center gap-2 rounded-full border border-white bg-[#020202] px-3.5 py-2.5 text-sm leading-none font-medium"
+				class="3xl:text-xl -mt-2 flex w-fit items-center gap-2 rounded-full border border-white bg-[#020202] px-3.5 py-2.5 text-sm leading-none font-medium sm:text-base"
 			>
-				<img src="/pin.svg" alt="pin" class="3xl:size-fit -mt-0.5 size-4" />
+				<img src="/pin.svg" alt="pin" class="3xl:size-fit -mt-0.5 size-4 sm:size-5" />
 				<p>IIT HYDERABAD</p>
 			</div>
 
 			<!-- Dates -->
 			<div
-				class="bg-custom-blue/60 3xl:text-xl inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1 text-sm font-medium"
+				class="bg-custom-blue/60 3xl:text-xl inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1 text-sm font-medium sm:text-base"
 			>
 				10th to 17th December 2025
 			</div>
@@ -216,11 +225,11 @@
 
 		<!-- Bottom Right Announcement -->
 		<section
-			class="3xl:-right-10 3xl:gap-3 3xl:rounded-tl-2xl 3xl:pt-10 3xl:pb-4 3xl:pr-20 absolute -right-3 -bottom-[0.3px] flex w-fit -skew-x-15 flex-col rounded-tl-lg bg-white py-6 pr-8 pl-8 text-white"
+			class="3xl:gap-3 3xl:rounded-tl-2xl 3xl:pt-10 3xl:pb-4 absolute -right-3 -bottom-[0.3px] flex w-fit -skew-x-15 flex-col rounded-tl-lg bg-white py-6 pr-8 pl-8 text-white sm:-right-10 sm:pr-20 sm:pl-4"
 		>
 			<!-- Rounded Corner top right -->
 			<div
-				class="bottom-right-corner 3xl:size-4 3xl:-top-[1rem] 3xl:right-[5.3rem] absolute -top-[7.8px] right-[1.4rem] size-2 skew-x-15 bg-white"
+				class="bottom-right-corner 3xl:size-4 3xl:-top-[1rem] 3xl:right-[5.3rem] absolute -top-[7.7px] right-[1.3rem] size-2 skew-x-15 bg-white sm:right-[4.75rem]"
 			></div>
 
 			<!-- Rounded Corner bottom left -->
@@ -229,13 +238,13 @@
 			></div>
 
 			<!-- Mobile Right Bottom Text -->
-			<div class=" 3xl:hidden flex items-center gap-x-4">
+			<div class=" flex items-center gap-x-4 sm:hidden">
 				<img src="orange-triple-chevron-down.svg" alt="chevron down" class="skew-x-15" />
 				<p class="text-custom-orange font-bold text-nowrap">What's Happening?</p>
 			</div>
 
 			<!-- Desktop Right bottom Text -->
-			<div class="3xl:flex hidden skew-x-15 flex-col gap-3 pb-4 pl-6 text-black">
+			<div class="hidden skew-x-15 flex-col gap-3 pb-4 pl-6 text-black sm:flex">
 				<!-- Top Row: Circle + Heading -->
 				<div class="flex items-center gap-1 pl-6">
 					<div
@@ -248,7 +257,9 @@
 						</div>
 					</div>
 
-					<p class="text-custom-orange ml-1 text-xl font-medium">What's happening?</p>
+					<p class="text-custom-orange 3xl:text-xl ml-1 font-medium sm:text-base">
+						What's happening?
+					</p>
 					<div class="flex items-center gap-1 *:size-6">
 						<img src="basketball.webp" alt="event 1" />
 						<img src="football.webp" alt="event 2" />
@@ -258,19 +269,21 @@
 				</div>
 
 				<!-- Title -->
-				<p class="pl-6 text-[2.5rem] leading-snug font-semibold">5-DAY SPORTS SUMMER CAMP</p>
+				<p class="3xl:text-[2.5rem] pl-6 leading-snug font-semibold sm:text-2xl">
+					5-DAY SPORTS SUMMER CAMP
+				</p>
 
 				<!-- Two lines of text -->
-				<div class="pl-6 text-xl leading-relaxed">
+				<div class="3xl:text-xl pl-6 leading-relaxed sm:text-base">
 					<p>Open to school and college students in Hyderabad.</p>
 					<p>Train at IIT Hyderabad this summer with expert coaches and top facilites.</p>
 				</div>
 
 				<!-- Buttons -->
-				<div class="mt-2 flex -skew-x-15 gap-x-8 *:py-3">
+				<div class="3xl:text-lg mt-2 flex -skew-x-15 gap-x-8 *:py-3 sm:text-base">
 					<!-- Skewed Button -->
 					<button
-						class="bg-custom-orange hover:bg-custom-orange/90 flex grow flex-row flex-nowrap items-center justify-center rounded text-lg font-bold text-white transition hover:cursor-pointer"
+						class="bg-custom-orange hover:bg-custom-orange/90 flex grow flex-row flex-nowrap items-center justify-center rounded font-bold text-white transition hover:cursor-pointer"
 					>
 						<a href="/workshop" target="_blank" class="flex flex-nowrap items-center">
 							<p class="skew-x-15">KNOW MORE & REGISTER</p>
@@ -282,7 +295,7 @@
 
 					<!-- Skewed Date Box -->
 					<div
-						class="flex flex-row items-center rounded border border-black/10 bg-white px-6 text-lg font-semibold text-black"
+						class="flex flex-row items-center rounded border border-black/10 bg-white px-6 font-semibold text-black"
 					>
 						<p class="skew-x-15">DATES – 6–11 JULY 2025</p>
 					</div>
@@ -293,7 +306,7 @@
 </header>
 
 <!-- Mobile Workshop Details -->
-<section class="3xl:hidden flex flex-col px-6 py-6">
+<section class="flex flex-col px-6 py-6 sm:hidden">
 	<div class="flex items-center gap-4">
 		<div
 			class="border-custom-orange/50 flex size-7 animate-pulse flex-row items-center justify-center rounded-full border"
