@@ -7,72 +7,73 @@
 </script>
 
 <svelte:head>
-	<title>58th Inter IIT Sports Meet 2025</title>
+	<title>Inter IIT Sports Meet 2025 Hyderabad</title>
 	<meta
 		name="description"
 		content="Official page for 58th Inter IIT Sports Meet 2025 hosted by IIT Hyderabad in joint collaboration with IIT Madras and IIT Tirupati."
 	/>
 </svelte:head>
 
-<section class="text-background relative overflow-x-clip">
-	<div class="relative px-4">
-		<!-- Main image -->
+<header class="relative h-full overflow-x-clip rounded-2xl p-6">
+	<div class="relative z-10 h-full">
+		<!-- Gradients -->
+		<div
+			class="absolute z-0 h-1/3 w-full rounded-2xl bg-gradient-to-b from-black/60 to-transparent"
+		></div>
+		<div
+			class="absolute z-0 h-full w-1/2 rounded-2xl bg-gradient-to-r from-black/60 to-transparent"
+		></div>
 
+		<!-- Main image -->
 		<img
 			src="image-5.webp"
 			alt="Official Website"
-			class="3xl:h-[10800px] my-4 h-[calc(100vh-4rem)] w-full rounded-xl object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center lg:h-[80vh] xl:h-[720px] 2xl:h-[900px]"
+			class="h-full w-full rounded-xl object-cover object-[65%_10%]"
 		/>
 
-		<!-- Logo + Text container positioned on top of the image -->
-		<div
-			class="-skew-x-15 absolute left-0 top-0 flex items-center space-x-3 rounded-br-2xl bg-white pb-2 pl-3 pr-3 pt-2 sm:pb-3 sm:pl-5 sm:pr-5 sm:pt-3 lg:pl-6 lg:pr-6 xl:pl-6 xl:pr-6 2xl:pl-7 2xl:pr-7"
+		<!-- Logo + Text container positioned on top left of the image -->
+		<section
+			class="absolute -top-[0.3px] -left-4 flex -skew-x-15 items-center gap-x-5 rounded-br-2xl bg-white py-5 pr-7 pl-9"
 		>
+			<!-- Rounded Corner top right -->
 			<div
-				class="absolute -right-[26px] top-0 size-4 bg-white"
+				class="absolute top-0 -right-4 size-4 bg-white"
+				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
+			></div>
+			<!-- Rounded Corner bottom left-->
+			<div
+				class="absolute -bottom-[15px] left-8 size-4 skew-x-15 bg-white"
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
-			<div
-				class="skew-x-15 absolute -bottom-4 left-7 size-4 bg-white"
-				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
-			></div>
+			<img src="/logo.png" alt="Logo" class="size-[4.5rem] skew-x-15" />
 
-			<img
-				src="/logo.png"
-				alt="Logo"
-				class="skew-x-15 lg:size-18 size-14 sm:size-16 xl:size-20 2xl:size-24"
-			/>
-
-			<div
-				class="skew-x-15 text-[0.65rem] font-semibold leading-tight text-gray-800 sm:text-sm lg:text-base xl:text-base 2xl:text-lg"
-			>
+			<div class="skew-x-15 text-sm leading-none font-medium text-gray-800">
 				58TH<br />
 				INTER IIT<br />
 				SPORTS MEET<br />
 				2025
 			</div>
-		</div>
+		</section>
+
 		<!--Nav bar for the layouts other than mobile-->
-		<!-- <div
-			class="3xl:gap-x-12 3xl:text-xl hidden flex-wrap justify-end gap-x-2 text-[0.65rem] font-semibold sm:flex sm:gap-x-4 sm:text-xs lg:gap-x-6 lg:text-sm xl:gap-x-8 xl:text-base 2xl:gap-x-10 2xl:text-lg"
-		>
+		<nav class="absolute top-0 right-0 flex justify-end gap-x-12 p-12 font-semibold text-white">
 			<a href="#schedule" class="hover:underline">SCHEDULE</a>
 			<a href="#teams" class="hover:underline">TEAMS AND PLAYERS</a>
 			<a href="#live-score" class="hover:underline">LIVE SCORE</a>
 			<a href="#results" class="hover:underline">RESULTS</a>
 			<a href="#gallery" class="hover:underline">GALLERY</a>
 			<a href="#contact" class="hover:underline">CONTACT</a>
-		</div> -->
+		</nav>
 
 		<!-- Mobile dropdown menu-->
-		<div class="absolute left-0 top-0 z-50 w-full">
+		<nav class="absolute top-0 left-0 z-50 hidden w-full">
 			<!-- Menu button at top right -->
 			<div class="relative py-4">
 				<!-- Increased horizontal padding -->
 				<button
 					on:click={toggleMenu}
-					class="absolute right-10 text-4xl italic text-white focus:outline-none"
+					class="absolute right-10 text-4xl text-white italic focus:outline-none"
 					aria-label="Toggle menu"
 				>
 					☰
@@ -84,7 +85,7 @@
 				<div class="bg-custom-blue fixed inset-0 z-40 pt-20">
 					<!-- Close Button (X mark) -->
 
-					<div class="fixed left-0 top-2 z-40 flex items-center rounded-br-xl p-3">
+					<div class="fixed top-2 left-0 z-40 flex items-center rounded-br-xl p-3">
 						<img src="/logo-white.svg" alt="Logo" class="h-12 w-12" />
 						<div class="ml-2 text-xs leading-tight text-white" style="font-size: 8px;">
 							58TH<br />
@@ -95,7 +96,7 @@
 					</div>
 					<button
 						on:click={toggleMenu}
-						class="absolute right-6 top-4 text-5xl font-bold text-white"
+						class="absolute top-4 right-6 text-5xl font-bold text-white"
 						aria-label="Close menu"
 					>
 						×
@@ -105,44 +106,45 @@
 						<!-- Regular Menu Items -->
 						<a
 							href="#"
-							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
 						>
 							HOME
 						</a>
 						<a
 							href="#"
-							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
 						>
 							SCHEDULE
 						</a><a
 							href="#"
-							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
 						>
 							TEAMS AND PLAYERS
 						</a><a
 							href="#"
-							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
 						>
 							LIVE SCORE
 						</a><a
 							href="#"
-							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
 						>
 							RESULTS
 						</a><a
 							href="#"
-							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
 						>
 							GALLERY
 						</a><a
 							href="#"
-							class="hover:border-l-5 hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
 						>
 							CONTACT
 						</a>
 					</div>
+
 					<div
-						class="absolute bottom-20 left-0 right-0 mx-4 mb-10 rounded-lg bg-white p-6 shadow-lg"
+						class="absolute right-0 bottom-20 left-0 mx-4 mb-10 rounded-lg bg-white p-6 shadow-lg"
 					>
 						<div class="flex flex-col items-start gap-1">
 							<p class="text-center text-3xl font-bold text-black">
@@ -159,12 +161,12 @@
 								<p class="text-black-600">Open to school and college students</p>
 
 								<button
-									class="h-15 w-15 -skew-x-15 bg-custom-orange ml-3 flex items-center justify-center rounded-md"
+									class="bg-custom-orange ml-3 flex h-15 w-15 -skew-x-15 items-center justify-center rounded-md"
 								>
 									<img
 										src="/diag-up-arrow.svg"
 										alt="Northeast arrow"
-										class="skew-x-15 h-4 w-4 rotate-45 transform text-white"
+										class="h-4 w-4 rotate-45 skew-x-15 transform text-white"
 									/>
 								</button>
 							</div>
@@ -177,18 +179,17 @@
 					</div>
 				</div>
 			{/if}
-		</div>
+		</nav>
 
-		<div
-			class="absolute left-24 top-1/2 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
-		>
+		<!-- Header Text -->
+		<section class="absolute top-0 bottom-0 flex flex-col justify-center gap-8 pl-28 text-white">
 			<!-- IITH logo -->
 			<div class="flex justify-start">
-				<img src="/iith-logo-full.png" alt="IITH Logo" class="mb-6 h-10 sm:h-12" />
+				<img src="/iith-logo-full.png" alt="IITH Logo" class="mb-4 h-10" />
 			</div>
 
 			<!-- Event Title -->
-			<div class="text-nowrap text-xs font-semibold italic leading-tight sm:text-[4rem]">
+			<div class="text-[4rem] leading-none font-semibold text-nowrap italic">
 				<p>58TH</p>
 				<p>INTER IIT</p>
 				<p>SPORTS MEET</p>
@@ -197,36 +198,39 @@
 
 			<!-- IIT HYDERABAD location -->
 			<div
-				class="inline-flex w-fit items-center gap-2 rounded-full border border-white/80 bg-black/30 px-4 py-1 text-xs font-medium sm:text-xl"
+				class="-mt-2 flex w-fit items-center gap-2 rounded-full border border-white bg-[#020202] px-3.5 py-2.5 text-xl leading-none font-medium"
 			>
-				<img src="/pin.svg" alt="pin" class="h-3 w-3" />
-				IIT HYDERABAD
+				<img src="/pin.svg" alt="pin" class="-mt-0.5" />
+				<p>IIT HYDERABAD</p>
 			</div>
 
 			<!-- Dates -->
 			<div
-				class="bg-custom-blue/60 inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1 text-xs font-medium sm:text-xl"
+				class="bg-custom-blue/60 inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1 text-xl font-medium"
 			>
 				10th to 17th December 2025
 			</div>
-		</div>
+		</section>
 
-		<div
-			class="-skew-x-15 absolute -bottom-[0.2px] -right-8 flex w-fit flex-col gap-3 rounded-tl-2xl bg-white pb-4 pl-8 pr-20 pt-8 text-white"
+		<!-- Bottom Right Announcement -->
+		<section
+			class="absolute -right-10 -bottom-[0.3px] flex w-fit -skew-x-15 flex-col gap-3 rounded-tl-2xl bg-white pt-10 pr-20 pb-4 pl-8 text-white"
 		>
+			<!-- Rounded Corner top right -->
 			<div
-				class="skew-x-15 absolute -top-[1rem] right-[5.56rem] size-4 bg-white"
+				class="absolute -top-[1rem] right-[5.3rem] size-4 skew-x-15 bg-white"
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at top left, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
+			<!-- Rounded Corner bottom left -->
 			<div
 				class="absolute -bottom-[0.2px] -left-[0.98rem] size-4 bg-white"
 				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at top left, transparent 0%, transparent 100%,black 100%);"
 			></div>
 
-			<div class="skew-x-15 flex flex-col gap-3 pb-4 pl-12 text-black">
+			<div class="flex skew-x-15 flex-col gap-3 pb-4 pl-6 text-black">
 				<!-- Top Row: Circle + Heading -->
-				<div class="flex items-center gap-2">
+				<div class="flex items-center gap-1 pl-6">
 					<div
 						class="border-custom-orange/50 flex size-7 animate-pulse flex-row items-center justify-center rounded-full border"
 					>
@@ -236,7 +240,8 @@
 							<div class="bg-custom-orange size-3 rounded-full"></div>
 						</div>
 					</div>
-					<p class="text-custom-orange ml-2 text-xl font-medium">What's happening?</p>
+
+					<p class="text-custom-orange ml-1 text-xl font-medium">What's happening?</p>
 					<div class="flex items-center gap-1 *:size-6">
 						<img src="basketball.webp" alt="event 1" />
 						<img src="football.webp" alt="event 2" />
@@ -246,23 +251,23 @@
 				</div>
 
 				<!-- Title -->
-				<p class="text-[2.5rem] font-semibold leading-snug">5-DAY SPORTS SUMMER CAMP</p>
+				<p class="pl-6 text-[2.5rem] leading-snug font-semibold">5-DAY SPORTS SUMMER CAMP</p>
 
 				<!-- Two lines of text -->
-				<div class="text-xl leading-relaxed">
+				<div class="pl-6 text-xl leading-relaxed">
 					<p>Open to school and college students in Hyderabad.</p>
 					<p>Train at IIT Hyderabad this summer with expert coaches and top facilites.</p>
 				</div>
 
 				<!-- Buttons -->
-				<div class="-skew-x-15 mt-2 flex gap-x-8 *:py-3">
+				<div class="mt-2 flex -skew-x-15 gap-x-8 *:py-3">
 					<!-- Skewed Button -->
 					<button
-						class="bg-custom-orange hover:bg-custom-orange/90 flex flex-row flex-nowrap items-center rounded px-12 text-lg font-bold text-white transition hover:cursor-pointer"
+						class="bg-custom-orange hover:bg-custom-orange/90 flex grow flex-row flex-nowrap items-center justify-center rounded text-lg font-bold text-white transition hover:cursor-pointer"
 					>
 						<a href="/workshop" target="_blank" class="flex flex-nowrap items-center">
 							<p class="skew-x-15">KNOW MORE & REGISTER</p>
-							<div class="skew-x-15 my-auto ml-3 size-4">
+							<div class="my-auto ml-3 size-4 skew-x-15">
 								<img src="diag-up-arrow.svg" alt="Arrow" />
 							</div>
 						</a>
@@ -270,12 +275,12 @@
 
 					<!-- Skewed Date Box -->
 					<div
-						class="flex flex-row items-center rounded border border-black/20 bg-white px-6 text-lg font-semibold text-black"
+						class="flex flex-row items-center rounded border border-black/10 bg-white px-6 text-lg font-semibold text-black"
 					>
 						<p class="skew-x-15">DATES – 6–11 JULY 2025</p>
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	</div>
-</section>
+</header>

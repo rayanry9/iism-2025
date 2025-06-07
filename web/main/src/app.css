@@ -5,6 +5,9 @@
 	--color-custom-yellow: oklch(0.8184 0.1631 77.69);
 	--color-custom-blue: oklch(0.3861 0.1473 270.17);
 	--color-custom-teal: oklch(0.5347 0.0808 200.58);
+	--breakpoint-3xl: 120rem; /* 1080p */
+	--breakpoint-4xl: 160rem; /* 2k */
+	--breakpoint-5xl: 240rem; /* 4k */
 }
 
 @font-face {
