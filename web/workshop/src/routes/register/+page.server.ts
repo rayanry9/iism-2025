@@ -1,3 +1,4 @@
+import { SendMail } from '$lib/server/db/email';
 import { createRegistrant, type RegisterData } from '$lib/server/db/register';
 import type { Actions } from './$types';
 import { writeFile } from 'node:fs/promises';
@@ -54,6 +55,7 @@ export const actions: Actions = {
 					data.utr +
 					' | Has Registerd'
 			);
+			// SendMail(data.email);
 		}
 		return { success: success };
 	}

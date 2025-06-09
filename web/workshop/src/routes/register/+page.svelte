@@ -3,11 +3,14 @@
 	import { base } from '$app/paths';
 	import type { Action } from 'svelte/action';
 	import type { PageProps } from './$types';
+	import { navigating } from '$app/state';
 	let dialog = $state();
 	let formStage = $state(1);
 	let formElem = $state();
-	let fileInputElem = $state();
+	let fileInputElem = $state<HTMLInputElement | null>(null);
 	let { form }: PageProps = $props();
+	console.log(navigating);
+	let filename = $state('JPEG, PNG, PDF formats, up to 10 MB');
 
 	const focusAction: Action<HTMLDivElement> = (node) => {
 		node.scrollIntoView({ behavior: 'smooth' });
@@ -402,13 +405,30 @@
 							</p>
 							<input
 								bind:this={fileInputElem}
-								class="input"
+								class="input hidden"
 								accept="application/pdf, image/jpeg, image/png"
+								onchange={(inp) => {
+									filename = (inp.target! as HTMLInputElement)!.files![0].name;
+								}}
 								name="screenshot"
 								placeholder="Enter Here"
 								type="file"
 								required
 							/>
+							<div
+								class="flex h-fit w-full flex-col items-center gap-y-6 border border-dotted border-[#016064] py-12"
+							>
+								<p class="text-[#016064]">{filename}</p>
+								<button
+									type="button"
+									onclick={() => {
+										(fileInputElem! as HTMLInputElement).click();
+									}}
+									class="h-fit w-fit border border-[#016064] bg-[#C6D8D6] px-6 py-4 text-xl font-medium text-[#016064] hover:bg-[#D6E8E6]"
+								>
+									Choose a file
+								</button>
+							</div>
 						</label>
 
 						<button

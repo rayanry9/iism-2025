@@ -21,6 +21,7 @@
 		"@sveltejs/kit": "^2.21.3",
 		"@sveltejs/vite-plugin-svelte": "^5.1.0",
 		"@tailwindcss/vite": "^4.1.8",
+		"@types/nodemailer": "^6.4.17",
 		"eslint": "^9.28.0",
 		"eslint-config-prettier": "^10.1.5",
 		"eslint-plugin-svelte": "^3.9.1",
@@ -45,6 +46,7 @@
 		"@types/node": "^22.15.30",
 		"dotenv": "^16.5.0",
 		"node:fs": "link:@types/node:fs",
+		"nodemailer": "^7.0.3",
 		"postgres": "^3.4.7"
 	}
 }
