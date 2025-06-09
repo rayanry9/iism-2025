@@ -1,3 +1,7 @@
+<script module>
+	export { TeamItem };
+</script>
+
 <script lang="ts"></script>
 
 <svelte:head>

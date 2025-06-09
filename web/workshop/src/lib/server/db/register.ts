@@ -22,6 +22,9 @@ export interface RegisterData {
 	experience: string;
 	gaurdianName: string;
 	gaurdianPhone: string;
+	utr: string;
+	accountHolderName: string;
+	screenshot: File;
 }
 
 /* 
@@ -44,20 +47,22 @@ CREATE TABLE IF NOT EXISTS registrants(
 	sport_choice TEXT,
 	previous_experience TEXT,
 	gaurdian_name TEXT,
-	gaurdian_phone TEXT	
+	gaurdian_phone TEXT,
+	utr TEXT,
+	account_holder_name TEXT
 );
 
 */
 
-export async function createRegistrant(data: RegisterData) {
+export async function createRegistrant(data: RegisterData): Promise<boolean> {
 	try {
 		await DB`
 		INSERT INTO 
 			registrants 
 
-			(name, phone_number, email, gender, age, dob, address, pincode, institute, current_class, blood_group, medical_conditions, hostel_required, sport_choice, previous_experience, gaurdian_name, gaurdian_phone)
+			(name, phone_number, email, gender, age, dob, address, pincode, institute, current_class, blood_group, medical_conditions, hostel_required, sport_choice, previous_experience, gaurdian_name, gaurdian_phone, utr, account_holder_name)
 		VALUES
-			(${data.name}, ${data.phone}, ${data.email}, ${data.gender}, ${data.age}, ${data.dob}, ${data.address}, ${data.pincode}, ${data.institute}, ${data.class}, ${data.blood}, ${data.medical}, ${data.hostel}, ${data.sport}, ${data.experience}, ${data.gaurdianName}, ${data.gaurdianPhone})
+			(${data.name}, ${data.phone}, ${data.email}, ${data.gender}, ${data.age}, ${data.dob}, ${data.address}, ${data.pincode}, ${data.institute}, ${data.class}, ${data.blood}, ${data.medical}, ${data.hostel}, ${data.sport}, ${data.experience}, ${data.gaurdianName}, ${data.gaurdianPhone}, ${data.utr}, ${data.accountHolderName})
 	`;
 		return true;
 	} catch (err) {

@@ -1,10 +1,7 @@
-<script module>
-	export { SportItem };
-</script>
-
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
+	import { TeamItem } from './team/+page.svelte';
 	let expectCards = $state(new Array(5));
 	let currentCard = $state(1);
 </script>
@@ -27,9 +24,9 @@
 
 {#snippet SportItem(text: string, imgSrc: string)}
 	<div
-		class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-xl font-medium text-[#016064] sm:text-[1.375rem]"
+		class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-6 text-xl font-medium text-[#016064] sm:text-[1.375rem]"
 	>
-		<p class="skew-x-[15deg]">{text}</p>
+		<p class="skew-x-[15deg] text-nowrap">{text}</p>
 		<img src={imgSrc} alt={text} class="absolute right-4 bottom-0 w-32 skew-x-[15deg]" />
 	</div>
 {/snippet}
@@ -41,7 +38,7 @@
 		class="h-[calc(100vh-4rem)] object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center 2xl:h-auto"
 	/>
 	<div
-		class="from-foreground to-foreground body-spacing absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b via-transparent py-12 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:to-transparent sm:py-0"
+		class="to-foreground body-spacing absolute top-0 flex h-full w-full flex-col justify-center gap-y-6 bg-linear-to-b from-[#5E86AA] via-transparent py-12 sm:bottom-0 sm:h-auto sm:w-fit sm:bg-linear-to-r sm:via-none sm:from-black/40 sm:to-transparent sm:py-0 2xl:from-[#5E86AA]"
 	>
 		<div class="hidden flex-row items-center gap-x-6 sm:flex">
 			<div class="divide-background/70 flex flex-row items-center divide-x">
@@ -133,6 +130,9 @@
 				{@render SportItem('BASKETBALL', 'home/basketball.webp')}
 				{@render SportItem('BADMINTON', 'home/badminton.webp')}
 				{@render SportItem('HOCKEY', 'home/hockey.webp')}
+				{@render SportItem('VOLLEYBALL', 'home/volleyball.webp')}
+				{@render SportItem('TABLE TENNIS', 'home/tt.webp')}
+				{@render SportItem('SQUASH', 'home/squash.webp')}
 			</div>
 
 			<button
@@ -176,7 +176,11 @@
 					</div>
 					<div class="ml-auto h-full w-[10rem] skew-x-[15deg]">
 						<div class="h-full -skew-x-[15deg] overflow-hidden">
-							<img src={imgSrc} alt={title} class="h-full scale-150 skew-x-[15deg] object-cover" />
+							<img
+								src={imgSrc}
+								alt={title}
+								class="h-full scale-150 skew-x-[15deg] object-cover object-center"
+							/>
 						</div>
 					</div>
 				</div>
@@ -231,7 +235,7 @@
 					'Stay in campus hostels and dine in mess halls',
 					'Explore academic zones, & Open spaces'
 				],
-				'gallery/image-4.webp',
+				'home/image.webp',
 				1
 			)}
 
@@ -241,7 +245,7 @@
 					'Professionally guided beginner-friendly sessions<br/>in selected sports',
 					'Structured schedules and skill-building drills'
 				],
-				'gallery/image-4.webp',
+				'home/image-1.webp',
 				2
 			)}
 
@@ -251,7 +255,7 @@
 					'Capture your journey through group photographs<br/>& video highlights',
 					'Participate in fun events like campus tours &  activities'
 				],
-				'gallery/image-4.webp',
+				'home/image-2.webp',
 				3
 			)}
 
@@ -261,7 +265,7 @@
 					'Camp finale features a mini-competition',
 					'Prizes and recognition for standout performances'
 				],
-				'gallery/image-4.webp',
+				'home/image-3.webp',
 				4
 			)}
 		</div>
@@ -328,7 +332,7 @@
 					'Stay in campus hostels and dine in mess halls',
 					'Explore academic zones, & Open spaces'
 				],
-				'gallery/image-4.webp',
+				'home/image.webp',
 				1
 			)}
 
@@ -338,7 +342,7 @@
 					'Professionally guided beginner-friendly sessions<br/>in selected sports',
 					'Structured schedules and skill-building drills'
 				],
-				'gallery/image-4.webp',
+				'home/image-1.webp',
 				2
 			)}
 
@@ -348,7 +352,7 @@
 					'Capture your journey through group photographs<br/>& video highlights',
 					'Participate in fun events like campus tours &  activities'
 				],
-				'gallery/image-4.webp',
+				'home/image-2.webp',
 				3
 			)}
 
@@ -358,7 +362,7 @@
 					'Camp finale features a mini-competition',
 					'Prizes and recognition for standout performances'
 				],
-				'gallery/image-4.webp',
+				'home/image-3.webp',
 				4
 			)}
 		</div>
@@ -427,78 +431,166 @@
 		<img src="home/sncc.webp" class="hidden h-full object-cover lg:block" alt="SNCC" />
 	</div>
 </section>
+<!---->
+<!-- <section -->
+<!-- 	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mt-0 sm:mb-0 sm:py-24 lg:mt-12 lg:mb-24 lg:block xl:mb-12 xl:py-24 2xl:mb-24 2xl:py-48" -->
+<!-- > -->
+<!-- 	<h2 -->
+<!-- 		class="mx-auto mt-24 mb-20 w-fit text-[2rem] font-medium text-nowrap sm:mt-0 sm:mb-32 sm:text-5xl lg:hidden" -->
+<!-- 	> -->
+<!-- 		Gallery -->
+<!-- 	</h2> -->
+<!-- 	<div -->
+<!-- 		class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 *:h-40 *:w-full **:object-cover lg:scale-110 lg:grid-cols-4 xl:grid-cols-6" -->
+<!-- 	> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-2.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="h-full w-full -translate-x-8 scale-125 skew-x-[15deg] lg:translate-x-0 xl:-translate-x-0" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-9.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="h-full w-full -translate-x-8 scale-125 skew-x-[15deg] lg:translate-x-0 xl:-translate-x-0" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-10.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="h-full w-full translate-x-12 scale-125 skew-x-[15deg] lg:hidden lg:translate-x-0 xl:block xl:translate-x-0" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="hidden flex-col pt-8 lg:flex"> -->
+<!-- 			<h2 class=" skew-x-[15deg] self-end text-4xl font-medium xl:mr-4 2xl:text-5xl">Gallery</h2> -->
+<!-- 			<a -->
+<!-- 				href="{base}/gallery" -->
+<!-- 				class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8 xl:py-6 2xl:py-8" -->
+<!-- 			> -->
+<!-- 				<h4 class="text-background skew-x-[15deg] text-xl font-medium 2xl:text-2xl">SHOW ALL</h4> -->
+<!-- 				<img src="icons/triple-chevron-right.svg" alt="Go To" class="ml-auto skew-x-[15deg]" /> -->
+<!-- 			</a> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-1.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="h-full w-full translate-x-12 scale-125 skew-x-[15deg] lg:translate-x-0 xl:translate-x-0" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!---->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-5.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full w-full scale-125 skew-x-[15deg] lg:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-6.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full w-full scale-125 skew-x-[15deg] lg:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-7.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full w-full scale-125 skew-x-[15deg] lg:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-span-2 row-span-2 hidden overflow-clip xl:block" style="height: inherit;"> -->
+<!-- 			<img -->
+<!-- 				class="h-[20.7rem] w-full scale-125 skew-x-[15deg] object-cover" -->
+<!-- 				src="gallery/image.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!---->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-8.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full scale-125 skew-x-[15deg] lg:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-9.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full scale-125 skew-x-[15deg] xl:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-8.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full scale-125 skew-x-[15deg] xl:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!---->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-4.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full scale-125 skew-x-[15deg] xl:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-3.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full scale-125 skew-x-[15deg] xl:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 		<div class="overflow-clip"> -->
+<!-- 			<img -->
+<!-- 				src="gallery/image-6.webp" -->
+<!-- 				alt="gallery img" -->
+<!-- 				class="hidden h-full scale-125 skew-x-[15deg] xl:block" -->
+<!-- 			/> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!---->
+<!-- 	<div class="mt-24 w-full grow self-center px-8 lg:hidden"> -->
+<!-- 		<button -->
+<!-- 			onclick={() => { -->
+<!-- 				goto(base + '/gallery'); -->
+<!-- 			}} -->
+<!-- 			class="bg-foreground text-background flex w-full -skew-x-[15deg] flex-row self-center px-8 py-4 text-xl font-medium hover:cursor-pointer lg:mt-24" -->
+<!-- 		> -->
+<!-- 			<p class="skew-x-[15deg]">SHOW ALL</p> -->
+<!-- 			<img -->
+<!-- 				src="icons/triple-chevron-right.svg" -->
+<!-- 				alt="Chevron Right" -->
+<!-- 				class="ml-auto skew-x-[15deg]" -->
+<!-- 			/> -->
+<!-- 		</button> -->
+<!-- 	</div> -->
+<!-- </section> -->
 
-<section
-	class="text-foreground mb-32 flex w-full flex-col overflow-x-clip sm:mt-0 sm:mb-0 sm:py-24 lg:mt-12 lg:mb-24 lg:block xl:mb-12 xl:py-24 2xl:mb-24 2xl:py-48"
->
-	<h2
-		class="mx-auto mt-24 mb-20 w-fit text-[2rem] font-medium text-nowrap sm:mt-0 sm:mb-32 sm:text-5xl lg:hidden"
-	>
-		Gallery
-	</h2>
-	<div
-		class="grid scale-125 -skew-x-[15deg] grid-cols-2 gap-2.5 lg:scale-110 lg:grid-cols-4 xl:grid-cols-6"
-	>
-		<img
-			src="gallery/image-2.webp"
-			alt="gallery img"
-			class="-translate-x-8 lg:translate-x-0 xl:-translate-x-0"
-		/>
-		<img
-			src="gallery/image-2.webp"
-			alt="gallery img"
-			class="-translate-x-8 lg:translate-x-0 xl:-translate-x-0"
-		/>
-		<img
-			src="gallery/image-2.webp"
-			alt="gallery img"
-			class="translate-x-12 lg:hidden lg:translate-x-0 xl:block xl:translate-x-0"
-		/>
-		<div class="hidden flex-col pt-8 lg:flex">
-			<h2 class="skew-x-[15deg] self-end text-4xl font-medium xl:mr-4 2xl:text-5xl">Gallery</h2>
-			<a
-				href="{base}/gallery"
-				class="bg-foreground mt-auto flex h-8 w-full flex-row items-center px-4 py-8 xl:py-6 2xl:py-8"
-			>
-				<h4 class="text-background skew-x-[15deg] text-xl font-medium 2xl:text-2xl">SHOW ALL</h4>
-				<img src="icons/triple-chevron-right.svg" alt="Go To" class="ml-auto skew-x-[15deg]" />
-			</a>
-		</div>
-		<img
-			src="gallery/image-2.webp"
-			alt="gallery img"
-			class="translate-x-12 lg:translate-x-0 xl:translate-x-0"
-		/>
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img
-			class="col-span-2 row-span-2 hidden xl:block"
-			src="gallery/image-2.webp"
-			alt="gallery img"
-		/>
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden lg:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
-		<img src="gallery/image-2.webp" alt="gallery img" class="hidden xl:block" />
-	</div>
+<section class="body-spacing my-20 flex flex-col items-center">
+	<h3 class="text-[2rem] font-medium sm:text-3xl">Contact For Queries</h3>
+	<div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+		{@render TeamItem(
+			'Sai Kumar R.',
+			'Events Head',
+			'team/sai-kumar.webp',
+			'+91 7396641098',
+			'ce23btech11021@iith.ac.in'
+		)}
 
-	<div class="mt-24 w-full grow self-center px-8 lg:hidden">
-		<button
-			onclick={() => {
-				goto(base + '/gallery');
-			}}
-			class="bg-foreground text-background flex w-full -skew-x-[15deg] flex-row self-center px-8 py-4 text-xl font-medium hover:cursor-pointer lg:mt-24"
-		>
-			<p class="skew-x-[15deg]">SHOW ALL</p>
-			<img
-				src="icons/triple-chevron-right.svg"
-				alt="Chevron Right"
-				class="ml-auto skew-x-[15deg]"
-			/>
-		</button>
+		{@render TeamItem(
+			'Nikhil Deshmukh',
+			'Events Head',
+			'team/nikhil.webp',
+			'+91 7499816792',
+			'ch22btech11025@iith.ac.in'
+		)}
 	</div>
 </section>
 

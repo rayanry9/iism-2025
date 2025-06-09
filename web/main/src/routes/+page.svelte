@@ -178,11 +178,14 @@
 					</div>
 					<div class="absolute bottom-10 ml-10 flex items-center gap-8 *:size-8">
 						<a href="https://www.instagram.com/interiit_sports2025/">
-							<img src="instagram.svg" alt="event 1" />
+							<img src="instagram.svg" alt="instagram" />
 						</a>
 						<a href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/">
-							<img src="linkedin.svg" alt="event 2" />
+							<img src="linkedin.svg" alt="linkedin" />
 						</a>
+						<!-- <a href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/"> -->
+						<!-- 	<img src="x.svg" alt="X" /> -->
+						<!-- </a> -->
 					</div>
 				</div>
 			{/if}
