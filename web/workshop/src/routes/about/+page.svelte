@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { SportItem } from '../+page.svelte';
 </script>
 
 <svelte:head>
@@ -10,6 +9,26 @@
 		content="5-Day Sports Workshop 2025 About Page. Registration and event details about the 5-Day Sports Workshop which is being conducted in IIT Hyderabad."
 	/>
 </svelte:head>
+
+{#snippet SportItem(text: string, imgSrc: string, details: string[], extras: string | null = null)}
+	<div class="flex flex-col gap-y-4">
+		<div
+			class="relative grid -skew-x-[15deg] grid-cols-2 border-2 border-[#016064] bg-[#D6E8E6] py-4 pl-8 text-xl font-medium text-[#016064] sm:text-[1.375rem]"
+		>
+			<p class="skew-x-[15deg]">{text}</p>
+			<img src={imgSrc} alt={text} class="absolute right-4 bottom-0 w-32 skew-x-[15deg]" />
+		</div>
+
+		<ul class="list-disc pl-6 text-lg leading-tight font-medium">
+			{#each details as detail}
+				<li>{@html detail}</li>
+			{/each}
+		</ul>
+		{#if extras != null}
+			<p class="text-lg font-medium text-[#016064]">{extras}</p>
+		{/if}
+	</div>
+{/snippet}
 
 <header class="relative h-56 sm:h-96 2xl:h-auto">
 	<div
@@ -35,9 +54,7 @@
 	<img src="about/header.webp" alt="header" class="h-full object-cover" />
 </header>
 
-<article
-	class="body-spacing grid grid-cols-1 gap-x-28 gap-y-12 py-12 sm:py-24 2xl:grid-cols-2 2xl:flex-row 2xl:gap-y-0"
->
+<article class="body-spacing grid grid-cols-1 gap-x-20 gap-y-12 py-12 sm:py-24">
 	<section class="flex flex-col gap-y-4 sm:gap-y-8">
 		<h2 class="text-[2rem] font-medium sm:text-5xl">About The Sports Workshop...</h2>
 		<div class="flex flex-col gap-y-4 sm:text-xl">
@@ -60,15 +77,60 @@
 	<section class="flex flex-col gap-y-4 sm:gap-y-8">
 		<h2 class="text-[2rem] font-medium sm:text-5xl">Sports</h2>
 		<p class="mb-4 sm:mb-0 sm:text-xl">
-			This workshop will focus on Sports like Football, Volleyball, Cricket, Hockey, Athletics and
-			more which will lorem ipsum lorem ipsum
+			This workshop will focus on Sports like Football, Basketball, Badminton and Hockey. giving
+			Students opportunity to explore and win exciting Prizes!! Please check the list of required
+			gear for each sport before attending.
 		</p>
 
-		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
-			{@render SportItem('FOOTBALL', 'home/football.webp')}
-			{@render SportItem('BASKETBALL', 'home/basketball.webp')}
-			{@render SportItem('BADMINTON', 'home/badminton.webp')}
-			{@render SportItem('HOCKEY', 'home/hockey.webp')}
+		<div class="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3">
+			{@render SportItem(
+				'FOOTBALL',
+				'home/football.webp',
+				[
+					'Football shoes (must bring your own)',
+					'Shin gaurds and 2 pairs of socks',
+					'2 pairs of jerseys'
+				],
+				'Football, cones, and other training equipment will be provided.'
+			)}
+			{@render SportItem(
+				'BASKETBALL',
+				'home/basketball.webp',
+				[
+					'Non-marking 	basketball shoes (mandatory)',
+					'2 pairs of jerseys and socks',
+					'Bring your own basic kit (water bottle, towel, etc)'
+				],
+				'Basketballs and training gear will be provided.'
+			)}
+			{@render SportItem(
+				'HOCKEY',
+				'home/hockey.webp',
+				['Hockey Shoes', 'Hockey stockings (long socks)', '2 pairs of jerseys and stockings'],
+				'Sticks, balls, and shin gaurds will be provided.'
+			)}
+			{@render SportItem('BADMINTON', 'home/badminton.webp', [
+				'Non-marking shoes (mandatory)',
+				'Bring your own racket',
+				'Shuttlecocks: Yonex Mavis 350 only (minimum 5 pieces)<br/>(Other brands/models are not permitted)'
+			])}
+			{@render SportItem('TABLE TENNIS', 'home/tt.webp', [
+				'Bring your own	TT bat',
+				'White TT balls (minimum 5 pieces)',
+				'Non-marking shoes',
+				'2 pairs of jerseys and socks'
+			])}
+			{@render SportItem('SQUASH', 'home/squash.webp', [
+				'Non-marking shoes (mandatory)',
+				'Bring your own squash racket',
+				'Bring your own squash ball'
+			])}
+			{@render SportItem(
+				'VOLLEYBALL',
+				'home/volleyball.webp',
+				['Non-marking shoes', '2 pairs of jerseys and socks'],
+				'Balls and nets will be provided'
+			)}
 		</div>
 	</section>
 </article>
@@ -291,10 +353,10 @@
 			class="grid grid-cols-1 gap-y-2 text-xl font-medium sm:mt-6 sm:grid-cols-[35%_60%] sm:gap-y-4 sm:text-2xl"
 		>
 			<p>EARLY BIRD OFFER:</p>
-			<p class="mb-5"><span class="text-primary">XXXX/-</span> (VALID TILL 20 JULY)</p>
+			<p class="mb-5"><span class="text-primary">4998/-</span> (VALID TILL 22 JUNE)</p>
 
 			<p>STANDARD FEE:</p>
-			<p>XXXX/- (POST EARLY BIRD PERIOD)</p>
+			<p>6998/- (POST EARLY BIRD PERIOD)</p>
 		</div>
 
 		<div class="flex flex-col">
@@ -304,8 +366,8 @@
 				<li>Meals and refreshments</li>
 				<li>Sports coaching and facility access</li>
 				<li>Participation in all camp sessions and events</li>
-				<li>Camp merchandise</li>
-				<li>Certification and entry into the final tournament</li>
+				<li>Camp merchandise (on a payment basis)</li>
+				<li>Certification and awards</li>
 			</ul>
 			<ul class="mt-8 list-disc pl-8 text-lg">
 				<li>Note: Limited slots per sport. Register early to secure your place.</li>

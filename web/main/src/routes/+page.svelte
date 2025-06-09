@@ -1,66 +1,209 @@
 <script lang="ts">
+	let showMenu = $state(false);
 </script>
 
 <svelte:head>
-	<title>58th Inter IIT Sports Meet 2025</title>
+	<title>Inter IIT Sports Meet 2025 Hyderabad</title>
 	<meta
 		name="description"
 		content="Official page for 58th Inter IIT Sports Meet 2025 hosted by IIT Hyderabad in joint collaboration with IIT Madras and IIT Tirupati."
 	/>
 </svelte:head>
 
-<section class="text-background relative overflow-x-clip">
-	<div class="relative px-4">
+<header
+	class="3xl:p-5 3xl:rounded-2xl relative h-full overflow-x-clip rounded-lg p-2 sm:p-3 2xl:p-4"
+>
+	<div class="relative z-10 h-full">
+		<!-- Gradients -->
+		<div
+			class="absolute z-0 h-1/3 w-full rounded-2xl bg-gradient-to-b from-black/60 to-transparent"
+		></div>
+		<div
+			class="absolute z-0 h-full w-1/2 rounded-2xl bg-gradient-to-r from-black/60 to-transparent"
+		></div>
+
 		<!-- Main image -->
 		<img
 			src="image-5.webp"
 			alt="Official Website"
-			class="my-4 h-[calc(100vh-4rem)] w-full rounded-xl object-cover object-[30%_50%] sm:h-[calc(100vh-3rem)] sm:object-center xl:h-auto"
+			class="3xl:rounded-2xl h-full w-full rounded-lg object-cover object-[65%_10%]"
 		/>
 
-		<!-- Logo + Text container positioned on top of the image -->
-		<div
-			class="absolute top-0 left-0 flex -skew-x-15 items-center space-x-3 rounded-br-2xl bg-white pt-4 pr-8 pb-4 pl-8"
+		<!-- Logo + Text container positioned on top left of the image -->
+		<section
+			class="3xl:-left-4 3xl:gap-x-5 3xl:pl-9 3xl:pr-7 3xl:rounded-br-2xl 3xl:py-5 absolute -top-[0.3px] -left-2 flex -skew-x-15 items-center gap-x-2 rounded-br-lg bg-white py-3 pr-3 pl-4 sm:pr-4"
 		>
+			<!-- Rounded Corner top right -->
 			<div
-				class="absolute top-0 -right-[26px] size-4 bg-white"
-				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
+				class="top-left-corner 3xl:size-4 3xl:-right-4 absolute top-0 -right-2 size-2 bg-white"
+			></div>
+			<!-- Rounded Corner bottom left-->
+			<div
+				class="top-left-corner 3xl:size-4 3xl:left-8 3xl:-bottom-[15px] absolute -bottom-2 left-[17.2px] size-2 skew-x-15 bg-white"
 			></div>
 
-			<div
-				class="absolute -bottom-4 left-7 size-4 skew-x-15 bg-white"
-				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at bottom right, transparent 0%, transparent 100%,black 100%);"
-			></div>
+			<img src="/logo.png" alt="Logo" class="3xl:size-[4.5rem] size-9 skew-x-15 sm:size-12" />
 
-			<img src="/logo.png" alt="Logo" class=" size-20 skew-x-15" />
-			<div class="skew-x-15 text-sm leading-tight font-semibold text-gray-800">
+			<div
+				class="3xl:text-sm skew-x-15 text-[8px] leading-none font-medium text-[#121212] sm:text-[10px]"
+			>
 				58TH<br />
 				INTER IIT<br />
 				SPORTS MEET<br />
 				2025
 			</div>
-		</div>
+		</section>
 
-		<!-- Right side: Navigation menu -->
-		<nav class="absolute top-10 right-15 flex space-x-10 font-semibold text-white">
-			<a href="#schedule" class="cursor-pointer hover:underline">SCHEDULE</a>
-			<a href="#teams" class="cursor-pointer hover:underline">TEAMS AND PLAYERS</a>
-			<a href="#live-score" class="cursor-pointer hover:underline">LIVE SCORE</a>
-			<a href="#results" class="cursor-pointer hover:underline">RESULTS</a>
-			<a href="#gallery" class="cursor-pointer hover:underline">GALLERY</a>
-			<a href="#contact" class="cursor-pointer hover:underline">CONTACT</a>
+		<!--Nav bar for the layouts other than mobile-->
+		<nav
+			class="3xl:p-12 3xl:gap-x-12 absolute top-0 right-0 hidden justify-end gap-x-6 font-semibold text-white lg:flex lg:p-8"
+		>
+			<a href="#schedule" class="hover:underline">SCHEDULE</a>
+			<a href="#teams" class="hover:underline">TEAMS AND PLAYERS</a>
+			<a href="#live-score" class="hover:underline">LIVE SCORE</a>
+			<a href="#results" class="hover:underline">RESULTS</a>
+			<a href="#gallery" class="hover:underline">GALLERY</a>
+			<a href="#contact" class="hover:underline">CONTACT</a>
 		</nav>
 
-		<div
-			class="absolute top-1/2 left-24 flex max-w-xs -translate-y-1/2 flex-col gap-4 rounded-md p-4 text-white"
+		<!-- Mobile dropdown menu-->
+		<nav class="absolute top-0 left-0 z-50 w-full lg:hidden">
+			<!-- Menu button at top right -->
+			<div class="relative py-4">
+				<!-- Increased horizontal padding -->
+				<button
+					onclick={() => {
+						showMenu = !showMenu;
+					}}
+					class="absolute right-10 text-4xl text-white italic focus:outline-none"
+					aria-label="Toggle menu"
+				>
+					☰
+				</button>
+			</div>
+
+			<!-- Full-screen menu content -->
+			{#if showMenu}
+				<div class="bg-custom-blue fixed inset-0 z-40 pt-20">
+					<!-- Close Button (X mark) -->
+
+					<div class="fixed top-2 left-0 z-40 flex items-center rounded-br-xl p-3">
+						<img src="/logo-white.svg" alt="Logo" class="h-12 w-12" />
+						<div class="ml-2 text-xs leading-tight text-white" style="font-size: 8px;">
+							58TH<br />
+							INTER IIT<br />
+							SPORTS MEET<br />
+							2025
+						</div>
+					</div>
+					<button
+						onclick={() => {
+							showMenu = !showMenu;
+						}}
+						class="absolute top-4 right-6 text-5xl font-bold text-white"
+						aria-label="Close menu"
+					>
+						×
+					</button>
+
+					<div class="flex flex-col space-y-4 pt-10">
+						<!-- Regular Menu Items -->
+						<a
+							href="#"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
+						>
+							HOME
+						</a>
+						<a
+							href="#"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
+						>
+							SCHEDULE
+						</a><a
+							href="#"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
+						>
+							TEAMS AND PLAYERS
+						</a><a
+							href="#"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
+						>
+							LIVE SCORE
+						</a><a
+							href="#"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
+						>
+							RESULTS
+						</a><a
+							href="#"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
+						>
+							GALLERY
+						</a><a
+							href="#"
+							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
+						>
+							CONTACT
+						</a>
+					</div>
+
+					<div
+						class="absolute right-0 bottom-20 left-0 mx-4 mb-10 rounded-lg bg-white p-6 shadow-lg"
+					>
+						<div class="flex flex-col items-start gap-1">
+							<p class="text-center text-3xl font-bold text-black">
+								5-DAY SPORTS<br />SUMMER CAMP
+							</p>
+							<div class="flex items-center gap-1 *:size-6">
+								<img src="basketball.webp" alt="event 1" />
+								<img src="football.webp" alt="event 2" />
+								<img src="hockey.webp" alt="event 3" />
+								<img src="badminton.webp" alt="event 4" />
+							</div>
+							<div class="flex items-end justify-evenly gap-1">
+								<!-- Center alignment container -->
+								<p class="text-black-600">Open to school and college students</p>
+
+								<button
+									class="bg-custom-orange ml-3 flex h-15 w-15 -skew-x-15 items-center justify-center rounded-md"
+								>
+									<img
+										src="/diag-up-arrow.svg"
+										alt="Northeast arrow"
+										class="h-4 w-4 rotate-45 skew-x-15 transform text-white"
+									/>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="absolute bottom-10 ml-10 flex items-center gap-8 *:size-8">
+						<a href="https://www.instagram.com/interiit_sports2025/">
+							<img src="instagram.svg" alt="instagram" />
+						</a>
+						<a href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/">
+							<img src="linkedin.svg" alt="linkedin" />
+						</a>
+						<!-- <a href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/"> -->
+						<!-- 	<img src="x.svg" alt="X" /> -->
+						<!-- </a> -->
+					</div>
+				</div>
+			{/if}
+		</nav>
+
+		<!-- Header Text -->
+		<section
+			class="3xl:pl-28 3xl:gap-8 absolute top-32 flex flex-col justify-center gap-4 pl-14 text-white sm:top-40 sm:gap-6 sm:pl-16 lg:top-0 lg:bottom-0"
 		>
 			<!-- IITH logo -->
 			<div class="flex justify-start">
-				<img src="/iith-logo-full.png" alt="IITH Logo" class="mb-6 h-10 sm:h-12" />
+				<img src="/iith-logo-full.png" alt="IITH Logo" class="3xl:h-10 mb-4 h-7 sm:h-8" />
 			</div>
 
 			<!-- Event Title -->
-			<div class="text-xs leading-tight font-semibold text-nowrap italic sm:text-[4rem]">
+			<div
+				class="3xl:text-[4rem] text-[2.5rem] leading-none font-semibold text-nowrap italic sm:text-5xl"
+			>
 				<p>58TH</p>
 				<p>INTER IIT</p>
 				<p>SPORTS MEET</p>
@@ -69,36 +212,44 @@
 
 			<!-- IIT HYDERABAD location -->
 			<div
-				class="inline-flex w-fit items-center gap-2 rounded-full border border-white/80 bg-black/30 px-4 py-1 text-xs font-medium sm:text-xl"
+				class="3xl:text-xl -mt-2 flex w-fit items-center gap-2 rounded-full border border-white bg-[#020202] px-3.5 py-2.5 text-sm leading-none font-medium sm:text-base"
 			>
-				<img src="/pin.svg" alt="pin" class="h-3 w-3" />
-				IIT HYDERABAD
+				<img src="/pin.svg" alt="pin" class="3xl:size-fit -mt-0.5 size-4 sm:size-5" />
+				<p>IIT HYDERABAD</p>
 			</div>
 
 			<!-- Dates -->
 			<div
-				class="bg-custom-blue/60 inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1 text-xs font-medium sm:text-xl"
+				class="bg-custom-blue/60 3xl:text-xl inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1 text-sm font-medium sm:text-base"
 			>
 				10th to 17th December 2025
 			</div>
-		</div>
+		</section>
 
-		<div
-			class="absolute -right-8 -bottom-[0.2px] flex w-fit -skew-x-15 flex-col gap-3 rounded-tl-2xl bg-white pt-8 pr-20 pb-4 pl-8 text-white"
+		<!-- Bottom Right Announcement -->
+		<section
+			class="3xl:gap-3 3xl:rounded-tl-2xl 3xl:pt-10 3xl:pb-4 absolute -right-3 -bottom-[0.3px] flex w-fit -skew-x-15 flex-col rounded-tl-lg bg-white py-6 pr-8 pl-8 text-white sm:-right-10 sm:pr-20 sm:pl-4"
 		>
+			<!-- Rounded Corner top right -->
 			<div
-				class="absolute -top-[1rem] right-[5.56rem] size-4 skew-x-15 bg-white"
-				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at top left, transparent 0%, transparent 100%,black 100%);"
+				class="bottom-right-corner 3xl:size-4 3xl:-top-[1rem] 3xl:right-[5.3rem] absolute -top-[7.7px] right-[1.3rem] size-2 skew-x-15 bg-white sm:right-[4.75rem]"
 			></div>
 
+			<!-- Rounded Corner bottom left -->
 			<div
-				class="absolute -bottom-[0.2px] -left-[0.98rem] size-4 bg-white"
-				style="mask-composite: exclude;mask-image: radial-gradient(circle 1rem at top left, transparent 0%, transparent 100%,black 100%);"
+				class="bottom-right-corner 3xl:size-4 3xl:-left-[0.98rem] absolute -bottom-[0.2px] -left-2 size-2 bg-white"
 			></div>
 
-			<div class="flex skew-x-15 flex-col gap-3 pb-4 pl-12 text-black">
+			<!-- Mobile Right Bottom Text -->
+			<div class=" flex items-center gap-x-4 sm:hidden">
+				<img src="orange-triple-chevron-down.svg" alt="chevron down" class="skew-x-15" />
+				<p class="text-custom-orange font-bold text-nowrap">What's Happening?</p>
+			</div>
+
+			<!-- Desktop Right bottom Text -->
+			<div class="hidden skew-x-15 flex-col gap-3 pb-4 pl-6 text-black sm:flex">
 				<!-- Top Row: Circle + Heading -->
-				<div class="flex items-center gap-2">
+				<div class="flex items-center gap-1 pl-6">
 					<div
 						class="border-custom-orange/50 flex size-7 animate-pulse flex-row items-center justify-center rounded-full border"
 					>
@@ -108,7 +259,10 @@
 							<div class="bg-custom-orange size-3 rounded-full"></div>
 						</div>
 					</div>
-					<p class="text-custom-orange ml-2 text-xl font-medium">What's happening?</p>
+
+					<p class="text-custom-orange 3xl:text-xl ml-1 font-medium sm:text-base">
+						What's happening?
+					</p>
 					<div class="flex items-center gap-1 *:size-6">
 						<img src="basketball.webp" alt="event 1" />
 						<img src="football.webp" alt="event 2" />
@@ -118,19 +272,21 @@
 				</div>
 
 				<!-- Title -->
-				<p class="text-[2.5rem] leading-snug font-semibold">5-DAY SPORTS SUMMER CAMP</p>
+				<p class="3xl:text-[2.5rem] pl-6 leading-snug font-semibold sm:text-2xl">
+					5-DAY SPORTS SUMMER CAMP
+				</p>
 
 				<!-- Two lines of text -->
-				<div class="text-xl leading-relaxed">
+				<div class="3xl:text-xl pl-6 leading-relaxed sm:text-base">
 					<p>Open to school and college students in Hyderabad.</p>
 					<p>Train at IIT Hyderabad this summer with expert coaches and top facilites.</p>
 				</div>
 
 				<!-- Buttons -->
-				<div class="mt-2 flex -skew-x-15 gap-x-8 *:py-3">
+				<div class="3xl:text-lg mt-2 flex -skew-x-15 gap-x-8 *:py-3 sm:text-base">
 					<!-- Skewed Button -->
 					<button
-						class="bg-custom-orange hover:bg-custom-orange/90 flex flex-row flex-nowrap items-center rounded px-12 text-lg font-bold text-white transition hover:cursor-pointer"
+						class="bg-custom-orange hover:bg-custom-orange/90 flex grow flex-row flex-nowrap items-center justify-center rounded font-bold text-white transition hover:cursor-pointer"
 					>
 						<a href="/workshop" target="_blank" class="flex flex-nowrap items-center">
 							<p class="skew-x-15">KNOW MORE & REGISTER</p>
@@ -142,12 +298,94 @@
 
 					<!-- Skewed Date Box -->
 					<div
-						class="flex flex-row items-center rounded border border-black/20 bg-white px-6 text-lg font-semibold text-black"
+						class="flex flex-row items-center rounded border border-black/10 bg-white px-6 font-semibold text-black"
 					>
 						<p class="skew-x-15">DATES – 6–11 JULY 2025</p>
 					</div>
 				</div>
 			</div>
+		</section>
+	</div>
+</header>
+
+<!-- Mobile Workshop Details -->
+<section class="flex flex-col px-6 py-6 sm:hidden">
+	<div class="flex items-center gap-4">
+		<div
+			class="border-custom-orange/50 flex size-7 animate-pulse flex-row items-center justify-center rounded-full border"
+		>
+			<div
+				class="border-custom-orange flex size-5 animate-pulse flex-row items-center justify-center rounded-full border"
+			>
+				<div class="bg-custom-orange size-3 rounded-full"></div>
+			</div>
+		</div>
+
+		<div class="flex items-center gap-1 *:size-6">
+			<img src="basketball.webp" alt="event 1" />
+			<img src="football.webp" alt="event 2" />
+			<img src="hockey.webp" alt="event 3" />
+			<img src="badminton.webp" alt="event 4" />
 		</div>
 	</div>
+
+	<!-- Two lines of text -->
+	<div class="leading-tight text-black">
+		<p class="my-4 text-2xl font-semibold">5-DAY SPORTS SUMMER CAMP</p>
+		<p>Open to school and college students in Hyderabad.</p>
+		<p>Train at IIT Hyderabad this summer with expert<br />coaches and top facilites.</p>
+
+		<p class="mt-5"><span class="font-bold">DATES</span> – 6–11 JULY 2025</p>
+	</div>
+
+	<button
+		class="bg-custom-orange hover:bg-custom-orange/90 mt-8 flex grow -skew-x-15 flex-row flex-nowrap items-center justify-center rounded py-4 font-bold text-white transition hover:cursor-pointer"
+	>
+		<a href="/workshop" target="_blank" class="flex flex-nowrap items-center">
+			<p class="skew-x-15">KNOW MORE & REGISTER</p>
+			<div class="my-auto ml-3 size-4 skew-x-15">
+				<img src="diag-up-arrow.svg" alt="Arrow" />
+			</div>
+		</a>
+	</button>
 </section>
+
+<style>
+	@media (width>=120rem) {
+		.top-left-corner {
+			mask-image: radial-gradient(
+				circle 1rem at bottom right,
+				transparent 0%,
+				transparent 100%,
+				black 100%
+			) !important;
+		}
+		.bottom-right-corner {
+			mask-image: radial-gradient(
+				circle 1rem at top left,
+				transparent 0%,
+				transparent 100%,
+				black 100%
+			) !important;
+		}
+	}
+
+	.top-left-corner {
+		mask-composite: exclude;
+		mask-image: radial-gradient(
+			circle 0.5rem at bottom right,
+			transparent 0%,
+			transparent 100%,
+			black 100%
+		);
+	}
+	.bottom-right-corner {
+		mask-composite: exclude;
+		mask-image: radial-gradient(
+			circle 0.5rem at top left,
+			transparent 0%,
+			transparent 100%,
+			black 100%
+		);
+	}
+</style>
