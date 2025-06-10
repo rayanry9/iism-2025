@@ -75,7 +75,7 @@
 	</section>
 
 	<section class="flex flex-col gap-y-4 sm:gap-y-8">
-		<h2 class="text-[2rem] font-medium sm:text-5xl">Sports</h2>
+		<h2 class="text-[2rem] font-medium sm:text-5xl">Workshop Sports & What to Bring</h2>
 		<p class="mb-4 sm:mb-0 sm:text-xl">
 			This workshop will focus on Sports like Football, Basketball, Badminton and Hockey. giving
 			Students opportunity to explore and win exciting Prizes!! Please check the list of required
@@ -141,14 +141,14 @@
 	</h2>
 
 	<!-- Mobile Version -->
-	{#snippet Card1(day: number, morning: string, evening: string)}
+	{#snippet Card1(day: string, morning: string, evening: string)}
 		<div class="flex flex-col">
 			<div class="bg-[#CAC19B]">
 				<div
 					style="clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%);"
 					class="text-background bg-[#AE9C74] py-4 pl-8 text-xl font-medium"
 				>
-					Day {day}
+					{day}
 				</div>
 			</div>
 
@@ -167,16 +167,20 @@
 	{/snippet}
 
 	<section class="mt-8 grid grid-cols-1 gap-y-4 sm:hidden">
-		{@render Card1(1, 'Welcome, Orientation, Light Training', 'Campus Tour, Icebreaker Sessions')}
-		{@render Card1(2, 'Sports Training', 'Group Games, Fitness Challenges')}
-		{@render Card1(3, 'Sports Rotation', 'Team Building, Fun Quiz')}
-		{@render Card1(4, 'Team Building, Fun Quiz', 'Movie Night or Talent Hour')}
-		{@render Card1(5, 'Mini Tournament, Closing Ceremony', 'Departure')}
+		{@render Card1(
+			'30 June',
+			'Welcome, Orientation, Light Training',
+			'Campus Tour, Icebreaker Sessions'
+		)}
+		{@render Card1('1 July', 'Sports Training', 'Group Games, Fitness Challenges')}
+		{@render Card1('2 July', 'Sports Rotation', 'Team Building, Fun Quiz')}
+		{@render Card1('3 July', 'Team Building, Fun Quiz', 'Movie Night or Talent Hour')}
+		{@render Card1('4 July', 'Mini Tournament, Closing Ceremony', 'Departure')}
 	</section>
 
 	<!-- Desktop Version -->
 	<section
-		class="my-16 hidden grid-cols-[10%_45%_45%] gap-y-2 text-center text-2xl font-medium *:bg-[#E9E4CE] *:text-[#AE9C74] *:odd:mr-4 sm:grid"
+		class="my-16 hidden grid-cols-[20%_40%_40%] gap-y-2 text-center text-2xl font-medium *:bg-[#E9E4CE] *:text-[#AE9C74] *:odd:mr-4 sm:grid"
 	>
 		<div class="!text-background grid-cell !bg-[#AE9C74]">Day</div>
 		<div class="!text-background col-span-2 grid grid-cols-subgrid !bg-[#AE9C74]">
@@ -189,7 +193,7 @@
 				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
 				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
 			>
-				1
+				30 June
 			</div>
 		</div>
 		<div class=" col-span-2 grid grid-cols-subgrid">
@@ -202,7 +206,7 @@
 				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
 				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
 			>
-				2
+				1 July
 			</div>
 		</div>
 		<div class="col-span-2 grid grid-cols-subgrid">
@@ -215,7 +219,7 @@
 				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
 				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
 			>
-				3
+				2 July
 			</div>
 		</div>
 		<div class="col-span-2 grid grid-cols-subgrid">
@@ -228,7 +232,7 @@
 				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
 				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
 			>
-				4
+				3 July
 			</div>
 		</div>
 		<div class="col-span-2 grid grid-cols-subgrid">
@@ -241,7 +245,7 @@
 				class="flex h-full w-full flex-col items-center justify-center bg-[#E9E4CE]"
 				style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);"
 			>
-				5
+				4 July
 			</div>
 		</div>
 		<div class="col-span-2 grid grid-cols-subgrid">
@@ -286,12 +290,12 @@
 			{@render Card(
 				'about/2.svg',
 				'CAMP KIT (TBD)',
-				'Includes T-shirt, wristband, water bottle (subject to sponsors)'
+				'Includes T-shirt, Jersey, Tracksuit & water bottle (On a payment basis)'
 			)}
 			{@render Card(
 				'about/3.svg',
 				'ACCOMMODATION',
-				'Hostel stay and meals for the full 5-day duration'
+				'Hostel stay and meals for the entire camp duration'
 			)}
 			{@render Card('about/4.svg', 'SKILL FEEDBACK SHEET', 'Optional feedback from coaches')}
 			{@render Card(
@@ -327,13 +331,13 @@
 			{@render Card(
 				'about/2.svg',
 				'CAMP KIT (TBD)',
-				'Includes T-shirt, wristband, water bottle (subject to sponsors)'
+				'Includes T-shirt, Jersey, Tracksuit & water bottle (on a payment basis)'
 			)}
 			{@render Card('about/6.svg', 'PHOTOS & VIDEOS', 'Access to media content post-camp')}
 			{@render Card(
 				'about/3.svg',
 				'ACCOMMODATION',
-				'Hostel stay and meals for the full 5-day duration'
+				'Hostel stay and meals for the entire camp duration'
 			)}
 			{@render Card(
 				'about/7.svg',

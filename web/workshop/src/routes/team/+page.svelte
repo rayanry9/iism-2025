@@ -66,14 +66,14 @@
 			'Aryan Jain',
 			'Co-Convenor',
 			'team/aryan.webp',
-			'director@iith.ac.in',
+			'+91 9650896994',
 			'interiit.oc@iith.ac.in'
 		)}
 		{@render TeamItem(
 			'Parth B.',
 			'Co-Convenor',
 			'team/parth.webp',
-			'+91 9650896994',
+			'+91 9099781308',
 			'interiit.oc@iith.ac.in'
 		)}
 	</section>

@@ -3,13 +3,11 @@
 	import { base } from '$app/paths';
 	import type { Action } from 'svelte/action';
 	import type { PageProps } from './$types';
-	import { navigating } from '$app/state';
 	let dialog = $state();
 	let formStage = $state(1);
 	let formElem = $state();
 	let fileInputElem = $state<HTMLInputElement | null>(null);
 	let { form }: PageProps = $props();
-	console.log(navigating);
 	let filename = $state('JPEG, PNG, PDF formats, up to 10 MB');
 
 	const focusAction: Action<HTMLDivElement> = (node) => {
@@ -242,16 +240,8 @@
 				</label>
 
 				<label class={formStage == 1 ? '' : '!hidden'}>
-					<p class="label-text">Age (10-28)<span class="text-red-500">*</span></p>
-					<input
-						class="input"
-						name="age"
-						placeholder="Enter Here"
-						type="number"
-						min={10}
-						max={28}
-						required
-					/>
+					<p class="label-text">Age<span class="text-red-500">*</span></p>
+					<input class="input" name="age" placeholder="Enter Here" type="number" required />
 				</label>
 
 				<label class={formStage == 1 ? '' : '!hidden'}>
@@ -316,13 +306,21 @@
 				</label>
 
 				<label class={formStage == 1 ? '' : '!hidden'}>
-					<p class="label-text">Gaurdian Full Name</p>
-					<input class="input" placeholder="Enter Here" name="gaurdian_name" type="text" />
+					<p class="label-text">Gaurdian Full Name<span class="text-red-500">*</span></p>
+					<input class="input" placeholder="Enter Here" name="gaurdian_name" type="text" required />
 				</label>
 
 				<label class={formStage == 1 ? '' : '!hidden'}>
-					<p class="label-text">Gaurdian Contact No. (WhatsApp Preferred)</p>
-					<input class="input" placeholder="Enter Here" name="gaurdian_phone" type="text" />
+					<p class="label-text">
+						Gaurdian Contact No. (WhatsApp Preferred)<span class="text-red-500">*</span>
+					</p>
+					<input
+						class="input"
+						placeholder="Enter Here"
+						name="gaurdian_phone"
+						type="text"
+						required
+					/>
 				</label>
 				{#if formStage == 1}
 					<div class="md:col-span-2">

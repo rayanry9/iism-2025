@@ -9,7 +9,9 @@
 </script>
 
 {#snippet NavItem(text: string, href: string)}
-	<a {href} class="ml-8 {page.url.pathname == '/' + href ? 'text-primary' : 'text-background'}"
+	<a
+		href={base + href}
+		class="ml-8 {page.url.pathname == '/' + href ? 'text-primary' : 'text-background'}"
 		>{text.toUpperCase()}</a
 	>
 {/snippet}
@@ -18,7 +20,7 @@
 	class="bg-foreground text-background sticky top-0 left-0 z-10 flex flex-row items-center py-4 pr-8 pl-8 sm:py-0"
 >
 	<div class="divide-background/50 flex h-full flex-row divide-x">
-		<a href={base}>
+		<a href="/">
 			<img src="interiit-logo.png" alt="Inter IIT Sports Meet Logo" class="h-9 pr-3" />
 		</a>
 
@@ -27,9 +29,10 @@
 		</a>
 	</div>
 	<div class="ml-auto hidden flex-row items-center gap-x-2 sm:flex">
-		{@render NavItem('About & Facilities', 'about')}
-		{@render NavItem('Gallery', 'gallery')}
-		{@render NavItem('team', 'team')}
+		{@render NavItem('Home', '')}
+		{@render NavItem('About & Facilities', '/about')}
+		{@render NavItem('Gallery', '/gallery')}
+		{@render NavItem('team', '/team')}
 		<a
 			class="bg-primary relative ml-4 flex h-14 -skew-x-12 flex-row items-center px-10"
 			href="{base}/register"
@@ -56,6 +59,12 @@
 		<div
 			class="bg-foreground text-background *:border-y-background/20 absolute top-[4.25rem] left-0 flex w-full flex-col items-center *:flex *:w-full *:flex-col *:items-center *:border-t *:py-4"
 		>
+			<a
+				onclick={() => {
+					navMenuOpen = !navMenuOpen;
+				}}
+				href={base}>HOME</a
+			>
 			<a
 				onclick={() => {
 					navMenuOpen = !navMenuOpen;
@@ -161,15 +170,21 @@
 				REACH US
 			</h5>
 			<div
-				class="grid grid-cols-[0.5fr_1fr] gap-y-4 sm:col-span-2 sm:grid-cols-subgrid sm:gap-y-0 lg:col-span-1 lg:grid-cols-2"
+				class="grid grid-cols-[0.4fr_1fr] gap-x-1 gap-y-4 sm:col-span-2 sm:grid-cols-subgrid sm:gap-y-4 lg:col-span-1 lg:grid-cols-[30%_70%]"
 			>
 				<p>Get in Touch -</p>
 				<p>SNCC Sports Complex, IIT Hyderabad, Kandi, 522084</p>
 				<p>Call -</p>
 				<div class="flex flex-col gap-y-1">
-					<p>Pritam (Overall Convenor ) - +91 7602790672</p>
-					<p>Health Center - +91 7602790672</p>
-					<p>Security Control Office - +91 7602790672</p>
+					<p>Nikhil Deshmukh - +91 7499816792</p>
+					<p>Sai kumar - +91 7396641098</p>
+				</div>
+
+				<p>Hospitality & Operation -</p>
+				<div class="flex flex-col gap-y-1">
+					<p>Gayatri Priya - +91 6305430598</p>
+					<p>Utkarsh - +91 8052492889</p>
+					<p>Nihar - +91 7670981506</p>
 				</div>
 
 				<p>Mail -</p>

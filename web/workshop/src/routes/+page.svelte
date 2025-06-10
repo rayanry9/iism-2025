@@ -52,17 +52,32 @@
 				5-Day Sports <br class="hidden sm:block" />Summer Camp
 
 				<span
-					class="inline-flex w-fit flex-row gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-sm font-normal text-nowrap sm:hidden"
+					class="inline-flex w-fit flex-row items-center gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-sm font-normal text-nowrap sm:hidden"
+				>
+					<img src="icons/calendar.svg" alt="calendar" />
+					30th June to 4th July
+				</span>
+
+				<span
+					class="inline-flex w-fit flex-row items-center gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-sm font-normal text-nowrap sm:hidden"
 				>
 					<img src="home/pin.svg" alt="pin" />
 					IIT HYDERABAD
 				</span>
 			</p>
-			<div
-				class="hidden w-fit flex-row gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-nowrap sm:flex"
-			>
-				<img src="home/pin.svg" alt="pin" />
-				IIT HYDERABAD
+			<div class="flex flex-row gap-x-4">
+				<div
+					class="hidden w-fit flex-row items-center gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-nowrap sm:flex"
+				>
+					<img src="icons/calendar.svg" alt="calendar" />
+					30th June to 4th July
+				</div>
+				<div
+					class="hidden w-fit flex-row items-center gap-x-3 rounded-full border border-[#707070] bg-black/30 px-6 py-2 text-nowrap sm:flex"
+				>
+					<img src="home/pin.svg" alt="pin" />
+					IIT HYDERABAD
+				</div>
 			</div>
 		</div>
 		<p class="text-base sm:text-xl sm:font-medium">
@@ -121,8 +136,8 @@
 		<section class="flex flex-col gap-y-4 sm:gap-y-8">
 			<h2 class="text-[2rem] font-medium sm:text-5xl">Sports</h2>
 			<p class="mb-4 sm:mb-0 sm:text-xl">
-				This workshop will focus on Sports like Football, Volleyball, Cricket, Hockey, Athletics and
-				more which will lorem ipsum lorem ipsum
+				This workshop will focus on Sports like Football, Basketball, Badminton and Hockey. giving
+				Students opportunity to explore and win exciting Prizes!!
 			</p>
 
 			<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
@@ -575,7 +590,7 @@
 
 <section class="body-spacing my-20 flex flex-col items-center">
 	<h3 class="text-[2rem] font-medium sm:text-3xl">Contact For Queries</h3>
-	<div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+	<div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
 		{@render TeamItem(
 			'Sai Kumar R.',
 			'Events Head',
