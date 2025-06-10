@@ -1,7 +1,11 @@
 import { SMTP_EMAIL, SMTP_PASSWORD } from '$env/static/private';
 import nodemailer from 'nodemailer';
 import type { RegisterData } from './register';
-import path from 'node:path';
+import term from '../../../../static/Terms_and_Conditions.pdf';
+import { read } from '$app/server';
+
+const file = read(term);
+const fileData = await file.arrayBuffer();
 
 const transporter = nodemailer.createTransport({
 	service: 'Gmail',
@@ -30,7 +34,7 @@ IIT Hyderabad`,
 		attachments: [
 			{
 				filename: 'Terms & Conditions and General Instructions.pdf',
-				path: path.resolve('src/lib/server/db/Terms_and_Conditions.pdf'),
+				content: Buffer.from(fileData),
 				contentType: 'application/pdf'
 			}
 		]

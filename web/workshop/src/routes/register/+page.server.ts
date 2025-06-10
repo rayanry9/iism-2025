@@ -59,16 +59,28 @@ export const actions: Actions = {
 				SendMail(data)
 					.then((val) => {
 						if (!val) {
-							console.error('failed sending email to ' + data.email + ' | Phone: ' + data.phone);
+							console.error(
+								'\n' +
+									new Date().toISOString() +
+									' | failed sending email to ' +
+									data.email +
+									' | Phone: ' +
+									data.phone
+							);
 							try {
 								appendFile(
 									join(homedir(), 'logs', 'email-fails.txt'),
-									'\nEmail: ' + data.email + ' | Phone: ' + data.phone
+									'\n' +
+										new Date().toISOString() +
+										' | Email: ' +
+										data.email +
+										' | Phone: ' +
+										data.phone
 								);
 							} catch (e) {
-								console.error('Failed writing to email fails');
-								console.error(e);
-								console.error('----------------------------------------');
+								console.error('\n' + new Date().toISOString() + ' | Failed writing to email fails');
+								console.error('\n' + e);
+								console.error('\n' + '----------------------------------------');
 							}
 						}
 					})
@@ -76,48 +88,89 @@ export const actions: Actions = {
 						try {
 							appendFile(
 								join(homedir(), 'logs', 'email-fails.txt'),
-								'\nEmail: ' + data.email + ' | Phone: ' + data.phone + '\n' + err
+								'\n' +
+									new Date().toISOString() +
+									' | Email: ' +
+									data.email +
+									' | Phone: ' +
+									data.phone +
+									'\n' +
+									err
 							);
 						} catch (e) {
-							console.error('failed sending email to ' + data.email + ' | Phone: ' + data.phone);
-							console.error(err);
-							console.error('----------------------------------------');
+							console.error(
+								'\n' +
+									new Date().toISOString() +
+									' | failed sending email to ' +
+									data.email +
+									' | Phone: ' +
+									data.phone
+							);
+							console.error('\n' + err);
+							console.error('\n' + '----------------------------------------');
 						}
 					});
 			} catch (e) {
-				console.error('failed sending email to ' + data.email + ' | Phone: ' + data.phone);
-				console.error(e);
-				console.error('----------------------------------------');
+				console.error(
+					'\n' +
+						new Date().toISOString() +
+						' | failed sending email to ' +
+						data.email +
+						' | Phone: ' +
+						data.phone
+				);
+				console.error('\n' + e);
+				console.error('\n' + '----------------------------------------');
 				try {
 					appendFile(
 						join(homedir(), 'logs', 'email-fails.txt'),
-						'\nEmail: ' + data.email + ' | Phone: ' + data.phone + '\n' + e
+						'\n' +
+							new Date().toISOString() +
+							' | Email: ' +
+							data.email +
+							' | Phone: ' +
+							data.phone +
+							'\n' +
+							e
 					);
 				} catch (e) {
-					console.error(e);
-					console.error('Failed writing to email fails');
+					console.error('\n' + e);
+					console.error('\n' + new Date().toISOString() + ' | Failed writing to email fails');
 				}
 			}
 		} else {
 			console.error(
-				'failed registering user with email: ' + data.email + ' | Phone: ' + data.phone
+				'\n' +
+					new Date().toISOString() +
+					' | failed registering user with email: ' +
+					data.email +
+					' | Phone: ' +
+					data.phone
 			);
-			console.error('-----------------------------------');
-			console.error(data);
-			console.error('-----------------------------------');
+			console.error('\n' + '-----------------------------------');
+			console.error('\n' + data);
+			console.error('\n' + '-----------------------------------');
 			try {
 				appendFile(
 					join(homedir(), 'logs', 'registration-fail.txt'),
-					'\nFailed registering user with email: ' + data.email + ' | Phone: ' + data.phone + '\n'
+					'\n' +
+						new Date().toISOString() +
+						' | Failed registering user with email: ' +
+						data.email +
+						' | Phone: ' +
+						data.phone +
+						'\n'
 				);
-				appendFile(join(homedir(), 'logs', 'registration-fail.txt'), JSON.stringify(data));
+				appendFile(join(homedir(), 'logs', 'registration-fail.txt'), '\n' + JSON.stringify(data));
 				appendFile(
 					join(homedir(), 'logs', 'registration-fail.txt'),
 					'\n-------------------------------------------------------'
 				);
 			} catch (e) {
-				console.error(e);
-				console.error('Failed writing to failed registrations');
+				console.error('\n' + e);
+				console.error(
+					'\n' + new Date().toISOString() + ' | Failed writing to failed registrations'
+				);
 			}
 		}
 		return { success: success };
