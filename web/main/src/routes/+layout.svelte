@@ -5,3 +5,5 @@
 </script>
 
 {@render children()}
+
+<footer></footer>

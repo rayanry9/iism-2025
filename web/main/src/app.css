@@ -92,3 +92,29 @@
 :root {
 	font-family: 'OptimaNovaLTPro';
 }
+
+.hero-text {
+	@apply italic;
+}
+
+.tags-text {
+	@apply 3xl:text-xl text-sm leading-none font-semibold sm:text-base;
+}
+
+.button-text {
+	@apply text-xl font-semibold;
+}
+
+@layer base {
+	h1 {
+		@apply 3xl:text-[4rem] text-[2.5rem] leading-none font-semibold sm:text-5xl;
+	}
+
+	h2 {
+		@apply text-[2.5rem] font-semibold;
+	}
+
+	p {
+		@apply text-xl;
+	}
+}

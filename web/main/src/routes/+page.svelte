@@ -1,4 +1,9 @@
 <script lang="ts">
+	import landingHeader from '$lib/assets/landing-header.webp';
+	import logoWithText from '$lib/assets/logo-text.webp';
+	import iithLogoFull from '$lib/assets/iith-logo-full.png';
+	import pin from '$lib/assets/pin.svg';
+
 	let showMenu = $state(false);
 </script>
 
@@ -24,8 +29,8 @@
 
 		<!-- Main image -->
 		<img
-			src="image-5.webp"
-			alt="Official Website"
+			src={landingHeader}
+			alt="Landing"
 			class="3xl:rounded-2xl h-full w-full rounded-lg object-cover object-[65%_10%]"
 		/>
 
@@ -42,28 +47,19 @@
 				class="top-left-corner 3xl:size-4 3xl:left-8 3xl:-bottom-[15px] absolute -bottom-2 left-[17.2px] size-2 skew-x-15 bg-white"
 			></div>
 
-			<img src="/logo.png" alt="Logo" class="3xl:size-[4.5rem] size-9 skew-x-15 sm:size-12" />
-
-			<div
-				class="3xl:text-sm skew-x-15 text-[8px] leading-none font-medium text-[#121212] sm:text-[10px]"
-			>
-				58TH<br />
-				INTER IIT<br />
-				SPORTS MEET<br />
-				2025
-			</div>
+			<img src={logoWithText} alt="Logo" class="3xl:h-14 h-9 skew-x-15 sm:h-12" />
 		</section>
 
 		<!--Nav bar for the layouts other than mobile-->
 		<nav
-			class="3xl:p-12 3xl:gap-x-12 absolute top-0 right-0 hidden justify-end gap-x-6 font-semibold text-white lg:flex lg:p-8"
+			class="3xl:p-12 3xl:gap-x-12 absolute top-0 right-0 hidden justify-end gap-x-6 text-white lg:flex lg:p-8"
 		>
-			<a href="#schedule" class="hover:underline">SCHEDULE</a>
-			<a href="#teams" class="hover:underline">TEAMS AND PLAYERS</a>
-			<a href="#live-score" class="hover:underline">LIVE SCORE</a>
-			<a href="#results" class="hover:underline">RESULTS</a>
-			<a href="#gallery" class="hover:underline">GALLERY</a>
-			<a href="#contact" class="hover:underline">CONTACT</a>
+			<a href="#schedule" class="button-text hover:underline">SCHEDULE</a>
+			<a href="#teams" class="button-text hover:underline">TEAMS AND PLAYERS</a>
+			<a href="#live-score" class="button-text hover:underline">LIVE SCORE</a>
+			<a href="#results" class="button-text hover:underline">RESULTS</a>
+			<a href="#gallery" class="button-text hover:underline">GALLERY</a>
+			<a href="#contact" class="button-text hover:underline">CONTACT</a>
 		</nav>
 
 		<!-- Mobile dropdown menu-->
@@ -147,35 +143,6 @@
 						</a>
 					</div>
 
-					<div
-						class="absolute right-0 bottom-20 left-0 mx-4 mb-10 rounded-lg bg-white p-6 shadow-lg"
-					>
-						<div class="flex flex-col items-start gap-1">
-							<p class="text-center text-3xl font-bold text-black">
-								5-DAY SPORTS<br />SUMMER CAMP
-							</p>
-							<div class="flex items-center gap-1 *:size-6">
-								<img src="basketball.webp" alt="event 1" />
-								<img src="football.webp" alt="event 2" />
-								<img src="hockey.webp" alt="event 3" />
-								<img src="badminton.webp" alt="event 4" />
-							</div>
-							<div class="flex items-end justify-evenly gap-1">
-								<!-- Center alignment container -->
-								<p class="text-black-600">Open to school and college students</p>
-
-								<button
-									class="bg-custom-orange ml-3 flex h-15 w-15 -skew-x-15 items-center justify-center rounded-md"
-								>
-									<img
-										src="/diag-up-arrow.svg"
-										alt="Northeast arrow"
-										class="h-4 w-4 rotate-45 skew-x-15 transform text-white"
-									/>
-								</button>
-							</div>
-						</div>
-					</div>
 					<div class="absolute bottom-10 ml-10 flex items-center gap-8 *:size-8">
 						<a href="https://www.instagram.com/interiit_sports2025/">
 							<img src="instagram.svg" alt="instagram" />
@@ -197,32 +164,30 @@
 		>
 			<!-- IITH logo -->
 			<div class="flex justify-start">
-				<img src="/iith-logo-full.png" alt="IITH Logo" class="3xl:h-10 mb-4 h-7 sm:h-8" />
+				<img src={iithLogoFull} alt="IITH Logo" class="3xl:h-10 mb-4 h-7 sm:h-8" />
 			</div>
 
 			<!-- Event Title -->
-			<div
-				class="3xl:text-[4rem] text-[2.5rem] leading-none font-semibold text-nowrap italic sm:text-5xl"
-			>
-				<p>58TH</p>
-				<p>INTER IIT</p>
-				<p>SPORTS MEET</p>
-				<p>2025</p>
-			</div>
+			<h1 class="hero-text text-nowrap">
+				58TH<br />
+				INTER IIT<br />
+				SPORTS MEET<br />
+				2025<br />
+			</h1>
 
 			<!-- IIT HYDERABAD location -->
 			<div
-				class="3xl:text-xl -mt-2 flex w-fit items-center gap-2 rounded-full border border-white bg-[#020202] px-3.5 py-2.5 text-sm leading-none font-medium sm:text-base"
+				class="-mt-2 flex w-fit items-center gap-2 rounded-full border border-white bg-[#020202] px-3.5 py-2.5"
 			>
-				<img src="/pin.svg" alt="pin" class="3xl:size-fit -mt-0.5 size-4 sm:size-5" />
-				<p>IIT HYDERABAD</p>
+				<img src={pin} alt="pin" class="3xl:size-fit -mt-0.5 size-4 sm:size-5" />
+				<span class="tags-text">IIT HYDERABAD</span>
 			</div>
 
 			<!-- Dates -->
 			<div
-				class="bg-custom-blue/60 3xl:text-xl inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1 text-sm font-medium sm:text-base"
+				class="bg-custom-blue/60 tags-text inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1"
 			>
-				10th to 17th December 2025
+				14th to 21st December 2025
 			</div>
 		</section>
 
@@ -239,116 +204,9 @@
 			<div
 				class="bottom-right-corner 3xl:size-4 3xl:-left-[0.98rem] absolute -bottom-[0.2px] -left-2 size-2 bg-white"
 			></div>
-
-			<!-- Mobile Right Bottom Text -->
-			<div class=" flex items-center gap-x-4 sm:hidden">
-				<img src="orange-triple-chevron-down.svg" alt="chevron down" class="skew-x-15" />
-				<p class="text-custom-orange font-bold text-nowrap">What's Happening?</p>
-			</div>
-
-			<!-- Desktop Right bottom Text -->
-			<div class="hidden skew-x-15 flex-col gap-3 pb-4 pl-6 text-black sm:flex">
-				<!-- Top Row: Circle + Heading -->
-				<div class="flex items-center gap-1 pl-6">
-					<div
-						class="border-custom-orange/50 flex size-7 animate-pulse flex-row items-center justify-center rounded-full border"
-					>
-						<div
-							class="border-custom-orange flex size-5 animate-pulse flex-row items-center justify-center rounded-full border"
-						>
-							<div class="bg-custom-orange size-3 rounded-full"></div>
-						</div>
-					</div>
-
-					<p class="text-custom-orange 3xl:text-xl ml-1 font-medium sm:text-base">
-						What's happening?
-					</p>
-					<div class="flex items-center gap-1 *:size-6">
-						<img src="basketball.webp" alt="event 1" />
-						<img src="football.webp" alt="event 2" />
-						<img src="hockey.webp" alt="event 3" />
-						<img src="badminton.webp" alt="event 4" />
-					</div>
-				</div>
-
-				<!-- Title -->
-				<p class="3xl:text-[2.5rem] pl-6 leading-snug font-semibold sm:text-2xl">
-					5-DAY SPORTS SUMMER CAMP
-				</p>
-
-				<!-- Two lines of text -->
-				<div class="3xl:text-xl pl-6 leading-relaxed sm:text-base">
-					<p>Open to school and college students in Hyderabad.</p>
-					<p>Train at IIT Hyderabad this summer with expert coaches and top facilites.</p>
-				</div>
-
-				<!-- Buttons -->
-				<div class="3xl:text-lg mt-2 flex -skew-x-15 gap-x-8 *:py-3 sm:text-base">
-					<!-- Skewed Button -->
-					<button
-						class="bg-custom-orange hover:bg-custom-orange/90 flex grow flex-row flex-nowrap items-center justify-center rounded font-bold text-white transition hover:cursor-pointer"
-					>
-						<a href="/workshop" target="_blank" class="flex flex-nowrap items-center">
-							<p class="skew-x-15">KNOW MORE & REGISTER</p>
-							<div class="my-auto ml-3 size-4 skew-x-15">
-								<img src="diag-up-arrow.svg" alt="Arrow" />
-							</div>
-						</a>
-					</button>
-
-					<!-- Skewed Date Box -->
-					<div
-						class="flex flex-row items-center rounded border border-black/10 bg-white px-6 font-semibold text-black"
-					>
-						<p class="skew-x-15">DATES – 6–11 JULY 2025</p>
-					</div>
-				</div>
-			</div>
 		</section>
 	</div>
 </header>
-
-<!-- Mobile Workshop Details -->
-<section class="flex flex-col px-6 py-6 sm:hidden">
-	<div class="flex items-center gap-4">
-		<div
-			class="border-custom-orange/50 flex size-7 animate-pulse flex-row items-center justify-center rounded-full border"
-		>
-			<div
-				class="border-custom-orange flex size-5 animate-pulse flex-row items-center justify-center rounded-full border"
-			>
-				<div class="bg-custom-orange size-3 rounded-full"></div>
-			</div>
-		</div>
-
-		<div class="flex items-center gap-1 *:size-6">
-			<img src="basketball.webp" alt="event 1" />
-			<img src="football.webp" alt="event 2" />
-			<img src="hockey.webp" alt="event 3" />
-			<img src="badminton.webp" alt="event 4" />
-		</div>
-	</div>
-
-	<!-- Two lines of text -->
-	<div class="leading-tight text-black">
-		<p class="my-4 text-2xl font-semibold">5-DAY SPORTS SUMMER CAMP</p>
-		<p>Open to school and college students in Hyderabad.</p>
-		<p>Train at IIT Hyderabad this summer with expert<br />coaches and top facilites.</p>
-
-		<p class="mt-5"><span class="font-bold">DATES</span> – 6–11 JULY 2025</p>
-	</div>
-
-	<button
-		class="bg-custom-orange hover:bg-custom-orange/90 mt-8 flex grow -skew-x-15 flex-row flex-nowrap items-center justify-center rounded py-4 font-bold text-white transition hover:cursor-pointer"
-	>
-		<a href="/workshop" target="_blank" class="flex flex-nowrap items-center">
-			<p class="skew-x-15">KNOW MORE & REGISTER</p>
-			<div class="my-auto ml-3 size-4 skew-x-15">
-				<img src="diag-up-arrow.svg" alt="Arrow" />
-			</div>
-		</a>
-	</button>
-</section>
 
 <style>
 	@media (width>=120rem) {
