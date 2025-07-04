@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { ToggleTabs } from '$lib/ui/components/toggleTabs';
 	import '../app.css';
 
 	let { children } = $props();
@@ -7,9 +6,11 @@
 
 {@render children()}
 
-<ToggleTabs.Root>
-	<ToggleTabs.Item class="button-text px-10 py-5">ONGOING MATCHES</ToggleTabs.Item>
-	<ToggleTabs.Item class="button-text px-10 py-5">UPCOMING MATCHES</ToggleTabs.Item>
-</ToggleTabs.Root>
+<footer class="flex flex-col items-center bg-black py-4">
+	<div></div>
 
-<footer></footer>
+	<p class="w-fit text-white opacity-40">
+		© Official Website of INTER IIT Sports Meet 2026 Copyright © 2026, IIT Hyderabad, All rights
+		reserved
+	</p>
+</footer>

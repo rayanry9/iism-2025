@@ -6,11 +6,11 @@
 	let bgDiv: HTMLDivElement;
 
 	let currentIndex = $state(1);
-	let prevIndex = $state(1);
+	let prevIndex = 1;
 
-	let startXPos = $state(0);
-	let width = $state(0);
-	let height = $state(0);
+	let startXPos = 0;
+	let width = 0;
+	let height = 0;
 
 	setContext('updateIndex', (index: number) => {
 		if (currentIndex - 1 == index) {
@@ -32,6 +32,7 @@
 	$effect(() => {
 		width = (mainDiv.children[currentIndex] as HTMLButtonElement).clientWidth;
 		height = (mainDiv.children[currentIndex] as HTMLButtonElement).clientHeight;
+
 		bgDiv.style.width = width + 'px';
 		bgDiv.style.height = height + 'px';
 		bgDiv.style.left =
@@ -50,7 +51,7 @@
 >
 	<div
 		bind:this={bgDiv}
-		class="bg-custom-blue absolute z-[-1] w-20 rounded-full transition-all ease-in-out"
+		class="bg-custom-blue absolute z-[-1] w-20 rounded-full transition-all duration-200 ease-in-out"
 	></div>
 	{@render children()}
 </div>
