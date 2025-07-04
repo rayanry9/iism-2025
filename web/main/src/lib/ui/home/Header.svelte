@@ -179,7 +179,7 @@
 
 			<!-- Dates -->
 			<div
-				class="bg-custom-blue/60 tags-text inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-1"
+				class="bg-custom-blue/60 tags-text inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-2"
 			>
 				14th to 21st December 2025
 			</div>

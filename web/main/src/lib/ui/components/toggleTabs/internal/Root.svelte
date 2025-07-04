@@ -20,7 +20,7 @@
 	});
 
 	onMount(() => {
-		startXPos = (mainDiv.children[currentIndex] as HTMLButtonElement).getBoundingClientRect().x;
+		startXPos = (mainDiv.children[currentIndex] as HTMLButtonElement).offsetLeft;
 		width = (mainDiv.children[currentIndex] as HTMLButtonElement).clientWidth;
 		height = (mainDiv.children[currentIndex] as HTMLButtonElement).clientHeight;
 
@@ -35,8 +35,7 @@
 
 		bgDiv.style.width = width + 'px';
 		bgDiv.style.height = height + 'px';
-		bgDiv.style.left =
-			(mainDiv.children[currentIndex] as HTMLButtonElement).getBoundingClientRect().x + 'px';
+		bgDiv.style.left = (mainDiv.children[currentIndex] as HTMLButtonElement).offsetLeft + 'px';
 
 		(mainDiv.children[prevIndex] as HTMLButtonElement).style.color = 'black';
 		(mainDiv.children[currentIndex] as HTMLButtonElement).style.color = 'white';
@@ -47,11 +46,11 @@
 
 <div
 	bind:this={mainDiv}
-	class="border-custom-gray relative flex w-fit flex-row rounded-full border p-1.5"
+	class="border-custom-gray relative flex w-fit flex-row rounded-full border bg-white p-1.5"
 >
 	<div
 		bind:this={bgDiv}
-		class="bg-custom-blue absolute z-[-1] w-20 rounded-full transition-all duration-200 ease-in-out"
+		class="bg-custom-blue absolute z-0 w-20 rounded-full transition-all duration-200 ease-in-out"
 	></div>
 	{@render children()}
 </div>
