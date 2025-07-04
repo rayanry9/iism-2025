@@ -3,6 +3,7 @@
 	import Button from '$lib/ui/components/Button.svelte';
 	import iithLogoFull from '$lib/assets/iith-logo-full.png';
 	import footerLogo from '$lib/assets/footer-logo.webp';
+	import arrowUpRight from '$lib/assets/icons/diag-up-right-arrow.svg';
 	import '../app.css';
 
 	let { children } = $props();
@@ -20,9 +21,11 @@
 				<img src={footerLogo} class="h-28" alt="IISM Logo" />
 			</div>
 			<div>
-				<Button class="bg-custom-blue my-auto border border-white px-8 py-3 text-white"
-					>SWITCH TO IISSM 25</Button
-				>
+				<Button class="bg-custom-blue my-auto border border-white px-8 py-3 text-white">
+					<div class="flex gap-x-4">
+						SWITCH TO IISSM 25 <img src={arrowUpRight} alt="Diagonal Upper Right Arrow" />
+					</div>
+				</Button>
 			</div>
 		</div>
 		<div class="col-span-1 row-span-3 grid grid-rows-subgrid">
