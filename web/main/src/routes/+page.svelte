@@ -2,7 +2,7 @@
 	import landingHeader from '$lib/assets/landing-header.webp';
 	import logoWithText from '$lib/assets/logo-text.webp';
 	import iithLogoFull from '$lib/assets/iith-logo-full.png';
-	import pin from '$lib/assets/pin.svg';
+	import pin from '$lib/assets/icons/pin.svg';
 
 	let showMenu = $state(false);
 </script>
@@ -54,8 +54,9 @@
 		<nav
 			class="3xl:p-12 3xl:gap-x-12 absolute top-0 right-0 hidden justify-end gap-x-6 text-white lg:flex lg:p-8"
 		>
+			<a href="/" class="button-text hover:underline">HOME</a>
 			<a href="#schedule" class="button-text hover:underline">SCHEDULE</a>
-			<a href="#teams" class="button-text hover:underline">TEAMS AND PLAYERS</a>
+			<a href="#teams" class="button-text hover:underline">TEAMS & PLAYERS</a>
 			<a href="#live-score" class="button-text hover:underline">LIVE SCORE</a>
 			<a href="#results" class="button-text hover:underline">RESULTS</a>
 			<a href="#gallery" class="button-text hover:underline">GALLERY</a>
