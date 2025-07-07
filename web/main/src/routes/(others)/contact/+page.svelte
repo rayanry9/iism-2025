@@ -26,17 +26,17 @@
 	import VinitImg from '$lib/assets/team/vinit.webp';
 </script>
 
-<main class="3xl:gap-y-24 3xl:my-24 my-12 flex flex-col items-center gap-y-12">
+<main class="my-12 flex flex-col items-center gap-y-12 xl:my-20 xl:gap-y-20 2xl:my-24 2xl:gap-y-24">
 	<ToggleTabs.Root>
 		<ToggleTabs.Item>STUDENT TEAM</ToggleTabs.Item>
 		<ToggleTabs.Item>KEY OFFICIALS</ToggleTabs.Item>
 	</ToggleTabs.Root>
 
-	<div class="3xl:gap-y-24 flex w-full flex-col items-center gap-y-16">
+	<div class="flex w-full flex-col items-center gap-y-16 xl:gap-y-20 2xl:gap-y-24">
 		<FlairedTitle>CONVENOR</FlairedTitle>
 
 		<div
-			class="3xl:px-32 3xl:gap-20 grid grid-cols-1 gap-14 px-8 md:grid-cols-2 xl:grid-cols-3 xl:px-16"
+			class="3xl:px-32 grid grid-cols-1 gap-14 px-8 lg:grid-cols-2 xl:px-16 2xl:grid-cols-3 2xl:gap-20 2xl:px-24"
 		>
 			<ContactCard
 				imgSrc={pritamImg}
@@ -63,11 +63,13 @@
 		</div>
 	</div>
 
-	<div class="3xl:gap-y-24 3xl:mt-24 mt-12 flex w-full flex-col items-center gap-y-16">
+	<div
+		class="mt-12 flex w-full flex-col items-center gap-y-16 xl:mt-20 xl:gap-y-20 2xl:mt-24 2xl:gap-y-24"
+	>
 		<FlairedTitle>HEADS</FlairedTitle>
 
 		<div
-			class="3xl:px-32 3xl:gap-20 grid grid-cols-1 gap-14 px-8 md:grid-cols-2 xl:grid-cols-3 xl:px-16"
+			class="3xl:px-32 grid grid-cols-1 gap-14 px-8 lg:grid-cols-2 xl:px-16 2xl:grid-cols-3 2xl:gap-20 2xl:px-24"
 		>
 			<ContactCard
 				imgSrc={NikhilImg}
