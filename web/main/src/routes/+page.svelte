@@ -17,9 +17,9 @@
 </svelte:head>
 
 <Header />
-<Schedule />
-<InfoBanner />
-<FeaturedEvents />
-<ParticipatingIiTs />
-<SportsToPlay />
-<DownloadBanner />
+<!-- <Schedule /> -->
+<!-- <InfoBanner /> -->
+<!-- <FeaturedEvents /> -->
+<!-- <ParticipatingIiTs /> -->
+<!-- <SportsToPlay /> -->
+<!-- <DownloadBanner /> -->

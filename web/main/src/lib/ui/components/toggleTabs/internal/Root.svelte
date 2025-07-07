@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { onMount, setContext, type Snippet } from 'svelte';
+	import type { ClassValue } from 'svelte/elements';
 
-	let { children } = $props();
+	let { children, class: className }: { class?: ClassValue; children: Snippet } = $props();
 	let mainDiv: HTMLDivElement;
 	let bgDiv: HTMLDivElement;
 
@@ -46,7 +47,7 @@
 
 <div
 	bind:this={mainDiv}
-	class="border-custom-gray relative flex w-fit flex-row rounded-full border bg-white p-1.5"
+	class={`border-custom-gray relative flex w-fit flex-row rounded-full border bg-white p-1 xl:p-1.5 ${className}`}
 >
 	<div
 		bind:this={bgDiv}

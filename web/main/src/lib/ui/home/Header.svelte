@@ -4,8 +4,7 @@
 	import iithLogoFull from '$lib/assets/iith-logo-full.png';
 	import pin from '$lib/assets/icons/pin.svg';
 	import SocialButtons from '$lib/ui/common/SocialButtons.svelte';
-
-	let showMenu = $state(false);
+	import NavScreenMobile from '../components/NavScreenMobile.svelte';
 </script>
 
 <header
@@ -40,7 +39,7 @@
 				class="top-left-corner 3xl:size-4 3xl:left-[27px] 3xl:-bottom-[15px] absolute -bottom-2 left-[17.2px] size-2 skew-x-12 bg-white"
 			></div>
 
-			<img src={logoWithText} alt="Logo" class="3xl:h-14 h-9 skew-x-12 sm:h-12" />
+			<img src={logoWithText} alt="IISM Logo" class="3xl:h-14 h-9 skew-x-12 sm:h-12" />
 		</section>
 
 		<!--Nav bar for the layouts other than mobile-->
@@ -48,108 +47,16 @@
 			class="3xl:p-12 3xl:gap-x-12 absolute top-0 right-0 hidden justify-end gap-x-6 text-white lg:flex lg:p-8"
 		>
 			<a href="/" class="button-text hover:underline">HOME</a>
-			<a href="#schedule" class="button-text hover:underline">SCHEDULE</a>
-			<a href="#teams" class="button-text hover:underline">TEAMS & PLAYERS</a>
-			<a href="#live-score" class="button-text hover:underline">LIVE SCORE</a>
-			<a href="#results" class="button-text hover:underline">RESULTS</a>
-			<a href="#gallery" class="button-text hover:underline">GALLERY</a>
+			<a href="/schedule" class="button-text hover:underline">SCHEDULE</a>
+			<a href="/teams" class="button-text hover:underline">TEAMS & PLAYERS</a>
+			<a href="/live-score" class="button-text hover:underline">LIVE SCORE</a>
+			<a href="/results" class="button-text hover:underline">RESULTS</a>
+			<a href="/gallery" class="button-text hover:underline">GALLERY</a>
 			<a href="/contact" class="button-text hover:underline">CONTACT</a>
 		</nav>
 
-		<!-- Mobile dropdown menu-->
 		<nav class="absolute top-0 left-0 z-50 w-full lg:hidden">
-			<!-- Menu button at top right -->
-			<div class="relative py-4">
-				<!-- Increased horizontal padding -->
-				<button
-					onclick={() => {
-						showMenu = !showMenu;
-					}}
-					class="absolute right-10 text-4xl text-white italic focus:outline-none"
-					aria-label="Toggle menu"
-				>
-					☰
-				</button>
-			</div>
-
-			<!-- Full-screen menu content -->
-			{#if showMenu}
-				<div class="bg-custom-blue fixed inset-0 z-40 pt-20">
-					<!-- Close Button (X mark) -->
-
-					<div class="fixed top-2 left-0 z-40 flex items-center rounded-br-xl p-3">
-						<img src="/logo-white.svg" alt="Logo" class="h-12 w-12" />
-						<div class="ml-2 text-xs leading-tight text-white" style="font-size: 8px;">
-							58TH<br />
-							INTER IIT<br />
-							SPORTS MEET<br />
-							2025
-						</div>
-					</div>
-					<button
-						onclick={() => {
-							showMenu = !showMenu;
-						}}
-						class="absolute top-4 right-6 text-5xl font-bold text-white"
-						aria-label="Close menu"
-					>
-						×
-					</button>
-
-					<div class="flex flex-col space-y-4 pt-10">
-						<!-- Regular Menu Items -->
-						<a
-							href="#"
-							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
-						>
-							HOME
-						</a>
-						<a
-							href="#"
-							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
-						>
-							SCHEDULE
-						</a><a
-							href="#"
-							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
-						>
-							TEAMS AND PLAYERS
-						</a><a
-							href="#"
-							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
-						>
-							LIVE SCORE
-						</a><a
-							href="#"
-							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
-						>
-							RESULTS
-						</a><a
-							href="#"
-							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
-						>
-							GALLERY
-						</a><a
-							href="#"
-							class="hover:border-custom-yellow hover:text-custom-yellow py-2 pl-10 text-lg font-semibold text-white transition-colors duration-200 hover:border-l-5"
-						>
-							CONTACT
-						</a>
-					</div>
-
-					<div class="absolute bottom-10 ml-10 flex items-center gap-8 *:size-8">
-						<a href="https://www.instagram.com/interiit_sports2025/">
-							<img src="instagram.svg" alt="instagram" />
-						</a>
-						<a href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/">
-							<img src="linkedin.svg" alt="linkedin" />
-						</a>
-						<!-- <a href="https://www.linkedin.com/company/inter-iit-sports-meet-2025/"> -->
-						<!-- 	<img src="x.svg" alt="X" /> -->
-						<!-- </a> -->
-					</div>
-				</div>
-			{/if}
+			<NavScreenMobile class={'absolute top-4 right-6 text-white'} />
 		</nav>
 
 		<!-- Header Text -->
@@ -187,7 +94,7 @@
 
 		<!-- Bottom Right Announcement -->
 		<section
-			class="3xl:rounded-tl-2xl absolute -right-2 -bottom-[0.3px] flex w-fit -skew-x-12 flex-col rounded-tl-lg bg-white pt-5 pr-4 pb-1.5 pl-5 text-white"
+			class="3xl:rounded-tl-2xl 3xl:pt-5 3xl:pl-5 absolute -right-2 -bottom-[0.3px] flex w-fit -skew-x-12 flex-col rounded-tl-lg bg-white pt-3 pr-4 pb-1.5 pl-3 text-white"
 		>
 			<!-- Rounded Corner top right -->
 			<div

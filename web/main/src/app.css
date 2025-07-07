@@ -4,8 +4,11 @@
 	--color-custom-orange: oklch(0.6374 0.2093 33.71);
 	--color-custom-yellow: oklch(0.8184 0.1631 77.69);
 	--color-custom-blue: oklch(0.3861 0.1473 270.17);
+	--color-custom-pastel-blue: oklch(0.928 0.0292 210.04);
 	--color-custom-teal: oklch(0.5347 0.0808 200.58);
+	--color-custom-teal-light: oklch(0.7373 0.0665 200.77);
 	--color-custom-gray: oklch(0.8576 0 0);
+	--color-custom-light-gray: oklch(0.9551 0 0);
 	--breakpoint-3xl: 120rem; /* 1080p */
 	--breakpoint-4xl: 160rem; /* 2k */
 	--breakpoint-5xl: 240rem; /* 4k */
@@ -99,23 +102,27 @@
 }
 
 .tags-text {
-	@apply 3xl:text-xl text-sm leading-none font-semibold sm:text-base;
+	@apply 3xl:text-xl text-base leading-tight font-semibold xl:text-lg;
 }
 
 .button-text {
-	@apply text-xl font-semibold;
+	@apply 3xl:text-xl text-base font-semibold xl:text-lg;
+}
+
+.title-text {
+	@apply 3xl:text-[1.75rem] text-xl leading-none font-semibold xl:text-2xl;
 }
 
 @layer base {
 	h1 {
-		@apply 3xl:text-[4rem] text-[2.5rem] leading-none font-semibold sm:text-5xl;
+		@apply 3xl:text-[4rem] text-[2.5rem] leading-none font-semibold sm:text-5xl xl:text-6xl;
 	}
 
 	h2 {
-		@apply text-[2.5rem] font-semibold;
+		@apply 3xl:text-[2.5rem] text-2xl font-semibold xl:text-[2rem];
 	}
 
 	p {
-		@apply text-xl;
+		@apply 3xl:text-xl text-base xl:text-lg;
 	}
 }

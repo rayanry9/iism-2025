@@ -8,7 +8,8 @@
 </script>
 
 <button
-	class={'z-[1] transition-colors hover:cursor-pointer ' + className}
+	class={'button-text 3xl:px-10 3xl:py-6 z-[1] px-5 py-3 transition-colors hover:cursor-pointer xl:px-8 xl:py-4 ' +
+		className}
 	bind:this={buttonElem}
 	onclick={(ev) => {
 		updateIndex(parseInt(buttonElem.dataset.index ?? '0'));
