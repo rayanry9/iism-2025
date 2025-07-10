@@ -55,6 +55,7 @@
 			<a href="/contact" class="button-text hover:underline">CONTACT</a>
 		</nav>
 
+		<!--Nav bar for mobile-->
 		<nav class="absolute top-0 left-0 z-50 w-full lg:hidden">
 			<NavScreenMobile class={'absolute top-4 right-6 text-white'} />
 		</nav>

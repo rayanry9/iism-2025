@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Inter IIT Sports Meet 2025 Hyderabad</title>
+	<title>Inter IIT Sports Meet, IIT Hyderabad, 2025</title>
 	<meta
 		name="description"
 		content="Official page for 58th Inter IIT Sports Meet 2025 hosted by IIT Hyderabad in joint collaboration with IIT Madras and IIT Tirupati."
