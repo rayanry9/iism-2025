@@ -14,7 +14,7 @@
 >
 	<Button
 		onclick={() => {
-			window.location.href = 'https://www.instagram.com/interiit_sportsmeet/';
+			window.open('https://www.instagram.com/interiit_sportsmeet/', '_blank');
 		}}
 		class="bg-custom-orange"
 	>
@@ -23,7 +23,7 @@
 
 	<Button
 		onclick={() => {
-			window.location.href = 'https://www.facebook.com/iithyderabad/';
+			window.open('https://www.facebook.com/iithyderabad/', '_blank');
 		}}
 		class="bg-custom-orange"
 	>
@@ -32,7 +32,7 @@
 
 	<Button
 		onclick={() => {
-			window.location.href = 'https://x.com/IITHyderabad';
+			window.open('https://x.com/IITHyderabad', '_blank');
 		}}
 		class="bg-custom-orange"
 	>
@@ -41,7 +41,7 @@
 
 	<Button
 		onclick={() => {
-			window.location.href = 'https://www.linkedin.com/company/inter-iit-sports-meet-2025/';
+			window.open('https://www.linkedin.com/company/inter-iit-sports-meet-2025/', '_blank');
 		}}
 		class="bg-custom-orange"
 	>

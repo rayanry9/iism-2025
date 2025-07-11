@@ -20,6 +20,6 @@
 <!-- <Schedule /> -->
 <!-- <InfoBanner /> -->
 <!-- <FeaturedEvents /> -->
-<!-- <ParticipatingIiTs /> -->
+<ParticipatingIiTs />
 <!-- <SportsToPlay /> -->
 <!-- <DownloadBanner /> -->

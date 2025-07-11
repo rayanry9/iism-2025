@@ -34,12 +34,12 @@
 			<div class="my-auto"><p>QUICK LINKS</p></div>
 			<div class="mt-12 mb-12 grid h-fit w-fit grid-cols-2 gap-x-20 gap-y-6 2xl:mb-0">
 				<a href="/" class="tags-text">HOME</a>
-				<a href="/result" class="tags-text">RESULTS</a>
+				<a href="/results" class="tags-text">RESULTS</a>
 				<a href="/schedule" class="tags-text">SCHEDULE</a>
 				<a href="/gallery" class="tags-text">GALLERY</a>
 				<a href="/teams" class="tags-text">TEAMS & PLAYERS</a>
 				<a href="/contact" class="tags-text">CONTACT</a>
-				<a href="/live-scores" class="tags-text">LIVE SCORES</a>
+				<a href="/live-score" class="tags-text">LIVE SCORES</a>
 			</div>
 			<div>
 				<SocialButtons />
