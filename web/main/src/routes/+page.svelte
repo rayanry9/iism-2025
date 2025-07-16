@@ -22,4 +22,4 @@
 <!-- <FeaturedEvents /> -->
 <ParticipatingIiTs />
 <!-- <SportsToPlay /> -->
-<!-- <DownloadBanner /> -->
+<DownloadBanner />

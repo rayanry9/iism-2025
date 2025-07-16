@@ -3,6 +3,7 @@
 @theme {
 	--color-custom-orange: oklch(0.6374 0.2093 33.71);
 	--color-custom-yellow: oklch(0.8184 0.1631 77.69);
+	--color-custom-dark-blue: oklch(0.2303 0.0275 274.71);
 	--color-custom-blue: oklch(0.3861 0.1473 270.17);
 	--color-custom-pastel-blue: oklch(0.928 0.0292 210.04);
 	--color-custom-teal: oklch(0.5347 0.0808 200.58);

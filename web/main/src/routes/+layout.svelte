@@ -11,7 +11,7 @@
 
 {@render children()}
 
-<footer class="flex flex-col items-center bg-black py-4 text-white">
+<footer class="bg-custom-dark-blue flex flex-col items-center py-4 text-white">
 	<div
 		class="3xl:px-56 grid w-full auto-rows-auto grid-cols-1 gap-y-20 px-8 pt-12 pb-20 md:px-16 lg:grid-cols-2 lg:px-24 lg:last:col-span-2 xl:px-32 2xl:grid-cols-3 2xl:gap-y-0 2xl:px-44"
 	>
@@ -74,7 +74,7 @@
 	</div>
 
 	<p class="w-fit px-6 text-center text-white opacity-40 2xl:px-0">
-		© Official Website of INTER IIT Sports Meet 2026 Copyright © 2026, IIT Hyderabad, All rights
+		© Official Website of INTER IIT Sports Meet 2025 Copyright © 2025, IIT Hyderabad, All rights
 		reserved
 	</p>
 </footer>
