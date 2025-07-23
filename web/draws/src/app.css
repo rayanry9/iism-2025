@@ -3,4 +3,5 @@
 	themes:
 		corporate --default,
 		forest --prefers-dark;
+	/* forest --default; */
 }

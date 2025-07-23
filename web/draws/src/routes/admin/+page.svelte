@@ -124,7 +124,7 @@
 		onclick={() => {
 			setTimeout(() => {
 				form = null;
-			}, 1500);
+			}, 2500);
 		}}>Submit</button
 	>
 </form>
