@@ -20,3 +20,9 @@ type GetPoolsBySportIdResponse struct {
 	Name  string      `json:"name"`
 	Teams []PoolTeams `json:"teams"`
 }
+
+type GetAllPoolsResponse struct {
+	Id      int    `json:"id"`
+	Name    string `json:"name"`
+	SportId int    `json:"sportId"`
+}

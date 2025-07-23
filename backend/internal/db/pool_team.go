@@ -2,6 +2,7 @@ package db
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5"
 	"github.com/rayanry9/iism-2025/backend/internal/config"
 	"github.com/rayanry9/iism-2025/backend/internal/schema"
 )
@@ -17,4 +18,17 @@ func UpdatePoolTeam(c *gin.Context, req schema.UpdatePoolTeamRequest) (int, erro
 		return -1, err
 	}
 	return sportId, nil
+}
+
+func GetAllPoolTeams(c *gin.Context) (*[]schema.GetAllPoolTeamsResponse, error) {
+	rows, err := config.DB.Query(c, `SELECT id, temp_name, institute_id, pool_id FROM pool_teams`)
+	if err != nil {
+		return nil, err
+	}
+	data, err := pgx.CollectRows(rows, pgx.RowToStructByName[schema.GetAllPoolTeamsResponse])
+
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
 }

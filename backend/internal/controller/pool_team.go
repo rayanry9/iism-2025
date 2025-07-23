@@ -65,7 +65,7 @@ func PoolTeamUpdateWebsocket(c *gin.Context) {
 
 func UpdatePoolTeam(c *gin.Context) {
 	var req schema.UpdatePoolTeamRequest
-	if err := c.Bind(&req); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		slog.Warn("Bad Request", "err", err)
 		c.Status(http.StatusBadRequest)
 		return
@@ -79,4 +79,14 @@ func UpdatePoolTeam(c *gin.Context) {
 	}
 	utility.PoolBroadcasterInstance.Broadcast(sportId)
 
+}
+
+func GetAllPoolTeams(c *gin.Context) {
+	data, err := db.GetAllPoolTeams(c)
+	if err != nil {
+		slog.Warn("GetAllPoolTeams", "err", err)
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+	c.JSON(http.StatusOK, data)
 }

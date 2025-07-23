@@ -21,3 +21,10 @@ type SportDB struct {
 	Staff bool      `db:"staff"`
 	Type  SportType `db:"type"`
 }
+
+type GetAllSportsResponse struct {
+	Id    int       `json:"id"`
+	Name  string    `json:"name"`
+	Staff bool      `json:"staff"`
+	Type  SportType `json:"type"`
+}

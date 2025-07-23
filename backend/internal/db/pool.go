@@ -44,3 +44,16 @@ func GetPoolsBySportId(c *gin.Context, req schema.GetPoolsBySportIdRequest) (*[]
 	return &data, nil
 
 }
+
+func GetAllPools(c *gin.Context) (*[]schema.GetAllPoolsResponse, error) {
+	rows, err := config.DB.Query(c, `SELECT id, name, sport_id FROM pools`)
+	if err != nil {
+		return nil, err
+	}
+	data, err := pgx.CollectRows(rows, pgx.RowToStructByName[schema.GetAllPoolsResponse])
+
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
+}

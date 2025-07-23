@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"log/slog"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -25,5 +26,15 @@ func GetPoolsBySportId(c *gin.Context) {
 		return
 	}
 
+	c.JSON(http.StatusOK, data)
+}
+
+func GetAllPools(c *gin.Context) {
+	data, err := db.GetAllPools(c)
+	if err != nil {
+		slog.Warn("GetAllPools", "err", err)
+		c.Status(http.StatusInternalServerError)
+		return
+	}
 	c.JSON(http.StatusOK, data)
 }
