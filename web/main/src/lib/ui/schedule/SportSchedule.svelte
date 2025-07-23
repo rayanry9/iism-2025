@@ -46,7 +46,6 @@
 		{#await data}
 			{#each [1, 2, 3, 4, 5, 6, 7, 8] as key}
 				<SchedulePoolCard
-					class="blur-[2px]"
 					poolName="A"
 					teamData={[
 						{ id: 1, tempName: 'A', name: null },

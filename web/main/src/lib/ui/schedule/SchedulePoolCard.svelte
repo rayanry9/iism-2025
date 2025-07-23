@@ -1,5 +1,7 @@
 <script lang="ts">
+	import type { IITNames } from '$lib/types/iitNames';
 	import type { GetPoolsBySportIdResponseTeamData } from '$lib/types/pools';
+	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
 	import type { ClassValue } from 'svelte/elements';
 
 	let {
@@ -24,7 +26,10 @@
 	</div>
 	{#each teamData as team}
 		{#if team.name != null}
-			<div>{team.name}</div>
+			<div class="flex items-center leading-none">
+				<img class="mr-2 h-fit w-6" src={getIITImgSrc(team.name as IITNames)} alt="iit logo" />
+				<span class="pt-2">IIT {team.name}</span>
+			</div>
 		{:else}
 			<div>{team.tempName}</div>
 		{/if}

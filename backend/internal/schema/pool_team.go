@@ -6,3 +6,12 @@ type PoolTeamDB struct {
 	InstituteId int    `db:"institute_id"`
 	PoolId      int    `db:"pool_id"`
 }
+
+type WebsocketPoolTeamUpdateRequest struct {
+	SportId int `form:"sportId"`
+}
+
+type UpdatePoolTeamRequest struct {
+	Id          int `json:"id"`
+	InstituteId int `json:"instituteId"`
+}
