@@ -40,7 +40,7 @@
 		<div class="button-text flex flex-col space-y-4 pt-10 text-white *:box-border *:py-2 *:pl-12">
 			<!-- Regular Menu Items -->
 			<a
-				class={`${page.url.pathname == '/' ? 'text-custom-yellow border-l-custom-yellow border-l-4' : ''}`}
+				class={`${page.url.pathname == '/' ? 'text-custom-yellow border-l-custom-yellow border-l-4' : 'border-transparent'} border-l-4`}
 				href="/"
 			>
 				HOME

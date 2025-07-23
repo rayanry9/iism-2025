@@ -27,6 +27,3 @@ func SetCors() gin.HandlerFunc {
 		AllowCredentials: true,
 	})
 }
-
-func SetupApiRoutes(r *gin.RouterGroup) {
-}

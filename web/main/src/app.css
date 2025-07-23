@@ -3,13 +3,17 @@
 @theme {
 	--color-custom-orange: oklch(0.6374 0.2093 33.71);
 	--color-custom-yellow: oklch(0.8184 0.1631 77.69);
+	--color-custom-pastel-yellow: oklch(0.9177 0.0299 94.36);
+	--color-custom-dark-yellow: oklch(0.7175 0.1737 51.28);
 	--color-custom-dark-blue: oklch(0.2303 0.0275 274.71);
+	--color-custom-light-blue: oklch(0.6203 0.084 275.76);
 	--color-custom-blue: oklch(0.3861 0.1473 270.17);
 	--color-custom-pastel-blue: oklch(0.928 0.0292 210.04);
 	--color-custom-teal: oklch(0.5347 0.0808 200.58);
 	--color-custom-teal-light: oklch(0.7373 0.0665 200.77);
 	--color-custom-gray: oklch(0.8576 0 0);
 	--color-custom-light-gray: oklch(0.9551 0 0);
+	--color-custom-dark-gray: oklch(0.4997 0 0);
 	--breakpoint-3xl: 120rem; /* 1080p */
 	--breakpoint-4xl: 160rem; /* 2k */
 	--breakpoint-5xl: 240rem; /* 4k */
