@@ -8,6 +8,10 @@
 
 	let { sport }: { sport: Sports } = $props();
 	let data = $derived.by(() => getPoolsBySportId(getSportIdOfSport(sport, sportType, false)));
+	$effect(() => {
+		sport;
+		sportType = 'Male';
+	});
 	let sportType = $state<SportType>('Male');
 </script>
 
@@ -25,20 +29,22 @@
 				{/await} Teams
 			</p>
 		</div>
-		<ToggleTabs.Root class="ml-auto h-fit">
-			<ToggleTabs.Item
-				onclick={() => {
-					sportType = 'Male';
-				}}
-				class="!px-5 !py-2">MEN</ToggleTabs.Item
-			>
-			<ToggleTabs.Item
-				onclick={() => {
-					sportType = 'Female';
-				}}
-				class="!px-5 !py-2">WOMEN</ToggleTabs.Item
-			>
-		</ToggleTabs.Root>
+		{#if sport == 'Volleyball'}
+			<ToggleTabs.Root class="ml-auto h-fit">
+				<ToggleTabs.Item
+					onclick={() => {
+						sportType = 'Male';
+					}}
+					class="!px-5 !py-2">MEN</ToggleTabs.Item
+				>
+				<ToggleTabs.Item
+					onclick={() => {
+						sportType = 'Female';
+					}}
+					class="!px-5 !py-2">WOMEN</ToggleTabs.Item
+				>
+			</ToggleTabs.Root>
+		{/if}
 	</div>
 
 	<!-- <section class="grid w-full grid-flow-col grid-rows-2 gap-12"> -->

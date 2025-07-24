@@ -51,7 +51,7 @@
 				<div class="grid auto-cols-auto gap-x-12 gap-y-3">
 					<div class="col-span-2 grid grid-cols-subgrid">
 						<p>Get in touch -</p>
-						<p>SNCC Sports Complex, IIT Hyderabad, Kandi, 522084</p>
+						<p>SNCC Sports Complex, IIT Hyderabad, Kandi, 522085</p>
 					</div>
 					<div class="col-span-2 grid grid-cols-subgrid">
 						<p>Call -</p>

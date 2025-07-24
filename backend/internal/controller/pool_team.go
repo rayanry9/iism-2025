@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"encoding/json"
 	"log/slog"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -15,18 +17,11 @@ import (
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
 		origin := r.Header.Get("Origin")
-		return origin == "http://localhost:5173"
+		return origin == os.Getenv("FRONTEND_URL")
 	},
 }
 
 func PoolTeamUpdateWebsocket(c *gin.Context) {
-	var req schema.WebsocketPoolTeamUpdateRequest
-	if err := c.Bind(&req); err != nil {
-		slog.Warn("Bad Request", "err", err)
-		c.Status(http.StatusBadRequest)
-		return
-	}
-
 	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
 		slog.Warn("Websocket Upgrade", "err", err)
@@ -39,15 +34,21 @@ func PoolTeamUpdateWebsocket(c *gin.Context) {
 	ticker := time.NewTicker(30 * time.Second)
 	for {
 		select {
-		case id := <-subChan:
-			if id == req.SportId {
-				if err := conn.WriteMessage(websocket.TextMessage, []byte("update")); err != nil {
-					conn.WriteMessage(websocket.CloseMessage, nil)
-					conn.Close()
-					close(subChan)
-					slog.Info("Connection Closed", "err", err)
-					return
-				}
+		case data := <-subChan:
+			jsonData, err := json.Marshal(data)
+			if err != nil {
+				conn.WriteMessage(websocket.CloseMessage, nil)
+				conn.Close()
+				close(subChan)
+				slog.Info("Connection Closed", "err", err)
+				return
+			}
+			if err := conn.WriteMessage(websocket.TextMessage, jsonData); err != nil {
+				conn.WriteMessage(websocket.CloseMessage, nil)
+				conn.Close()
+				close(subChan)
+				slog.Info("Connection Closed", "err", err)
+				return
 			}
 		case <-ticker.C:
 			if err := conn.WriteMessage(websocket.PingMessage, nil); err != nil {
@@ -71,14 +72,18 @@ func UpdatePoolTeam(c *gin.Context) {
 		return
 	}
 
-	sportId, err := db.UpdatePoolTeam(c, req)
+	instituteName, err := db.UpdatePoolTeam(c, req)
 	if err != nil {
 		slog.Warn("Failed to Update", "err", err)
 		c.Status(http.StatusInternalServerError)
 		return
 	}
-	utility.PoolBroadcasterInstance.Broadcast(sportId)
-
+	data := utility.PoolTeamUpdateBroadcastData{
+		InstituteName: instituteName,
+		InstituteId:   req.InstituteId,
+		PoolTeamId:    req.Id,
+	}
+	utility.PoolBroadcasterInstance.Broadcast(data)
 }
 
 func GetAllPoolTeams(c *gin.Context) {

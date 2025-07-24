@@ -8,23 +8,29 @@ import (
 var PoolBroadcasterInstance PoolBroadcaster = PoolBroadcaster{}
 
 type PoolBroadcaster struct {
-	subscribers []chan int // Sport Id
+	subscribers []chan PoolTeamUpdateBroadcastData // Sport Id
 	lock        sync.Mutex
 }
 
-func (p *PoolBroadcaster) Subscribe() chan int {
-	channel := make(chan int, 10)
+type PoolTeamUpdateBroadcastData struct {
+	InstituteName string `json:"instituteName"`
+	InstituteId   int    `json:"instituteId"`
+	PoolTeamId    int    `json:"poolTeamId"`
+}
+
+func (p *PoolBroadcaster) Subscribe() chan PoolTeamUpdateBroadcastData {
+	channel := make(chan PoolTeamUpdateBroadcastData, 10)
 	p.lock.Lock()
 	p.subscribers = append(p.subscribers, channel)
 	p.lock.Unlock()
 	return channel
 }
 
-func (p *PoolBroadcaster) Broadcast(sportId int) {
-	var newSubscribers []chan int
+func (p *PoolBroadcaster) Broadcast(data PoolTeamUpdateBroadcastData) {
+	var newSubscribers []chan PoolTeamUpdateBroadcastData
 	p.lock.Lock()
 	for _, sub := range p.subscribers {
-		if safeSend(sub, sportId) {
+		if safeSend(sub, data) {
 			newSubscribers = append(newSubscribers, sub)
 		}
 	}
@@ -33,7 +39,7 @@ func (p *PoolBroadcaster) Broadcast(sportId int) {
 	p.lock.Unlock()
 }
 
-func safeSend(ch chan int, val int) (ok bool) {
+func safeSend(ch chan PoolTeamUpdateBroadcastData, val PoolTeamUpdateBroadcastData) (ok bool) {
 	defer func() {
 		if r := recover(); r != nil {
 			ok = false
