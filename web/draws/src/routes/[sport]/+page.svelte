@@ -1,11 +1,16 @@
 <script lang="ts">
 	import { registerWebsocketConnection } from '$lib/api/websocket';
 	import { onDestroy, onMount } from 'svelte';
+	import bgImg from '$lib/assets/bg.webp';
+	import menSvg from '$lib/assets/men.svg';
+	import womenSvg from '$lib/assets/female.svg';
 	import iismLogo from '$lib/assets/iism-logo.webp';
+
 	import type { PageProps } from './$types';
 	import PoolCard from '$lib/ui/PoolCard.svelte';
 	import CoinDeciding from '$lib/ui/CoinDeciding.svelte';
-	import type { IITNames } from '$lib/types/other';
+	import type { IITNames, Sports } from '$lib/types/other';
+	import { getSportImageSrc } from '$lib/utility/sport';
 
 	let { data, params }: PageProps = $props();
 
@@ -42,11 +47,36 @@
 
 <svelte:head></svelte:head>
 
-<div class="relative flex h-screen flex-col bg-custom-dark-blue text-white *:px-32">
+<div class="relative flex h-screen flex-col bg-custom-dark-blue text-white *:z-10 *:px-12">
+	<img class="absolute right-0 left-0 z-0 h-screen w-screen !px-0" src={bgImg} alt="bg img" />
+	<img
+		class="absolute -top-24 -left-24 w-[35rem] !px-0 opacity-10"
+		src={getSportImageSrc(data.sports.find((sport) => sport.id == sportId)?.name as Sports)}
+		alt={'sport bg img'}
+	/>
+
 	<div class="absolute top-12 flex h-fit w-full grow">
-		<img src={iismLogo} alt="iism logo" class="h-24" />
-		<div class="ml-auto">
-			<h2 class="">{data.sports.find((val) => val.id == sportId)?.name}</h2>
+		<img src={iismLogo} alt="iism logo" class="h-16" />
+		<div class="ml-auto flex gap-x-4">
+			<img
+				class="h-16"
+				src={getSportImageSrc(data.sports.find((sport) => sport.id == sportId)?.name as Sports)}
+				alt={'sport img'}
+			/>
+			<div class="button-text flex h-fit flex-col leading-none *:flex *:gap-x-1">
+				<h2 class="">{data.sports.find((val) => val.id == sportId)?.name}</h2>
+				{#if data.sports.find((val) => val.id == sportId)?.type == 1}
+					<div class="flex items-center">
+						Men
+						<img class="w-5" src={menSvg} alt="men logo" />
+					</div>
+				{:else}
+					<div class="flex items-center">
+						Women
+						<img src={womenSvg} class="w-5" alt="women logo" />
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
 

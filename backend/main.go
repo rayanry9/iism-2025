@@ -23,6 +23,11 @@ func main() {
 	defer config.DB.Close()
 
 	// Gin Setup
+	if os.Getenv("GIN_MODE") == "release" {
+		gin.SetMode(gin.ReleaseMode)
+	} else {
+		gin.SetMode(gin.DebugMode)
+	}
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
 	router.Use(config.SetSecurityHeaders(), config.SetCors())

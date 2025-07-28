@@ -22,3 +22,14 @@ export type IITNames =
 	| 'Roorkee'
 	| 'Ropar'
 	| 'Tirupati';
+
+export type Sports =
+	| 'Football'
+	| 'Cricket'
+	| 'Volleyball'
+	| 'Hockey'
+	| 'Badminton'
+	| 'Basketball'
+	| 'Squash'
+	| 'Table Tennis'
+	| 'Tennis';

@@ -12,15 +12,17 @@
 
 <script lang="ts">
 	import type { IITNames } from '$lib/types/other';
+	import bgPattern from '$lib/assets/img-1.webp';
 
 	import { getIITImgSrc } from '$lib/utility/iitLogoSrc';
 
 	let { data }: { data: PoolCardData } = $props();
 </script>
 
-<div class="grid grid-cols-1 gap-y-1 *:flex *:h-[2.75rem] *:w-[13.5rem] *:items-center *:pl-4">
-	<div class="bg-custom-teal-light">
+<div class="grid grid-cols-1 gap-y-1 *:flex *:h-[2.75rem] *:w-[14rem] *:items-center *:pl-4">
+	<div class="flex bg-custom-teal-light">
 		<h2 class="-mb-1 leading-none text-black">{data.PoolName}</h2>
+		<img src={bgPattern} class="ml-auto h-full" alt="bg pattern" />
 	</div>
 	{#each data.Items as item}
 		<div
@@ -33,7 +35,9 @@
 					alt="{item.InstituteName} logo"
 				/>
 			{/if}
-			<div>{item.InstituteName ?? ''}</div>
+			{#if item.InstituteName}
+				<div class="-mb-1 leading-none">IIT {item.InstituteName}</div>
+			{/if}
 		</div>
 	{/each}
 </div>

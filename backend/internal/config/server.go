@@ -21,7 +21,7 @@ func SetSecurityHeaders() gin.HandlerFunc {
 func SetCors() gin.HandlerFunc {
 	return cors.New(cors.Config{
 		// AllowOrigins: []string{"https://" + os.Getenv("BASE_URL") + ":" + os.Getenv("PORT")},
-		AllowOrigins:     []string{"http://localhost:5173", "http://localhost:5174", "http://192.168.198.78:5173"},
+		AllowOrigins:     []string{"http://localhost:5173", "http://localhost:5174", "http://192.168.198.78:5173", "https://iism.sports.iith.ac.in"},
 		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Content-Disposition"},
 		AllowCredentials: true,
