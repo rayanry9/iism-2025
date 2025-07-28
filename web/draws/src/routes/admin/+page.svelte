@@ -37,6 +37,7 @@
 		});
 	});
 	let poolTeamId = $state<number>(-1);
+	let upcoming = $state<boolean>(true);
 	let statefulPoolTeamData = $state(data.poolTeams);
 </script>
 
@@ -109,9 +110,22 @@
 		</select>
 	</label>
 
+	<div class="flex gap-x-4">
+		<input
+			class="checkbox"
+			id="upcoming"
+			disabled={poolTeamId == -1}
+			bind:checked={upcoming}
+			value="true"
+			type="checkbox"
+			name="upcoming"
+		/>
+		<label class="label" for="upcoming">Upcoming</label>
+	</div>
+
 	<label class="select">
 		<span class="label">Assign To Institute</span>
-		<select name="instituteId" value={-1} disabled={poolTeamId == -1} class="" required>
+		<select name="instituteId" value={-1} disabled={upcoming || poolTeamId == -1} class="" required>
 			{#each data.institutes as institute}
 				<option value={institute.id}>IIT {institute.name}</option>
 			{/each}

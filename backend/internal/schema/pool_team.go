@@ -8,8 +8,9 @@ type PoolTeamDB struct {
 }
 
 type UpdatePoolTeamRequest struct {
-	Id          int `json:"id"`
-	InstituteId int `json:"instituteId"`
+	Id          int  `json:"id"`
+	InstituteId int  `json:"instituteId"`
+	Upcoming    bool `json:"upcoming"`
 }
 
 type GetAllPoolTeamsResponse struct {

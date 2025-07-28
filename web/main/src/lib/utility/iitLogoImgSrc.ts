@@ -20,7 +20,7 @@ import iitmdLogo from '$lib/assets/logos/iitmd.webp';
 import iitpLogo from '$lib/assets/logos/iitp.webp';
 import iitpkdLogo from '$lib/assets/logos/iitpkd.webp';
 import iitrprLogo from '$lib/assets/logos/iitrpr.webp';
-import iittLogo from '$lib/assets/logos/iitt.webp';
+import iittpLogo from '$lib/assets/logos/iittp.webp';
 import type { IITNames } from '$lib/types/iitNames';
 
 export function getIITImgSrc(name: IITNames): string {
@@ -70,6 +70,6 @@ export function getIITImgSrc(name: IITNames): string {
 		case 'Ropar':
 			return iitrprLogo;
 		case 'Tirupati':
-			return iittLogo;
+			return iittpLogo;
 	}
 }

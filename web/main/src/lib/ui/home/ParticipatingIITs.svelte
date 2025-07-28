@@ -58,30 +58,29 @@
 			bind:this={scrollingDiv}
 			class="3xl:gap-x-16 3xl:px-32 grid auto-cols-auto grid-flow-col grid-rows-2 gap-x-6 gap-y-6 overflow-x-auto px-8 xl:grid-rows-1 xl:gap-x-12 xl:px-24"
 		>
-			<IitCarouselItem iit={'Madras'} />
-			<IitCarouselItem iit={'Hyderabad'} />
+			<IitCarouselItem iit={'Bombay'} />
+			<IitCarouselItem iit={'Bhubaneswar'} />
+			<IitCarouselItem iit={'Bhilai'} />
+			<IitCarouselItem iit={'(BHU) Varanasi'} />
+			<IitCarouselItem iit={'Delhi'} />
+			<IitCarouselItem iit={'Dharwad'} />
+			<IitCarouselItem iit={'(ISM) Dhanbad'} />
 			<IitCarouselItem iit={'Guwahati'} />
-			<IitCarouselItem iit={'Roorkee'} />
-			<IitCarouselItem iit={'Madras'} />
+			<IitCarouselItem iit={'Gandhinagar'} />
+			<IitCarouselItem iit={'Goa'} />
 			<IitCarouselItem iit={'Hyderabad'} />
-			<IitCarouselItem iit={'Guwahati'} />
-			<IitCarouselItem iit={'Roorkee'} />
+			<IitCarouselItem iit={'Indore'} />
+			<IitCarouselItem iit={'Jodhpur'} />
+			<IitCarouselItem iit={'Jammu'} />
+			<IitCarouselItem iit={'Kanpur'} />
+			<IitCarouselItem iit={'Kharagpur'} />
 			<IitCarouselItem iit={'Madras'} />
-			<IitCarouselItem iit={'Hyderabad'} />
-			<IitCarouselItem iit={'Guwahati'} />
+			<IitCarouselItem iit={'Mandi'} />
+			<IitCarouselItem iit={'Patna'} />
+			<IitCarouselItem iit={'Palakkad'} />
 			<IitCarouselItem iit={'Roorkee'} />
-			<IitCarouselItem iit={'Madras'} />
-			<IitCarouselItem iit={'Hyderabad'} />
-			<IitCarouselItem iit={'Guwahati'} />
-			<IitCarouselItem iit={'Roorkee'} />
-			<IitCarouselItem iit={'Madras'} />
-			<IitCarouselItem iit={'Hyderabad'} />
-			<IitCarouselItem iit={'Guwahati'} />
-			<IitCarouselItem iit={'Roorkee'} />
-			<IitCarouselItem iit={'Madras'} />
-			<IitCarouselItem iit={'Hyderabad'} />
-			<IitCarouselItem iit={'Guwahati'} />
-			<IitCarouselItem iit={'Roorkee'} />
+			<IitCarouselItem iit={'Ropar'} />
+			<IitCarouselItem iit={'Tirupati'} />
 		</div>
 	</div>
 

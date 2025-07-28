@@ -71,17 +71,26 @@ func UpdatePoolTeam(c *gin.Context) {
 		c.Status(http.StatusBadRequest)
 		return
 	}
+	var data utility.PoolTeamUpdateBroadcastData
+	if req.Upcoming {
+		data = utility.PoolTeamUpdateBroadcastData{
+			PoolTeamId: req.Id,
+			Upcoming:   true,
+		}
 
-	instituteName, err := db.UpdatePoolTeam(c, req)
-	if err != nil {
-		slog.Warn("Failed to Update", "err", err)
-		c.Status(http.StatusInternalServerError)
-		return
-	}
-	data := utility.PoolTeamUpdateBroadcastData{
-		InstituteName: instituteName,
-		InstituteId:   req.InstituteId,
-		PoolTeamId:    req.Id,
+	} else {
+		instituteName, err := db.UpdatePoolTeam(c, req)
+		if err != nil {
+			slog.Warn("Failed to Update", "err", err)
+			c.Status(http.StatusInternalServerError)
+			return
+		}
+		data = utility.PoolTeamUpdateBroadcastData{
+			InstituteName: instituteName,
+			InstituteId:   req.InstituteId,
+			PoolTeamId:    req.Id,
+			Upcoming:      false,
+		}
 	}
 	utility.PoolBroadcasterInstance.Broadcast(data)
 }

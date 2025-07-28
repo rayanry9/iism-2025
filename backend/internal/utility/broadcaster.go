@@ -16,6 +16,7 @@ type PoolTeamUpdateBroadcastData struct {
 	InstituteName string `json:"instituteName"`
 	InstituteId   int    `json:"instituteId"`
 	PoolTeamId    int    `json:"poolTeamId"`
+	Upcoming      bool   `json:"upcoming"`
 }
 
 func (p *PoolBroadcaster) Subscribe() chan PoolTeamUpdateBroadcastData {

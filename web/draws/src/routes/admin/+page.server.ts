@@ -17,8 +17,13 @@ export const actions = {
 		const formData = await request.formData();
 		const instituteId = formData.get('instituteId') ?? '';
 		const poolTeamId = formData.get('poolTeamId') ?? '';
+		const upcoming = formData.get('upcoming') ?? false;
 
-		return await updatePoolTeam(parseInt(poolTeamId.toString()), parseInt(instituteId.toString()));
+		return await updatePoolTeam(
+			parseInt(poolTeamId.toString()),
+			upcoming == 'true',
+			parseInt(instituteId.toString())
+		);
 	},
 	logout: ({ cookies }) => {
 		cookies.delete('admin', { path: '/' });
