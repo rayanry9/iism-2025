@@ -1,6 +1,7 @@
 import { isValidUser } from '$lib/server/auth';
 import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { resolve } from '$app/paths';
 
 export const actions = {
 	default: async ({ cookies, request }) => {
@@ -12,10 +13,11 @@ export const actions = {
 				path: '/',
 				httpOnly: true,
 				sameSite: 'lax',
-				maxAge: 6 * 60 * 60
+				maxAge: 6 * 60 * 60,
+				secure: false
 			});
 			console.log('LOGGED IN');
-			redirect(303, '/admin');
+			redirect(303, resolve('/admin'));
 		} else {
 			console.log('Invalid credentials');
 		}

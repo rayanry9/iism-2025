@@ -1,14 +1,15 @@
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { updatePoolTeam } from '$lib/api/update';
+import { resolve } from '$app/paths';
 
 export const load: PageServerLoad = ({ cookies }) => {
 	const admin = cookies.get('admin');
 	if (admin == undefined) {
-		redirect(307, '/admin/login');
+		redirect(307, resolve('/admin/login'));
 	}
 	if (admin != 'true') {
-		redirect(307, '/admin/login');
+		redirect(307, resolve('/admin/login'));
 	}
 };
 

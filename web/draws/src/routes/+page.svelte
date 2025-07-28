@@ -2,6 +2,7 @@
 	import { untrack } from 'svelte';
 	import type { PageProps } from './$types';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 
 	let { data }: PageProps = $props();
 
@@ -52,7 +53,7 @@
 	<button
 		type="button"
 		onclick={() => {
-			goto(`/${sportId}`);
+			goto(resolve(`/${sportId}`));
 		}}
 		class="btn w-full btn-primary">GO</button
 	>
