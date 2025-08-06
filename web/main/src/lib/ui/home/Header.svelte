@@ -36,7 +36,7 @@
 			></div>
 			<!-- Rounded Corner bottom left-->
 			<div
-				class="top-left-corner 3xl:size-4 3xl:left-[27px] 3xl:-bottom-[15px] absolute -bottom-2 left-[17.2px] size-2 skew-x-12 bg-white"
+				class="top-left-corner 3xl:size-4 3xl:left-[27px] 3xl:-bottom-[15px] absolute -bottom-[7.5px] left-[16px] size-2 skew-x-12 bg-white"
 			></div>
 
 			<img src={logoWithText} alt="IISM Logo" class="3xl:h-14 h-9 skew-x-12 sm:h-12" />
@@ -99,7 +99,7 @@
 		>
 			<!-- Rounded Corner top right -->
 			<div
-				class="bottom-right-corner 3xl:size-4 3xl:-top-[0.9rem] absolute -top-[7.7px] right-4 size-2 skew-x-12 bg-white"
+				class="bottom-right-corner 3xl:size-4 3xl:-top-[0.9rem] absolute -top-[7.7px] right-[15.7px] size-2 skew-x-12 bg-white"
 			></div>
 
 			<!-- Rounded Corner bottom left -->

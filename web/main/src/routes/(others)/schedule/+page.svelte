@@ -16,10 +16,12 @@
 >
 	<aside class="flex h-[250vh] -translate-x-[22rem] -skew-x-12 flex-row">
 		<div
-			class="flex flex-col items-end gap-y-6 bg-black pt-20 pr-8 pl-32 text-white *:[button]:w-fit *:[button]:rounded-md *:[button]:px-4 *:[button]:py-2.5 *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
+			class="flex flex-col items-end gap-y-6 bg-black pt-20 pr-8 pl-32 text-white *:[button]:w-fit *:[button]:rounded-sm *:[button]:px-4 *:[button]:py-2.5 *:[button]:transition *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
 		>
 			<button
-				class="button-text bg-custom-orange"
+				class="button-text {selectedSport == undefined
+					? 'bg-custom-orange'
+					: 'bg-custom-blue outline outline-white'} "
 				onclick={() => {
 					selectedSport = undefined;
 				}}><div class="skew-x-12">FULL SCHEDULE</div></button

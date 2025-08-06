@@ -15,7 +15,7 @@
 	});
 </script>
 
-<section class="my-40 flex flex-col items-center gap-y-12">
+<section class="my-24 flex flex-col items-center gap-y-12 sm:my-48">
 	<FlairedTitle>PARTICIPATING IITS</FlairedTitle>
 
 	<div class="flex flex-col items-center gap-y-8 px-12 text-center xl:*:w-[60rem]">

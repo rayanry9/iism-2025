@@ -21,5 +21,5 @@
 <!-- <InfoBanner /> -->
 <!-- <FeaturedEvents /> -->
 <ParticipatingIiTs />
-<!-- <SportsToPlay /> -->
+<SportsToPlay />
 <DownloadBanner />
