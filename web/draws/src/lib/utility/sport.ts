@@ -29,6 +29,9 @@ export function getSportImageSrc(sport: Sports): string {
 			return tableTennisImg;
 		case 'Tennis':
 			return tennisImg;
+		case 'Aquatics Water Polo':
+			//TODO:
+			return squashImg;
 	}
 }
 
@@ -80,6 +83,8 @@ export function getSportId(sport: Sports, type: number, staff: boolean): number 
 			case 'Tennis':
 				if (type == 1) return 12;
 				else return 13;
+			case 'Aquatics Water Polo':
+				return 26;
 		}
 	}
 }

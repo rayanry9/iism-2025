@@ -39,24 +39,25 @@ INSERT INTO sports (id, name, type) VALUES (12, 'Tennis', 1);
 INSERT INTO sports (id, name, type) VALUES (13, 'Tennis', 2);
 INSERT INTO sports (id, name, type) VALUES (14, 'Volleyball', 1);
 INSERT INTO sports (id, name, type) VALUES (15, 'Volleyball', 2);
-
+INSERT INTO sports (id, name, type) VALUES (26, 'Aquatics Water Polo', 1);
 
 -- Staff Sports
+
 INSERT INTO sports (id, name, type, staff) VALUES (16, 'Badminton', 1, true);
 INSERT INTO sports (id, name, type, staff) VALUES (17, 'Badminton', 2, true);
 INSERT INTO sports (id, name, type, staff) VALUES (18, 'Basketball', 1, true);
-INSERT INTO sports (id, name, type, staff) VALUES (19, 'Cricket', 3, true);
+INSERT INTO sports (id, name, type, staff) VALUES (19, 'Cricket', 1, true);
 INSERT INTO sports (id, name, type, staff) VALUES (20, 'Football', 1, true);
-INSERT INTO sports (id, name, type, staff) VALUES (21, 'Squash', 3, true);
-INSERT INTO sports (id, name, type, staff) VALUES (22, 'Tennis', 3, true);
+INSERT INTO sports (id, name, type, staff) VALUES (21, 'Squash', 1, true);
+INSERT INTO sports (id, name, type, staff) VALUES (22, 'Tennis', 1, true);
 INSERT INTO sports (id, name, type, staff) VALUES (23, 'Table Tennis', 1, true);
 INSERT INTO sports (id, name, type, staff) VALUES (24, 'Table Tennis', 2, true);
-INSERT INTO sports (id, name, type, staff) VALUES (25, 'Volleyball', 3, true);
-
+INSERT INTO sports (id, name, type, staff) VALUES (25, 'Volleyball', 1, true);
 
 -- Pools
 
 -- Badminton Pools
+
 INSERT INTO pools (id, name, sport_id) VALUES (1, 'A', 1);
 INSERT INTO pools (id, name, sport_id) VALUES (2, 'B', 1);
 INSERT INTO pools (id, name, sport_id) VALUES (3, 'C', 1);
@@ -783,3 +784,22 @@ INSERT INTO pool_teams (temp_name, pool_id) VALUES ('G2', 151);
 INSERT INTO pool_teams (temp_name, pool_id) VALUES ('G3', 151);
 INSERT INTO pool_teams (temp_name, pool_id, institute_id) VALUES ('H1', 152, 10);
 INSERT INTO pool_teams (temp_name, pool_id) VALUES ('H2', 152);
+
+-- Student Water Polo
+
+INSERT INTO pools (id, name, sport_id) VALUES (153, 'A', 26);
+INSERT INTO pools (id, name, sport_id) VALUES (154, 'B', 26);
+INSERT INTO pools (id, name, sport_id) VALUES (155, 'C', 26);
+INSERT INTO pools (id, name, sport_id) VALUES (156, 'D', 26);
+
+INSERT INTO pool_teams (temp_name, pool_id, institute_id) VALUES ('A1', 153, 5);
+INSERT INTO pool_teams (temp_name, pool_id) VALUES ('A2', 153);
+INSERT INTO pool_teams (temp_name, pool_id, institute_id) VALUES ('B1', 154, 1);
+INSERT INTO pool_teams (temp_name, pool_id) VALUES ('B2', 154);
+INSERT INTO pool_teams (temp_name, pool_id) VALUES ('B3', 154);
+INSERT INTO pool_teams (temp_name, pool_id, institute_id) VALUES ('C1', 155, 17);
+INSERT INTO pool_teams (temp_name, pool_id) VALUES ('C2', 155);
+INSERT INTO pool_teams (temp_name, pool_id) VALUES ('C3', 155);
+INSERT INTO pool_teams (temp_name, pool_id, institute_id) VALUES ('D1', 156, 15);
+INSERT INTO pool_teams (temp_name, pool_id) VALUES ('D2', 156);
+INSERT INTO pool_teams (temp_name, pool_id) VALUES ('D3', 156);

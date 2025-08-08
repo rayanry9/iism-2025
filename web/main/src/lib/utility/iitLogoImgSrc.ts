@@ -73,3 +73,31 @@ export function getIITImgSrc(name: IITNames): string {
 			return iittpLogo;
 	}
 }
+
+export function getAllIITNames(): IITNames[] {
+	return [
+		'Bombay',
+		'Bhubaneswar',
+		'Bhilai',
+		'(BHU) Varanasi',
+		'Delhi',
+		'Dharwad',
+		'Guwahati',
+		'Gandhinagar',
+		'Goa',
+		'Hyderabad',
+		'Indore',
+		'(ISM) Dhanbad',
+		'Jodhpur',
+		'Jammu',
+		'Kanpur',
+		'Kharagpur',
+		'Madras',
+		'Mandi',
+		'Patna',
+		'Palakkad',
+		'Roorkee',
+		'Ropar',
+		'Tirupati'
+	];
+}

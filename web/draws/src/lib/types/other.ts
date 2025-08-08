@@ -31,5 +31,6 @@ export type Sports =
 	| 'Badminton'
 	| 'Basketball'
 	| 'Squash'
+	| 'Aquatics Water Polo'
 	| 'Table Tennis'
 	| 'Tennis';

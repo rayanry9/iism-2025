@@ -1,0 +1,24 @@
+<script lang="ts">
+	import type { Sports } from '$lib/types/sports';
+	import SportsAsideBar from '$lib/ui/common/SportsAsideBar.svelte';
+	import OverallLeaderboard from '$lib/ui/results/OverallLeaderboard.svelte';
+	import PastMatches from '$lib/ui/results/PastMatches.svelte';
+
+	let selectedSport = $state<Sports | undefined>();
+</script>
+
+<div
+	class="relative flex flex-row gap-x-24 overflow-x-clip text-nowrap *:[main]:mt-24 *:[main]:mr-28"
+>
+	<SportsAsideBar
+		{selectedSport}
+		bottomText={'Select a Sport to<br/>see past Matches<br/>and Results'}
+		buttonText={'LEADERBOARD'}
+	/>
+
+	{#if selectedSport == undefined}
+		<OverallLeaderboard />
+	{:else}
+		<PastMatches />
+	{/if}
+</div>
