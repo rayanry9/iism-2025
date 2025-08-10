@@ -11,8 +11,8 @@
 	class="relative flex flex-row gap-x-24 overflow-x-clip text-nowrap *:[main]:mt-24 *:[main]:mr-28"
 >
 	<SportsAsideBar
-		{selectedSport}
-		bottomText={'Select a Sport to<br/>see past Matches<br/>and Results'}
+		bind:selectedSport
+		bottomText={'Select a Sport<br/>to see past<br/>Matches<br/>and Results'}
 		buttonText={'LEADERBOARD'}
 	/>
 

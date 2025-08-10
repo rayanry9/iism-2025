@@ -10,7 +10,7 @@
 	class="relative flex flex-row gap-x-24 overflow-x-clip text-nowrap *:[main]:mt-24 *:[main]:mr-28"
 >
 	<SportsAsideBar
-		{selectedSport}
+		bind:selectedSport
 		buttonText={'ALL MATCHES'}
 		bottomText={'Select a Sport<br/>to view live<br/>matches'}
 	/>

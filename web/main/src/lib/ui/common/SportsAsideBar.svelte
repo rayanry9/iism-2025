@@ -5,13 +5,17 @@
 	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 
-	let sports = $state<Array<Sports>>(['Football', 'Athletics', 'Volleyball', 'Hockey', 'Cricket']);
+	let sports = ['Football', 'Athletics', 'Volleyball', 'Hockey', 'Cricket'] satisfies Array<Sports>;
 
 	let {
 		buttonText,
 		bottomText,
-		selectedSport
-	}: { buttonText: string; bottomText: string; selectedSport: Sports | undefined } = $props();
+		selectedSport = $bindable()
+	}: {
+		buttonText: string;
+		bottomText: string;
+		selectedSport: Sports | undefined;
+	} = $props();
 </script>
 
 <aside class="flex h-[250vh] -translate-x-[22rem] -skew-x-12 flex-row">
@@ -48,10 +52,10 @@
 		{#each sports as s}
 			<ScheduleSidebarSportCard
 				sport={s}
+				selected={selectedSport == s}
 				onclick={() => {
 					selectedSport = s;
 				}}
-				selected={selectedSport == s}
 			/>
 		{/each}
 	</div>

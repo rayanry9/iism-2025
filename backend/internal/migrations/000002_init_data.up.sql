@@ -785,7 +785,7 @@ INSERT INTO pool_teams (temp_name, pool_id) VALUES ('G3', 151);
 INSERT INTO pool_teams (temp_name, pool_id, institute_id) VALUES ('H1', 152, 10);
 INSERT INTO pool_teams (temp_name, pool_id) VALUES ('H2', 152);
 
--- Student Water Polo
+-- Aquatics Water Polo Student
 
 INSERT INTO pools (id, name, sport_id) VALUES (153, 'A', 26);
 INSERT INTO pools (id, name, sport_id) VALUES (154, 'B', 26);

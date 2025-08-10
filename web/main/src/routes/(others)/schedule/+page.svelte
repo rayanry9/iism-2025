@@ -5,17 +5,18 @@
 	import SportSchedule from '$lib/ui/schedule/SportSchedule.svelte';
 	import SportsAsideBar from '$lib/ui/common/SportsAsideBar.svelte';
 
-	let selectedSport = $state<Sports | undefined>();
+	let selectedSport = $state<Sports | undefined>(undefined);
 </script>
 
 <div
 	class="relative flex flex-row gap-x-24 overflow-x-clip text-nowrap *:[main]:mt-24 *:[main]:mr-28"
 >
 	<SportsAsideBar
-		{selectedSport}
+		bind:selectedSport
 		bottomText={'Select a Sport<br/>to see Pools'}
 		buttonText={'FULL SCHEDULE'}
 	/>
+	{@debug selectedSport}
 
 	{#if selectedSport == undefined}
 		<FullSchedule />
