@@ -1,41 +1,71 @@
 package schema
 
-import "time"
+import (
+	"time"
+)
 
 type PoolMatchType int
+type PoolMatchResult int
+type MatchStatus int
 
 const (
-	PoolMatchLeague PoolMatchType = 1
-	PoolMatchNormal PoolMatchType = 2
+	PoolMatchLeague       PoolMatchType = 1
+	PoolMatchPreQuarter   PoolMatchType = 2
+	PoolMatchQuarterFinal PoolMatchType = 3
+	PoolMatchSemiFinal    PoolMatchType = 4
+	PoolMatchFinal        PoolMatchType = 5
+)
+
+const (
+	PoolMatchTeam1Win PoolMatchResult = 1
+	PoolMatchTeam2Win PoolMatchResult = 2
+	PoolMatchDraw     PoolMatchResult = 3
+)
+
+const (
+	PoolMatchPending   MatchStatus = 1
+	PoolMatchOngoing   MatchStatus = 2
+	PoolMatchConcluded MatchStatus = 3
 )
 
 func (d PoolMatchType) IsValid() bool {
 	return d == 1 || d == 2
 }
 
-type PoolMatchStatus string
-
-const (
-	PoolMatchPending   PoolMatchStatus = "Pending"
-	PoolMatchOngoing   PoolMatchStatus = "Ongoing"
-	PoolMatchConcluded PoolMatchStatus = "Concluded"
-)
-
-func (d PoolMatchStatus) IsValid() bool {
+func (d MatchStatus) IsValid() bool {
 	return d == PoolMatchPending || d == PoolMatchConcluded || d == PoolMatchOngoing
 }
 
 type PoolMatchDB struct {
-	Id            int             `db:"id"`
-	Team1TempName string          `db:"team1_temp_name"`
-	Team1Id       *int            `db:"team1_id"`
-	Team2TempName string          `db:"temp2_temp_name"`
-	Team2Id       *int            `db:"team2_id"`
-	Status        PoolMatchStatus `db:"status"`
-	StartTime     time.Time       `db:"start_time"`
-	Duration      *time.Duration  `db:"duration"`
-	EndTime       *time.Time      `db:"end_time"`
-	Venue         *string         `db:"venue"`
-	Type          PoolMatchType   `db:"type"`
-	MatchName     *string         `db:"match_name"`
+	Id             int           `db:"id"`
+	Team1TempName  string        `db:"team1_temp_name"`
+	Team1Id        *int          `db:"team1_id"`
+	Team2TempName  string        `db:"team2_temp_name"`
+	Team2Id        *int          `db:"team2_id"`
+	Status         MatchStatus   `db:"status"`
+	Result         *int          `db:"result"`
+	StartTime      time.Time     `db:"start_time"`
+	EndTime        *time.Time    `db:"end_time"`
+	Venue          *string       `db:"venue"`
+	Type           PoolMatchType `db:"type"`
+	SportId        int           `db:"sport_id"`
+	MatchName      *string       `db:"match_name"`
+	LiveStreamLink *string       `db:"live_stream_link"`
+}
+
+type GetAllPoolMatchesResponse struct {
+	Id             int           `json:"id"`
+	SportId        int           `json:"sportId"`
+	Team1TempName  string        `json:"team1TempName"`
+	Team1Id        *int          `json:"team1Id"`
+	Team2TempName  string        `json:"team2TempName"`
+	Team2Id        *int          `json:"team2Id"`
+	Status         MatchStatus   `json:"status"`
+	Result         *int          `json:"result"`
+	StartTime      time.Time     `json:"startTime"`
+	EndTime        *time.Time    `json:"endTime"`
+	Venue          *string       `json:"venue"`
+	Type           PoolMatchType `json:"type"`
+	MatchName      *string       `json:"matchName"`
+	LiveStreamLink *string       `json:"liveStreamLink"`
 }

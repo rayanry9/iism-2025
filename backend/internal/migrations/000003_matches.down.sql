@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS athletic_matches;
+DROP TABLE IF EXISTS pool_matches;
+CREATE TABLE IF NOT EXISTS pool_matches(id SERIAL PREIMARY KEY);
