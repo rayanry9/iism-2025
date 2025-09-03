@@ -2,7 +2,7 @@
 	import Button from '../components/Button.svelte';
 	import igIcon from '$lib/assets/icons/instagram.svg';
 	import fbIcon from '$lib/assets/icons/fb.svg';
-	import xIcon from '$lib/assets/icons/x.svg';
+	// import xIcon from '$lib/assets/icons/x.svg';
 	import linkedinIcon from '$lib/assets/icons/linkedin.svg';
 	import type { ClassValue } from 'svelte/elements';
 
@@ -30,14 +30,14 @@
 		<img src={fbIcon} class="" alt="Facebook" />
 	</Button>
 
-	<Button
-		onclick={() => {
-			window.open('https://x.com/IITHyderabad', '_blank');
-		}}
-		class="bg-custom-orange"
-	>
-		<img src={xIcon} class="" alt="Twitter / X" />
-	</Button>
+	<!-- <Button -->
+	<!-- 	onclick={() => { -->
+	<!-- 		window.open('https://x.com/IITHyderabad', '_blank'); -->
+	<!-- 	}} -->
+	<!-- 	class="bg-custom-orange" -->
+	<!-- > -->
+	<!-- 	<img src={xIcon} class="" alt="Twitter / X" /> -->
+	<!-- </Button> -->
 
 	<Button
 		onclick={() => {

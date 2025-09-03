@@ -8,6 +8,7 @@ import basketballImg from '$lib/assets/sports/basketball.webp';
 import squashImg from '$lib/assets/sports/squash.webp';
 import tableTennisImg from '$lib/assets/sports/table-tennis.webp';
 import tennisImg from '$lib/assets/sports/tennis.webp';
+import poloImg from '$lib/assets/sports/polo.webp';
 
 export function getSportImageSrc(sport: Sports): string {
 	switch (sport) {
@@ -30,8 +31,7 @@ export function getSportImageSrc(sport: Sports): string {
 		case 'Tennis':
 			return tennisImg;
 		case 'Aquatics Water Polo':
-			//TODO:
-			return squashImg;
+			return poloImg;
 	}
 }
 

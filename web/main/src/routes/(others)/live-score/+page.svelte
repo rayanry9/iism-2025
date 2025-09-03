@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="relative flex flex-row gap-x-24 overflow-x-clip text-nowrap *:[main]:mt-24 *:[main]:mr-28"
+	class="relative flex flex-col gap-x-24 overflow-x-clip text-nowrap 2xl:flex-row *:[main]:mt-24 *:[main]:mr-28"
 >
 	<SportsAsideBar
 		bind:selectedSport

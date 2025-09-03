@@ -17,5 +17,7 @@ export function getSportImageSrc(sport: Sports): string {
 			return hockeyImg;
 		case 'Athletics':
 			return athleticsImg;
+		default:
+			return '';
 	}
 }

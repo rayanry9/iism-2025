@@ -1,13 +1,25 @@
 <script lang="ts">
 	import { getPoolsBySportId } from '$lib/api/pools';
+	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
+	import type { GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
 	import type { Sports, SportType } from '$lib/types/sports';
 	import { getSportIdOfSport } from '$lib/utility/sport';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import { ToggleTabs } from '../components/toggleTabs';
 	import SchedulePoolCard from './SchedulePoolCard.svelte';
 
-	let { sport }: { sport: Sports } = $props();
-	let data = $derived.by(() => getPoolsBySportId(getSportIdOfSport(sport, sportType, false)));
+	let {
+		sport,
+		institutes,
+		matchData
+	}: {
+		sport: Sports;
+		institutes: GetAllInstitutesResponse[];
+		matchData: Array<GetAllPoolMatchesResponse>;
+	} = $props();
+	let data = $derived.by(() =>
+		getPoolsBySportId(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, false))
+	);
 	$effect(() => {
 		sport;
 		sportType = 'Male';
@@ -66,4 +78,6 @@
 			{/each}
 		{/await}
 	</section>
+
+	<section></section>
 </main>

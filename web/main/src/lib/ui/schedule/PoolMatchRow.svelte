@@ -1,0 +1,64 @@
+<script lang="ts">
+	import type { IITNames } from '$lib/types/iitNames';
+	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
+	import type { GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
+	import type { Sports } from '$lib/types/sports';
+	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
+	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
+
+	let {
+		sport,
+		instituteData,
+		matchData
+	}: {
+		sport: Sports;
+		instituteData: GetAllInstitutesResponse[];
+		matchData: GetAllPoolMatchesResponse;
+	} = $props();
+</script>
+
+<div class="border-custom-gray button-text flex border leading-none *:flex *:items-center *:py-3">
+	<div class="border-r-custom-gray w-[20rem] gap-x-3 border-r px-4">
+		<img class="h-8" src={getSportImageSrc(sport)} alt="sport icon" />
+		<div>{sport.toUpperCase()} - {matchData.matchName?.toUpperCase()}</div>
+	</div>
+	{#if instituteData.find((val) => val.id == matchData.team1Id)}
+		<div>
+			<img
+				class="mr-3 h-8"
+				src={getIITImgSrc(
+					(instituteData.find((val) => val.id == matchData.team1Id)?.name ??
+						'Hyderabad') as IITNames
+				)}
+				alt="IIT Logo"
+			/>
+			<span>IIT {instituteData.find((val) => val.id == matchData.team1Id)?.name.toUpperCase()}</span
+			>
+		</div>
+	{:else}
+		<div>{matchData.team1TempName}</div>
+	{/if}
+	<div class="border-l-custom-gray border-r-custom-gray mx-2 -skew-x-12 border-r border-l px-3">
+		<span class="skew-x-12">VS</span>
+	</div>
+	{#if instituteData.find((val) => val.id == matchData.team2Id)}
+		<div>
+			<span>
+				IIT {instituteData.find((val) => val.id == matchData.team2Id)?.name.toUpperCase()}
+			</span>
+			<img
+				class="ml-3 h-8"
+				src={getIITImgSrc(
+					(instituteData.find((val) => val.id == matchData.team1Id)?.name ??
+						'Hyderabad') as IITNames
+				)}
+				alt="IIT Logo"
+			/>
+		</div>
+	{:else}
+		<div>{matchData.team2TempName.toUpperCase()}</div>
+	{/if}
+	<div class="border-l-custom-gray ml-auto w-[14rem] justify-center justify-self-end border-l">
+		STATUS - {matchData.status}
+	</div>
+</div>

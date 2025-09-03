@@ -3,12 +3,16 @@
 	import asideBg from '$lib/assets/team-aside-bg.webp';
 	import logoNoText from '$lib/assets/logo-no-text.svg';
 	import type { IITNames } from '$lib/types/iitNames';
+	import MobileHeaderFrame from '$lib/ui/common/MobileHeaderFrame.svelte';
 
 	let activeIIT = $state<IITNames | undefined>(undefined);
 </script>
 
-<div class="flex flex-row overflow-x-clip">
-	<aside class="mr-32 -ml-64 flex -skew-x-12 flex-row">
+<div class="flex flex-col overflow-x-clip 2xl:flex-row">
+	<MobileHeaderFrame>
+		<div>Teams</div>
+	</MobileHeaderFrame>
+	<aside class="mr-32 -ml-64 hidden -skew-x-12 flex-row 2xl:flex">
 		<div class="bg-custom-dark-blue relative mr-8 flex w-[20rem] flex-row overflow-x-clip">
 			<img
 				src={asideBg}

@@ -42,32 +42,53 @@
 			<a
 				class={`${page.url.pathname == '/' ? 'text-custom-yellow border-l-custom-yellow border-l-4' : 'border-transparent'} border-l-4`}
 				href="/"
+				onclick={() => {
+					showMenu = false;
+				}}
 			>
 				HOME
 			</a>
 
 			<a
 				class={`${page.url.pathname == '/schedule' ? 'text-custom-yellow border-l-custom-yellow' : 'border-transparent'}  border-l-4`}
+				onclick={() => {
+					showMenu = false;
+				}}
 				href="/schedule">SCHEDULE</a
 			>
 			<a
 				class={`${page.url.pathname == '/teams' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`}
+				onclick={() => {
+					showMenu = false;
+				}}
 				href="/teams">TEAMS AND PLAYERS</a
 			>
 			<a
 				class={`${page.url.pathname == '/live-score' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`}
+				onclick={() => {
+					showMenu = false;
+				}}
 				href="/live-score">LIVE SCORE</a
 			>
 			<a
 				class={`${page.url.pathname == '/results' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`}
+				onclick={() => {
+					showMenu = false;
+				}}
 				href="/results">RESULTS</a
 			>
 			<a
 				class={`${page.url.pathname == '/gallery' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`}
+				onclick={() => {
+					showMenu = false;
+				}}
 				href="/gallery">GALLERY</a
 			>
 			<a
 				class={`${page.url.pathname == '/contact' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`}
+				onclick={() => {
+					showMenu = false;
+				}}
 				href="/contact">CONTACT</a
 			>
 			<SocialButtons class={'mt-12'} />
