@@ -19,7 +19,7 @@
 <Header />
 <!-- <Schedule /> -->
 <!-- <InfoBanner /> -->
-<!-- <FeaturedEvents /> -->
+<FeaturedEvents />
 <ParticipatingIiTs />
 <SportsToPlay />
 <DownloadBanner />
