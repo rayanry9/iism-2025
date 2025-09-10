@@ -29,7 +29,7 @@
 <main class="my-12 flex flex-col items-center gap-y-12 xl:my-20 xl:gap-y-20 2xl:my-24 2xl:gap-y-24">
 	<ToggleTabs.Root>
 		<ToggleTabs.Item>STUDENT TEAM</ToggleTabs.Item>
-		<ToggleTabs.Item>KEY OFFICIALS</ToggleTabs.Item>
+		<!-- <ToggleTabs.Item>KEY OFFICIALS</ToggleTabs.Item> -->
 	</ToggleTabs.Root>
 
 	<div class="flex w-full flex-col items-center gap-y-16 xl:gap-y-20 2xl:gap-y-24">

@@ -1,155 +1,225 @@
 <script lang="ts">
-	import landingHeader from '$lib/assets/landing-header.webp';
 	import logoWithText from '$lib/assets/logo-text.webp';
-	import iithLogoFull from '$lib/assets/iith-logo-full.png';
-	import pin from '$lib/assets/icons/pin.svg';
+	import iithLogoFull from '$lib/assets/iith-logo-full-blue-text.webp';
+	import pinImg from '$lib/assets/icons/pin.svg';
+	import headerImg1 from '$lib/assets/header-1.webp';
+	import headerImg2 from '$lib/assets/header-2.webp';
+	import headerImg3 from '$lib/assets/header-3.webp';
+	import headerImg4 from '$lib/assets/header-4.webp';
+	import headerImg5 from '$lib/assets/header-5.webp';
+	import headerMobImg1 from '$lib/assets/header-mob-1.webp';
+	import headerMobImg2 from '$lib/assets/header-mob-2.webp';
+	import headerMobImg3 from '$lib/assets/header-mob-3.webp';
+	import headerMobImg4 from '$lib/assets/header-mob-4.webp';
 	import SocialButtons from '$lib/ui/common/SocialButtons.svelte';
-	import NavScreenMobile from '../components/NavScreenMobile.svelte';
+	import FlairedTitle from '../components/FlairedTitle.svelte';
+	import { onMount } from 'svelte';
+	import Button from '../components/Button.svelte';
+	import arrowLeft from '$lib/assets/icons/arrow-left-white.svg';
+	import arrowRight from '$lib/assets/icons/arrow-right-white.svg';
+
+	const remTime = new Date(2025, 11, 14, 0, 0, 0).getTime() - Date.now();
+	let remDays = $state(Math.floor(remTime / (24 * 60 * 60 * 1000)));
+	let remHours = $state(Math.floor((remTime / (1000 * 60 * 60)) % 24));
+	let remMinutes = $state(Math.floor((remTime / (1000 * 60)) % 60));
+	let remSeconds = $state(Math.floor((remTime / 1000) % 60));
+
+	const headerImages = [headerImg1, headerImg2, headerImg3, headerImg4, headerImg5];
+	const mobHeaderImages = [headerMobImg1, headerMobImg2, headerMobImg3, headerMobImg4];
+
+	let currentHeaderImageIdx = $state(0);
+
+	onMount(() => {
+		const imgInterval = setInterval(() => {
+			if (window.innerWidth > 1024) {
+				currentHeaderImageIdx = (currentHeaderImageIdx + 1) % headerImages.length;
+			} else {
+				currentHeaderImageIdx = (currentHeaderImageIdx + 1) % mobHeaderImages.length;
+			}
+		}, 3000);
+
+		const interval = setInterval(() => {
+			if (remSeconds <= 0) {
+				if (remMinutes <= 0) {
+					remMinutes = 59;
+					if (remHours <= 0) {
+						remHours = 59;
+						if (remHours <= 0) {
+							remDays -= 1;
+						}
+					} else {
+						remHours -= 1;
+					}
+				} else {
+					remMinutes -= 1;
+				}
+				remSeconds = 59;
+			} else {
+				remSeconds -= 1;
+			}
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+			clearInterval(imgInterval);
+		};
+	});
 </script>
 
-<header
-	class="3xl:p-5 3xl:rounded-2xl relative h-full overflow-x-clip rounded-lg p-2 sm:p-3 2xl:p-4"
->
-	<div class="relative z-10 h-full">
-		<!-- Gradients -->
+{#snippet MascotButtons()}
+	<div class="flex flex-col items-start 2xl:-skew-x-12">
+		<div class="button-text 2xl:skew-x-12">
+			<span class="hidden 2xl:inline">Official </span>Event Mascot
+		</div>
+		<h1 class="hero-text mb-2 2xl:-mb-4 2xl:skew-x-12">SIMHI</h1>
+	</div>
+
+	<div class="relative flex flex-col 2xl:self-end">
 		<div
-			class="absolute z-0 h-1/3 w-full rounded-2xl bg-gradient-to-b from-black/60 to-transparent"
-		></div>
+			class="flex gap-x-2 *:rounded-sm *:border *:border-white *:px-2.5 *:py-2.5 2xl:gap-x-3 2xl:*:border-2 2xl:*:px-3 2xl:*:py-3"
+		>
+			<Button
+				onclick={() => {
+					if (window.innerWidth > 1024) {
+						currentHeaderImageIdx = (currentHeaderImageIdx + 4) % headerImages.length;
+					} else {
+						currentHeaderImageIdx = (currentHeaderImageIdx + 3) % mobHeaderImages.length;
+					}
+				}}
+			>
+				<img src={arrowLeft} alt="left arrow" />
+			</Button>
+			<Button
+				onclick={() => {
+					if (window.innerWidth > 1024) {
+						currentHeaderImageIdx = (currentHeaderImageIdx + 1) % headerImages.length;
+					} else {
+						currentHeaderImageIdx = (currentHeaderImageIdx + 1) % mobHeaderImages.length;
+					}
+				}}
+			>
+				<img src={arrowRight} alt="right arrow" />
+			</Button>
+		</div>
+
 		<div
-			class="absolute z-0 h-full w-1/2 rounded-2xl bg-gradient-to-r from-black/60 to-transparent"
-		></div>
-
-		<!-- Main image -->
-		<img
-			src={landingHeader}
-			alt="Landing"
-			class="3xl:rounded-2xl h-full w-full rounded-lg object-cover object-[65%_10%]"
-		/>
-
-		<!-- Logo + Text container positioned on top left of the image -->
-		<section
-			class="3xl:-left-4 3xl:gap-x-5 3xl:pl-9 3xl:pr-7 3xl:rounded-br-2xl 3xl:py-5 absolute -top-[0.3px] -left-2 flex -skew-x-12 items-center gap-x-2 rounded-br-lg bg-white py-3 pr-3 pl-4 sm:pr-4"
+			class="mt-6 flex -skew-x-12 flex-row gap-x-1 *:size-2 2xl:absolute 2xl:right-2.5 2xl:-bottom-6 2xl:mt-0"
 		>
-			<!-- Rounded Corner top right -->
-			<div
-				class="top-left-corner 3xl:size-4 3xl:-right-4 absolute top-0 -right-2 size-2 bg-white"
-			></div>
-			<!-- Rounded Corner bottom left-->
-			<div
-				class="top-left-corner 3xl:size-4 3xl:left-[27px] 3xl:-bottom-[15px] absolute -bottom-[7.5px] left-[16px] size-2 skew-x-12 bg-white"
-			></div>
+			{#each mobHeaderImages as _, idx}
+				<div class={idx == currentHeaderImageIdx ? 'bg-white' : 'bg-white/25'}></div>
+			{/each}
+		</div>
+	</div>
+{/snippet}
 
-			<img src={logoWithText} alt="IISM Logo" class="3xl:h-14 h-9 skew-x-12 sm:h-12" />
-		</section>
-
-		<!--Nav bar for the layouts other than mobile-->
-		<nav
-			class="3xl:p-12 3xl:gap-x-12 absolute top-0 right-0 hidden justify-end gap-x-6 text-white lg:flex lg:p-8"
-		>
-			<a href="/" class="button-text hover:underline">HOME</a>
-			<a href="/schedule" class="button-text hover:underline">SCHEDULE</a>
-			<a href="/teams" class="button-text hover:underline">TEAMS & PLAYERS</a>
-			<a href="/live-score" class="button-text hover:underline">LIVE SCORE</a>
-			<a href="/results" class="button-text hover:underline">RESULTS</a>
-			<a href="/gallery" class="button-text hover:underline">GALLERY</a>
-			<a href="/contact" class="button-text hover:underline">CONTACT</a>
-		</nav>
-
-		<!--Nav bar for mobile-->
-		<nav class="absolute top-0 left-0 z-50 w-full lg:hidden">
-			<NavScreenMobile class={'absolute top-4 right-6 text-white'} />
-		</nav>
-
-		<!-- Header Text -->
-		<section
-			class="3xl:pl-28 3xl:gap-8 absolute top-32 flex flex-col justify-center gap-4 pl-14 text-white sm:top-40 sm:gap-6 sm:pl-16 lg:top-0 lg:bottom-0"
-		>
-			<!-- IITH logo -->
-			<div class="flex justify-start">
-				<img src={iithLogoFull} alt="IITH Logo" class="3xl:h-10 mb-4 h-7 sm:h-8" />
+<header class="relative flex w-full 2xl:h-[calc(100vh-4rem)]">
+	<div class="absolute right-0 z-20 hidden 2xl:block">
+		{#key headerImages[currentHeaderImageIdx % headerImages.length]}
+			<img
+				class="h-[calc(100vh-4rem)]"
+				src={headerImages[currentHeaderImageIdx % headerImages.length]}
+				alt="hero img"
+			/>
+		{/key}
+	</div>
+	<section
+		class="flex grow flex-col items-center gap-y-8 text-center 2xl:items-start 2xl:gap-y-14 2xl:text-start"
+	>
+		<div class="mt-24 hidden 2xl:flex 2xl:pl-[15rem]">
+			<div class="gap-x-8 2xl:flex">
+				<img class="h-12" src={logoWithText} alt="inter iit logo" />
+				<img class="h-12" src={iithLogoFull} alt="iit hyderabad logo" />
 			</div>
+			<div class="z-40 ml-auto hidden gap-x-20 text-white 2xl:flex">
+				{@render MascotButtons()}
+			</div>
+		</div>
 
-			<!-- Event Title -->
-			<h1 class="hero-text text-nowrap">
-				58TH<br />
-				INTER IIT<br />
-				SPORTS MEET<br />
-				2025<br />
+		<div class="mt-12 2xl:mt-0 2xl:ml-[15rem]">
+			<h1 class="hero-text flex flex-col items-center 2xl:block">
+				58TH<br />INTER IIT<br />SPORTS MEET<br />2025<span
+					class="button-text text-custom-orange border-custom-orange mt-2 flex h-fit w-fit gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic 2xl:ml-4 2xl:inline-flex"
+					><img src={pinImg} class="text-custom-orange -mt-1 inline" alt="pin" />IIT Hyderabad</span
+				>
 			</h1>
+		</div>
 
-			<!-- IIT HYDERABAD location -->
-			<div
-				class="-mt-2 flex w-fit items-center gap-2 rounded-full border border-white bg-[#020202] px-3.5 py-2.5"
-			>
-				<img src={pin} alt="pin" class="3xl:size-fit -mt-0.5 size-4 sm:size-5" />
-				<span class="tags-text">IIT HYDERABAD</span>
+		<div class="2xl:mt-12">
+			<div class="button-text 2xl:ml-[17.5rem]">14th to 21st December 2025</div>
+
+			<FlairedTitle class="!w-full 2xl:!w-[110rem] 2xl:-translate-x-[30rem]">
+				<div
+					class="*:inline-flex *:max-w-12 *:min-w-12 *:flex-col *:items-center 2xl:*:max-w-16 2xl:*:min-w-16 **:[span]:inline-flex **:[span]:max-w-3 **:[span]:min-w-3 **:[span]:justify-center 2xl:**:[span]:max-w-4 2xl:**:[span]:min-w-4"
+				>
+					<div>
+						<div>
+							{#if remDays >= 10}
+								<span>{remDays.toString().at(0)}</span>
+								<span>{remDays.toString().at(1)}</span>
+							{:else}
+								<span>0</span>
+								<span>{remDays.toString().at(0)}</span>
+							{/if}
+						</div>
+						<p class="leading-none">Days</p>
+					</div>
+					:
+					<div>
+						<div>
+							{#if remHours >= 10}
+								<span>{remHours.toString().at(0)}</span>
+								<span>{remHours.toString().at(1)}</span>
+							{:else}
+								<span>0</span>
+								<span>{remHours.toString().at(0)}</span>
+							{/if}
+						</div>
+						<p class="leading-none">Hrs</p>
+					</div>
+					:
+					<div>
+						<div>
+							{#if remMinutes >= 10}
+								<span>{remMinutes.toString().at(0)}</span>
+								<span>{remMinutes.toString().at(1)}</span>
+							{:else}
+								<span>0</span>
+								<span>{remMinutes.toString().at(0)}</span>
+							{/if}
+						</div>
+						<p class="leading-none">Mins</p>
+					</div>
+					:
+					<div>
+						<div>
+							{#if remSeconds >= 10}
+								<span>{remSeconds.toString().at(0)}</span>
+								<span>{remSeconds.toString().at(1)}</span>
+							{:else}
+								<span>0</span>
+								<span>{remSeconds.toString().at(0)}</span>
+							{/if}
+						</div>
+						<p class="leading-none">Sec</p>
+					</div>
+				</div>
+			</FlairedTitle>
+		</div>
+
+		<div class="relative 2xl:hidden">
+			{#key mobHeaderImages[currentHeaderImageIdx % mobHeaderImages.length]}
+				<img
+					class="max-w-screen"
+					src={mobHeaderImages[currentHeaderImageIdx % mobHeaderImages.length]}
+					alt="hero img"
+				/>
+			{/key}
+			<div class="absolute top-[36%] flex flex-col pl-8 text-white">
+				{@render MascotButtons()}
 			</div>
-
-			<!-- Dates -->
-			<div
-				class="bg-custom-blue/60 tags-text inline-flex w-fit items-center gap-2 rounded-sm border border-white/80 px-4 py-2"
-			>
-				14th to 21st December 2025
-			</div>
-		</section>
-
-		<!-- Bottom Right Announcement -->
-		<section
-			class="3xl:rounded-tl-2xl 3xl:pt-5 3xl:pl-5 absolute -right-2 -bottom-[0.3px] flex w-fit -skew-x-12 flex-col rounded-tl-lg bg-white pt-3 pr-4 pb-1.5 pl-3 text-white"
-		>
-			<!-- Rounded Corner top right -->
-			<div
-				class="bottom-right-corner 3xl:size-4 3xl:-top-[0.9rem] absolute -top-[7.7px] right-[15.7px] size-2 skew-x-12 bg-white"
-			></div>
-
-			<!-- Rounded Corner bottom left -->
-			<div
-				class="bottom-right-corner 3xl:size-4 3xl:-left-[0.98rem] absolute -bottom-[0.2px] -left-2 size-2 bg-white"
-			></div>
-
-			<div class="skew-x-12">
-				<SocialButtons />
-			</div>
-		</section>
+			<SocialButtons class="*:bg-custom-teal-light absolute right-4 bottom-2" />
+		</div>
+	</section>
+	<div class="z-50 hidden self-end 2xl:block">
+		<SocialButtons class="*:bg-custom-teal-light mr-8 mb-24 !flex-col gap-y-4" />
 	</div>
 </header>
-
-<style>
-	@media (width>=120rem) {
-		.top-left-corner {
-			mask-image: radial-gradient(
-				circle 1rem at bottom right,
-				transparent 0%,
-				transparent 100%,
-				black 100%
-			) !important;
-		}
-		.bottom-right-corner {
-			mask-image: radial-gradient(
-				circle 1rem at top left,
-				transparent 0%,
-				transparent 100%,
-				black 100%
-			) !important;
-		}
-	}
-
-	.top-left-corner {
-		mask-composite: exclude;
-		mask-image: radial-gradient(
-			circle 0.5rem at bottom right,
-			transparent 0%,
-			transparent 100%,
-			black 100%
-		);
-	}
-	.bottom-right-corner {
-		mask-composite: exclude;
-		mask-image: radial-gradient(
-			circle 0.5rem at top left,
-			transparent 0%,
-			transparent 100%,
-			black 100%
-		);
-	}
-</style>

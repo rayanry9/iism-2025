@@ -1,10 +1,12 @@
 <script lang="ts">
 	import flairHead from '$lib/assets/title-flair-head.webp';
 	import flairTail from '$lib/assets/title-flair-tail.webp';
-	let { children } = $props();
+	import type { Snippet } from 'svelte';
+	import type { ClassValue } from 'svelte/elements';
+	let { children, class: className }: { children: Snippet; class?: ClassValue } = $props();
 </script>
 
-<div class="flex w-full flex-row items-center">
+<div class="flex w-full flex-row items-center {className}">
 	<div class="flex w-full">
 		<div class="grow bg-contain" style="background-image: url({flairTail})"></div>
 		<img src={flairHead} class="3xl:h-24 h-14 w-fit" alt="Flair head design" />

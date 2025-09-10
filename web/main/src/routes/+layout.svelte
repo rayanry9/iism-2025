@@ -5,9 +5,12 @@
 	import footerLogo from '$lib/assets/footer-logo.webp';
 	import arrowUpRight from '$lib/assets/icons/diag-up-right-arrow.svg';
 	import '../app.css';
+	import Navbar from '$lib/ui/common/Navbar.svelte';
 
 	let { children } = $props();
 </script>
+
+<Navbar />
 
 {@render children()}
 
@@ -23,7 +26,10 @@
 				<img src={footerLogo} class="h-28" alt="IISM Logo" />
 			</div>
 			<div>
-				<Button class="bg-custom-blue my-auto border border-white px-6 py-3 text-white 2xl:px-8">
+				<Button
+					data-umami-event="switch-to-iissm"
+					class="bg-custom-blue my-auto border border-white px-6 py-3 text-white 2xl:px-8"
+				>
 					<div class="flex gap-x-4">
 						SWITCH TO IISSM 25 <img src={arrowUpRight} alt="Diagonal Upper Right Arrow" />
 					</div>

@@ -23,15 +23,16 @@
 			From North to South, East to West, students from 23 IITs across India will come together to
 			compete in the 58th Inter IIT Sports Meet at IIT Hyderabad.
 		</p>
-		<div class="tags-text text-custom-orange flex items-center justify-center gap-x-4">
-			<div class="bg-custom-orange size-4 animate-bounce rounded-full"></div>
-			<div class="hidden xl:block">
-				(Hover over the logos to Identify their team jersey color and pattern)
-			</div>
-			<div class="block xl:hidden">
-				(Click on the logos to Identify their team jersey color and pattern)
-			</div>
-		</div>
+		<!-- TODO -->
+		<!-- <div class="tags-text text-custom-orange flex items-center justify-center gap-x-4"> -->
+		<!-- 	<div class="bg-custom-orange size-4 animate-bounce rounded-full"></div> -->
+		<!-- 	<div class="hidden xl:block"> -->
+		<!-- 		(Hover over the logos to Identify their team jersey color and pattern) -->
+		<!-- 	</div> -->
+		<!-- 	<div class="block xl:hidden"> -->
+		<!-- 		(Click on the logos to Identify their team jersey color and pattern) -->
+		<!-- 	</div> -->
+		<!-- </div> -->
 	</div>
 
 	<div class="relative w-full">
