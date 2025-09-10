@@ -66,14 +66,14 @@
 </script>
 
 {#snippet MascotButtons()}
-	<div class="flex flex-col items-start 2xl:-skew-x-12">
-		<div class="button-text 2xl:skew-x-12">
-			<span class="hidden 2xl:inline">Official </span>Event Mascot
+	<div class="flex flex-col items-start xl:-skew-x-12">
+		<div class="button-text xl:skew-x-12">
+			<span class="hidden xl:inline">Official </span>Event Mascot
 		</div>
-		<h1 class="hero-text mb-2 2xl:-mb-4 2xl:skew-x-12">SIMHI</h1>
+		<h1 class="hero-text mb-2 xl:-mb-4 xl:skew-x-12">SIMHI</h1>
 	</div>
 
-	<div class="relative flex flex-col 2xl:self-end">
+	<div class="relative flex flex-col xl:self-end">
 		<div
 			class="flex gap-x-2 *:rounded-sm *:border *:border-white *:px-2.5 *:py-2.5 2xl:gap-x-3 2xl:*:border-2 2xl:*:px-3 2xl:*:py-3"
 		>
@@ -102,17 +102,24 @@
 		</div>
 
 		<div
-			class="mt-6 flex -skew-x-12 flex-row gap-x-1 *:size-2 2xl:absolute 2xl:right-2.5 2xl:-bottom-6 2xl:mt-0"
+			class="mt-6 flex -skew-x-12 flex-row gap-x-1 *:size-2 xl:absolute xl:right-2.5 xl:-bottom-6 xl:mt-0 xl:hidden"
 		>
 			{#each mobHeaderImages as _, idx}
+				<div class={idx == currentHeaderImageIdx ? 'bg-white' : 'bg-white/25'}></div>
+			{/each}
+		</div>
+		<div
+			class="mt-4 hidden -skew-x-12 flex-row gap-x-1 *:size-2 xl:absolute xl:right-2.5 xl:-bottom-6 xl:mt-0 xl:flex"
+		>
+			{#each headerImages as _, idx}
 				<div class={idx == currentHeaderImageIdx ? 'bg-white' : 'bg-white/25'}></div>
 			{/each}
 		</div>
 	</div>
 {/snippet}
 
-<header class="relative flex w-full 2xl:h-[calc(100vh-4rem)]">
-	<div class="absolute right-0 z-20 hidden 2xl:block">
+<header class="relative flex w-full lg:h-[calc(100vh-4rem)]">
+	<div class="absolute right-0 z-20 hidden lg:block">
 		{#key headerImages[currentHeaderImageIdx % headerImages.length]}
 			<img
 				class="h-[calc(100vh-4rem)]"
@@ -122,31 +129,39 @@
 		{/key}
 	</div>
 	<section
-		class="flex grow flex-col items-center gap-y-8 text-center 2xl:items-start 2xl:gap-y-14 2xl:text-start"
+		class="flex grow flex-col items-center gap-y-4 text-center lg:items-start lg:text-start xl:gap-y-8 2xl:gap-y-14"
 	>
-		<div class="mt-24 hidden 2xl:flex 2xl:pl-[15rem]">
-			<div class="gap-x-8 2xl:flex">
-				<img class="h-12" src={logoWithText} alt="inter iit logo" />
-				<img class="h-12" src={iithLogoFull} alt="iit hyderabad logo" />
+		<div
+			class="3xl:mt-24 hidden w-full lg:mt-8 lg:flex lg:pl-[5rem] xl:mt-12 xl:pl-[6rem] 2xl:mt-16 2xl:pl-[15rem]"
+		>
+			<div class="flex lg:gap-x-6 xl:gap-x-8">
+				<img class="h-10 2xl:h-12" src={logoWithText} alt="inter iit logo" />
+				<img class="h-10 2xl:h-12" src={iithLogoFull} alt="iit hyderabad logo" />
 			</div>
-			<div class="z-40 ml-auto hidden gap-x-20 text-white 2xl:flex">
+			<div
+				class="3xl:gap-x-20 3xl:mr-0 z-40 ml-auto hidden text-white lg:-mr-8 lg:flex lg:gap-x-6 xl:-mr-10 xl:gap-x-8 2xl:-mr-6 2xl:gap-x-12"
+			>
 				{@render MascotButtons()}
 			</div>
 		</div>
 
-		<div class="mt-12 2xl:mt-0 2xl:ml-[15rem]">
-			<h1 class="hero-text flex flex-col items-center 2xl:block">
+		<div class="mt-20 lg:mt-0 lg:ml-[5rem] xl:ml-[6rem] 2xl:ml-[15rem]">
+			<h1 class="hero-text flex flex-col items-center lg:block">
 				58TH<br />INTER IIT<br />SPORTS MEET<br />2025<span
-					class="button-text text-custom-orange border-custom-orange mt-2 flex h-fit w-fit gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic 2xl:ml-4 2xl:inline-flex"
+					class="button-text text-custom-orange border-custom-orange flex h-fit w-fit gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic lg:mt-1 lg:ml-4 lg:inline-flex lg:pt-2 lg:pb-1.5 xl:mt-2 xl:pt-2.5 xl:pb-2"
 					><img src={pinImg} class="text-custom-orange -mt-1 inline" alt="pin" />IIT Hyderabad</span
 				>
 			</h1>
 		</div>
 
-		<div class="2xl:mt-12">
-			<div class="button-text 2xl:ml-[17.5rem]">14th to 21st December 2025</div>
+		<div class="mt-8 w-full xl:mt-0 2xl:mt-12">
+			<div class="button-text lg:ml-[6rem] xl:ml-[8rem] 2xl:ml-[17.5rem]">
+				14th to 21st December 2025
+			</div>
 
-			<FlairedTitle class="!w-full 2xl:!w-[110rem] 2xl:-translate-x-[30rem]">
+			<FlairedTitle
+				class="3xl:!w-[110rem] 3xl:-translate-x-[30rem] !w-full lg:!w-[50rem] lg:-translate-x-[13rem] xl:!w-[65rem] xl:-translate-x-[17.5rem] 2xl:!w-[90rem] 2xl:-translate-x-[20rem]"
+			>
 				<div
 					class="*:inline-flex *:max-w-12 *:min-w-12 *:flex-col *:items-center 2xl:*:max-w-16 2xl:*:min-w-16 **:[span]:inline-flex **:[span]:max-w-3 **:[span]:min-w-3 **:[span]:justify-center 2xl:**:[span]:max-w-4 2xl:**:[span]:min-w-4"
 				>
@@ -205,7 +220,7 @@
 			</FlairedTitle>
 		</div>
 
-		<div class="relative 2xl:hidden">
+		<div class="relative lg:hidden">
 			{#key mobHeaderImages[currentHeaderImageIdx % mobHeaderImages.length]}
 				<img
 					class="max-w-screen"
@@ -213,13 +228,15 @@
 					alt="hero img"
 				/>
 			{/key}
-			<div class="absolute top-[36%] flex flex-col pl-8 text-white">
+			<div class="absolute top-[36%] flex flex-col pl-8 text-white sm:top-[44%] sm:pl-16">
 				{@render MascotButtons()}
 			</div>
 			<SocialButtons class="*:bg-custom-teal-light absolute right-4 bottom-2" />
 		</div>
 	</section>
-	<div class="z-50 hidden self-end 2xl:block">
-		<SocialButtons class="*:bg-custom-teal-light mr-8 mb-24 !flex-col gap-y-4" />
+	<div class="z-50 hidden self-end lg:block">
+		<SocialButtons
+			class="*:bg-custom-teal-light !flex-col gap-y-4  lg:mr-4 lg:mb-4 xl:mb-6 2xl:mr-8 2xl:mb-24"
+		/>
 	</div>
 </header>
