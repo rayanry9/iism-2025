@@ -15,7 +15,6 @@ with open("cert_data.txt", "r") as data:
             draw.text((2565, 1556), position, fill=(0,0,0), font=font)
 
             cert.save(f"cert_out/{name}.png")
-            print(f"{name} Done")
             print(f"{(len(lines) - idx)//2} remaining")
 
 
