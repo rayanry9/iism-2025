@@ -40,6 +40,7 @@
 		<a
 			href="/results"
 			class="3xl:mt-28 3xl:mr-24 mt-16 w-fit -skew-y-6 self-center xl:mt-12 xl:-skew-y-3 xl:self-end 2xl:mt-20 2xl:mr-20"
+			data-umami-event="Leaderboard from home"
 		>
 			<Button class="bg-custom-orange px-6 py-2 *:flex *:gap-x-2">
 				View Leaderboard

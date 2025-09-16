@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="relative flex flex-col gap-x-24 overflow-x-clip text-nowrap 2xl:flex-row *:[main]:mt-24 *:[main]:mr-28"
+	class="relative flex flex-col gap-x-24 overflow-x-clip text-nowrap 2xl:h-[calc(100vh-4rem)] 2xl:flex-row *:[main]:py-24 *:[main]:pr-28"
 >
 	<MobileHeaderFrame>
 		<div class="flex flex-col gap-y-1">

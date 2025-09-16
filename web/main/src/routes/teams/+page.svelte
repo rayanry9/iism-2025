@@ -4,6 +4,7 @@
 	import logoNoText from '$lib/assets/logo-no-text.svg';
 	import type { IITNames } from '$lib/types/iitNames';
 	import MobileHeaderFrame from '$lib/ui/common/MobileHeaderFrame.svelte';
+	import FlairedTitle from '$lib/ui/components/FlairedTitle.svelte';
 
 	let activeIIT = $state<IITNames | undefined>(undefined);
 </script>
@@ -23,7 +24,7 @@
 			<div class="border-l-custom-light-blue z-10 h-full border-l-8"></div>
 		</div>
 		<div
-			class="my-12 flex h-screen flex-col gap-y-6 overflow-y-scroll pr-8"
+			class="my-12 flex h-[calc(100vh-10rem)] flex-col gap-y-6 overflow-y-scroll pr-8"
 			style="scrollbar-color: #FDB424 #F0F0F0; scrollbar-width:auto ;"
 		>
 			{#each getAllIITNames() as iit}
@@ -34,6 +35,8 @@
 					onclick={() => {
 						activeIIT = iit;
 					}}
+					data-umami-event="Team selection"
+					data-umami-event-team={activeIIT}
 				>
 					<img src={getIITImgSrc(iit)} class="3xl:w-24 skew-x-12" alt={'IIT ' + iit + ' logo'} />
 				</button>
@@ -58,6 +61,10 @@
 				</div>
 				<p>Select a College to see their<br />teams and players.</p>
 			</section>
+		</main>
+	{:else}
+		<main class="flex grow items-center justify-center">
+			<h2>Team has not been decided yet.</h2>
 		</main>
 	{/if}
 </div>

@@ -28,6 +28,8 @@
 				activeDate = i;
 				currentDate = days[i];
 			}}
+			data-umami-event="Day selector used"
+			data-umami-event-day={currentDate}
 		>
 			DAY {i} - {day.getDate()}/{day.getMonth()}/{day.getFullYear()}
 		</Button>

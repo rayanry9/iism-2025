@@ -44,22 +44,23 @@
 <main class="2xl:h-full 2xl:overflow-y-auto">
 	<h2>FULL SCHEDULE</h2>
 
-	<section class="pt-12">
+	<section class="item flex flex-col pt-12">
 		<DaySelector bind:currentDate />
 		<hr class="text-custom-gray mt-8" />
-		{#each timeSets as time}
-			<div class="my-12 flex flex-col gap-y-3">
-				<div class="bg-custom-light-blue title-text w-fit px-5 py-3 text-white">
-					{time.val}
-				</div>
-				{#each matchData.filter((val) => val.startTime.getDate() == currentDate.getDate() && val.startTime.getHours() == time.hour && val.startTime.getMinutes() == time.min) as match}
-					<PoolMatchRow
-						sport={getSportFromSportId(match.sportId) ?? 'Athletics'}
-						instituteData={institutes}
-						matchData={match}
-					/>
-				{/each}
-			</div>
-		{/each}
+		<!-- {#each timeSets as time} -->
+		<!-- 	<div class="my-12 flex flex-col gap-y-3"> -->
+		<!-- 		<div class="bg-custom-light-blue title-text w-fit px-5 py-3 text-white"> -->
+		<!-- 			{time.val} -->
+		<!-- 		</div> -->
+		<!-- 		{#each matchData.filter((val) => val.startTime.getDate() == currentDate.getDate() && val.startTime.getHours() == time.hour && val.startTime.getMinutes() == time.min) as match} -->
+		<!-- 			<PoolMatchRow -->
+		<!-- 				sport={getSportFromSportId(match.sportId) ?? 'Athletics'} -->
+		<!-- 				instituteData={institutes} -->
+		<!-- 				matchData={match} -->
+		<!-- 			/> -->
+		<!-- 		{/each} -->
+		<!-- 	</div> -->
+		<!-- {/each} -->
+		<h2 class="mt-16 self-center">Schedule has not been updated yet.</h2>
 	</section>
 </main>

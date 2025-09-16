@@ -35,6 +35,7 @@
 		<button
 			hidden={page.url.pathname != '/schedule'}
 			class="border-custom-light-blue button-text border-2"
+			data-umami-event="Full schedule pdf download"
 		>
 			<div class="flex skew-x-12 items-center gap-x-1.5 leading-none">
 				PDF <img src={downloadIcon} alt="download" />

@@ -18,6 +18,7 @@
 			window.open('https://www.youtube.com/@interiit_sportsmeet/', '_blank');
 		}}
 		class="bg-custom-orange"
+		data-umami-event="social-youtube"
 	>
 		<img src={ytIcon} class="!h-4 xl:!h-5 2xl:!h-6" alt="Youtube Icon" />
 	</Button>
