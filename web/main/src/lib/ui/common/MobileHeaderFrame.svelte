@@ -5,7 +5,7 @@
 	let { children, class: className }: { children: Snippet; class?: ClassValue } = $props();
 </script>
 
-<div class="relative w-full 2xl:hidden {className}">
+<div class="relative w-full lg:hidden {className}">
 	<div
 		class="bg-custom-dark-blue z-20 px-6 py-10 text-white"
 		style="clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0% 100%); "

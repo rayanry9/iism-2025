@@ -42,9 +42,9 @@
 </script>
 
 <main class="2xl:h-full 2xl:overflow-y-auto">
-	<h2>FULL SCHEDULE</h2>
+	<h2 class="hidden xl:block">FULL SCHEDULE</h2>
 
-	<section class="item flex flex-col pt-12">
+	<section class="item flex flex-col xl:pt-12">
 		<DaySelector bind:currentDate />
 		<hr class="text-custom-gray mt-8" />
 		<!-- {#each timeSets as time} -->
@@ -61,6 +61,6 @@
 		<!-- 		{/each} -->
 		<!-- 	</div> -->
 		<!-- {/each} -->
-		<h2 class="mt-16 self-center">Schedule has not been updated yet.</h2>
+		<h2 class="mt-16 self-center">Unavailable currently.</h2>
 	</section>
 </main>

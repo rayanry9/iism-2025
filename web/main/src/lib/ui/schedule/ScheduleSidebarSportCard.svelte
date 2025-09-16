@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { Sports } from '$lib/types/sports';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import { fade } from 'svelte/transition';
@@ -21,6 +22,8 @@
 	class="relative mt-8 flex h-[8rem] w-[12rem] flex-col border-2 border-white transition-all {selected
 		? 'bg-custom-orange'
 		: 'bg-black'} "
+	data-umami-event="Sport selected"
+	data-umami-event-page={page.url.pathname}
 >
 	<img
 		class="absolute {selected

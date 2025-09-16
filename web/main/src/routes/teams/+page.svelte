@@ -4,16 +4,15 @@
 	import logoNoText from '$lib/assets/logo-no-text.svg';
 	import type { IITNames } from '$lib/types/iitNames';
 	import MobileHeaderFrame from '$lib/ui/common/MobileHeaderFrame.svelte';
-	import FlairedTitle from '$lib/ui/components/FlairedTitle.svelte';
 
 	let activeIIT = $state<IITNames | undefined>(undefined);
 </script>
 
-<div class="flex flex-col overflow-x-clip 2xl:flex-row">
+<div class="flex flex-col overflow-x-clip lg:flex-row">
 	<MobileHeaderFrame>
 		<h2>TEAMS</h2>
 	</MobileHeaderFrame>
-	<aside class="mr-32 -ml-64 hidden -skew-x-12 flex-row 2xl:flex">
+	<aside class="mr-32 -ml-64 hidden -skew-x-12 flex-row lg:flex">
 		<div class="bg-custom-dark-blue relative mr-8 flex w-[20rem] flex-row overflow-x-clip">
 			<img
 				src={asideBg}
@@ -31,14 +30,18 @@
 				<button
 					class="{activeIIT == iit
 						? 'outline-custom-dark-yellow'
-						: 'outline-custom-gray'} hover:bg-custom-light-blue/10 mx-6 my-1 w-fit self-center px-10 py-6 outline-2 transition-colors hover:cursor-pointer"
+						: 'outline-custom-gray'} hover:bg-custom-light-blue/10 my-1 w-fit self-center px-10 py-6 outline-2 transition-colors hover:cursor-pointer xl:ml-4 2xl:mx-6"
 					onclick={() => {
 						activeIIT = iit;
 					}}
 					data-umami-event="Team selection"
 					data-umami-event-team={activeIIT}
 				>
-					<img src={getIITImgSrc(iit)} class="3xl:w-24 skew-x-12" alt={'IIT ' + iit + ' logo'} />
+					<img
+						src={getIITImgSrc(iit)}
+						class="skew-x-12 xl:w-16 2xl:w-24"
+						alt={'IIT ' + iit + ' logo'}
+					/>
 				</button>
 			{/each}
 		</div>
@@ -46,7 +49,9 @@
 
 	{#if activeIIT == undefined}
 		<main class="flex h-fit grow items-center justify-center">
-			<section class="mt-64 flex flex-col items-center gap-y-6 text-center">
+			<section
+				class="mt-32 hidden flex-col items-center gap-y-6 text-center max-lg:mb-32 xl:mt-64 xl:flex"
+			>
 				<div class="relative">
 					<div
 						style="filter: invert(48%) sepia(79%) saturate(26%) hue-rotate(86deg) brightness(118%) contrast(119%) opacity(70%); clip-path: polygon(100% 0%, 100% 100%, 0% 50%);"
@@ -63,7 +68,7 @@
 			</section>
 		</main>
 	{:else}
-		<main class="flex grow items-center justify-center">
+		<main class="flex h-[calc(100vh-20rem)] grow items-center justify-center">
 			<h2>Team has not been decided yet.</h2>
 		</main>
 	{/if}

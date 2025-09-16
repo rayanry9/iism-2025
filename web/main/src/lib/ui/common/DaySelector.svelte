@@ -18,7 +18,10 @@
 	let { currentDate = $bindable() }: { currentDate: Date } = $props();
 </script>
 
-<section class="flex flex-row flex-wrap gap-y-4 *:mx-2">
+<section
+	class="flex flex-row gap-y-4 *:mx-2 max-xl:overflow-scroll xl:flex-wrap"
+	style="scrollbar-width: 0;"
+>
 	{#each days as day, i}
 		<Button
 			class="{activeDate == i

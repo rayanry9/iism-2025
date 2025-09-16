@@ -13,7 +13,7 @@
 </script>
 
 <div
-	class="relative flex flex-col gap-x-24 overflow-x-clip text-nowrap 2xl:h-[calc(100vh-4rem)] 2xl:flex-row *:[main]:py-24 *:[main]:pr-28"
+	class="relative flex flex-col gap-x-24 overflow-x-clip text-nowrap xl:h-[calc(100vh-4rem)] xl:flex-row *:[main]:px-12 *:[main]:py-16 xl:*:[main]:py-24 xl:*:[main]:pr-28 xl:*:[main]:pl-0"
 >
 	<SportsAsideBar
 		bind:selectedSport
