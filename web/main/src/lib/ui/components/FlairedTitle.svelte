@@ -7,13 +7,19 @@
 </script>
 
 <div class="flex w-full flex-row items-center {className}">
-	<div class="flex w-full">
-		<div class="grow bg-contain" style="background-image: url({flairTail})"></div>
+	<div class="@container flex w-full">
+		<div
+			class="grow overflow-clip bg-cover @min-[112px]:bg-contain"
+			style="background-image: url({flairTail}); background-repeat: repeat-x;"
+		></div>
 		<img src={flairHead} class="3xl:h-24 h-14 w-fit" alt="Flair head design" />
 	</div>
 	<div class="3xl:px-8 px-4 text-nowrap"><h2>{@render children?.()}</h2></div>
-	<div class="flex w-full">
+	<div class="@container flex w-full">
 		<img src={flairHead} class="3xl:h-24 h-14 w-fit rotate-180" alt="Flair head design" />
-		<div class="grow bg-contain" style="background-image: url({flairTail})"></div>
+		<div
+			class="grow overflow-clip bg-cover @min-[112px]:bg-contain"
+			style="background-image: url({flairTail}); background-repeat: repeat-x;"
+		></div>
 	</div>
 </div>
