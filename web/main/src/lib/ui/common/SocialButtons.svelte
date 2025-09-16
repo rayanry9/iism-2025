@@ -2,8 +2,9 @@
 	import Button from '../components/Button.svelte';
 	import igIcon from '$lib/assets/icons/instagram.svg';
 	import fbIcon from '$lib/assets/icons/fb.svg';
-	// import xIcon from '$lib/assets/icons/x.svg';
+	import ytIcon from '$lib/assets/icons/youtube.webp';
 	import linkedinIcon from '$lib/assets/icons/linkedin.svg';
+
 	import type { ClassValue } from 'svelte/elements';
 
 	let { class: className }: { class?: ClassValue } = $props();
@@ -12,6 +13,15 @@
 <div
 	class={`3xl:gap-x-5 flex flex-row gap-x-3 *:rounded-sm *:p-3 lg:*:p-3.5 xl:gap-x-4 2xl:*:p-4 **:[img]:size-5 xl:**:[img]:size-[1.5rem] 2xl:**:[img]:size-8 ${className}`}
 >
+	<Button
+		onclick={() => {
+			window.open('https://www.youtube.com/@interiit_sportsmeet/', '_blank');
+		}}
+		class="bg-custom-orange"
+	>
+		<img src={ytIcon} class="!h-4 xl:!h-5 2xl:!h-6" alt="Youtube Icon" />
+	</Button>
+
 	<Button
 		onclick={() => {
 			window.open('https://www.instagram.com/interiit_sportsmeet/', '_blank');
@@ -31,15 +41,6 @@
 	>
 		<img src={fbIcon} class="" alt="Facebook" />
 	</Button>
-
-	<!-- <Button -->
-	<!-- 	onclick={() => { -->
-	<!-- 		window.open('https://x.com/IITHyderabad', '_blank'); -->
-	<!-- 	}} -->
-	<!-- 	class="bg-custom-orange" -->
-	<!-- > -->
-	<!-- 	<img src={xIcon} class="" alt="Twitter / X" /> -->
-	<!-- </Button> -->
 
 	<Button
 		onclick={() => {

@@ -31,7 +31,7 @@
 
 	onMount(() => {
 		const imgInterval = setInterval(() => {
-			if (window.innerWidth > 1024) {
+			if (window.innerWidth > 1280) {
 				currentHeaderImageIdx = (currentHeaderImageIdx + 1) % headerImages.length;
 			} else {
 				currentHeaderImageIdx = (currentHeaderImageIdx + 1) % mobHeaderImages.length;
@@ -68,7 +68,7 @@
 {#snippet MascotButtons()}
 	<div class="flex flex-col items-start xl:-skew-x-12">
 		<div class="button-text xl:skew-x-12">
-			<span class="hidden xl:inline">Official </span>Event Mascot
+			<span class="hidden xl:inline">Official</span> Event Mascot
 		</div>
 		<h1 class="hero-text mb-2 xl:-mb-4 xl:skew-x-12">SIMHI</h1>
 	</div>
@@ -79,7 +79,7 @@
 		>
 			<Button
 				onclick={() => {
-					if (window.innerWidth > 1024) {
+					if (window.innerWidth > 1280) {
 						currentHeaderImageIdx = (currentHeaderImageIdx + 4) % headerImages.length;
 					} else {
 						currentHeaderImageIdx = (currentHeaderImageIdx + 3) % mobHeaderImages.length;
@@ -90,7 +90,7 @@
 			</Button>
 			<Button
 				onclick={() => {
-					if (window.innerWidth > 1024) {
+					if (window.innerWidth > 1280) {
 						currentHeaderImageIdx = (currentHeaderImageIdx + 1) % headerImages.length;
 					} else {
 						currentHeaderImageIdx = (currentHeaderImageIdx + 1) % mobHeaderImages.length;
@@ -120,19 +120,18 @@
 
 <header class="relative flex w-full lg:h-[calc(100vh-4rem)]">
 	<div class="absolute right-0 z-20 hidden lg:block">
-		{#key headerImages[currentHeaderImageIdx % headerImages.length]}
-			<img
-				class="h-[calc(100vh-4rem)]"
-				src={headerImages[currentHeaderImageIdx % headerImages.length]}
-				alt="hero img"
-			/>
-		{/key}
+		<img
+			fetchpriority="high"
+			class="h-[calc(100vh-4rem)]"
+			src={headerImages[currentHeaderImageIdx % headerImages.length]}
+			alt="hero img"
+		/>
 	</div>
 	<section
 		class="flex grow flex-col items-center gap-y-4 text-center lg:items-start lg:text-start xl:gap-y-8 2xl:gap-y-14"
 	>
 		<div
-			class="3xl:mt-24 hidden w-full lg:mt-8 lg:flex lg:pl-[5rem] xl:mt-12 xl:pl-[6rem] 2xl:mt-16 2xl:pl-[15rem]"
+			class="3xl:mt-24 hidden w-full lg:mt-8 lg:flex lg:pl-[5rem] xl:mt-12 xl:pl-[8.5rem] 2xl:mt-16 2xl:pl-[15rem]"
 		>
 			<div class="flex lg:gap-x-6 xl:gap-x-8">
 				<img class="h-10 2xl:h-12" src={logoWithText} alt="inter iit logo" />
@@ -145,7 +144,7 @@
 			</div>
 		</div>
 
-		<div class="mt-20 lg:mt-0 lg:ml-[5rem] xl:ml-[6rem] 2xl:ml-[15rem]">
+		<div class="mt-20 lg:mt-0 lg:ml-[5rem] xl:ml-[8.5rem] 2xl:ml-[15rem]">
 			<h1 class="hero-text flex flex-col items-center lg:block">
 				58TH<br />INTER IIT<br />SPORTS MEET<br />2025<span
 					class="button-text text-custom-orange border-custom-orange flex h-fit w-fit gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic lg:mt-1 lg:ml-4 lg:inline-flex lg:pt-2 lg:pb-1.5 xl:mt-2 xl:pt-2.5 xl:pb-2"
@@ -155,12 +154,12 @@
 		</div>
 
 		<div class="mt-8 w-full xl:mt-0 2xl:mt-12">
-			<div class="button-text lg:ml-[6rem] xl:ml-[8rem] 2xl:ml-[17.5rem]">
+			<div class="button-text lg:ml-[6rem] xl:ml-[10.5rem] 2xl:ml-[17.5rem]">
 				14th to 21st December 2025
 			</div>
 
 			<FlairedTitle
-				class="3xl:!w-[110rem] 3xl:-translate-x-[30rem] !w-full lg:!w-[50rem] lg:-translate-x-[13rem] xl:!w-[65rem] xl:-translate-x-[17.5rem] 2xl:!w-[90rem] 2xl:-translate-x-[20rem]"
+				class="3xl:!w-[110rem] 3xl:-translate-x-[30rem] !w-full lg:!w-[50rem] lg:-translate-x-[13rem] xl:!w-[70rem] xl:-translate-x-[17.5rem] 2xl:!w-[90rem] 2xl:-translate-x-[20rem]"
 			>
 				<div
 					class="*:inline-flex *:max-w-12 *:min-w-12 *:flex-col *:items-center 2xl:*:max-w-16 2xl:*:min-w-16 **:[span]:inline-flex **:[span]:max-w-3 **:[span]:min-w-3 **:[span]:justify-center 2xl:**:[span]:max-w-4 2xl:**:[span]:min-w-4"
@@ -221,13 +220,12 @@
 		</div>
 
 		<div class="relative lg:hidden">
-			{#key mobHeaderImages[currentHeaderImageIdx % mobHeaderImages.length]}
-				<img
-					class="max-w-screen"
-					src={mobHeaderImages[currentHeaderImageIdx % mobHeaderImages.length]}
-					alt="hero img"
-				/>
-			{/key}
+			<img
+				fetchpriority="high"
+				class="max-w-screen"
+				src={mobHeaderImages[currentHeaderImageIdx % mobHeaderImages.length]}
+				alt="hero img"
+			/>
 			<div class="absolute top-[36%] flex flex-col pl-8 text-white sm:top-[44%] sm:pl-16">
 				{@render MascotButtons()}
 			</div>

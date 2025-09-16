@@ -10,7 +10,6 @@
 	import NikhilImg from '$lib/assets/team/nikhil.webp';
 	import SaiKumarImg from '$lib/assets/team/sai-kumar.webp';
 	import ShivenImg from '$lib/assets/team/shiven.webp';
-	import PalemImg from '$lib/assets/team/palem.webp';
 	import GayatriImg from '$lib/assets/team/gayatri.webp';
 	import UtkarshImg from '$lib/assets/team/utkarsh.webp';
 	import NiharImg from '$lib/assets/team/nihar.webp';
@@ -21,14 +20,13 @@
 	import SiyaImg from '$lib/assets/team/siya.webp';
 	import HanzalaImg from '$lib/assets/team/hanzala.webp';
 	import RayanImg from '$lib/assets/team/rayan.webp';
-	import DhruvImg from '$lib/assets/team/dhruv.webp';
 	import SheesImg from '$lib/assets/team/shees.webp';
 	import VinitImg from '$lib/assets/team/vinit.webp';
 </script>
 
 <main class="my-12 flex flex-col items-center gap-y-12 xl:my-20 xl:gap-y-20 2xl:my-24 2xl:gap-y-24">
 	<ToggleTabs.Root>
-		<ToggleTabs.Item>STUDENT TEAM</ToggleTabs.Item>
+		<ToggleTabs.Item>CORE TEAM</ToggleTabs.Item>
 		<!-- <ToggleTabs.Item>KEY OFFICIALS</ToggleTabs.Item> -->
 	</ToggleTabs.Root>
 
@@ -85,21 +83,6 @@
 				mail="interiit.oc@iith.ac.in"
 				name="Sai Kumar R."
 			/>
-
-			<ContactCard
-				imgSrc={ShivenImg}
-				designation="Sponsorship Head"
-				phone="+91 7878435233"
-				mail="outreach.interiit@iith.ac.in "
-				name="Shiven Mathur"
-			/>
-			<ContactCard
-				imgSrc={PalemImg}
-				designation="Sponsorship Head"
-				phone="+91 6281086630"
-				mail="outreach.interiit@iith.ac.in"
-				name="Palem Rakesh V."
-			/>
 			<ContactCard
 				imgSrc={GayatriImg}
 				designation="Hospitality Head"
@@ -115,11 +98,39 @@
 				name="Utkarsh Dwivedi"
 			/>
 			<ContactCard
+				imgSrc={SheesImg}
+				designation="Production Head"
+				phone="+91 7081770180"
+				mail="interiit.oc@iith.ac.in"
+				name="M. Shees"
+			/>
+			<ContactCard
 				imgSrc={NiharImg}
 				designation="Operations Head"
 				phone="+91 7670981506"
 				mail="interiit.oc@iith.ac.in"
 				name="Nihar Kartikeye"
+			/>
+			<ContactCard
+				imgSrc={RohitImg}
+				designation="Medical & Security Head"
+				phone="+91 8010410993"
+				mail="interiit.oc@iith.ac.in"
+				name="Rohit Gundeti"
+			/>
+			<ContactCard
+				imgSrc={HanzalaImg}
+				designation="Transport Head"
+				phone="+91 9102003098"
+				mail="interiit.oc@iith.ac.in"
+				name="Hanzala Akhter"
+			/>
+			<ContactCard
+				imgSrc={ShivenImg}
+				designation="Sponsorship Head"
+				phone="+91 7878435233"
+				mail="outreach.interiit@iith.ac.in "
+				name="Shiven Mathur"
 			/>
 			<ContactCard
 				imgSrc={EshaaniImg}
@@ -136,13 +147,6 @@
 				name="KJ Shreevel"
 			/>
 			<ContactCard
-				imgSrc={RohitImg}
-				designation="Medical & Security Head"
-				phone="+91 8010410993"
-				mail="interiit.oc@iith.ac.in"
-				name="Rohit Gundeti"
-			/>
-			<ContactCard
 				imgSrc={KushImg}
 				designation="Media Head"
 				phone="+91 9032066698"
@@ -157,32 +161,11 @@
 				name="Siya Shah"
 			/>
 			<ContactCard
-				imgSrc={HanzalaImg}
-				designation="Transport Head"
-				phone="+91 9102003098"
-				mail="interiit.oc@iith.ac.in"
-				name="Hanzala Akhter"
-			/>
-			<ContactCard
 				imgSrc={RayanImg}
 				designation="Web Head"
 				phone="+91 9836025700"
 				mail="interiit.oc@iith.ac.in"
 				name="Rayan Halder"
-			/>
-			<ContactCard
-				imgSrc={DhruvImg}
-				designation="PR & Web Head"
-				phone="+91 8712831015"
-				mail="interiit.oc@iith.ac.in"
-				name="Dhruv Sharma"
-			/>
-			<ContactCard
-				imgSrc={SheesImg}
-				designation="Production Head"
-				phone="+91 7081770180"
-				mail="interiit.oc@iith.ac.in"
-				name="M. Shees"
 			/>
 			<ContactCard
 				imgSrc={VinitImg}
