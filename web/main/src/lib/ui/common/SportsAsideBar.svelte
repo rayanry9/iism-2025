@@ -5,7 +5,7 @@
 	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 
-	let sports = ['Football', 'Athletics', 'Volleyball', 'Hockey', 'Cricket'] satisfies Array<Sports>;
+	let sports = ['Athletics', 'Cricket', 'Football', 'Hockey', 'Volleyball'] satisfies Array<Sports>;
 
 	let {
 		buttonText,
@@ -18,11 +18,9 @@
 	} = $props();
 </script>
 
-<aside
-	class="hidden flex-col 2xl:flex 2xl:h-full 2xl:-translate-x-[11rem] 2xl:-skew-x-12 2xl:flex-row"
->
+<aside class="hidden flex-col xl:flex xl:h-full xl:-translate-x-[11rem] xl:-skew-x-12 xl:flex-row">
 	<div
-		class="hidden flex-col items-end gap-y-6 bg-black pt-20 pr-8 pl-32 text-white 2xl:flex *:[button]:w-fit *:[button]:rounded-sm *:[button]:px-4 *:[button]:py-2.5 *:[button]:transition *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
+		class="hidden flex-col items-end gap-y-6 bg-black pt-20 pr-8 pl-32 text-white xl:flex *:[button]:w-fit *:[button]:rounded-sm *:[button]:px-4 *:[button]:py-2.5 *:[button]:transition *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
 	>
 		<button
 			class="button-text {selectedSport == undefined
@@ -51,7 +49,7 @@
 			</div>
 		{/if}
 	</div>
-	<div class="bg-custom-blue hidden flex-col gap-y-4 pt-14 *:translate-x-8 2xl:flex">
+	<div class="bg-custom-blue hidden flex-col gap-y-4 pt-14 *:translate-x-8 xl:flex">
 		{#each sports as s}
 			<ScheduleSidebarSportCard
 				sport={s}

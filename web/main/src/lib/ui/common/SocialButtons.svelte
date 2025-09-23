@@ -35,7 +35,7 @@
 
 	<Button
 		onclick={() => {
-			window.open('https://www.facebook.com/iithyderabad/', '_blank');
+			window.open('https://www.facebook.com/share/17P316izDp', '_blank');
 		}}
 		class="bg-custom-orange"
 		data-umami-event="social-facebook"
