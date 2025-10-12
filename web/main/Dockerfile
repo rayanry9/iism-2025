@@ -10,6 +10,7 @@ RUN pnpm install --frozen-lockfile --prod
 
 ENV PORT=3000
 ENV ORIGIN=https://iism25.sports.iith.ac.in
+ENV NODE_ENV='production'
 
 EXPOSE 3000
 

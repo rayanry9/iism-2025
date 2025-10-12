@@ -21,7 +21,7 @@ func GetPoolsBySportId(c *gin.Context) {
 
 	data, err := db.GetPoolsBySportId(c, req)
 	if err != nil {
-		fmt.Println(err)
+		slog.Error("Get Pools by Sport id", "err", err)
 		c.Status(http.StatusInternalServerError)
 		return
 	}

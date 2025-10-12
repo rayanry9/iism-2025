@@ -131,3 +131,10 @@
 		@apply 3xl:text-xl text-base xl:text-lg;
 	}
 }
+
+.toast-error {
+	background-color: var(--color-red-600);
+	color: var(--color-white);
+	font-weight: bold;
+	font-size: var(--text-xl);
+}

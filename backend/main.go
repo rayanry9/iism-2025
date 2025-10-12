@@ -22,6 +22,15 @@ func main() {
 	config.InitDB()
 	defer config.DB.Close()
 
+	if err := os.MkdirAll("images/users/original", 0755); err != nil {
+		slog.Error("failed to created original dir", err, err.Error())
+		panic(err)
+	}
+	if err := os.MkdirAll("images/users/web", 0755); err != nil {
+		slog.Error("failed to created web dir", err, err.Error())
+		panic(err)
+	}
+
 	// Gin Setup
 	if os.Getenv("GIN_MODE") == "release" {
 		gin.SetMode(gin.ReleaseMode)

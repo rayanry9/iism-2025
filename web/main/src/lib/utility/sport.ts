@@ -10,6 +10,8 @@ export function isSportIdStaff(id: number): boolean {
 
 export function getSportFromSportId(id: number): Sports | null {
 	switch (id) {
+		case 0:
+			return 'Athletics';
 		case 1:
 			return 'Badminton';
 		case 2:
@@ -120,4 +122,62 @@ export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 		}
 	}
 	return 1;
+}
+
+export function isSportFemale(id: number) {
+	switch (id) {
+		case 17:
+		case 24:
+		case 2:
+		case 4:
+		case 9:
+		case 11:
+		case 13:
+		case 15:
+			return true;
+		default:
+			return false;
+	}
+}
+
+export function getSportMaxRegistrants(sportId: number): number {
+	switch (sportId) {
+		case 0:
+			return 24;
+		case 1:
+			return 5;
+		case 2:
+		case 11:
+			return 3;
+		case 3:
+		case 4:
+		case 14:
+		case 15:
+			return 12;
+		case 5:
+		case 6:
+		case 7:
+			return 16;
+		case 8:
+		case 9:
+		case 10:
+		case 12:
+		case 13:
+		case 16:
+		case 17:
+		case 21:
+		case 22:
+		case 23:
+		case 24:
+			return 4;
+		case 18:
+			return 11;
+		case 19:
+		case 20:
+			return 17;
+		case 25:
+			return 11;
+		default:
+			return -1;
+	}
 }

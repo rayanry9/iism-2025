@@ -5,7 +5,9 @@
 	import footerLogo from '$lib/assets/footer-logo.webp';
 	import arrowUpRight from '$lib/assets/icons/diag-up-right-arrow.svg';
 	import '../app.css';
+	import 'toastify-js/src/toastify.css';
 	import Navbar from '$lib/ui/common/Navbar.svelte';
+	import { globals } from '$lib/state.svelte';
 
 	let { children } = $props();
 </script>
@@ -29,9 +31,14 @@
 				<Button
 					data-umami-event="switch-to-iissm"
 					class="bg-custom-blue my-auto border border-white px-6 py-3 text-white 2xl:px-8"
+					onclick={() => {
+						globals.staff = !globals.staff;
+						scrollTo({ behavior: 'smooth', top: 0 });
+					}}
 				>
 					<div class="flex gap-x-4">
-						SWITCH TO IISSM 25 <img src={arrowUpRight} alt="Diagonal Upper Right Arrow" />
+						SWITCH TO {globals.staff ? 'IISM' : 'IISSM'} 25
+						<img src={arrowUpRight} alt="Diagonal Upper Right Arrow" />
 					</div>
 				</Button>
 			</div>

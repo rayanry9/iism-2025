@@ -27,6 +27,10 @@
 		<a class={`${page.url.pathname == '/contact' ? 'text-custom-orange ' : ''} `} href="/contact"
 			>CONTACT</a
 		>
+		<a
+			class={`${page.url.pathname.includes('/register') ? 'text-custom-orange ' : ''} `}
+			href="/register">REGISTER</a
+		>
 	</div>
 
 	<NavScreenMobile class={`ml-auto h-fit leading-0 text-black lg:hidden`} />

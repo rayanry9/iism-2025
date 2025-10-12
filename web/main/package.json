@@ -20,6 +20,7 @@
 		"@sveltejs/kit": "^2.22.2",
 		"@sveltejs/vite-plugin-svelte": "^5.1.0",
 		"@tailwindcss/vite": "^4.1.11",
+		"@types/toastify-js": "^1.12.4",
 		"eslint": "^9.30.0",
 		"eslint-config-prettier": "^10.1.5",
 		"eslint-plugin-svelte": "^3.10.1",
@@ -38,9 +39,16 @@
 		"onlyBuiltDependencies": [
 			"@tailwindcss/oxide",
 			"esbuild"
+		],
+		"ignoredBuiltDependencies": [
+			"@tailwindcss/oxide"
 		]
 	},
 	"dependencies": {
-		"@sveltejs/adapter-node": "^5.2.12"
+		"@cropper/element": "^2.0.1",
+		"@sveltejs/adapter-node": "^5.2.12",
+		"bits-ui": "^2.11.1",
+		"cropperjs": "2.0.0-rc.2",
+		"toastify-js": "^1.12.0"
 	}
 }

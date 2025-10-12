@@ -11,7 +11,7 @@ import (
 func GetAllSports(c *gin.Context) {
 	data, err := db.GetAllSports(c)
 	if err != nil {
-		slog.Warn("GetAllSports", "err", err)
+		slog.Error("GetAllSports", "err", err)
 		c.Status(http.StatusInternalServerError)
 		return
 	}

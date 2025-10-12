@@ -19,3 +19,8 @@ func GetAllSports(c *gin.Context) (*[]schema.GetAllSportsResponse, error) {
 	}
 	return &data, nil
 }
+
+func GetSportNameFromId(c *gin.Context, sportId int) (name string, err error) {
+	err = config.DB.QueryRow(c, `select name from sports where id = $1`, sportId).Scan(&name)
+	return
+}

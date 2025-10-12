@@ -17,12 +17,15 @@
 	import Button from '../components/Button.svelte';
 	import arrowLeft from '$lib/assets/icons/arrow-left-white.svg';
 	import arrowRight from '$lib/assets/icons/arrow-right-white.svg';
+	import { globals } from '$lib/state.svelte';
 
-	const remTime = new Date(2025, 11, 14, 0, 0, 0).getTime() - Date.now();
-	let remDays = $state(Math.floor(remTime / (24 * 60 * 60 * 1000)));
-	let remHours = $state(Math.floor((remTime / (1000 * 60 * 60)) % 24));
-	let remMinutes = $state(Math.floor((remTime / (1000 * 60)) % 60));
-	let remSeconds = $state(Math.floor((remTime / 1000) % 60));
+	let remTime = $derived(
+		new Date(2025, 11, globals.staff ? 24 : 14, 0, 0, 0).getTime() - Date.now()
+	);
+	let remDays = $derived(Math.floor(remTime / (24 * 60 * 60 * 1000)));
+	let remHours = $derived(Math.floor((remTime / (1000 * 60 * 60)) % 24));
+	let remMinutes = $derived(Math.floor((remTime / (1000 * 60)) % 60));
+	let remSeconds = $derived(Math.floor((remTime / 1000) % 60));
 
 	const headerImages = [headerImg1, headerImg2, headerImg3, headerImg4, headerImg5];
 	const mobHeaderImages = [headerMobImg1, headerMobImg2, headerMobImg3, headerMobImg4];
@@ -146,7 +149,7 @@
 
 		<div class="mt-20 lg:mt-0 lg:ml-[5rem] xl:ml-[8.5rem] 2xl:ml-[15rem]">
 			<h1 class="hero-text flex flex-col items-center lg:block">
-				58TH<br />INTER IIT<br />SPORTS MEET<br />2025<span
+				58TH<br />INTER IIT{globals.staff ? ' STAFF' : ''}<br />SPORTS MEET<br />2025<span
 					class="button-text text-custom-orange border-custom-orange flex h-fit w-fit gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic lg:mt-1 lg:ml-4 lg:inline-flex lg:pt-2 lg:pb-1.5 xl:mt-2 xl:pt-2.5 xl:pb-2"
 					><img src={pinImg} class="text-custom-orange -mt-1 inline" alt="pin" />IIT Hyderabad</span
 				>
@@ -155,7 +158,11 @@
 
 		<div class="mt-8 w-full xl:mt-0 2xl:mt-12">
 			<div class="button-text lg:ml-[6rem] xl:ml-[10.5rem] 2xl:ml-[17.5rem]">
-				14th to 21st December 2025
+				{#if globals.staff}
+					24th to 29th December 2025
+				{:else}
+					14th to 21st December 2025
+				{/if}
 			</div>
 
 			<FlairedTitle

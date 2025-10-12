@@ -35,14 +35,18 @@
 	</MobileHeaderFrame>
 
 	{#if selectedSport == undefined}
-		<FullSchedule institutes={data.institutes} matchData={data.poolMatches} />
+		{#await Promise.all([data.institutes, data.poolMatches])}
+			<FullSchedule institutes={[]} matchData={[]} />
+		{:then value}
+			<FullSchedule institutes={value[0]} matchData={value[1]} />
+		{/await}
 	{:else if selectedSport == 'Athletics'}
 		<AthleticsSchedule />
 	{:else}
-		<SportSchedule
-			institutes={data.institutes}
-			matchData={data.poolMatches}
-			sport={selectedSport}
-		/>
+		{#await Promise.all([data.institutes, data.poolMatches])}
+			<SportSchedule institutes={[]} matchData={[]} sport={selectedSport} />
+		{:then value}
+			<SportSchedule institutes={value[0]} matchData={value[1]} sport={selectedSport} />
+		{/await}
 	{/if}
 </div>

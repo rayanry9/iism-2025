@@ -3,18 +3,28 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/rayanry9/iism-2025/backend/internal/controller"
+	"github.com/rayanry9/iism-2025/backend/internal/middlewares"
 )
 
 func SetupApiRoutes(r *gin.RouterGroup) {
-	r.GET("get-pools-by-sport-id", controller.GetPoolsBySportId)
+	r.GET("get-pools-by-sport-id", middlewares.CacheHTTP(60*60*6), controller.GetPoolsBySportId)
 	// r.POST("update-pool-team", controller.UpdatePoolTeam)
 	// r.GET("notify-pool-team-update", controller.PoolTeamUpdateWebsocket)
 
-	r.GET("get-all-institutes", controller.GetAllInstitutes)
-	r.GET("get-all-sports", controller.GetAllSports)
-	r.GET("get-all-pools", controller.GetAllPools)
-	r.GET("get-all-pool-teams", controller.GetAllPoolTeams)
+	r.GET("get-all-institutes", middlewares.CacheHTTP(60*60*12), controller.GetAllInstitutes)
+	r.GET("get-all-sports", middlewares.CacheHTTP(60*60*24), controller.GetAllSports)
+	r.GET("get-all-pools", middlewares.CacheHTTP(60*60*12), controller.GetAllPools)
+	r.GET("get-all-pool-teams", middlewares.CacheHTTP(60*60*12), controller.GetAllPoolTeams)
 
-	r.GET("get-all-pool-matches", controller.GetAllPoolMatches)
+	r.GET("get-all-pool-matches", middlewares.CacheHTTP(60*60*12), controller.GetAllPoolMatches)
 	r.GET("get-all-athletic-matches", controller.GetAllAthleticMatches)
+
+	r.POST("login", controller.Login)
+	r.POST("logout", controller.Logout)
+	r.GET("me", middlewares.AuthJWT(), middlewares.CacheHTTP(60*5), controller.Me)
+	r.POST("register", controller.RegisterPlayer)
+	r.Static("/profile-pic", "images/users/web").Use(middlewares.CacheHTTP(60 * 1))
+	r.GET("get-players", middlewares.CacheHTTP(5), controller.GetPlayers)
+	r.GET("get-player-count", middlewares.CacheHTTP(5), controller.GetPlayerCount)
+
 }

@@ -11,7 +11,7 @@ import (
 func GetAllInstitutes(c *gin.Context) {
 	data, err := db.GetAllInstitutes(c)
 	if err != nil {
-		slog.Warn("GetAllInstitutes", "err", err)
+		slog.Error("GetAllInstitutes", "err", err)
 		c.Status(http.StatusInternalServerError)
 		return
 	}
