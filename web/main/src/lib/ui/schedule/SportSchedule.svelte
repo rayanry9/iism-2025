@@ -27,7 +27,7 @@
 	let sportType = $state<SportType>('Male');
 </script>
 
-<main class="flex w-full flex-col">
+<main class="flex w-full flex-col overflow-auto ">
 	<div class="mb-12 flex w-full">
 		<div class="flex flex-col">
 			<h2 class="flex items-center">
@@ -60,7 +60,7 @@
 	</div>
 
 	<!-- <section class="grid w-full grid-flow-col grid-rows-2 gap-12"> -->
-	<section class="flex w-full flex-wrap place-content-between gap-12">
+	<section class="flex w-full flex-wrap  xl:gap-12 2xl:gap-12">
 		{#await data}
 			{#each [1, 2, 3, 4, 5, 6, 7, 8] as key}
 				<SchedulePoolCard
