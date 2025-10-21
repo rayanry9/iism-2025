@@ -11,7 +11,7 @@ import (
 	"github.com/rayanry9/iism-2025/backend/internal/utility"
 )
 
-func GetUserDetailFromEmail(c *gin.Context, email string) (id int, password *string, exists bool, err error) {
+func GetUserDetailFromEmailOrAssignedId(c *gin.Context, email string) (id int, password *string, exists bool, err error) {
 	err = config.DB.QueryRow(c, `SELECT id, password FROM users WHERE email ILIKE $1 or assigned_id ILIKE $1`, email).Scan(&id, &password)
 
 	if err == pgx.ErrNoRows {

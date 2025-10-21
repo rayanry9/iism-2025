@@ -23,7 +23,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	id, password, exists, err := db.GetUserDetailFromEmail(c, req.Email)
+	id, password, exists, err := db.GetUserDetailFromEmailOrAssignedId(c, req.Email)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
 		slog.Error("Failed getting user detail", "error", err)
