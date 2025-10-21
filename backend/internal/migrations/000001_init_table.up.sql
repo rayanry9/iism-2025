@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS sports (
 -- 4 -> Athletics Male
 -- 5 -> Athletics Female
 -- 6 -> Athletics Mixed
+-- 7 -> Athletics Male Relay
+-- 8 -> Athletics Female Relay
+-- 9 -> Athletics Mixed Relay
 
 CREATE TABLE IF NOT EXISTS users (
 	id SERIAL PRIMARY KEY,

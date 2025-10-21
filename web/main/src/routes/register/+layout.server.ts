@@ -2,18 +2,19 @@ import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 import { PUBLIC_API_URL, PUBLIC_URL } from '$env/static/public';
 import type { UserDetails } from '$lib/types/user';
+import type { GetAllSportsResponse } from '$lib/types/sports';
 
 export const load: LayoutServerLoad = async ({ cookies, url, fetch }) => {
 	if (!cookies.get('jwt') && url.pathname != '/register/login') {
-		redirect(307, '/register/login');
+		throw redirect(307, '/register/login');
 	}
-	if (url.pathname == '/register/login') {
-		return {
-			me: null
-		};
+	const res = await fetch(`${PUBLIC_API_URL}/me`);
+	let me = null;
+	if (res.status == 200) {
+		me = (await res.json()) as UserDetails | null;
 	}
-	const me = (await (await fetch(`${PUBLIC_API_URL}/me`)).json()) as UserDetails;
-	if (me.role != 3) {
+
+	if (me && me.role != 3) {
 		cookies.set('jwt', '', {
 			path: '/',
 			maxAge: -1,
@@ -23,9 +24,12 @@ export const load: LayoutServerLoad = async ({ cookies, url, fetch }) => {
 				? PUBLIC_URL.split('://')[1]
 				: PUBLIC_URL.split('://')[1].split(':')[0]
 		});
-		redirect(307, '/register/login');
+		throw redirect(307, '/register/login');
 	}
 	return {
-		me: me
+		me: me,
+		sports: (await (
+			await fetch(PUBLIC_API_URL + '/get-all-sports')
+		).json()) as GetAllSportsResponse[]
 	};
 };

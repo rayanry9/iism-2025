@@ -13,6 +13,7 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 
 	r.GET("get-all-institutes", middlewares.CacheHTTP(60*60*12), controller.GetAllInstitutes)
 	r.GET("get-all-sports", middlewares.CacheHTTP(60*60*24), controller.GetAllSports)
+	r.GET("get-all-athletic-sub-sports-data", middlewares.CacheHTTP(0), controller.GetAllAthleticSubSportsData)
 	r.GET("get-all-pools", middlewares.CacheHTTP(60*60*12), controller.GetAllPools)
 	r.GET("get-all-pool-teams", middlewares.CacheHTTP(60*60*12), controller.GetAllPoolTeams)
 
@@ -20,11 +21,12 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.GET("get-all-athletic-matches", controller.GetAllAthleticMatches)
 
 	r.POST("login", controller.Login)
-	r.POST("logout", controller.Logout)
+	r.POST("logout", middlewares.AuthJWT(), controller.Logout)
 	r.GET("me", middlewares.AuthJWT(), middlewares.CacheHTTP(60*5), controller.Me)
-	r.POST("register", controller.RegisterPlayer)
+	r.POST("register", middlewares.AuthJWT(), controller.RegisterPlayer)
+	r.POST("remove-player", middlewares.AuthJWT(), controller.RemovePlayer)
 	r.Static("/profile-pic", "images/users/web").Use(middlewares.CacheHTTP(60 * 1))
-	r.GET("get-players", middlewares.CacheHTTP(5), controller.GetPlayers)
-	r.GET("get-player-count", middlewares.CacheHTTP(5), controller.GetPlayerCount)
+	r.GET("get-players", middlewares.CacheHTTP(24), controller.GetPlayers)
+	r.GET("get-player-count", middlewares.CacheHTTP(24), controller.GetPlayerCount)
 
 }

@@ -24,7 +24,7 @@ export const actions = {
 					? PUBLIC_URL.split('://')[1]
 					: PUBLIC_URL.split('://')[1].split(':')[0]
 			});
-			redirect(303, '/register');
+			redirect(307, '/register');
 		} else {
 			console.log(await res.json());
 		}

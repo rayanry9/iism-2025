@@ -1,13 +1,21 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+	import { globals } from '$lib/state.svelte.js';
 	import Button from '$lib/ui/components/Button.svelte';
 	import Input from '$lib/ui/components/Input.svelte';
+	import Loading from '$lib/ui/components/Loading.svelte';
+	import StartToastifyInstance from 'toastify-js';
 
-	import Toastify from 'toastify-js';
-	let { form } = $props();
+	let { data, form } = $props();
+	if (data.me && data.me.staff != globals.staff) {
+		globals.staff = data.me.staff;
+		goto('/register');
+	}
+
 	$effect(() => {
 		if (form != undefined) {
-			Toastify({
+			StartToastifyInstance({
 				text: form?.text,
 				position: 'right',
 				gravity: 'bottom',
@@ -20,7 +28,16 @@
 			}).showToast();
 		}
 	});
+
+	beforeNavigate(() => {
+		globals.loading = true;
+	});
+	afterNavigate(() => {
+		globals.loading = false;
+	});
 </script>
+
+<Loading loading={globals.loading} />
 
 <main class="mx-auto my-32 flex w-fit flex-col items-center gap-y-12">
 	<div class="flex flex-col items-center gap-y-4">
@@ -32,8 +49,8 @@
 			id="email"
 			placeholder="Enter here"
 			required={true}
-			type="email"
-			label="PROVIDED EMAIL"
+			type="text"
+			label="PROVIDED Login ID"
 			name="email"
 		/>
 		<Input

@@ -1,9 +1,26 @@
 <script lang="ts">
+	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+	import { globals } from '$lib/state.svelte.js';
+	import type { Sports } from '$lib/types/sports.js';
+	import Loading from '$lib/ui/components/Loading.svelte';
 	import SportCard from '$lib/ui/register/SportCard.svelte';
-	import { getSportIdOfSport } from '$lib/utility/sport';
+	import { getRegisterableSports, getSportMaxRegistrants } from '$lib/utility/sport';
 	let { data } = $props();
-	console.log(data);
+	$effect(() => {
+		if (data.me?.staff != globals.staff) {
+			goto('/register/login');
+		}
+	});
+
+	beforeNavigate(() => {
+		globals.loading = true;
+	});
+	afterNavigate(() => {
+		globals.loading = false;
+	});
 </script>
+
+<Loading loading={globals.loading} />
 
 <main class="flex flex-col items-center gap-y-12 pt-24 pb-48">
 	<div class="flex flex-col items-center gap-y-5">
@@ -15,44 +32,18 @@
 	</div>
 
 	<section class="flex flex-wrap justify-center gap-x-10 gap-y-16 px-32">
-		<a href="register/team?sport=0">
-			<SportCard
-				sport="Athletics"
-				currentCount={data.athletics.count}
-				totalCount={12}
-				maxCount={16}
-			/>
-		</a>
-		<a href="register/team?sport={getSportIdOfSport('Cricket', 1, false)}">
-			<SportCard sport="Cricket" currentCount={data.cricket.count} totalCount={12} maxCount={16} />
-		</a>
-		<a href="register/team?sport={getSportIdOfSport('Football', 1, false)}">
-			<SportCard
-				sport="Football"
-				currentCount={data.football.count}
-				totalCount={12}
-				maxCount={16}
-			/>
-		</a>
-		<a href="register/team?sport={getSportIdOfSport('Hockey', 1, false)}">
-			<SportCard sport="Hockey" currentCount={data.hockey.count} totalCount={12} maxCount={16} />
-		</a>
-		<a href="register/team?sport={getSportIdOfSport('Volleyball', 1, false)}">
-			<SportCard
-				sport="Volleyball"
-				currentCount={data.volleyball.count}
-				totalCount={12}
-				maxCount={16}
-			/>
-		</a>
-		<a href="register/team?sport={getSportIdOfSport('Volleyball', 2, false)}">
-			<SportCard
-				sport="Volleyball"
-				extraText={'(W)'}
-				currentCount={data.volleyballWomen.count}
-				totalCount={12}
-				maxCount={16}
-			/>
-		</a>
+		{#each getRegisterableSports(globals.staff, data.sports!) as sport}
+			<a href="register/team?sport={sport.id}">
+				<SportCard
+					sport={sport.name as Sports}
+					extraText={sport.type == 1 ? '(M)' : sport.type == 2 ? '(W)' : '(MX)'}
+					currentCount={(data.playerCountData!.find((val) => val.sportId == sport.id)?.count || 0) +
+						(data.playerCountData!.find((val) => val.sportId == sport.id)?.reserveCount || 0) +
+						(data.playerCountData!.find((val) => val.sportId == sport.id)?.secondaryCount || 0)}
+					totalCount={getSportMaxRegistrants(sport.id)}
+					maxCount={globals.staff ? 41 : 60}
+				/>
+			</a>
+		{/each}
 	</section>
 </main>

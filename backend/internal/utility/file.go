@@ -62,6 +62,16 @@ func SaveProfilePic(img multipart.FileHeader) error {
 	return nil
 }
 
+func DeleteProfilePic(fn string) error {
+	if err := os.Remove(fmt.Sprintf("images/users/web/%s.webp", fn)); err != nil {
+		return err
+	}
+	if err := os.Remove(fmt.Sprintf("images/users/original/%s.png", fn)); err != nil {
+		return err
+	}
+	return nil
+}
+
 func GetProfilePicFile(fp string) ([]byte, error) {
 	data, err := os.ReadFile(fp)
 	if err != nil {

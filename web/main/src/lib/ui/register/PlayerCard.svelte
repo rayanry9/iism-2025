@@ -16,10 +16,10 @@
 		alt="player pic"
 	/>
 	<div class="title-text mb-2 w-[15rem] text-wrap wrap-break-word">{playerName}</div>
-	<p class="text-custom-orange w-[15rem] wrap-break-word">{subText}</p>
+	<p class="text-custom-orange mb-4 w-[15rem] wrap-break-word">{subText}</p>
 	<Button
 		onclick={onRemove}
-		class="text-custom-teal border-custom-teal mt-4 w-fit rounded-sm border bg-white p-6 leading-0 transition-all"
+		class="text-custom-teal border-custom-teal mt-auto w-fit rounded-sm border bg-white p-6 leading-0 transition-all"
 		>REMOVE</Button
 	>
 </div>

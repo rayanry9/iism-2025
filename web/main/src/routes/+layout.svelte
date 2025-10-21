@@ -9,10 +9,10 @@
 	import Navbar from '$lib/ui/common/Navbar.svelte';
 	import { globals } from '$lib/state.svelte';
 
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
-<Navbar />
+<Navbar isLoggedIn={data.isLoggedIn} />
 
 {@render children()}
 
@@ -33,6 +33,7 @@
 					class="bg-custom-blue my-auto border border-white px-6 py-3 text-white 2xl:px-8"
 					onclick={() => {
 						globals.staff = !globals.staff;
+						localStorage.setItem('staff', globals.staff.toString());
 						scrollTo({ behavior: 'smooth', top: 0 });
 					}}
 				>

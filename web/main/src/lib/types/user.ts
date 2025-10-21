@@ -16,6 +16,7 @@ export interface UserDetails {
 	checkOutDate: string | null;
 	assignedId: string | null;
 	role: number;
+	staff: boolean;
 	extra: string | null;
 	institute: IITNames;
 	sportId: number | null;
@@ -30,5 +31,8 @@ export interface GetPlayers {
 	extra: string | null;
 }
 export interface GetPlayerCount {
+	sportId: number;
 	count: number;
+	secondaryCount: number;
+	reserveCount: number;
 }

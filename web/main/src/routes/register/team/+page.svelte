@@ -4,15 +4,37 @@
 	import type { Sports } from '$lib/types/sports';
 	import PlayerCard from '$lib/ui/register/PlayerCard.svelte';
 	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
-	import { getSportFromSportId, isSportFemale } from '$lib/utility/sport';
+	import {
+		getSportFromSportId,
+		getSportMaxRegistrants,
+		isSportFemale,
+		isSportIdStaff
+	} from '$lib/utility/sport';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import Button from '$lib/ui/components/Button.svelte';
 	import { PUBLIC_API_URL } from '$env/static/public';
+	import { afterNavigate, beforeNavigate, goto, invalidateAll } from '$app/navigation';
+	import { globals } from '$lib/state.svelte.js';
+	import Loading from '$lib/ui/components/Loading.svelte';
 	const sportId = page.url.searchParams.get('sport');
-	const totalRegistrants = 12;
+	const totalRegistrants = getSportMaxRegistrants(parseInt(sportId!));
 	let { data } = $props();
-	let currentRegistrants = $state(data.playerData.length);
+	let currentRegistrants = $derived(
+		data.playerCount.count + data.playerCount.reserveCount + data.playerCount.secondaryCount
+	);
+	if (globals.staff != isSportIdStaff(parseInt(sportId ?? '0'))) {
+		goto('/register');
+	}
+
+	beforeNavigate(() => {
+		globals.loading = true;
+	});
+	afterNavigate(() => {
+		globals.loading = false;
+	});
 </script>
+
+<Loading loading={globals.loading} />
 
 <section class="my-12 flex">
 	{#if sportId != null}
@@ -24,7 +46,14 @@
 			/>
 			<div class="flex flex-col">
 				<h2>{getSportFromSportId(parseInt(sportId))?.toUpperCase()} TEAM</h2>
-				<p>IIT {data.me?.institute} - {isSportFemale(parseInt(sportId)) ? 'Women' : 'Men'}</p>
+				<p>
+					IIT {data.me?.institute} - {isSportFemale(parseInt(sportId))
+						? 'Women'
+						: parseInt(sportId) == -2 || parseInt(sportId) == 59
+							? 'Mixed'
+							: 'Men'}
+					{globals.staff ? '( Staff )' : ''}
+				</p>
 			</div>
 		</div>
 	{:else}
@@ -42,7 +71,7 @@
 				style="width: calc({Math.floor((currentRegistrants * 100) / totalRegistrants)}%);"
 			></div>
 		</div>
-		<div class="button-text mt-2">{currentRegistrants}/{totalRegistrants} registered</div>
+		<div class="button-text mt-2">{currentRegistrants}/{totalRegistrants} spots registered</div>
 	</div>
 
 	<a class="ml-auto" href="/register/team/add?sport={sportId}">
@@ -61,11 +90,47 @@
 				player.firstName +
 				' ' +
 				(player.middleName ?? '') +
-				' ' +
+				(player.middleName ? ' ' : '') +
 				(player.lastName ?? '')
 			).trim()}
 			photoUrl={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
-			onRemove={() => {}}
+			onRemove={() => {
+				if (
+					confirm(
+						'Are you sure you want to remove ' +
+							player.firstName +
+							' ' +
+							(player.middleName ?? '') +
+							(player.middleName ? ' ' : '') +
+							(player.lastName ?? '') +
+							' ?'
+					)
+				) {
+					fetch(PUBLIC_API_URL + '/remove-player', {
+						method: 'POST',
+						credentials: 'include',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							userId: parseInt(player.userId)
+						})
+					})
+						.then((res) => {
+							if (res.status == 200) {
+								alert('Succesfully Removed');
+							} else {
+								res.json().then((data) => {
+									alert(data.message);
+								});
+							}
+							invalidateAll();
+						})
+						.catch((_) => {
+							alert('Failed to remove player');
+						});
+				}
+			}}
 			subText={player.extra ?? ''}
 		/>
 	{/each}

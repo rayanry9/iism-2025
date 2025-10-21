@@ -35,6 +35,6 @@
 			></div>
 		</div>
 
-		<div class="button-text">{currentCount}/{totalCount} registered</div>
+		<div class="button-text">{currentCount}/{totalCount} spots registered</div>
 	</div>
 </div>

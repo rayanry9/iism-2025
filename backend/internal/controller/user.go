@@ -198,3 +198,28 @@ func GetPlayerCount(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, data)
 }
+
+func RemovePlayer(c *gin.Context) {
+	var req schema.RemovePlayerRequest
+
+	removerId, _ := c.Get("userId")
+
+	if err := c.Bind(&req); err != nil {
+		slog.Info("Bad request for remove player", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
+		return
+	}
+
+	if err := db.RemovePlayer(c, req, removerId.(int)); err != nil {
+		if err.Error() == "Invalid" {
+			c.JSON(http.StatusForbidden, gin.H{"message": "You do not have permission to delete this user"})
+			return
+		} else {
+			slog.Error("Failed to Remove Player", "error", err, "req", c.Request)
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to remove player."})
+			return
+		}
+	}
+
+	c.Status(http.StatusOK)
+}

@@ -1,12 +1,22 @@
 <script lang="ts">
+	import { goto, invalidateAll } from '$app/navigation';
 	import { page } from '$app/state';
+	import { PUBLIC_API_URL } from '$env/static/public';
 	import logoWithText from '$lib/assets/logo-text.webp';
+	import { globals } from '$lib/state.svelte';
+	import StartToastifyInstance from 'toastify-js';
 	import NavScreenMobile from '../components/NavScreenMobile.svelte';
+	let { isLoggedIn }: { isLoggedIn: boolean } = $props();
 </script>
 
 <nav class="border-b-custom-gray flex flex-row items-center border-b bg-white px-8 py-3">
 	<img src={logoWithText} alt="Logo IISM" class="h-10" />
-	<div class="button-text ml-auto hidden flex-row items-center gap-x-12 lg:flex">
+	{#if globals.staff}
+		<div class="ml-2 font-bold">( STAFF )</div>
+	{/if}
+	<div
+		class="button-text ml-auto hidden flex-row items-center gap-x-12 *:hover:cursor-pointer lg:flex"
+	>
 		<a class={`${page.url.pathname == '/' ? 'text-custom-orange ' : ''} `} href="/">HOME</a>
 		<a class={`${page.url.pathname == '/schedule' ? 'text-custom-orange ' : ''} `} href="/schedule"
 			>SCHEDULE</a
@@ -27,10 +37,38 @@
 		<a class={`${page.url.pathname == '/contact' ? 'text-custom-orange ' : ''} `} href="/contact"
 			>CONTACT</a
 		>
-		<a
-			class={`${page.url.pathname.includes('/register') ? 'text-custom-orange ' : ''} `}
-			href="/register">REGISTER</a
-		>
+		{#if isLoggedIn && page.url.pathname.includes('/register')}
+			<button
+				class={`${page.url.pathname.includes('/register') ? 'text-custom-orange ' : ''} `}
+				onclick={() => {
+					fetch(PUBLIC_API_URL + '/logout', { method: 'post', credentials: 'include' }).then(
+						(res) => {
+							StartToastifyInstance({
+								text: 'Successfully logged out',
+								position: 'right',
+								gravity: 'bottom',
+								duration: 2000,
+								style: {
+									background: 'linear-gradient(90deg, #FF1744, #D50000)'
+								},
+								close: true
+							}).showToast();
+							setTimeout(() => {
+								invalidateAll();
+								goto('/register/login');
+							}, 2000);
+						}
+					);
+				}}
+			>
+				LOGOUT
+			</button>
+		{:else}
+			<a
+				class={`${page.url.pathname.includes('/register') ? 'text-custom-orange ' : ''} `}
+				href="/register">REGISTER</a
+			>
+		{/if}
 	</div>
 
 	<NavScreenMobile class={`ml-auto h-fit leading-0 text-black lg:hidden`} />

@@ -40,6 +40,7 @@ type UserDB struct {
 	CheckInDate        *custom.Date `db:"check_in_date"`
 	CheckOutDate       *custom.Date `db:"check_out_date"`
 	Role               UserRole     `db:"role"`
+	Staff              bool         `db:"staff"`
 	AssignedId         *string      `db:"assigned_id"`
 	Remark             *string      `db:"remark"`
 	InstituteId        int          `db:"institute_id"`
@@ -68,6 +69,7 @@ type GetUserDetailsResponse struct {
 	CheckInDate        *custom.Date               `json:"checkInDate"`
 	CheckOutDate       *custom.Date               `json:"checkOutDate"`
 	Role               UserRole                   `json:"role"`
+	Staff              bool                       `json:"staff"`
 	Extra              *string                    `json:"extra"`
 	Remark             *string                    `json:"remark"`
 	AssignedId         *string                    `json:"assignedId"`
@@ -91,6 +93,7 @@ type RegisterPlayerRequest struct {
 	Remark             *string              `form:"remark"`
 	Institute          string               `form:"institute"`
 	Sports             string               `form:"sports"`
+	Staff              bool                 `form:"staff"`
 }
 type RegisterPlayerSportData struct {
 	SportId   int     `json:"sportId"`
@@ -108,7 +111,10 @@ type GetPlayerCountRequest struct {
 	Institute string `form:"institute"`
 }
 type GetPlayerCountResponse struct {
-	Count int `json:"count"`
+	SportId        int `json:"sportId"`
+	Count          int `json:"count"`
+	SecondaryCount int `json:"secondaryCount"`
+	ReserveCount   int `json:"reserveCount"`
 }
 
 type GetPlayersResponse struct {
@@ -118,4 +124,8 @@ type GetPlayersResponse struct {
 	MiddleName *string `json:"middleName"`
 	LastName   *string `json:"lastName"`
 	Extra      *string `json:"extra"`
+}
+
+type RemovePlayerRequest struct {
+	UserId int `json:"userId"`
 }

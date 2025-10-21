@@ -1,15 +1,45 @@
-import type { Sports } from '$lib/types/sports';
+import type { GetAllSportsResponse, Sports } from '$lib/types/sports';
 
 export function isSportIdStaff(id: number): boolean {
-	if (id >= 16 && id <= 25) {
+	if ((id >= 16 && id <= 25) || id <= -3 || (id >= 59 && id <= 83)) {
 		return true;
 	} else {
 		return false;
 	}
 }
 
+export function getRegisterableSports(
+	staff: boolean,
+	allSports: GetAllSportsResponse[]
+): GetAllSportsResponse[] {
+	if (staff) {
+		const newArr = allSports.filter(
+			(sport) => sport.staff && (sport.type == 1 || sport.type == 2 || sport.type == 3)
+		);
+		newArr.push({ id: -3, name: 'Athletics', staff: true, type: 1 });
+		newArr.push({ id: -4, name: 'Athletics', staff: true, type: 2 });
+		return newArr.sort((a, b) => a.name.localeCompare(b.name));
+	} else {
+		return [
+			{ name: 'Athletics', staff: false, type: 1, id: 0 },
+			{ name: 'Athletics', staff: false, type: 2, id: -1 },
+			{ name: 'Athletics', staff: false, type: 3, id: -2 },
+			{ name: 'Cricket', staff: false, type: 1, id: getSportIdOfSport('Cricket', 1, false) },
+			{ name: 'Football', staff: false, type: 1, id: getSportIdOfSport('Football', 1, false) },
+			{ name: 'Hockey', staff: false, type: 1, id: getSportIdOfSport('Hockey', 1, false) },
+			{ name: 'Volleyball', staff: false, type: 1, id: getSportIdOfSport('Volleyball', 1, false) },
+			{ name: 'Volleyball', staff: false, type: 2, id: getSportIdOfSport('Volleyball', 2, false) }
+		].sort((a, b) => a.name.localeCompare(b.name));
+	}
+}
+
 export function getSportFromSportId(id: number): Sports | null {
 	switch (id) {
+		case -5:
+		case -4:
+		case -3:
+		case -2:
+		case -1:
 		case 0:
 			return 'Athletics';
 		case 1:
@@ -62,6 +92,8 @@ export function getSportFromSportId(id: number): Sports | null {
 			return 'Table Tennis';
 		case 25:
 			return 'Volleyball';
+		case 59:
+			return 'Chess';
 		default:
 			return null;
 	}
@@ -88,6 +120,8 @@ export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 			case 'Table Tennis':
 				if (type == 1) return 23;
 				else return 24;
+			case 'Chess':
+				return 59;
 			default:
 				return 0;
 		}
@@ -126,14 +160,38 @@ export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 
 export function isSportFemale(id: number) {
 	switch (id) {
-		case 17:
-		case 24:
 		case 2:
 		case 4:
 		case 9:
 		case 11:
 		case 13:
 		case 15:
+		case 17:
+		case 24:
+		case 45:
+		case 46:
+		case 47:
+		case 48:
+		case 49:
+		case 50:
+		case 51:
+		case 52:
+		case 53:
+		case 54:
+		case 55:
+		case 56:
+		case 57:
+		case 62:
+		case 76:
+		case 77:
+		case 78:
+		case 79:
+		case 80:
+		case 81:
+		case 82:
+		case 83:
+		case -1:
+		case -4:
 			return true;
 		default:
 			return false;
@@ -142,8 +200,16 @@ export function isSportFemale(id: number) {
 
 export function getSportMaxRegistrants(sportId: number): number {
 	switch (sportId) {
+		case -4:
+			return 7 * 3 + 1 * 5;
+		case -3:
+			return 12 * 3 + 1 * 5;
+		case -2:
+			return 6;
+		case -1:
+			return 13 * 3 + 2 * 6;
 		case 0:
-			return 24;
+			return 16 * 3 + 2 * 6;
 		case 1:
 			return 5;
 		case 2:
@@ -169,6 +235,7 @@ export function getSportMaxRegistrants(sportId: number): number {
 		case 22:
 		case 23:
 		case 24:
+		case 59:
 			return 4;
 		case 18:
 			return 11;
