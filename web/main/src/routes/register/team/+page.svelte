@@ -76,7 +76,7 @@
 
 	<a class="ml-auto" href="/register/team/add?sport={sportId}">
 		<Button
-			class="bg-custom-orange ml-auto h-fit rounded-sm px-4 py-2  text-white *:flex *:gap-x-4"
+			class="bg-custom-orange disabled:bg-custom-gray ml-auto h-fit rounded-sm px-4 py-2 text-white *:flex  *:gap-x-4 disabled:cursor-not-allowed disabled:active:brightness-100"
 			disabled={currentRegistrants == totalRegistrants}
 			><img src={plusSVG} class="h-6" alt="add" />Add New Member</Button
 		>

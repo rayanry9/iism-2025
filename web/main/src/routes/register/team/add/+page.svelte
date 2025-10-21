@@ -15,7 +15,7 @@
 	import minusIcon from '$lib/assets/icons/circle-minus.svg';
 	import { globals } from '$lib/state.svelte.js';
 	import StartToastifyInstance from 'toastify-js';
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
 	import Loading from '$lib/ui/components/Loading.svelte';
 
 	const sportId = page.url.searchParams.get('sport');
@@ -57,6 +57,7 @@
 	afterNavigate(() => {
 		globals.loading = false;
 	});
+	console.log(data);
 </script>
 
 <Loading loading={globals.loading} />
@@ -79,6 +80,7 @@
 				athleticSubSportArr = new Array<string | undefined>(10);
 				secondarySports = [];
 				globals.loading = false;
+				goto('/register/team' + page.url.search);
 			});
 		};
 	}}
@@ -226,7 +228,12 @@
 									: 1)}
 						checked={(data.athleticSubSport?.find(
 							(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
-						)?.count ?? 0) >= 2}
+						)?.count ?? 0) >=
+							((data.athleticSubSport?.find(
+								(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+							)?.type ?? 0) >= 7
+								? 4
+								: 2)}
 					/>
 					<div class="button-text -mb-1">Reserve</div>
 				</label>
