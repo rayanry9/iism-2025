@@ -84,7 +84,7 @@
 			});
 		};
 	}}
-	class="grid grid-cols-3 gap-12"
+	class="grid grid-cols-3 gap-10 *:mt-auto 2xl:gap-12"
 	method="post"
 	enctype="multipart/form-data"
 >

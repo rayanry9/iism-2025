@@ -22,7 +22,7 @@
 
 <Loading loading={globals.loading} />
 
-<main class="flex flex-col items-center gap-y-12 pt-24 pb-48">
+<main class="flex flex-col items-center gap-y-12 pt-24 pb-40">
 	<div class="flex flex-col items-center gap-y-5">
 		<div class="title-text text-custom-orange">
 			Welcome {data.me?.firstName + ' ' + data.me?.lastName}!
@@ -31,7 +31,7 @@
 		<p>Select a sport to register the Team</p>
 	</div>
 
-	<section class="flex flex-wrap justify-center gap-x-10 gap-y-16 px-32">
+	<section class="flex flex-wrap justify-center gap-12 px-24 2xl:gap-16 2xl:px-32">
 		{#each getRegisterableSports(globals.staff, data.sports!) as sport}
 			<a href="register/team?sport={sport.id}">
 				<SportCard

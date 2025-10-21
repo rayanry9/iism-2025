@@ -36,7 +36,7 @@
 
 <Loading loading={globals.loading} />
 
-<section class="my-12 flex">
+<section class="my-8 flex 2xl:my-12">
 	{#if sportId != null}
 		<div class="flex items-center gap-x-4 leading-0">
 			<img
@@ -62,7 +62,7 @@
 	<img src={getIITImgSrc(data.me!.institute)} class="ml-auto h-20" alt="iit logo" />
 </section>
 <hr class="mb-2" />
-<section class="my-8 flex items-center">
+<section class="my-6 flex items-center 2xl:my-8">
 	<div>
 		<div class="title-text">Current Members</div>
 		<div class="bg-custom-gray mt-5 h-2 w-[24rem] -skew-x-12">
@@ -83,7 +83,7 @@
 	</a>
 </section>
 
-<section class="flex flex-wrap gap-10">
+<section class="flex flex-wrap gap-8 2xl:gap-10">
 	{#each data.playerData as player}
 		<PlayerCard
 			playerName={(

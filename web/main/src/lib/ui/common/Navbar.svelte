@@ -15,7 +15,7 @@
 		<div class="ml-2 font-bold">( STAFF )</div>
 	{/if}
 	<div
-		class="button-text ml-auto hidden flex-row items-center gap-x-12 *:hover:cursor-pointer lg:flex"
+		class="button-text ml-auto hidden flex-row items-center gap-x-5 *:hover:cursor-pointer lg:flex xl:gap-x-8 2xl:gap-x-12"
 	>
 		<a class={`${page.url.pathname == '/' ? 'text-custom-orange ' : ''} `} href="/">HOME</a>
 		<a class={`${page.url.pathname == '/schedule' ? 'text-custom-orange ' : ''} `} href="/schedule"

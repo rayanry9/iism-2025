@@ -1,5 +1,6 @@
 <script lang="ts">
 	import 'cropperjs';
+	import { innerWidth } from 'svelte/reactivity/window';
 	let { children, class: className, filled = $bindable() } = $props();
 
 	let dialog = $state<HTMLDialogElement>();
@@ -9,6 +10,7 @@
 	$effect(() => {
 		filled = !(files == undefined || files.length == 0);
 	});
+	console.log(innerWidth.current);
 </script>
 
 <label class="button-text flex flex-col gap-y-1 {className}">
@@ -66,7 +68,7 @@
 <dialog bind:this={dialog} class="mx-auto my-auto rounded-md p-6">
 	<section class="flex flex-col">
 		<div class="title-text mb-4 w-fit">Crop Image</div>
-		<div class="size-[40rem]">
+		<div class="size-[30rem] 2xl:size-[40rem]">
 			<cropper-canvas background class="h-full">
 				<cropper-image
 					src={files != undefined ? URL.createObjectURL(files[0]) : ''}
@@ -78,8 +80,8 @@
 				<cropper-handle action="move" plain></cropper-handle>
 				<cropper-selection
 					bind:this={croppedSelection}
-					x="120"
-					y="120"
+					x={(innerWidth.current ?? 0) > 1536 ? '120' : '40'}
+					y={(innerWidth.current ?? 0) > 1536 ? '120' : '40'}
 					outlined
 					width="400"
 					height="400"

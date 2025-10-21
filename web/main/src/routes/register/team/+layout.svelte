@@ -5,7 +5,7 @@
 	let { children } = $props();
 </script>
 
-<main class="flex flex-col px-40 py-32">
+<main class="flex flex-col px-32 py-24 2xl:px-40 2xl:py-32">
 	<button
 		onclick={() => {
 			if (page.url.pathname == '/register/team') {
