@@ -4,8 +4,25 @@
 	import type { Sports } from '$lib/types/sports';
 	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
-
-	let sports = ['Athletics', 'Cricket', 'Football', 'Hockey', 'Volleyball'] satisfies Array<Sports>;
+	import { globals } from '$lib/state.svelte';
+	let sports = $derived.by(() => {
+		if (!globals.staff) {
+			return ['Athletics', 'Cricket', 'Football', 'Hockey', 'Volleyball'] satisfies Array<Sports>;
+		} else {
+			return [
+				'Athletics',
+				'Badminton',
+				'Basketball',
+				'Chess',
+				'Cricket',
+				'Football',
+				'Table Tennis',
+				'Tennis',
+				'Volleyball',
+				'Squash'
+			] satisfies Array<Sports>;
+		}
+	});
 
 	let {
 		buttonText,
@@ -18,9 +35,11 @@
 	} = $props();
 </script>
 
-<aside class="hidden flex-col xl:flex xl:h-full xl:-translate-x-[11rem] xl:-skew-x-12 xl:flex-row xl:ml-[1.5rem] 2xl:ml-[0.5rem]">
+<aside
+	class="hidden flex-col xl:ml-[1.5rem] xl:flex xl:h-full xl:-translate-x-[11rem] xl:-skew-x-12 xl:flex-row 2xl:ml-[0.5rem]"
+>
 	<div
-		class="hidden flex-col items-end gap-y-6 bg-black pt-20 xl:pr-4 2xl:pr-8 pl-32 text-white xl:flex *:[button]:w-fit *:[button]:rounded-sm *:[button]:px-4 *:[button]:py-2.5 *:[button]:transition *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
+		class="hidden flex-col items-end gap-y-6 bg-black pt-20 pl-32 text-white xl:flex xl:pr-4 2xl:pr-8 *:[button]:w-fit *:[button]:rounded-sm *:[button]:px-4 *:[button]:py-2.5 *:[button]:transition *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
 	>
 		<button
 			class="button-text {selectedSport == undefined
@@ -49,7 +68,10 @@
 			</div>
 		{/if}
 	</div>
-	<div class="bg-custom-blue hidden flex-col xl:gap-y-[3vh] 2xl:gap-y-4 pt-14 *:translate-x-8 xl:flex xl:w-[8rem] 2xl:w-[11rem]">
+	<div
+		style="scrollbar-color: var(--custom-light-blue) #F0F0F0; scrollbar-width:auto ;"
+		class="bg-custom-blue hidden flex-col overflow-x-visible overflow-y-scroll pt-14 *:translate-x-8 xl:flex xl:w-[8rem] xl:gap-y-[3vh] 2xl:w-[11rem] 2xl:gap-y-4"
+	>
 		{#each sports as s}
 			<ScheduleSidebarSportCard
 				sport={s}
