@@ -7,7 +7,7 @@ import cricketImg from '$lib/assets/sport/cricket.webp';
 import badmintonImg from '$lib/assets/sport/badminton.webp';
 import basketballImg from '$lib/assets/sport/basketball.webp';
 import squashImg from '$lib/assets/sport/squash.webp';
-import chessImg from '$lib/assets/sport/tennis.webp';
+import chessImg from '$lib/assets/sport/chess.webp';
 import tennisImg from '$lib/assets/sport/tennis.webp';
 import ttImg from '$lib/assets/sport/table-tennis.webp';
 

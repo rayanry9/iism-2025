@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"html/template"
 	"os"
+	"strings"
 
 	_ "embed"
 
@@ -43,25 +44,30 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	config.InitDB()
 
 	for _, user := range allData {
 		var isStaff bool
-		if user[7] == "staff" {
+		for idx := range 6 {
+			user[idx] = strings.Trim(user[idx], " ")
+		}
+		if user[6] == "staff" {
 			isStaff = true
 		} else {
 			isStaff = false
 		}
-		encodedPassword := utility.GenerateEncodedHashFromPassword(user[5])
+		encodedPassword := utility.GenerateEncodedHashFromPassword(user[4])
 
-		if _, err := config.DB.Exec(context.Background(), `insert into users (first_name, last_name, email, assigned_id, password, institute_id, role, staff)`, user[1], user[2], user[3], user[4], encodedPassword, user[6], 3, isStaff); err != nil {
-			panic(err)
+		if _, err := config.DB.Exec(context.Background(), `insert into users (first_name, last_name, email, assigned_id, password, institute_id, role, staff) values ($1, $2, $3, $4, $5, $6, $7, $8)`, user[0], user[1], user[2], user[3], encodedPassword, user[5], 3, isStaff); err != nil {
+			fmt.Printf("Failed to add to db with error: %v\nUser Data: %v\n", err, user)
+			continue
 		}
 
 		m := gomail.NewMessage()
 		m.SetHeader("From", "interiit.oc@iith.ac.in")
-		m.SetHeader("To", user[3])
+		m.SetHeader("To", user[2])
 		// m.SetHeader("Cc", "interiit@iith.ac.in", "interiit.convenor@iith.ac.in")
-		m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
+		// m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
 		var year string
 		if isStaff {
 			year = "38th Inter IIT Staff Sports Meet"
@@ -75,9 +81,9 @@ func main() {
 		}
 
 		var emailData EmailData
-		emailData.Name = user[1] + " " + user[2]
-		emailData.Password = user[5]
-		emailData.UserId = user[8]
+		emailData.Name = user[0] + " " + user[1]
+		emailData.Password = user[4]
+		emailData.UserId = user[3]
 
 		var finalEmail bytes.Buffer
 		if err := eml.Execute(&finalEmail, emailData); err != nil {
@@ -88,8 +94,8 @@ func main() {
 
 		dialer := gomail.NewDialer("smtp.gmail.com", 587, "interiit.oc@iith.ac.in", os.Getenv("SMTP_PASSWORD"))
 		if err := dialer.DialAndSend(m); err != nil {
-			fmt.Println(emailData)
-			panic(err)
+			fmt.Printf("\nFailed to send email with error: %v\nUser Data: %v\n", err, user)
+			continue
 		}
 
 	}

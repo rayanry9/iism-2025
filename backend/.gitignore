@@ -4,3 +4,4 @@ app
 output-image.tar.xz
 backup-*
 images/
+reg_cli

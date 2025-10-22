@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS user_sports (
 		extra TEXT
 );
 
-CREATE UNIQUE INDEX unq_primary_user_sport ON user_sports (user_id, sport_id) WHERE NOT (secondary OR reserve);
+CREATE UNIQUE INDEX IF NOT EXISTS unq_primary_user_sport ON user_sports (user_id, sport_id) WHERE NOT (secondary OR reserve);
 
 -- Role - > 1 -> non player 
 -- 2 -> Player
@@ -33,8 +33,8 @@ CREATE UNIQUE INDEX unq_primary_user_sport ON user_sports (user_id, sport_id) WH
 -- 5 -> Admin
 -- 6 -> Coach
 
-DROP TABLE players IF EXISTS;
-DROP TABLE admins IF EXISTS;
+DROP TABLE IF EXISTS players ;
+DROP TABLE IF EXISTS admins ;
 
 -- ATHLETICS STUDENT
 INSERT INTO sports (id, name, type) VALUES (27, '100 M', 4);
