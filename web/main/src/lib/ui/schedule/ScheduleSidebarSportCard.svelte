@@ -19,7 +19,7 @@
 	onkeydown={onclick}
 	tabindex={1}
 	{onclick}
-	class="relative flex flex-col border-2 border-white transition-all xl:mt-3 xl:h-[12vh] xl:w-[12.4vw] 2xl:mt-8 2xl:h-[12vh] 2xl:w-[12vw] {selected
+	class="relative flex flex-col border-2 border-white transition-all xl:mt-3 xl:h-32 xl:w-[12.4vw] 2xl:mt-8 2xl:h-32 2xl:w-[12vw] {selected
 		? 'bg-custom-orange'
 		: 'bg-black'} "
 	data-umami-event="Sport selected"

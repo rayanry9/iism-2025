@@ -21,7 +21,12 @@
 	class="border-custom-gray flex min-w-[28rem] flex-col gap-y-6 border bg-white px-12 py-8 transition-all hover:scale-[102%] hover:brightness-[99%]"
 >
 	<div class="flex gap-x-4">
-		<img src={getSportImageSrc(sport)} class="h-10" alt={sport} />
+		<img
+			src={getSportImageSrc(sport)}
+			hidden={(sport as string) == 'Coach/PTI/Staff'}
+			class="h-10"
+			alt={sport}
+		/>
 		<h2>{sport.toUpperCase()} {extraText?.toUpperCase()}</h2>
 	</div>
 	<div class="flex flex-col gap-y-4">

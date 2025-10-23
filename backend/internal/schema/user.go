@@ -12,6 +12,7 @@ type UserRole int
 const (
 	UserMale        UserGender = "Male"
 	UserFemale      UserGender = "Female"
+	UserOthers      UserGender = "Others"
 	UserUnspecified UserGender = "Unspecified"
 )
 const (
@@ -100,6 +101,24 @@ type RegisterPlayerSportData struct {
 	Secondary bool    `json:"secondary"`
 	Reserve   bool    `json:"reserve"`
 	Extra     *string `json:"extra"`
+}
+
+type RegisterCoachRequest struct {
+	FirstName          string               `form:"first_name"`
+	MiddleName         *string              `form:"middle_nme"`
+	LastName           *string              `form:"last_name"`
+	Gender             string               `form:"gender"`
+	Email              string               `form:"email"`
+	ProfilePic         multipart.FileHeader `form:"profile_pic"`
+	ContactNo          string               `form:"contact_no"`
+	EmergencyContactNo string               `form:"emergency_contact_no"`
+	BloodGroup         string               `form:"blood_group"`
+	FoodPreference     string               `form:"food_preference"`
+	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	Remark             *string              `form:"remark"`
+	Institute          string               `form:"institute"`
+	Staff              bool                 `form:"staff"`
 }
 
 type GetPlayersRequest struct {

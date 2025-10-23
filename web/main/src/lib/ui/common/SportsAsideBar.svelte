@@ -70,7 +70,7 @@
 	</div>
 	<div
 		style="scrollbar-color: var(--custom-light-blue) #F0F0F0; scrollbar-width:auto ;"
-		class="bg-custom-blue hidden flex-col overflow-x-visible overflow-y-scroll pt-14 *:translate-x-8 xl:flex xl:w-[8rem] xl:gap-y-[3vh] 2xl:w-[11rem] 2xl:gap-y-4"
+		class="bg-custom-blue hidden flex-col pt-14 *:translate-x-8 xl:flex xl:w-[8rem] xl:gap-y-[3vh] 2xl:w-[11rem] 2xl:gap-y-4"
 	>
 		{#each sports as s}
 			<ScheduleSidebarSportCard

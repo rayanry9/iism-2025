@@ -16,14 +16,17 @@
 	import { afterNavigate, beforeNavigate, goto, invalidateAll } from '$app/navigation';
 	import { globals } from '$lib/state.svelte.js';
 	import Loading from '$lib/ui/components/Loading.svelte';
+	import { browser } from '$app/environment';
 	const sportId = page.url.searchParams.get('sport');
 	const totalRegistrants = getSportMaxRegistrants(parseInt(sportId!));
 	let { data } = $props();
 	let currentRegistrants = $derived(
 		data.playerCount.count + data.playerCount.reserveCount + data.playerCount.secondaryCount
 	);
-	if (globals.staff != isSportIdStaff(parseInt(sportId ?? '0'))) {
-		goto('/register');
+	if (browser) {
+		if (globals.staff != isSportIdStaff(parseInt(sportId ?? '0'))) {
+			goto('/register');
+		}
 	}
 
 	beforeNavigate(() => {
@@ -41,17 +44,23 @@
 		<div class="flex items-center gap-x-4 leading-0">
 			<img
 				class="h-20"
+				hidden={parseInt(sportId) <= -10}
 				src={getSportImageSrc(getSportFromSportId(parseInt(sportId)) as Sports)}
 				alt="sport img"
 			/>
 			<div class="flex flex-col">
-				<h2>{getSportFromSportId(parseInt(sportId))?.toUpperCase()} TEAM</h2>
+				<h2 hidden={parseInt(sportId) <= -10}>
+					{getSportFromSportId(parseInt(sportId))?.toUpperCase()} TEAM
+				</h2>
+				<h2 hidden={parseInt(sportId) > -10}>COACH/PTI/STAFF TEAM</h2>
 				<p>
-					IIT {data.me?.institute} - {isSportFemale(parseInt(sportId))
-						? 'Women'
-						: parseInt(sportId) == -2 || parseInt(sportId) == 59
-							? 'Mixed'
-							: 'Men'}
+					IIT {data.me?.institute}{parseInt(sportId) > -10
+						? isSportFemale(parseInt(sportId))
+							? ' - Women'
+							: parseInt(sportId) == -2 || parseInt(sportId) == 59
+								? ' - Mixed'
+								: ' - Men'
+						: ''}
 					{globals.staff ? '( Staff )' : ''}
 				</p>
 			</div>
@@ -77,7 +86,7 @@
 	<a class="ml-auto" href="/register/team/add?sport={sportId}">
 		<Button
 			class="bg-custom-orange disabled:bg-custom-gray ml-auto h-fit rounded-sm px-4 py-2 text-white *:flex  *:gap-x-4 disabled:cursor-not-allowed disabled:active:brightness-100"
-			disabled={currentRegistrants == totalRegistrants}
+			disabled={currentRegistrants >= totalRegistrants}
 			><img src={plusSVG} class="h-6" alt="add" />Add New Member</Button
 		>
 	</a>

@@ -41,22 +41,34 @@
 			<button
 				class={`${page.url.pathname.includes('/register') ? 'text-custom-orange ' : ''} `}
 				onclick={() => {
+					globals.loading = true;
 					fetch(PUBLIC_API_URL + '/logout', { method: 'post', credentials: 'include' }).then(
 						(res) => {
-							StartToastifyInstance({
-								text: 'Successfully logged out',
-								position: 'right',
-								gravity: 'bottom',
-								duration: 2000,
-								style: {
-									background: 'linear-gradient(90deg, #FF1744, #D50000)'
-								},
-								close: true
-							}).showToast();
-							setTimeout(() => {
+							if (res.status == 200) {
+								StartToastifyInstance({
+									text: 'Successfully logged out',
+									position: 'right',
+									gravity: 'bottom',
+									duration: 2000,
+									style: {
+										background: 'linear-gradient(90deg, #FF1744, #D50000)'
+									},
+									close: true
+								}).showToast();
 								invalidateAll();
 								goto('/register/login');
-							}, 2000);
+							} else {
+								StartToastifyInstance({
+									text: 'Failed to logged out',
+									position: 'right',
+									gravity: 'bottom',
+									duration: 2000,
+									style: {
+										background: 'linear-gradient(90deg, #FF1744, #D50000)'
+									},
+									close: true
+								}).showToast();
+							}
 						}
 					);
 				}}

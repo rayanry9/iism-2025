@@ -8,7 +8,7 @@ export const load: PageLoad = async ({ parent, fetch, url }) => {
 	const par = await parent();
 	const sportId = parseInt(url.searchParams.get('sport')!);
 
-	if (sportId <= 0) {
+	if (sportId >= -8 && sportId <= 0) {
 		return {
 			athleticSubSport: (await (
 				await fetch(

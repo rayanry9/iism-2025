@@ -101,11 +101,68 @@ func RegisterPlayer(c *gin.Context, req schema.RegisterPlayerRequest, sports []s
 	return tx.Commit(c)
 }
 
+func RegisterCoach(c *gin.Context, req schema.RegisterCoachRequest) error {
+	tx, err := config.DB.Begin(c)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(c)
+
+	_, err = tx.Exec(c, `
+	insert into 
+		users 
+			(first_name, middle_name, last_name, gender, email, profile_pic, contact_no, emergency_contact_no, blood_group, food_preference, check_in_date, check_out_date, role, remark, institute_id, staff)
+	select	
+		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, id, $16 
+	from 
+		institutes
+	where 
+		name = $15 `, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserCoach, req.Remark, req.Institute, req.Staff)
+	if err != nil {
+		return err
+	}
+	return tx.Commit(c)
+}
+
 func GetPlayers(c *gin.Context, req schema.GetPlayersRequest) (*[]schema.GetPlayersResponse, error) {
 	var rows pgx.Rows
 	var err error
 
 	switch req.SportId {
+	case -11:
+		rows, err = config.DB.Query(c, `
+			select	
+				u.id as user_id,
+				u.profile_pic,
+				u.first_name,
+				u.middle_name,
+				u.last_name,
+				u.remark as extra
+			from
+				users u
+			join 
+				institutes i
+				on i.id = u.institute_id
+			where
+				i.name ILIKE $1 and u.staff and u.role = $2
+		`, req.Institute, schema.UserCoach)
+	case -10:
+		rows, err = config.DB.Query(c, `
+			select	
+				u.id as user_id,
+				u.profile_pic,
+				u.first_name,
+				u.middle_name,
+				u.last_name,
+				u.remark as extra
+			from
+				users u
+			join 
+				institutes i
+				on i.id = u.institute_id
+			where
+				i.name ILIKE $1 and not u.staff and u.role = $2
+		`, req.Institute, schema.UserCoach)
 	case 0:
 		fallthrough
 	case -1:
@@ -228,6 +285,30 @@ func GetPlayerCount(c *gin.Context, req schema.GetPlayerCountRequest) (*schema.G
 	var err error
 
 	switch req.SportId {
+	case -11:
+		err = config.DB.QueryRow(c, `
+			select	
+				count(*),0,0
+			from
+				users u
+			join 
+				institutes i
+				on i.id = u.institute_id
+			where
+				i.name ILIKE $1 and u.staff and u.role = $2
+		`, req.Institute, schema.UserCoach).Scan(&res.Count, &res.SecondaryCount, &res.ReserveCount)
+	case -10:
+		err = config.DB.QueryRow(c, `
+			select	
+				count(*),0,0
+			from
+				users u
+			join 
+				institutes i
+				on i.id = u.institute_id
+			where
+				i.name ILIKE $1 and not u.staff and u.role = $2
+		`, req.Institute, schema.UserCoach).Scan(&res.Count, &res.SecondaryCount, &res.ReserveCount)
 	case 0:
 		fallthrough
 	case -1:
