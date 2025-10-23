@@ -30,7 +30,7 @@ type UserDB struct {
 	MiddleName         *string      `db:"middle_name"`
 	LastName           *string      `db:"last_name"`
 	Gender             string       `db:"gender"`
-	Email              string       `db:"email"`
+	Email              *string      `db:"email"`
 	Password           *string      `db:"password"`
 	ProfilePic         *string      `db:"profile_pic"`
 	ContactNo          *string      `db:"contact_no"`
@@ -60,7 +60,7 @@ type GetUserDetailsResponse struct {
 	MiddleName         *string                    `json:"middleName"`
 	LastName           *string                    `json:"lastName"`
 	Gender             string                     `json:"gender"`
-	Email              string                     `json:"email"`
+	Email              *string                    `json:"email"`
 	ProfilePic         *string                    `json:"profilePic"`
 	ContactNo          *string                    `json:"contactNo"`
 	EmergencyContactNo *string                    `json:"emergencyContactNo"`
