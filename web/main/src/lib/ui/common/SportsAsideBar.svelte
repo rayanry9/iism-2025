@@ -35,11 +35,9 @@
 	} = $props();
 </script>
 
-<aside
-	class="hidden flex-col xl:ml-[1.5rem] xl:flex xl:h-full xl:-translate-x-[11rem] xl:-skew-x-12 xl:flex-row 2xl:ml-[0.5rem]"
->
+<aside class="hidden h-full -translate-x-32 -skew-x-12 xl:flex xl:flex-row">
 	<div
-		class="hidden flex-col items-end gap-y-6 bg-black pt-20 pl-32 text-white xl:flex xl:pr-4 2xl:pr-8 *:[button]:w-fit *:[button]:rounded-sm *:[button]:px-4 *:[button]:py-2.5 *:[button]:transition *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
+		class="hidden w-72 gap-y-4 bg-black pt-16 pr-4 text-white *:ml-auto xl:flex xl:flex-col 2xl:pt-24 2xl:pr-8 *:[button]:w-fit *:[button]:rounded-sm *:[button]:px-4 *:[button]:py-2.5 *:[button]:transition *:[button]:hover:cursor-pointer *:[button]:hover:brightness-95"
 	>
 		<button
 			class="button-text {selectedSport == undefined
@@ -70,16 +68,21 @@
 	</div>
 	<div
 		style="scrollbar-color: var(--custom-light-blue) #F0F0F0; scrollbar-width:auto ;"
-		class="bg-custom-blue hidden flex-col pt-14 *:translate-x-8 xl:flex xl:w-[8rem] xl:gap-y-[3vh] 2xl:w-[11rem] 2xl:gap-y-4"
+		class="bg-custom-blue hidden w-40 overflow-x-visible xl:flex xl:flex-col 2xl:w-52"
 	>
-		{#each sports as s}
-			<ScheduleSidebarSportCard
-				sport={s}
-				selected={selectedSport == s}
-				onclick={() => {
-					selectedSport = s;
-				}}
-			/>
-		{/each}
+		<div
+			class="flex h-min w-max translate-x-8 flex-col gap-y-10 overflow-x-clip overflow-y-auto pt-16 pr-8 pb-12 2xl:translate-x-12 2xl:gap-y-12 2xl:pt-24"
+			style="scrollbar-color: #FDB424 #F0F0F0; scrollbar-width:auto ;"
+		>
+			{#each sports as s}
+				<ScheduleSidebarSportCard
+					sport={s}
+					selected={selectedSport == s}
+					onclick={() => {
+						selectedSport = s;
+					}}
+				/>
+			{/each}
+		</div>
 	</div>
 </aside>
