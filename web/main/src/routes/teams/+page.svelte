@@ -122,7 +122,7 @@
 	{:else}
 		<main class="flex h-[calc(100vh-20rem)] grow  flex-row w-[100rem] ">
 			<div class="flex  flex-col xl:w-[60rem] 2xl:w-full p-[3rem] ">
-				<div class="flex flex-row gap-[2rem] border-2 border-black xl:h-[8rem] 2xl:h-[10rem] items-center justify-between  w-full p-[2rem]">
+				<div class="flex flex-row gap-[2rem]  xl:h-[8rem] 2xl:h-[10rem] items-center justify-between  w-full p-[2rem]">
 					<div class="flex gap-[2rem] items-center">
 						<img 
 						src={getIITImgSrc(activeIIT)}
@@ -140,17 +140,17 @@
 								// window.open('https://www.linkedin.com/company/inter-iit-sports-meet-2025/', '_blank');
 								activeSport = sport
 							}}
-							class={` border-2 border-black ${activeSport == sport ? 'bg-custom-blue' : 'bg-custom-white'}`}
+							class={`border-1 border-black ${activeSport == sport ? 'bg-custom-blue' : 'bg-custom-white'}`}
 						>
 							<img src={getSportImageSrc(sport)} class="" alt="sport" />
 						</Button>
 						{/each}
 				</div>	
 				</div>	
-				<div class="ml-[2rem] mt-[1rem] w-[96%] border-2 border-custom-gray"> </div>
+				<div class="ml-[2rem] mt-[1rem] w-[96%] "> </div>
 
 				{#if activeSport}
-				<div class = "flex flex-row  items-center justify-between xl:mt-[1rem] 2xl:mt-[2.5rem] xl:h-[10rem] border-2 border-black">
+				<div class = "flex flex-row  items-center justify-between xl:mt-[1rem] 2xl:mt-[2.5rem] xl:h-[10rem] ">
 				
 			<!-- <h2>Team has not been decided yet.</h2> -->
 			 
@@ -185,10 +185,10 @@
 						</ToggleTabs.Root>
 					</div>
 				</div>
-				<div class = "flex flex-none flex-row flex-wrap overflow-y-auto gap-[4rem] p-[1rem] border-2 border-custom-red xl:mt-[1rem] 2xl:mt-[2rem] lg:h-[15rem] xl:h-[28rem] 2xl:h-[40rem]">
+				<div class = "flex flex-none flex-row  flex-wrap overflow-y-auto gap-[4rem] p-[1rem] xl:mt-[1rem] 2xl:mt-[2rem] lg:h-[15rem] xl:h-[23rem] [@media(min-height:900px)]:h-[32rem] 2xl:h-[35rem]">
 					{#each playerData as player}
-						<div class=" flex flex-col  p-2 my-1  border-2 border-black h-[20rem] xl:w-[18rem] 2xl:w-[25rem]">
-							<img alt="profile photo" src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}/>
+						<div class=" flex flex-col   p-2 my-1  h-auto xl:w-[22rem] 2xl:w-[25rem]">
+							<img alt="profile" class = "h-[20rem] " src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}/>
    							<span class = "mt-[1rem] xl:text-xl 2xl:text-3xl "> {player.firstName} {player.lastName} </span>	
    							 <span class="mt-[1rem] xl:text-xxl text-xl">{player.extra}</span> 
   						</div>
