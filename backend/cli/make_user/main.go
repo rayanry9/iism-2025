@@ -79,8 +79,8 @@ func main() {
 		m := gomail.NewMessage()
 		m.SetHeader("From", "interiit.oc@iith.ac.in")
 		m.SetHeader("To", user[4:]...)
-		// m.SetHeader("Cc", "interiit@iith.ac.in", "interiit.convenor@iith.ac.in")
-		m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
+		m.SetHeader("Cc", "interiit@iith.ac.in", "interiit.convenor@iith.ac.in")
+		// m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
 		var year string
 		if isStaff {
 			year = "38th Inter IIT Staff Sports Meet"
@@ -90,7 +90,7 @@ func main() {
 		m.SetHeader("Subject", fmt.Sprintf("Login Details for %s 2025 Player Registration Website", year))
 
 		var emailData EmailData
-		emailData.Name = user[0] + " " + user[1]
+		emailData.Name = user[0]
 		emailData.Password = password
 		emailData.UserId = user[2]
 
