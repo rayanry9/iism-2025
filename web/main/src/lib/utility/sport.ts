@@ -102,6 +102,10 @@ export function getSportFromSportId(id: number): Sports | null {
 export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 	if (staff) {
 		switch (sport) {
+			case 'Athletics':
+				if(type==1) return -3;
+				else if(type==2) return -4;
+				else if(type ==3) return -5 ;
 			case 'Volleyball':
 				return 25;
 			case 'Football':
@@ -127,6 +131,10 @@ export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 		}
 	} else {
 		switch (sport) {
+			case 'Athletics':
+				if(type==1) return 0;
+				else if(type==2) return -1;
+				else if(type ==3) return -2;
 			case 'Volleyball':
 				if (type == 1) return 14;
 				else return 15;
