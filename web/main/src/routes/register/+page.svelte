@@ -28,7 +28,11 @@
 			Welcome {data.me?.firstName + ' ' + data.me?.lastName}!
 		</div>
 		<h2>SELECT A SPORT</h2>
-		<p>Select a sport to register the Team</p>
+		<p>
+			Select a sport to register the Team {globals.staff
+				? 'for Inter IIT Staff Sports Meet'
+				: 'for Inter IIT Sports Meet'}
+		</p>
 	</div>
 
 	<section class="flex flex-wrap justify-center gap-12 px-24 2xl:gap-16 2xl:px-32">
@@ -36,7 +40,13 @@
 			<a href="register/team?sport={sport.id}">
 				<SportCard
 					sport={sport.name as Sports}
-					extraText={sport.type == 1 ? '(M)' : sport.type == 2 ? '(W)' : '(MX)'}
+					extraText={sport.type == 1
+						? '(M)'
+						: sport.type == 2
+							? '(W)'
+							: sport.type == -1
+								? ''
+								: '(MX)'}
 					currentCount={(data.playerCountData!.find((val) => val.sportId == sport.id)?.count || 0) +
 						(data.playerCountData!.find((val) => val.sportId == sport.id)?.reserveCount || 0) +
 						(data.playerCountData!.find((val) => val.sportId == sport.id)?.secondaryCount || 0)}

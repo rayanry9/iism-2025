@@ -14,30 +14,27 @@
 	} = $props();
 </script>
 
-<div
-	role="button"
-	onkeydown={onclick}
-	tabindex={1}
+<button
 	{onclick}
-	class="relative flex flex-col border-2 border-white transition-all xl:mt-3 xl:h-[12vh] xl:w-[12.4vw] 2xl:mt-8 2xl:h-[12vh] 2xl:w-[12vw] {selected
+	class="relative flex h-28 w-44 shrink-0 flex-col overflow-visible border-2 border-white transition-all 2xl:h-32 2xl:w-52 {selected
 		? 'bg-custom-orange'
 		: 'bg-black'} "
 	data-umami-event="Sport selected"
 	data-umami-event-page={page.url.pathname}
 >
 	<img
-		class="absolute {selected
-			? '-top-8'
-			: '-top-6'} right-0 left-0 mx-auto skew-x-12 transition-all xl:h-[13vh] 2xl:h-[8.5rem]"
+		class="{selected
+			? 'bottom-5'
+			: 'bottom-2 '} absolute right-0 left-0 mx-auto h-32 skew-x-12 transition-all 2xl:h-36"
 		src={getSportImageSrc(sport)}
 		alt={sport}
 	/>
 	<div
 		class=" transition-all {selected
 			? 'bg-custom-dark-yellow border-t-custom-yellow'
-			: 'bg-custom-dark-gray border-t-custom-gray'}  button-text z-20 mt-auto h-fit border-t-4 px-6 py-3 leading-none text-white xl:py-1.5 2xl:py-3"
+			: 'bg-custom-dark-gray border-t-custom-gray'} button-text z-20 mt-auto flex h-fit flex-col border-t-4 py-2.5 leading-none text-white 2xl:py-3"
 	>
-		<div class="skew-x-12">{sport.toUpperCase()}</div>
+		<div class="mr-auto ml-6 skew-x-12">{sport.toUpperCase()}</div>
 	</div>
 
 	{#if selected}
@@ -47,4 +44,4 @@
 			style="clip-path: polygon(0% 0%, 100% 50%, 0% 100%);"
 		></div>
 	{/if}
-</div>
+</button>

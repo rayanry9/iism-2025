@@ -8,10 +8,12 @@
 	import StartToastifyInstance from 'toastify-js';
 
 	let { data, form } = $props();
-	if (data.me && data.me.staff != globals.staff) {
-		globals.staff = data.me.staff;
-		goto('/register');
-	}
+	$effect(() => {
+		if (data.me && data.me.staff != globals.staff) {
+			globals.staff = data.me.staff;
+			goto('/register');
+		}
+	});
 
 	$effect(() => {
 		if (form != undefined) {

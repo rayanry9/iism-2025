@@ -41,25 +41,29 @@
 	});
 </script>
 
-<main class="2xl:h-full 2xl:overflow-y-auto">
+<main class="2xl:h-full">
 	<h2 class="hidden xl:block">FULL SCHEDULE</h2>
 
 	<section class="item flex flex-col xl:pt-12">
-		<DaySelector bind:currentDate />
-		<hr class="text-custom-gray mt-8" />
-		{#each timeSets as time}
-			<div class="my-12 flex flex-col gap-y-3">
-				<div class="bg-custom-light-blue title-text w-fit px-5 py-3 text-white">
-					{time.val}
+		{#if false}
+			<DaySelector bind:currentDate />
+			<hr class="text-custom-gray mt-8" />
+			{#each timeSets as time}
+				<div class="my-12 flex flex-col gap-y-3">
+					<div class="bg-custom-light-blue title-text w-fit px-5 py-3 text-white">
+						{time.val}
+					</div>
+					{#each matchData.filter((val) => val.startTime.getDate() == currentDate.getDate() && val.startTime.getHours() == time.hour && val.startTime.getMinutes() == time.min) as match}
+						<PoolMatchRow
+							sport={getSportFromSportId(match.sportId) ?? 'Athletics'}
+							instituteData={institutes}
+							matchData={match}
+						/>
+					{/each}
 				</div>
-				{#each matchData.filter((val) => val.startTime.getDate() == currentDate.getDate() && val.startTime.getHours() == time.hour && val.startTime.getMinutes() == time.min) as match}
-					<PoolMatchRow
-						sport={getSportFromSportId(match.sportId) ?? 'Athletics'}
-						instituteData={institutes}
-						matchData={match}
-					/>
-				{/each}
-			</div>
-		{/each}
+			{/each}
+		{:else}
+			<h2>Cuurently not available</h2>
+		{/if}
 	</section>
 </main>

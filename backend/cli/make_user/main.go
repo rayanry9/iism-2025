@@ -3,9 +3,10 @@ package main
 import (
 	"bytes"
 	"context"
-	"encoding/csv"
+	"crypto/rand"
 	"fmt"
 	"html/template"
+	"io"
 	"os"
 	"strings"
 
@@ -38,36 +39,48 @@ func main() {
 		panic(err)
 	}
 	defer file.Close()
-
-	reader := csv.NewReader(file)
-	allData, err := reader.ReadAll()
+	readData, err := io.ReadAll(file)
 	if err != nil {
 		panic(err)
 	}
 	config.InitDB()
+	var allData [][]string
+
+	for line := range strings.SplitSeq(string(readData), "\n") {
+		allData = append(allData, strings.Split(line, ","))
+	}
 
 	for _, user := range allData {
+		if len(user) == 0 {
+			continue
+		}
 		var isStaff bool
-		for idx := range 6 {
+		for idx := range len(user) {
 			user[idx] = strings.Trim(user[idx], " ")
 		}
-		if user[6] == "staff" {
-			isStaff = true
-		} else {
+		if strings.Contains(user[1], "Student") {
 			isStaff = false
+		} else {
+			isStaff = true
 		}
-		encodedPassword := utility.GenerateEncodedHashFromPassword(user[4])
+		password := strings.ToLower(rand.Text())[:6]
+		encodedPassword := utility.GenerateEncodedHashFromPassword(password)
 
-		if _, err := config.DB.Exec(context.Background(), `insert into users (first_name, last_name, email, assigned_id, password, institute_id, role, staff) values ($1, $2, $3, $4, $5, $6, $7, $8)`, user[0], user[1], user[2], user[3], encodedPassword, user[5], 3, isStaff); err != nil {
+		if _, err := config.DB.Exec(context.Background(), `insert into users (first_name, last_name, assigned_id, password, institute_id, role, staff) values ($1, $2, $3, $4, $5, $6, $7)`, user[0], user[1], user[2], encodedPassword, user[3], 3, isStaff); err != nil {
 			fmt.Printf("Failed to add to db with error: %v\nUser Data: %v\n", err, user)
 			continue
 		}
 
+		eml, err := template.New("reg").Parse(string(registrationHtml))
+		if err != nil {
+			panic(err)
+		}
+
 		m := gomail.NewMessage()
 		m.SetHeader("From", "interiit.oc@iith.ac.in")
-		m.SetHeader("To", user[2])
+		m.SetHeader("To", user[4:]...)
 		// m.SetHeader("Cc", "interiit@iith.ac.in", "interiit.convenor@iith.ac.in")
-		// m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
+		m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
 		var year string
 		if isStaff {
 			year = "38th Inter IIT Staff Sports Meet"
@@ -75,15 +88,11 @@ func main() {
 			year = "58th Inter IIT Sports Meet"
 		}
 		m.SetHeader("Subject", fmt.Sprintf("Login Details for %s 2025 Player Registration Website", year))
-		eml, err := template.New("reg").Parse(string(registrationHtml))
-		if err != nil {
-			panic(err)
-		}
 
 		var emailData EmailData
 		emailData.Name = user[0] + " " + user[1]
-		emailData.Password = user[4]
-		emailData.UserId = user[3]
+		emailData.Password = password
+		emailData.UserId = user[2]
 
 		var finalEmail bytes.Buffer
 		if err := eml.Execute(&finalEmail, emailData); err != nil {
@@ -97,7 +106,6 @@ func main() {
 			fmt.Printf("\nFailed to send email with error: %v\nUser Data: %v\n", err, user)
 			continue
 		}
-
+		fmt.Printf("Sucessfully sent email to %s with password : %s", user, password)
 	}
-
 }

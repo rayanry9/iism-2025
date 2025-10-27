@@ -12,6 +12,7 @@ type UserRole int
 const (
 	UserMale        UserGender = "Male"
 	UserFemale      UserGender = "Female"
+	UserOthers      UserGender = "Others"
 	UserUnspecified UserGender = "Unspecified"
 )
 const (
@@ -29,7 +30,7 @@ type UserDB struct {
 	MiddleName         *string      `db:"middle_name"`
 	LastName           *string      `db:"last_name"`
 	Gender             string       `db:"gender"`
-	Email              string       `db:"email"`
+	Email              *string      `db:"email"`
 	Password           *string      `db:"password"`
 	ProfilePic         *string      `db:"profile_pic"`
 	ContactNo          *string      `db:"contact_no"`
@@ -59,7 +60,7 @@ type GetUserDetailsResponse struct {
 	MiddleName         *string                    `json:"middleName"`
 	LastName           *string                    `json:"lastName"`
 	Gender             string                     `json:"gender"`
-	Email              string                     `json:"email"`
+	Email              *string                    `json:"email"`
 	ProfilePic         *string                    `json:"profilePic"`
 	ContactNo          *string                    `json:"contactNo"`
 	EmergencyContactNo *string                    `json:"emergencyContactNo"`
@@ -100,6 +101,24 @@ type RegisterPlayerSportData struct {
 	Secondary bool    `json:"secondary"`
 	Reserve   bool    `json:"reserve"`
 	Extra     *string `json:"extra"`
+}
+
+type RegisterCoachRequest struct {
+	FirstName          string               `form:"first_name"`
+	MiddleName         *string              `form:"middle_nme"`
+	LastName           *string              `form:"last_name"`
+	Gender             string               `form:"gender"`
+	Email              string               `form:"email"`
+	ProfilePic         multipart.FileHeader `form:"profile_pic"`
+	ContactNo          string               `form:"contact_no"`
+	EmergencyContactNo string               `form:"emergency_contact_no"`
+	BloodGroup         string               `form:"blood_group"`
+	FoodPreference     string               `form:"food_preference"`
+	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	Remark             *string              `form:"remark"`
+	Institute          string               `form:"institute"`
+	Staff              bool                 `form:"staff"`
 }
 
 type GetPlayersRequest struct {

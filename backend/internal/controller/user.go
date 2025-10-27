@@ -164,6 +164,38 @@ func RegisterPlayer(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
+func RegisterCoach(c *gin.Context) {
+	var req schema.RegisterCoachRequest
+
+	if err := c.Bind(&req); err != nil {
+		slog.Info("Bad request for register player", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
+		return
+	}
+
+	if req.ProfilePic.Size > 10*1024*1024 {
+		slog.Info("Profile Pic File size exceeded", "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "File Size exceeded"})
+		return
+	}
+
+	// IIT - Sport - Player
+	req.ProfilePic.Filename = fmt.Sprintf("%s-%s-%s", req.Institute, req.Gender, utility.ToPascalCase(req.FirstName)+utility.ToPascalCase(utility.CoalesceString(req.MiddleName))+utility.ToPascalCase(utility.CoalesceString(req.LastName)))
+
+	if err := utility.SaveProfilePic(req.ProfilePic); err != nil {
+		slog.Error("Failed to save profile pic", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save Profile Picture"})
+		return
+	}
+
+	if err := db.RegisterCoach(c, req); err != nil {
+		slog.Error("Failed to register coach", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to register personnel."})
+		return
+	}
+	c.Status(http.StatusOK)
+}
+
 func GetPlayers(c *gin.Context) {
 	var req schema.GetPlayersRequest
 

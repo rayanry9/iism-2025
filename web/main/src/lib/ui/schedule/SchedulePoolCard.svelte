@@ -19,7 +19,7 @@
 </script>
 
 <div
-	class="button-text *:not-first:border-custom-gray grid h-fit w-[15rem] grid-cols-1 flex-col gap-y-1 *:px-4 *:py-2.5 *:not-first:border {className}"
+	class="button-text *:not-first:border-custom-gray grid h-fit w-[14rem] grid-cols-1 flex-col gap-y-1 *:px-4 *:py-2.5 *:not-first:border 2xl:w-[15rem] {className}"
 >
 	<div class="bg-custom-pastel-yellow">
 		POOL - <span class="font-extrabold">{poolName}</span>

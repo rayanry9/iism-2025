@@ -1,7 +1,7 @@
 import type { GetAllSportsResponse, Sports } from '$lib/types/sports';
 
 export function isSportIdStaff(id: number): boolean {
-	if ((id >= 16 && id <= 25) || id <= -3 || (id >= 59 && id <= 83)) {
+	if ((id >= 16 && id <= 25) || (id >= -6 && id <= -3) || id == -11 || (id >= 59 && id <= 83)) {
 		return true;
 	} else {
 		return false;
@@ -18,6 +18,7 @@ export function getRegisterableSports(
 		);
 		newArr.push({ id: -3, name: 'Athletics', staff: true, type: 1 });
 		newArr.push({ id: -4, name: 'Athletics', staff: true, type: 2 });
+		newArr.push({ id: -11, name: 'Coach/PTI/Staff', staff: true, type: -1 });
 		return newArr.sort((a, b) => a.name.localeCompare(b.name));
 	} else {
 		return [
@@ -28,7 +29,8 @@ export function getRegisterableSports(
 			{ name: 'Football', staff: false, type: 1, id: getSportIdOfSport('Football', 1, false) },
 			{ name: 'Hockey', staff: false, type: 1, id: getSportIdOfSport('Hockey', 1, false) },
 			{ name: 'Volleyball', staff: false, type: 1, id: getSportIdOfSport('Volleyball', 1, false) },
-			{ name: 'Volleyball', staff: false, type: 2, id: getSportIdOfSport('Volleyball', 2, false) }
+			{ name: 'Volleyball', staff: false, type: 2, id: getSportIdOfSport('Volleyball', 2, false) },
+			{ id: -10, name: 'Coach/PTI/Staff', staff: false, type: -1 }
 		].sort((a, b) => a.name.localeCompare(b.name));
 	}
 }
@@ -208,6 +210,10 @@ export function isSportFemale(id: number) {
 
 export function getSportMaxRegistrants(sportId: number): number {
 	switch (sportId) {
+		case -11:
+			return 2;
+		case -10:
+			return 20;
 		case -4:
 			return 7 * 3 + 1 * 5;
 		case -3:
