@@ -143,21 +143,21 @@
 				imgSrc={ShreevelImg}
 				designation="Design & Creatives Head"
 				phone="+91 9344702682"
-				mail="interiit.oc@iith.oc.in"
+				mail="interiit.oc@iith.ac.in"
 				name="KJ Shreevel"
 			/>
 			<ContactCard
 				imgSrc={KushImg}
 				designation="Media Head"
 				phone="+91 9032066698"
-				mail="interiit.oc@iith.oc.in"
+				mail="interiit.oc@iith.ac.in"
 				name="Kush Upadhyay"
 			/>
 			<ContactCard
 				imgSrc={SiyaImg}
 				designation="Media Head"
 				phone="+91 8657484442"
-				mail="interiit.oc@iith.oc.in"
+				mail="interiit.oc@iith.ac.in"
 				name="Siya Shah"
 			/>
 			<ContactCard
