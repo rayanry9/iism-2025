@@ -7,6 +7,7 @@
 	import type { PageProps } from './$types';
 	import MobileHeaderFrame from '$lib/ui/common/MobileHeaderFrame.svelte';
 	import downloadIcon from '$lib/assets/icons/download.svg';
+	import { globals } from '$lib/state.svelte';
 
 	let selectedSport = $state<Sports | undefined>(undefined);
 	let { data }: PageProps = $props();
@@ -27,10 +28,18 @@
 			<button
 				class="border-custom-light-blue button-text ml-auto w-fit -skew-x-12 self-end rounded-sm border-2 px-4 py-2.5 hover:cursor-pointer hover:brightness-95"
 			>
-				<div class="flex skew-x-12 items-center gap-x-1.5 leading-none">
-					PDF <img src={downloadIcon} alt="download" />
-				</div></button
-			>
+				<a
+					href={globals.staff
+						? '/30th%20IISSM%20Staff%20Schedule.pdf'
+						: '/58th%20IISM%20Student%20Schedule.pdf'}
+					target="_blank"
+					download
+				>
+					<div class="flex skew-x-12 items-center gap-x-1.5 leading-none">
+						PDF <img src={downloadIcon} alt="download" />
+					</div>
+				</a>
+			</button>
 		</div>
 	</MobileHeaderFrame>
 

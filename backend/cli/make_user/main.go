@@ -83,7 +83,7 @@ func main() {
 		// m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
 		var year string
 		if isStaff {
-			year = "38th Inter IIT Staff Sports Meet"
+			year = "30th Inter IIT Staff Sports Meet"
 		} else {
 			year = "58th Inter IIT Sports Meet"
 		}
