@@ -52,10 +52,18 @@
 			class="border-custom-light-blue button-text border-2"
 			data-umami-event="Full schedule pdf download"
 		>
-			<div class="flex skew-x-12 items-center gap-x-1.5 leading-none">
-				PDF <img src={downloadIcon} alt="download" />
-			</div></button
-		>
+			<a
+				href={globals.staff
+					? '/30th%20IISSM%20Staff%20Schedule.pdf'
+					: '/58th%20IISM%20Student%20Schedule.pdf'}
+				target="_blank"
+				download
+			>
+				<div class="flex skew-x-12 items-center gap-x-1.5 leading-none">
+					PDF <img src={downloadIcon} alt="download" />
+				</div>
+			</a>
+		</button>
 		{#if selectedSport == undefined}
 			<div transition:fade={{ duration: 100 }} class="flex items-center gap-x-4">
 				<p class="leading-tight">{@html bottomText}</p>
