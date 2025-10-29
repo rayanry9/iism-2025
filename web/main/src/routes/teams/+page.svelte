@@ -12,6 +12,9 @@
 	import { globals } from '$lib/state.svelte';
 	import type { Sports } from '$lib/types/sports';
 	import Button from '$lib/ui/components/Button.svelte';
+	import CustomSelect2 from '$lib/ui/teams/CustomSelect2.svelte';
+	import { browser } from '$app/environment';
+	import {onMount, onDestroy} from 'svelte';
 
 	let sports = $derived.by(() => {
 		if (!globals.staff) {
@@ -31,8 +34,9 @@
 			] satisfies Array<Sports>;
 		}
 	});
+	let open = $state<boolean>(false);
 	let activeSport = $state<Sports | undefined>('Athletics');
-	let activeIIT = $state<IITNames | undefined>('Hyderabad');
+	let activeIIT = $state<IITNames | undefined>(undefined);
 	let activeGender = $state<'MEN' | 'WOMEN' | undefined>('MEN');
 	let playerData = $state<GetPlayers[]>([]);
   	let playerCount = $state<GetPlayerCount | null>(null);
@@ -57,13 +61,18 @@
     //   playerCount.set(null);
     }
   });
+  	let width = $state<number>(0);
+	onMount(() => {
+	const updateWidth = () => (width = window.innerWidth);
+	window.addEventListener('resize', updateWidth);
 
+	// optional cleanup if component is destroyed
+	onDestroy(() => window.removeEventListener('resize', updateWidth));
+	});
 </script>
 
-<div class="flex flex-col overflow-x-clip xl:flex-row">
-	<MobileHeaderFrame>
-		<h2>TEAMS</h2>
-	</MobileHeaderFrame>
+<div class="hidden lg:flex flex-col overflow-x-clip xl:flex-row">
+	
 	<aside class="mr-32 -ml-64 hidden -skew-x-12 flex-row xl:flex">
 		<div class="bg-custom-dark-blue relative mr-8 flex w-[20rem] flex-row overflow-x-clip">
 			<img
@@ -120,13 +129,13 @@
 			</section>
 		</main>
 	{:else}
-		<main class="flex h-[calc(100vh-20rem)] grow  flex-row w-[100rem] ">
-			<div class="flex  flex-col xl:w-[60rem] 2xl:w-full p-[3rem] ">
-				<div class="flex flex-row gap-[2rem]  xl:h-[8rem] 2xl:h-[10rem] items-center justify-between  w-full p-[2rem]">
+		<main class="hidden lg:flex h-[calc(100vh-20rem)] grow  flex-row w-[100rem] ">
+			<div class="flex flex-col w-[20rem] xl:w-[60rem] 2xl:w-full p-[3rem] ">
+				<div class="flex flex-col lg:flex-row gap-[2rem]  xl:h-[8rem] 2xl:h-[10rem] items-center justify-between  w-full p-[2rem]">
 					<div class="flex gap-[2rem] items-center">
 						<img 
 						src={getIITImgSrc(activeIIT)}
-						class="xl:h-[3rem] 2xl:h-[6rem]"
+						class=" h-[4rem] xl:h-[3rem] 2xl:h-[6rem]"
 						alt="logo"/>
 						<div class="flex flex-col">
 							<span class="xl:text-2xl 2xl:text-4xl">IIT {activeIIT}</span>
@@ -201,3 +210,26 @@
 		</main>
 	{/if}
 </div>
+{#if width < 768}
+<div class="xl:hidden">
+	<div class="flex w-full ">
+		<MobileHeaderFrame>		
+			{#if browser}
+				<CustomSelect2
+					items={[
+						...getAllIITNames().map((iit) => ({
+							value: iit,
+							label: `IIT ${iit}`,
+							imgSrc: getIITImgSrc(iit)
+						}))
+					]}
+					bind:value={activeIIT}
+					placeholder="Select a College"
+					type="single"
+				/>
+			{/if}
+		</MobileHeaderFrame>
+	</div>
+
+</div>
+{/if}
