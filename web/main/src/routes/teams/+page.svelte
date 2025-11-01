@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { getAllIITNames, getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
-	import {getSportImageSrc} from '$lib/utility/sportImgSrc.js'
-	import {getSportIdOfSport} from '$lib/utility/sport'
+	import { getSportImageSrc } from '$lib/utility/sportImgSrc.js';
+	import { getSportIdOfSport } from '$lib/utility/sport';
 	import { PUBLIC_API_URL } from '$env/static/public';
-	import type {GetPlayers, GetPlayerCount} from '$lib/types/user';
+	import type { GetPlayers, GetPlayerCount } from '$lib/types/user';
 	import asideBg from '$lib/assets/team-aside-bg.webp';
 	import logoNoText from '$lib/assets/logo-no-text.svg';
 	import type { IITNames } from '$lib/types/iitNames';
 	import MobileHeaderFrame from '$lib/ui/common/MobileHeaderFrame.svelte';
-	import {ToggleTabs} from '$lib/ui/components/toggleTabs';
+	import { ToggleTabs } from '$lib/ui/components/toggleTabs';
 	import { globals } from '$lib/state.svelte';
 	import type { Sports } from '$lib/types/sports';
 	import Button from '$lib/ui/components/Button.svelte';
 	import CustomSelect2 from '$lib/ui/teams/CustomSelect2.svelte';
 	import { browser } from '$app/environment';
-	import men from '$lib/assets/icons/men.svg'
-	import women from '$lib/assets/icons/female.svg'
-	
+	import men from '$lib/assets/icons/men.svg';
+	import women from '$lib/assets/icons/female.svg';
+
 	let sports = $derived.by(() => {
 		if (!globals.staff) {
 			return ['Athletics', 'Cricket', 'Football', 'Hockey', 'Volleyball'] satisfies Array<Sports>;
@@ -35,38 +35,42 @@
 			] satisfies Array<Sports>;
 		}
 	});
-	let activeSport = $state<Sports | undefined>('Athletics');
-	let activeIIT = $state<IITNames | undefined>('Hyderabad');
+	let activeSport = $state<Sports | undefined>(undefined);
+	let activeIIT = $state<IITNames | undefined>(undefined);
 	let activeGender = $state<'MEN' | 'WOMEN' | undefined>('MEN');
 	let playerData = $state<GetPlayers[]>([]);
-  	let playerCount = $state<GetPlayerCount | null>(null);
-	 $effect(() => {
-    if (activeSport && activeIIT) {
-      // Fetch players
-      fetch(`${PUBLIC_API_URL}/get-players?sport_id=${getSportIdOfSport(activeSport,activeGender == 'MEN' ? 1 : 2,globals.staff)}&institute=${activeIIT}`)
-        .then(res => res.json())
-        .then((data: GetPlayers[]) => {
-          playerData = data;
-        });
+	let playerCount = $state<GetPlayerCount | null>(null);
+	$effect(() => {
+		if (activeSport && activeIIT) {
+			// Fetch players
+			fetch(
+				`${PUBLIC_API_URL}/get-players?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
+			)
+				.then((res) => res.json())
+				.then((data: GetPlayers[]) => {
+					playerData = data;
+				});
 
-      // Fetch player count
-      fetch(`${PUBLIC_API_URL}/get-player-count?sport_id=${getSportIdOfSport(activeSport,activeGender == 'MEN' ? 1 : 2,globals.staff)}&institute=${activeIIT}`)
-        .then(res => res.json())
-        .then((data: GetPlayerCount) => {
-          playerCount = data;
-        });
-    } else {
-      // Clear data if sport or IIT not selected
-    //   playerData.set([]);
-    //   playerCount.set(null);
-    }
-  });
-  	let isMobile = $state<boolean>(false);
+			// Fetch player count
+			fetch(
+				`${PUBLIC_API_URL}/get-player-count?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
+			)
+				.then((res) => res.json())
+				.then((data: GetPlayerCount) => {
+					playerCount = data;
+				});
+		} else {
+			// Clear data if sport or IIT not selected
+			//   playerData.set([]);
+			//   playerCount.set(null);
+		}
+	});
+	let isMobile = $state<boolean>(false);
 	function checkIsMobile() {
-		isMobile = window.innerWidth < 1280; 
-		if(!isMobile){
+		isMobile = window.innerWidth < 1280;
+		if (!isMobile) {
 			activeIIT = undefined;
-		}// Tailwind's lg breakpoint is 1280px
+		} // Tailwind's lg breakpoint is 1280px
 	}
 	$effect(() => {
 		if (browser) {
@@ -81,8 +85,7 @@
 	});
 </script>
 
-<div class="hidden lg:flex flex-col overflow-x-clip xl:flex-row">
-	
+<div class="hidden flex-col overflow-x-clip lg:flex xl:flex-row">
 	<aside class="mr-32 -ml-64 hidden -skew-x-12 flex-row xl:flex">
 		<div class="bg-custom-dark-blue relative mr-8 flex w-[20rem] flex-row overflow-x-clip">
 			<img
@@ -139,94 +142,113 @@
 			</section>
 		</main>
 	{:else}
-		<main class="hidden lg:flex h-[calc(100vh-20rem)] grow  flex-row w-[100rem] ">
-			<div class="flex flex-col w-[20rem] xl:w-[60rem] 2xl:w-full p-[3rem] ">
-				<div class="flex flex-col lg:flex-row gap-[2rem]  xl:h-[8rem] 2xl:h-[10rem] items-center justify-between  w-full p-[2rem]">
-					<div class="flex gap-[2rem] items-center">
-						<img 
-						src={getIITImgSrc(activeIIT)}
-						class=" h-[4rem] xl:h-[3rem] 2xl:h-[6rem]"
-						alt="logo"/>
+		<main class="hidden h-[calc(100vh-20rem)] w-[100rem] grow flex-row lg:flex">
+			<div class="flex w-[20rem] flex-col p-[3rem] xl:w-[60rem] 2xl:w-full">
+				<div
+					class="flex w-full flex-col items-center justify-between gap-[2rem] p-[2rem] lg:flex-row xl:h-[8rem] 2xl:h-[10rem]"
+				>
+					<div class="flex items-center gap-[2rem]">
+						<img
+							src={getIITImgSrc(activeIIT)}
+							class=" h-[4rem] xl:h-[3rem] 2xl:h-[6rem]"
+							alt="logo"
+						/>
 						<div class="flex flex-col">
 							<span class="xl:text-2xl 2xl:text-4xl">IIT {activeIIT}</span>
-							<span class="xl:text-xl text-2xl">Ranked 1st in Leaderboard</span>
+							<span class="text-2xl xl:text-xl">Ranked 1st in Leaderboard</span>
 						</div>
 					</div>
-					<div class={`3xl:gap-x-5 flex flex-row flex-wrap gap-x-3 xl:w-[20rem] 2xl:w-[30rem] *:rounded-sm *:p-0.5 lg:*:p-1 xl:gap-x-4 2xl:*:p-2 **:[img]:size-10 xl:**:[img]:size-[2rem] 2xl:**:[img]:size-12`}>
+					<div
+						class={`3xl:gap-x-5 flex flex-row flex-wrap gap-x-3 *:rounded-sm *:p-0.5 lg:*:p-1 xl:w-[20rem] xl:gap-x-4 2xl:w-[30rem] 2xl:*:p-2 **:[img]:size-10 xl:**:[img]:size-[2rem] 2xl:**:[img]:size-12`}
+					>
 						{#each sports as sport}
-						<Button
-							onclick={() => {
-								// window.open('https://www.linkedin.com/company/inter-iit-sports-meet-2025/', '_blank');
-								activeSport = sport
-							}}
-							class={`border-1 border-black ${activeSport == sport ? 'bg-custom-blue' : 'bg-custom-white'}`}
-						>
-							<img src={getSportImageSrc(sport)} class="" alt="sport" />
-						</Button>
+							<Button
+								onclick={() => {
+									// window.open('https://www.linkedin.com/company/inter-iit-sports-meet-2025/', '_blank');
+									activeSport = sport;
+								}}
+								class={`border-1 border-black ${activeSport == sport ? 'bg-custom-blue' : 'bg-custom-white'}`}
+							>
+								<img src={getSportImageSrc(sport)} class="" alt="sport" />
+							</Button>
 						{/each}
-				</div>	
-				</div>	
-				<div class="ml-[2rem] mt-[1rem] w-[96%] "> </div>
+					</div>
+				</div>
+				<div class="mt-[1rem] ml-[2rem] w-[96%]"></div>
 
 				{#if activeSport}
-					<div class="mb-3 mt-8 border-t-3 ml-4 border-t-[#D9D9D9] h-0 w-[98%] "></div>
+					<div class="mt-8 mb-3 ml-4 h-0 w-[98%] border-t-3 border-t-[#D9D9D9]"></div>
 
-				<div class = "flex flex-row  items-center justify-between xl:mt-[1rem] 2xl:mt-[2.5rem] xl:h-[10rem] ">
-				
-			<!-- <h2>Team has not been decided yet.</h2> -->
-			 
-					<div class = "flex flex-row gap-[2rem] items-center  w-[60rem]">
-						<img
-						class="xl:h-[4rem] 2xl:h-[6rem]"
-						alt="sport logo"
-						src={getSportImageSrc(activeSport)}
-						/>
-						<div>
-							<span class = "text-3xl uppercase">{activeSport}</span>
-							<span class="text-2xl text-custom-blue">   -  Team Players</span>
+					<div
+						class="flex flex-row items-center justify-between xl:mt-[1rem] xl:h-[10rem] 2xl:mt-[2.5rem]"
+					>
+						<!-- <h2>Team has not been decided yet.</h2> -->
+
+						<div class="flex w-[60rem] flex-row items-center gap-[2rem]">
+							<img
+								class="xl:h-[4rem] 2xl:h-[6rem]"
+								alt="sport logo"
+								src={getSportImageSrc(activeSport)}
+							/>
+							<div>
+								<span class="text-3xl uppercase">{activeSport}</span>
+								<span class="text-custom-blue text-2xl"> - Team Players</span>
+							</div>
+						</div>
+
+						<div class="">
+							<ToggleTabs.Root class="ml-auto h-fit ">
+								<ToggleTabs.Item
+									onclick={() => {
+										// sportType = 'Male';
+										activeGender = 'MEN';
+									}}
+									class="!px-5 !py-2"
+									><div class="flex flex-row items-center justify-center gap-2">
+										MEN <img src={men} alt="Male logo" />
+									</div></ToggleTabs.Item
+								>
+								<ToggleTabs.Item
+									onclick={() => {
+										// sportType = 'Female';
+										activeGender = 'WOMEN';
+									}}
+									class="!px-5 !py-2"
+									><div class="flex flex-row items-center gap-2">
+										WOMEN <img src={women} alt="Female logo" />
+									</div></ToggleTabs.Item
+								>
+							</ToggleTabs.Root>
 						</div>
 					</div>
-				
-					<div class = "">
-						<ToggleTabs.Root class="ml-auto h-fit ">
-							<ToggleTabs.Item
-								onclick={() => {
-									// sportType = 'Male';
-									activeGender = 'MEN'
-								}}
-								class="!px-5 !py-2"><div class = "flex flex-row justify-center items-center gap-2">MEN <img src={men} alt="Male logo"/></div></ToggleTabs.Item
-							>
-							<ToggleTabs.Item
-								onclick={() => {
-									// sportType = 'Female';
-									activeGender = 'WOMEN'
-								}}
-								class="!px-5 !py-2"><div class = "flex flex-row items-center gap-2">WOMEN <img src={women} alt="Female logo"/></div></ToggleTabs.Item
-							>
-						</ToggleTabs.Root>
+					<div
+						class="flex flex-none flex-row flex-wrap gap-[4rem] overflow-y-auto p-[1rem] lg:h-[15rem] xl:mt-[1rem] xl:h-[23rem] 2xl:mt-[2rem] 2xl:h-[35rem] [@media(min-height:900px)]:h-[32rem]"
+					>
+						{#each playerData as player}
+							<div class=" my-1 flex h-auto flex-col p-2 xl:w-[22rem] 2xl:w-[25rem]">
+								<img
+									alt="profile"
+									class="h-[20rem]"
+									src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+								/>
+								<span class="mt-[1rem] xl:text-xl 2xl:text-3xl">
+									{player.firstName}
+									{player.lastName}
+								</span>
+								<span class="xl:text-xxl mt-[1rem] text-xl">{player.extra}</span>
+							</div>
+						{/each}
 					</div>
-				</div>
-				<div class = "flex flex-none flex-row  flex-wrap overflow-y-auto gap-[4rem] p-[1rem] xl:mt-[1rem] 2xl:mt-[2rem] lg:h-[15rem] xl:h-[23rem] [@media(min-height:900px)]:h-[32rem] 2xl:h-[35rem]">
-					{#each playerData as player}
-						<div class=" flex flex-col   p-2 my-1  h-auto xl:w-[22rem] 2xl:w-[25rem]">
-							<img alt="profile" class = "h-[20rem] " src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}/>
-   							<span class = "mt-[1rem] xl:text-xl 2xl:text-3xl "> {player.firstName} {player.lastName} </span>	
-   							 <span class="mt-[1rem] xl:text-xxl text-xl">{player.extra}</span> 
-  						</div>
-						
-					{/each}
-				</div>
 				{/if}
 			</div>
-			
 		</main>
 	{/if}
 </div>
 {#if isMobile}
-<div class="xl:hidden">
-	<div class="flex  ">
-		<MobileHeaderFrame>		
-			<!-- {#if browser} -->
+	<div class="xl:hidden">
+		<div class="flex">
+			<MobileHeaderFrame>
+				<!-- {#if browser} -->
 				<CustomSelect2
 					items={[
 						...getAllIITNames().map((iit) => ({
@@ -239,80 +261,81 @@
 					placeholder="Select a College"
 					type="single"
 				/>
-			<!-- {/if} -->
-		</MobileHeaderFrame>
-		
-	</div>
-	{#if activeIIT}
-		<div class="flex flex-col items-center ">
-			<!-- <SelectSportMobile bind:activeSport /> -->
-				<img 
+				<!-- {/if} -->
+			</MobileHeaderFrame>
+		</div>
+		{#if activeIIT}
+			<div class="flex flex-col items-center">
+				<!-- <SelectSportMobile bind:activeSport /> -->
+				<img
 					src={getIITImgSrc(activeIIT)}
 					class=" mx-auto my-4 h-24"
 					alt={'IIT ' + activeIIT + ' logo'}
 				/>
 				<h2>IIT {activeIIT}</h2>
-				<span class="text-xl text-custom-orange">Current Rank in Leaderboard - 1</span>
-				<div class={`mt-10 flex flex-row flex-wrap justify-center gap-x-5 *:rounded-sm *:p-2  **:[img]:size-9 `}>
+				<span class="text-custom-orange text-xl">Current Rank in Leaderboard - 1</span>
+				<div
+					class={`mt-10 flex flex-row flex-wrap justify-center gap-x-5 *:rounded-sm *:p-2  **:[img]:size-9 `}
+				>
 					{#each sports as sport}
 						<Button
 							onclick={() => {
 								// window.open('https://www.linkedin.com/company/inter-iit-sports-meet-2025/', '_blank');
-								activeSport = sport
+								activeSport = sport;
 							}}
 							class={` border-1 border-black ${activeSport == sport ? 'bg-custom-blue' : 'bg-custom-white'}`}
 						>
 							<img src={getSportImageSrc(sport)} class="" alt="sport" />
 						</Button>
 					{/each}
-				</div>	
+				</div>
 				{#if activeSport}
-					<div class="mb-3 mt-10 border-t-3 border-t-[#D9D9D9] h-0 w-[92%] "></div>
-					<div class="flex flex-row justify-between items-center w-[92%] ">
-						<div class="flex flex-row gap-4 mt-4 items-center ">
-							<img
-								class="h-10"
-								alt="sport logo"
-								src={getSportImageSrc(activeSport)}
-							/>
+					<div class="mt-10 mb-3 h-0 w-[92%] border-t-3 border-t-[#D9D9D9]"></div>
+					<div class="flex w-[92%] flex-row items-center justify-between">
+						<div class="mt-4 flex flex-row items-center gap-4">
+							<img class="h-10" alt="sport logo" src={getSportImageSrc(activeSport)} />
 							<div class="flex flex-col items-center">
-								<span class = "text-xl uppercase font-semibold">{activeSport}</span>
+								<span class="text-xl font-semibold uppercase">{activeSport}</span>
 								<span class="text-l text-custom-blue"> Team Players</span>
 							</div>
-							
 						</div>
 						<div>
 							<ToggleTabs.Root class="ml-auto h-fit ">
-							<ToggleTabs.Item
-								onclick={() => {
-									// sportType = 'Male';
-									activeGender = 'MEN'
-								}}
-								class="!px-5 !py-2"><img src={men} alt="Male logo"/></ToggleTabs.Item
-							>
-							<ToggleTabs.Item
-								onclick={() => {
-									// sportType = 'Female';
-									activeGender = 'WOMEN'
-								}}
-								class="!px-5 !py-2"><img src = {women} alt="Female logo"/></ToggleTabs.Item
-							>
-						</ToggleTabs.Root>
+								<ToggleTabs.Item
+									onclick={() => {
+										// sportType = 'Male';
+										activeGender = 'MEN';
+									}}
+									class="!px-5 !py-2"><img src={men} alt="Male logo" /></ToggleTabs.Item
+								>
+								<ToggleTabs.Item
+									onclick={() => {
+										// sportType = 'Female';
+										activeGender = 'WOMEN';
+									}}
+									class="!px-5 !py-2"><img src={women} alt="Female logo" /></ToggleTabs.Item
+								>
+							</ToggleTabs.Root>
 						</div>
-						
 					</div>
-					<div class = "mt-10 flex flex-none flex-row  flex-wrap overflow-y-auto gap-[4rem] p-[1rem] xl:mt-[1rem] 2xl:mt-[2rem] lg:h-[15rem] xl:h-[23rem] [@media(min-height:900px)]:h-[32rem] 2xl:h-[35rem]">
-							{#each playerData as player}
-								<div class=" flex flex-col   p-2 my-1  h-auto w-[9.5rem]">
-									<img alt="profile" class = "h-[9rem] " src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}/>
-									<span class = "mt-[0.2rem] text-xl "> {player.firstName} {player.lastName} </span>	
-									<span class="mt-[0.3rem] text-base">{player.extra}</span> 
-								</div>
-							{/each}
+					<div
+						class="mt-10 flex flex-none flex-row flex-wrap gap-[4rem] overflow-y-auto p-[1rem] lg:h-[15rem] xl:mt-[1rem] xl:h-[23rem] 2xl:mt-[2rem] 2xl:h-[35rem] [@media(min-height:900px)]:h-[32rem]"
+					>
+						{#each playerData as player}
+							<div class=" my-1 flex h-auto w-[9.5rem] flex-col p-2">
+								<img
+									alt="profile"
+									class="h-[9rem]"
+									src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+								/>
+								<span class="mt-[0.2rem] text-xl"> {player.firstName} {player.lastName} </span>
+								<span class="mt-[0.3rem] text-base">{player.extra}</span>
+							</div>
+						{/each}
 					</div>
 				{/if}
-		</div>
-		
-	{/if}
-</div>
+			</div>
+		{/if}
+	</div>
 {/if}
+
