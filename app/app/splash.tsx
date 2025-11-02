@@ -22,7 +22,7 @@ export default function SplashScreen() {
     Animated.loop(
       Animated.timing(scroll, {
         toValue: 200,      
-        duration: 2300,    
+        duration: 3300,    
         useNativeDriver: true,
       })
     ).start()
