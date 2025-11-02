@@ -1,43 +1,75 @@
-import { useEffect } from "react"
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native"
+import { useEffect,useRef } from "react"
+import { View, Text, StyleSheet, Animated } from "react-native"
 import { useRouter } from "expo-router"
-import {Image} from 'expo-image';
+import { Image } from "expo-image";
+import {ImageBackground} from 'react-native';
 import { useWindowDimensions } from "react-native"
 export default function SplashScreen() {
   const router = useRouter()
   const { width, height } = useWindowDimensions()
+  
 
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       router.replace("/login") 
-//     }, 2000)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace("/login") 
+    }, 2000)
 
-//     return () => clearTimeout(timer)
-//   }, [])
+    return () => clearTimeout(timer)
+  }, [])
+  const scroll = useRef(new Animated.Value(0)).current
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(scroll, {
+        toValue: 200,      
+        duration: 2300,    
+        useNativeDriver: true,
+      })
+    ).start()
+  }, [])
 
   return (
-    <View style={styles.container}>
-        <View style={styles.ribbon}>
-        </View>
-        <View style={styles.auxRibbon}>
-        </View>
-      <Text style={styles.title}>My App</Text>
-      <ActivityIndicator size="large" color="#007AFF" />
-      <View style={styles.auxRibbon2}>
-        </View>
-      <View style={styles.ribbon2}>
-        </View>
-    </View>
+      <View   style={styles.container}  >
+        <Animated.Image source={require('./assets/pattern.webp')} style={[styles.pattern,{transform: [{ translateY: scroll },{translateX:scroll}]}]}></Animated.Image>
+          {/* <View style={styles.bgFade} />  */}
+          <View style={styles.ribbon}>
+          </View>
+          <View style={styles.auxRibbon}>
+          </View>
+        <Image
+          source={require('./assets/logo-no-text.svg')}
+          style={styles.logo}
+        />
+          <View style={styles.auxRibbon2}>
+          </View>
+        <View style={styles.ribbon2}>
+          </View>
+      </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    // width:100,
+    backgroundColor: "blue",
     justifyContent: "center",
     alignItems: "center",
+    opacity : 1
    
+  },
+  animatedContainer: {
+    ...StyleSheet.absoluteFillObject, // makes it full-screen
+  },
+  pattern:{
+    transform: [{ rotate: '10deg' }],
+    opacity:0.7, 
+    resizeMode:'repeat',
+    width:'200%',
+    height:'300%',
+    left:-200,
+    position:'absolute',
+    // right:10,
   },
   title: {
     fontSize: 32,
@@ -93,4 +125,10 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '-5deg' }],
 
   },  
+  logo:{
+    width: 100,
+    height: 117,
+    tintColor:'white'
+    // borderWidth: 2,
+  },
 })
