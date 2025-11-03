@@ -6,7 +6,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import { RegisterContext } from "../../../contexts/context";
 
 export default function Step1() {
-console.log("CTX:", useContext(RegisterContext));
+  console.log("CTX:", useContext(RegisterContext));
 
   const { data, setData } = useContext(RegisterContext)!;
   const router = useRouter();

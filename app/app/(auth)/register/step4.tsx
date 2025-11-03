@@ -15,7 +15,10 @@ export default function Step4() {
       Alert.alert("Error", "Please enter verification code");
       return;
     }
-    Alert.alert("Success", `Email verified! Registration completed for ${data.fullName}!`);
+    Alert.alert(
+      "Success",
+      `Email verified! Registration completed for ${data.fullName}!`,
+    );
     //router.push("/(auth)/login"); // or redirect wherever you want
   };
 
