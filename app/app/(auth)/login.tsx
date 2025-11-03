@@ -23,11 +23,11 @@ export default function LoginScreen() {
       <View style={styles.bottom}>
           <ImageBackground source={require('../assets/pattern.webp')} style={[styles.pattern]} imageStyle={{resizeMode:'repeat'}}></ImageBackground>
           <Text style={styles.registered}>If you're already registered</Text>
-         <TouchableOpacity style={styles.login}  onPress={() => router.replace("/register")}>
+         <TouchableOpacity style={styles.login}  onPress={() => router.replace("/(auth)/register/step1")}>
             <Text style={[styles.text,{color:'white'}]}>LOGIN</Text>
           </TouchableOpacity>
           <Text style={styles.new}>NEW HERE?</Text>
-        <TouchableOpacity style={styles.register} onPress={() => router.push("/register")} > 
+        <TouchableOpacity style={styles.register} onPress={() => router.push("/(auth)/register/step1")} > 
           <Text style={[styles.text,{color:'blue'}]}>REGISTER NOW</Text>
         </TouchableOpacity>
       </View>
