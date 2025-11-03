@@ -1,0 +1,47 @@
+BADMINTON
+Men
+24/12/2025
+ 1  B  Varanasi  vs  Palakkad  8:00AM  1 
+ 2  C  Dharwad  vs  Bhilai  8:00AM  2 
+ 3  D  Delhi  vs  Jammu  9:30AM  1 
+ 4  E  Dhanbad  vs  Ropar  9:30AM  2 
+ 5  F  Indore  vs  Gandhinagar  11:00AM  1 
+ 6  G  Jodhpur  vs  Kanpur  11:00AM  2 
+ 7  A  Kharagpur  vs  Madras  12:30 PM  1
+BADMINTON
+Men
+25/12/2025
+8	B	Varanasi  vs  Goa	8:00 AM	1
+9	C	Dharwad	vs Mandi	8:00 AM	2
+10	D	Delhi vs Roorkee	9:30 AM	1
+11	E	Dhanbad	vs Bhubaneshwar	9:30 AM	2
+12	F	Indore	vs Patna	11:00 AM	1
+13	G	Jodhpur	vs Hyderabad	11:00 AM	2
+14	A	Kharagpur vs Tirupati	12:30 AM	1
+BADMINTON
+Men
+26/12/2025
+15	B	Palakkad vs Goa	8:00 AM	1
+16	C	Bhilai vs Mandi	8:00 AM	2
+17	D	Jammu vs Roorkee	9:30 AM	1
+18	E	Ropar vs Bhubaneshwar	9:30 AM	2
+19	F	Gandhinagar vs Patna	11:00 AM	1
+20	G	Kanpur vs Hyderabad	11:00 AM	2
+21	A	Tirupati vs Madras	12:30 PM	1
+22	H	Bombay vs Guwahati	12:30 PM	2
+BADMINTON
+Women
+24/12/2025
+ 1  A  Kanpur  vs  Hyderabad  8:00 AM  3 
+ 2  B  Mandi  vs  Patna  8:00 AM  4 
+ 3  C  Bombay  vs  Dhanbad  9:30 AM  3 
+ 4  D  Madras  vs  Bhilai  9:30 AM  4 
+ 5  A  Ropar  vs  Gandhinagar  11:00 AM  3 
+ 6  B  Guwahati  vs  Varanasi  11:00 AM  4 
+ 7  C  Tirupati  vs  Indore  12:30 PM  3 
+ 8  D  Kharagpur  vs  Delhi  12:30 PM  4 
+ 9  D  Madras  vs  Roorkee  8:00 PM  4
+BADMINTON
+Women
+24/12/2025
+

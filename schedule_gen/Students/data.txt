@@ -1,0 +1,150 @@
+CRICKET
+Men
+13/12/2025
+ 1  A  Varanasi  vs  Ropar  8:30 AM  1 
+ 2  B  Madras  vs  Bhilai  8:30 AM  2 
+ 3  D  Delhi  vs  Jammu  1:00 PM  1 
+ 4  C  Gandhinagar  vs  Mandi  1:00 PM  2
+CRICKET
+Men
+14/12/2025
+ 5  F  Guwahati  vs  Dhanbad  8:30 AM  1 
+ 6  E  Kanpur  vs  Goa  8:30 AM  2 
+ 7  G  Tirupati vs Indore  8:30 AM  3
+CRICKET
+Men
+15/12/2025
+ 8  G  Kharagpur  vs  Indore  8:30 AM  1 
+ 9  A  Jodhpur  vs  Ropar  8:30 AM  2 
+ 10  C  Gandhinagar  vs  Hyderabad  1:00 PM  1 
+ 11  B  Roorkee  vs  Bhilai  1:00 PM  2 
+ 12  D  Dharwad  vs  Jammu  8:30 AM  3 
+ 13  E  Patna  vs  Goa  1:00 PM  3 
+ 14  F  Bhubaneswar  vs  Dhanbad  8:30 AM  4
+CRICKET
+Men
+16/12/2025
+ 15  B  Madras  vs  Roorkee  8:30 AM  1 
+ 16  D  Delhi  vs  Dharwad  8:30 AM  2 
+ 17  E  Kanpur  vs  Patna  8:30 AM  3 
+ 18  F  Guwahati  vs  Bhubaneswar  8:30 AM  4 
+ 19  C  Hyderabad  vs  Mandi  1:00 PM  1 
+ 20  A  Varanasi  vs  Jodhpur  1:00 PM  2 
+ 21  G  Kharagpur  vs  Tirupati  1:00 PM  3 
+ 22  H  Bombay  vs  Palakkad  1:00 PM  4
+FOOTBALL
+Men
+15/12/2025
+ 1  B  Kanpur  VS  Bhilai  8:00 AM  1 
+ 2  C  Bombay  VS  Palakkad  8:00 AM  2 
+ 3  D  Roorkee  VS  Patna  9:30 AM  1 
+ 4  E  Delhi  VS  Bhubaneswar  9:30 AM  2 
+ 5  F  Gandhinagar  VS  Indore  4:00 PM  1 
+ 6  G  Mandi  VS  Jodhpur  4:00 PM  2
+FOOTBALL
+Men
+16/12/2025
+ 7  B  Ropar  VS  Bhilai  8:00 AM  1 
+ 8  C  Varanasi  VS  Palakkad  8:00 AM  2 
+ 9  D  Jammu  VS  Patna  9:30 AM  1 
+ 10  E  Madras  VS  Bhubaneswar  9:30 AM  2 
+ 11  F  Hyderabad  VS  Indore  4:00 PM  1 
+ 12  G  Tirupati  VS  Jodhpur  4:00 PM  2 
+FOOTBALL
+Men
+17/12/2025
+ 13  A  Kharagpur  VS  Dhanbad  8:00 AM  1 
+ 14  B  Kanpur  VS  Ropar  8:00 AM  2 
+ 15  C  Bombay  VS  Varanasi  9:30 AM  1 
+ 16  D  Roorkee  VS  Jammu  9:30 AM  2 
+ 17  E  Delhi  VS  Madras  3:00 PM  1 
+ 18  G  Mandi  VS  Tirupati  3:00 PM  2 
+ 19  F  Gandhinagar  VS  Hyderabad  4:30 PM  1 
+ 20  H  Guwahati  VS  Dharwad  4:30 PM  2
+HOCKEY
+Men
+15/12/2025
+ 1  A  Delhi  VS  Mandi  8:00 AM  1 
+ 2  D  Varanasi  VS  Kanpur  11:00 AM  1 
+ 3  B  Bombay  VS  Jodhpur  2:00 PM  1 
+ 4  D  Ropar  VS  Dhanbad  4:00 PM  1
+HOCKEY
+Men
+16/12/2025
+ 5  A  Mandi  VS  Hyderabad  8:00 AM  1 
+ 6  D  Dhanbad  VS  Kanpur  10:00 AM  1 
+ 7  C  Roorkee  VS  Guwahati  2:00 PM  1 
+ 8  D  Varanasi  VS  Ropar  4:00 PM  1
+HOCKEY
+Men
+17/12/2025
+ 09  D  Varanasi  VS  Dhanbad  8:00 AM  1 
+ 10  B  Bombay  VS  Madras  10:00 AM  1 
+ 11  C  Roorkee  VS  Kharagpur  2:00 PM  1 
+ 12  D  Kanpur  VS  Ropar  4:00 PM  1
+HOCKEY
+Men
+18/12/2025
+ 13  A  Delhi  VS  Hyderabad  8:00 AM  1 
+ 14  B  Jodhpur  VS  Madras  10:00 AM  1 
+ 15  C  Guwahati  VS  Kharagpur  2:00 PM  1
+VOLLEYBALL
+Men
+15/12/2025
+ 1  F  Jodhpur  vs  Delhi  9:00 AM  1 
+ 2  G  Kharagpur  vs  Goa  9:00 AM  2 
+ 3  D  Madras  vs  Dharwad  10:30 AM  1 
+ 4  E  Jammu  vs  Patna  10:30 AM  2 
+ 5  A  Roorkee  vs  Kanpur  5:00 PM  1 
+ 6  B  Hyderabad  vs  Palakkad  5:00 PM  2 
+ 7  C  Bhubaneswar  vs  Mandi  6:30 PM  1
+VOLLEYBALL
+Men
+16/12/2025  
+ 8  A  Gandhinagar  vs  Kanpur  9:00 AM  1 
+ 9  B  Bombay  vs  Palakkad  9:00 AM  2 
+ 10  C  Tirupati  vs  Mandi  11:00 AM  1 
+ 11  D  Guwahati  vs  Dharwad  5:00 PM  1
+ 12  E  Dhanbad(ISM)  vs  Patna  5:00 PM  2 
+ 13  F  Indore  vs  Delhi  6:30 PM  1 
+ 14  G  Ropar  vs  Goa  6:30 PM  2 
+VOLLEYBALL
+Men
+17/12/2025 
+ 15  E  Jammu  vs  Dhanbad (ISM)  9:00 AM  1 
+ 16  F  Jodhpur  vs  Indore  9:00 AM  2 
+ 17  G  Kharagpur  vs  Ropar  10:30 AM  1 
+ 18  H  Varanasi(BHU)  vs  Bhilai  10:30 AM  2 
+ 19  C  Bhubaneswar  vs  Tirupati  4:30 PM  1 
+ 20  D  Madras  vs  Guwahati  4:30 PM  2 
+ 21  A  Roorkee  vs  Gandhinagar  6:30 PM  1 
+ 22  B  Hyderabad  vs  Bombay  6:30 PM  2
+VOLLEYBALL
+Women
+15/12/2025
+ 1  E  Kanpur  vs  Jammu  9:00 AM  3 
+ 2  G  Bhubaneshwar  vs  Gandhinagar  9:00 AM  4 
+ 3  D  Roorkee  vs  Mandi  11:00 AM  3 
+ 4  C  Jodhpur  vs  Bhilai  11:00 AM  4 
+ 5  B  Delhi  vs  Patna  5:00 PM  3 
+ 6  F  Madras  vs  Dhanbad  5:00 PM  4 
+VOLLEYBALL
+Women
+16/12/2025
+ 7  B  Tirupati  vs  Patna  9:00 AM  3 
+ 8  C  Guwahati  vs  Bhilai  9:00 AM  4 
+ 9  E  Dharwad  vs  Jammu  11:00 AM  3 
+ 10  F  Palakkad  vs  Dhanbad  11:00 AM  4 
+ 11  G  Indore  vs  Gandhinagar  5:00 PM  3
+ 12  D  Kharagpur  vs  Mandi  5:00 PM  4
+VOLLEYBALL
+Women
+17/12/2025
+ 13  B  Delhi  vs  Tirupati  9:00 AM  3 
+ 14  G  Bhubaneswar  vs  Indore  9:00 AM  4 
+ 15  D  Roorkee  vs  Kharagpur  11:00 AM  3 
+ 16  F  Madras  vs  Palakkad  11:00 AM  4 
+ 17  C  Jodhpur  vs  Guwahati  4:30 PM  3 
+ 18  H  Bombay  vs  Hyderabad  4:30 PM  4 
+ 19  E  Kanpur  vs  Dharwad  6:00 PM  3 
+ 20  A  Varanasi  vs  Ropar  6:00 PM  4 
