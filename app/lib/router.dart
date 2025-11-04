@@ -1,69 +1,76 @@
-import 'package:IISM/main.dart';
-import 'package:IISM/screens/contact.dart';
-import 'package:IISM/screens/gallery.dart';
-import 'package:IISM/screens/login.dart';
-import 'package:IISM/screens/matches.dart';
-import 'package:IISM/screens/notification.dart';
-import 'package:IISM/screens/profile.dart';
-import 'package:IISM/screens/schedule.dart';
-import 'package:IISM/screens/teams.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iism_2025/screens/contact.dart';
+import 'package:iism_2025/screens/gallery.dart';
+import 'package:iism_2025/screens/home.dart';
+import 'package:iism_2025/screens/login.dart';
+import 'package:iism_2025/screens/matches.dart';
+import 'package:iism_2025/screens/notification.dart';
+import 'package:iism_2025/screens/profile.dart';
+import 'package:iism_2025/screens/schedule.dart';
+import 'package:iism_2025/screens/teams.dart';
+import 'package:iism_2025/widgets/tab_bar.dart';
 
 final GoRouter router = GoRouter(
+  initialLocation: "/home",
   routes: [
     GoRoute(
-      path: "/",
+      path: "/login",
       builder: (BuildContext context, GoRouterState state) {
-        return const MyHomePage(title: "Home Page");
+        return const LoginScreen();
+      },
+    ),
+    GoRoute(
+      path: "/contact",
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return NoTransitionPage(child: const ContactScreen());
+      },
+    ),
+    GoRoute(
+      path: "/notification",
+      builder: (BuildContext context, GoRouterState state) {
+        return const NotificationScreen();
+      },
+    ),
+    GoRoute(
+      path: "/profile",
+      builder: (BuildContext context, GoRouterState state) {
+        return const ProfileScreen();
+      },
+    ),
+    ShellRoute(
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        return MyTabBar(child: child);
       },
       routes: [
         GoRoute(
-          path: "/login",
-          builder: (BuildContext context, GoRouterState state) {
-            return const LoginScreen();
-          },
-        ),
-        GoRoute(
-          path: "/contact",
-          builder: (BuildContext context, GoRouterState state) {
-            return const ContactScreen();
-          },
-        ),
-        GoRoute(
           path: "/gallery",
-          builder: (BuildContext context, GoRouterState state) {
-            return const GalleryScreen();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return NoTransitionPage(child: const GalleryScreen());
+          },
+        ),
+        GoRoute(
+          path: "/home",
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return NoTransitionPage(child: const HomeScreen());
           },
         ),
         GoRoute(
           path: "/matches",
-          builder: (BuildContext context, GoRouterState state) {
-            return const MatchesScreen();
-          },
-        ),
-        GoRoute(
-          path: "/notification",
-          builder: (BuildContext context, GoRouterState state) {
-            return const NotificationScreen();
-          },
-        ),
-        GoRoute(
-          path: "/profile",
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProfileScreen();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return NoTransitionPage(child: const MatchesScreen());
           },
         ),
         GoRoute(
           path: "/schedule",
-          builder: (BuildContext context, GoRouterState state) {
-            return const ScheduleScreen();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return NoTransitionPage(child: const ScheduleScreen());
           },
         ),
         GoRoute(
           path: "/teams",
-          builder: (BuildContext context, GoRouterState state) {
-            return const TeamsScreen();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return NoTransitionPage(child: const TeamsScreen());
           },
         ),
       ],
