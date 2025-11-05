@@ -1,16 +1,38 @@
 <script lang="ts">
+	import { PUBLIC_API_URL } from '$env/static/public';
 	import 'cropperjs';
+	import { onMount, type Snippet } from 'svelte';
+	import type { ClassValue } from 'svelte/elements';
 	import { innerWidth } from 'svelte/reactivity/window';
-	let { children, class: className, filled = $bindable() } = $props();
+	let {
+		children,
+		class: className,
+		filled = $bindable(),
+		profilePic
+	}: { profilePic?: string; filled: boolean; class?: ClassValue; children: Snippet } = $props();
 
 	let dialog = $state<HTMLDialogElement>();
 	let input = $state<HTMLInputElement>();
 	let files = $state<FileList>();
+	onMount(() => {
+		if (profilePic != undefined) {
+			fetch(PUBLIC_API_URL + '/profile-pic-orig/' + profilePic + '.png').then((res) => {
+				res.blob().then((blob) => {
+					const file = new File([blob], 'cropped_old.png', {
+						type: 'image/png'
+					});
+					const dt = new DataTransfer();
+					dt.items.add(file);
+					input!.files = dt.files;
+					files = dt.files;
+				});
+			});
+		}
+	});
 	let croppedSelection = $state();
 	$effect(() => {
 		filled = !(files == undefined || files.length == 0);
 	});
-	console.log(innerWidth.current);
 </script>
 
 <label class="button-text flex flex-col gap-y-1 {className}">
@@ -57,6 +79,7 @@
 				class="aspect-square h-40 object-cover"
 			/>
 			<button
+				type="button"
 				class="button-text bg-custom-orange ml-6 px-6 py-2 text-nowrap whitespace-nowrap text-white"
 				onclick={() => {
 					input?.click();

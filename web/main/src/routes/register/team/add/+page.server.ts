@@ -1,5 +1,19 @@
 import { PUBLIC_API_URL } from '$env/static/public';
+import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
+
+export const load: PageServerLoad = async ({ fetch, url, parent }) => {
+	const data = await parent();
+	if (url.searchParams.has('edit')) {
+		return {
+			...data,
+			playerData: await (
+				await fetch(PUBLIC_API_URL + '/get-player-data?id=' + url.searchParams.get('edit'))
+			).json()
+		};
+	}
+	return data;
+};
 
 export const actions = {
 	default: async ({ request, fetch }) => {
@@ -31,12 +45,21 @@ export const actions = {
 			console.log(sportData);
 			data.append('sports', JSON.stringify(sportData));
 			try {
-				const res = await fetch(PUBLIC_API_URL + '/register', {
-					method: 'POST',
-					credentials: 'include',
-					body: data
-				});
-				if (res.status == 200) {
+				let res: Response;
+				if (data.has('user_id')) {
+					res = await fetch(PUBLIC_API_URL + '/register-edit', {
+						method: 'POST',
+						credentials: 'include',
+						body: data
+					});
+				} else {
+					res = await fetch(PUBLIC_API_URL + '/register', {
+						method: 'POST',
+						credentials: 'include',
+						body: data
+					});
+				}
+				if (res!.status == 200) {
 					return { success: true };
 				} else {
 					return { success: false };
@@ -48,11 +71,20 @@ export const actions = {
 			}
 		} else {
 			try {
-				const res = await fetch(PUBLIC_API_URL + '/register-coach', {
-					method: 'POST',
-					credentials: 'include',
-					body: data
-				});
+				let res: Response;
+				if (data.has('user_id')) {
+					res = await fetch(PUBLIC_API_URL + '/register-coach-edit', {
+						method: 'POST',
+						credentials: 'include',
+						body: data
+					});
+				} else {
+					res = await fetch(PUBLIC_API_URL + '/register-coach', {
+						method: 'POST',
+						credentials: 'include',
+						body: data
+					});
+				}
 				if (res.status == 200) {
 					return { success: true };
 				} else {

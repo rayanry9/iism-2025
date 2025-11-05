@@ -80,14 +80,14 @@ func RegisterPlayer(c *gin.Context, req schema.RegisterPlayerRequest, sports []s
 	err = tx.QueryRow(c, `
 	insert into 
 		users 
-			(first_name, middle_name, last_name, gender, email, profile_pic, contact_no, emergency_contact_no, blood_group, food_preference, check_in_date, check_out_date, role, remark, institute_id, staff)
+			(first_name, middle_name, last_name, gender, email, profile_pic, contact_no, emergency_contact_no, blood_group, food_preference, check_in_date, check_out_date, role, remark, institute_id, staff, jersey_no)
 	select	
-		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, id, $16 
+		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, id, $16, $17 
 	from 
 		institutes
 	where 
 		name = $15
-	returning users.id`, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserPlayer, req.Remark, req.Institute, req.Staff).Scan(&userId)
+	returning users.id`, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserPlayer, req.Remark, req.Institute, req.Staff, req.JerseyNo).Scan(&userId)
 	if err != nil {
 		return err
 	}
@@ -97,6 +97,95 @@ func RegisterPlayer(c *gin.Context, req schema.RegisterPlayerRequest, sports []s
 		if err != nil {
 			return err
 		}
+	}
+	return tx.Commit(c)
+}
+
+func RegisterPlayerEdit(c *gin.Context, req schema.RegisterPlayerEditRequest, sports []schema.RegisterPlayerSportData) error {
+	tx, err := config.DB.Begin(c)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(c)
+
+	var userId int
+	err = tx.QueryRow(c, `
+	update 
+		users 
+	set 
+		first_name = $1, 
+		middle_name = $2, 
+		last_name = $3, 
+		gender = $4, 
+		email = $5, 
+		profile_pic = $6, 
+		contact_no = $7, 
+		emergency_contact_no = $8, 
+		blood_group = $9, 
+		food_preference = $10, 
+		check_in_date = $11, 
+		check_out_date = $12, 
+		role = $13, 
+		remark = $14, 
+		institute_id = (
+			select id from institutes where name = $15
+		), 
+		staff = $16, 
+		jersey_no = $17
+	where 
+		id = $18
+	returning id`, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserPlayer, req.Remark, req.Institute, req.Staff, req.JerseyNo, req.UserId).Scan(&userId)
+	if err != nil {
+		return err
+	}
+
+	if _, err := tx.Exec(c, `delete from user_sports where user_id = $1`, userId); err != nil {
+		return err
+	}
+
+	for idx := range sports {
+		_, err = tx.Exec(c, `insert into user_sports (user_id, sport_id, secondary, reserve, extra) values ($1, $2, $3, $4, $5)`, userId, sports[idx].SportId, sports[idx].Secondary, sports[idx].Reserve, sports[idx].Extra)
+		if err != nil {
+			return err
+		}
+	}
+	return tx.Commit(c)
+}
+
+func RegisterCoachEdit(c *gin.Context, req schema.RegisterCoachEditRequest) error {
+	tx, err := config.DB.Begin(c)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(c)
+
+	_, err = tx.Exec(c, `
+	update 
+		users 
+	set	
+		first_name = $1, 
+		middle_name = $2, 
+		last_name = $3, 
+		gender = $4, 
+		email = $5, 
+		profile_pic = $6, 
+		contact_no = $7, 
+		emergency_contact_no = $8, 
+		blood_group = $9, 
+		food_preference = $10, 
+		check_in_date = $11, 
+		check_out_date = $12, 
+		role = $13, 
+		remark = $14, 
+		institute_id = (
+			select id from institutes where name = $15
+		), 
+		staff = $16
+	where
+		id = $17
+		`, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserCoach, req.Remark, req.Institute, req.Staff, req.UserId)
+	if err != nil {
+		return err
 	}
 	return tx.Commit(c)
 }
@@ -438,4 +527,43 @@ func RemovePlayer(c *gin.Context, req schema.RemovePlayerRequest, removerId int)
 	}
 
 	return tx.Commit(c)
+}
+
+func GetPlayerData(c *gin.Context, req schema.GetPlayerDataRequest) (*schema.GetPlayerDataResponse, error) {
+	var data schema.GetPlayerDataResponse
+	err := config.DB.QueryRow(c, `
+	select
+		u.first_name,
+		u.middle_name,
+		u.last_name,
+		u.contact_no,
+		u.profile_pic,
+		u.email,
+		u.jersey_no,
+		u.emergency_contact_no,
+		u.blood_group,
+		u.food_preference,
+		u.remark,
+		u.check_in_date,
+		u.check_out_date,
+		ARRAY_AGG(
+			json_build_object(
+				'sportId', us.sport_id,
+				'secondary', us.secondary,
+				'reserve', us.reserve,
+				'extra', us.extra
+			)
+		) FILTER (WHERE us.id IS NOT NULL)
+	from 
+		users u
+	left join
+		user_sports us
+		on us.user_id = u.id
+	where 
+		u.id = $1
+	group by 
+		u.id
+	`, req.UserId).Scan(&data.FirstName, &data.MiddleName, &data.LastName, &data.ContactNo, &data.ProfilePic, &data.Email, &data.JerseyNo, &data.EmergencyContactNo, &data.BloodGroup, &data.FoodPreference, &data.Remark, &data.CheckInDate, &data.CheckOutDate, &data.Sports)
+
+	return &data, err
 }

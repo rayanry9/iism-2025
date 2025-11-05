@@ -33,6 +33,7 @@ type UserDB struct {
 	Email              *string      `db:"email"`
 	Password           *string      `db:"password"`
 	ProfilePic         *string      `db:"profile_pic"`
+	JerseyNo           *string      `db:"jersey_no"`
 	ContactNo          *string      `db:"contact_no"`
 	EmergencyContactNo *string      `db:"emergency_contact_no"`
 	BloodGroup         *string      `db:"blood_group"`
@@ -80,7 +81,55 @@ type GetUserDetailsResponse struct {
 
 type RegisterPlayerRequest struct {
 	FirstName          string               `form:"first_name"`
-	MiddleName         *string              `form:"middle_nme"`
+	MiddleName         *string              `form:"middle_name"`
+	LastName           *string              `form:"last_name"`
+	Gender             string               `form:"gender"`
+	Email              string               `form:"email"`
+	ProfilePic         multipart.FileHeader `form:"profile_pic"`
+	ContactNo          string               `form:"contact_no"`
+	EmergencyContactNo string               `form:"emergency_contact_no"`
+	JerseyNo           string               `form:"jersey"`
+	BloodGroup         string               `form:"blood_group"`
+	FoodPreference     string               `form:"food_preference"`
+	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	Remark             *string              `form:"remark"`
+	Institute          string               `form:"institute"`
+	Sports             string               `form:"sports"`
+	Staff              bool                 `form:"staff"`
+}
+
+type RegisterPlayerSportData struct {
+	SportId   int     `json:"sportId"`
+	Secondary bool    `json:"secondary"`
+	Reserve   bool    `json:"reserve"`
+	Extra     *string `json:"extra"`
+}
+
+type RegisterPlayerEditRequest struct {
+	UserId             int                  `form:"user_id"`
+	FirstName          string               `form:"first_name"`
+	MiddleName         *string              `form:"middle_name"`
+	LastName           *string              `form:"last_name"`
+	Gender             string               `form:"gender"`
+	Email              string               `form:"email"`
+	ProfilePic         multipart.FileHeader `form:"profile_pic"`
+	ContactNo          string               `form:"contact_no"`
+	EmergencyContactNo string               `form:"emergency_contact_no"`
+	JerseyNo           string               `form:"jersey"`
+	BloodGroup         string               `form:"blood_group"`
+	FoodPreference     string               `form:"food_preference"`
+	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	Remark             *string              `form:"remark"`
+	Institute          string               `form:"institute"`
+	Sports             string               `form:"sports"`
+	Staff              bool                 `form:"staff"`
+}
+
+type RegisterCoachRequest struct {
+	FirstName          string               `form:"first_name"`
+	MiddleName         *string              `form:"middle_name"`
 	LastName           *string              `form:"last_name"`
 	Gender             string               `form:"gender"`
 	Email              string               `form:"email"`
@@ -93,19 +142,12 @@ type RegisterPlayerRequest struct {
 	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
 	Remark             *string              `form:"remark"`
 	Institute          string               `form:"institute"`
-	Sports             string               `form:"sports"`
 	Staff              bool                 `form:"staff"`
 }
-type RegisterPlayerSportData struct {
-	SportId   int     `json:"sportId"`
-	Secondary bool    `json:"secondary"`
-	Reserve   bool    `json:"reserve"`
-	Extra     *string `json:"extra"`
-}
-
-type RegisterCoachRequest struct {
+type RegisterCoachEditRequest struct {
+	UserId             int                  `form:"user_id"`
 	FirstName          string               `form:"first_name"`
-	MiddleName         *string              `form:"middle_nme"`
+	MiddleName         *string              `form:"middle_name"`
 	LastName           *string              `form:"last_name"`
 	Gender             string               `form:"gender"`
 	Email              string               `form:"email"`
@@ -147,4 +189,31 @@ type GetPlayersResponse struct {
 
 type RemovePlayerRequest struct {
 	UserId int `json:"userId"`
+}
+
+type GetPlayerDataRequest struct {
+	UserId int `form:"id"`
+}
+
+type GetPlayerDataResponse struct {
+	FirstName          string      `json:"firstName"`
+	MiddleName         *string     `json:"middleName"`
+	LastName           *string     `json:"lastName"`
+	Gender             string      `json:"gender"`
+	Email              string      `json:"email"`
+	ProfilePic         string      `json:"profilePic"`
+	ContactNo          string      `json:"contactNo"`
+	EmergencyContactNo string      `json:"emergencyContactNo"`
+	BloodGroup         string      `json:"bloodGroup"`
+	JerseyNo           *string     `json:"jersey"`
+	FoodPreference     string      `json:"foodPreference"`
+	CheckInDate        custom.Date `json:"checkInDate" `
+	CheckOutDate       custom.Date `json:"checkOutDate"`
+	Remark             *string     `json:"remark"`
+	Sports             []struct {
+		SportId   int     `json:"sportId"`
+		Secondary bool    `json:"secondary"`
+		Reserve   bool    `json:"reserve"`
+		Extra     *string `json:"extra"`
+	} `json:"sports"`
 }

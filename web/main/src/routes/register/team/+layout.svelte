@@ -11,7 +11,7 @@
 			if (page.url.pathname == '/register/team') {
 				goto('/register');
 			} else if (page.url.pathname == '/register/team/add') {
-				goto('/register/team' + page.url.search);
+				goto('/register/team' + page.url.search.split('edit')[0]);
 			}
 		}}
 		class="button-text flex w-fit gap-x-4 hover:cursor-pointer"

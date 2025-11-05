@@ -24,10 +24,14 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.POST("logout", middlewares.AuthJWT(), controller.Logout)
 	r.GET("me", middlewares.AuthJWT(), middlewares.CacheHTTP(60*5), controller.Me)
 	r.POST("register", middlewares.AuthJWT(), controller.RegisterPlayer)
+	r.POST("register-edit", middlewares.AuthJWT(), controller.RegisterPlayerEdit)
 	r.POST("register-coach", middlewares.AuthJWT(), controller.RegisterCoach)
+	r.POST("register-coach-edit", middlewares.AuthJWT(), controller.RegisterCoach)
 	r.POST("remove-player", middlewares.AuthJWT(), controller.RemovePlayer)
 	r.Static("/profile-pic", "images/users/web").Use(middlewares.CacheHTTP(60 * 1))
+	r.Static("/profile-pic-orig", "images/users/original").Use(middlewares.CacheHTTP(60 * 1))
 	r.GET("get-players", middlewares.CacheHTTP(24), controller.GetPlayers)
+	r.GET("get-player-data", middlewares.CacheHTTP(24), controller.GetPlayerData)
 	r.GET("get-player-count", middlewares.CacheHTTP(24), controller.GetPlayerCount)
 
 }

@@ -103,6 +103,9 @@
 				(player.lastName ?? '')
 			).trim()}
 			photoUrl={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+			onEdit={() => {
+				goto(`/register/team/add?sport=${sportId}&edit=${player.userId}`);
+			}}
 			onRemove={() => {
 				if (
 					confirm(

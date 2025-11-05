@@ -36,3 +36,26 @@ export interface GetPlayerCount {
 	secondaryCount: number;
 	reserveCount: number;
 }
+
+export interface GetPlayerData {
+	firstName: string;
+	middleName: string | null;
+	lastName: string | null;
+	gender: string;
+	email: string;
+	profilePic: string;
+	contactNo: string;
+	emergencyContactNo: string;
+	bloodGroup: string;
+	jersey: string | null;
+	foodPreference: string;
+	checkInDate: string;
+	checkOutDate: string;
+	remark: string | null;
+	sports: {
+		sportId: number;
+		reserve: boolean;
+		extra: string | null;
+		secondary: boolean;
+	}[];
+}

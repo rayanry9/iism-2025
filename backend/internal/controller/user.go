@@ -164,6 +164,52 @@ func RegisterPlayer(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
+func RegisterPlayerEdit(c *gin.Context) {
+	var req schema.RegisterPlayerEditRequest
+
+	if err := c.Bind(&req); err != nil {
+		slog.Info("Bad request for register player edit", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
+		return
+	}
+
+	if req.ProfilePic.Size > 10*1024*1024 {
+		slog.Info("Profile Pic File size exceeded", "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "File Size exceeded"})
+		return
+	}
+
+	var sportsData []schema.RegisterPlayerSportData
+	if err := json.Unmarshal([]byte(req.Sports), &sportsData); err != nil {
+		slog.Info("Bad request for Sport Data edit", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
+		return
+	}
+
+	sportName, err := db.GetSportNameFromId(c, sportsData[0].SportId)
+	if err != nil {
+		slog.Info("Bad request for register player eidt | No such sport id", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "No such sport"})
+		return
+	}
+	// IIT - Sport - Player
+	fmt.Println(req.ProfilePic.Filename)
+	req.ProfilePic.Filename = fmt.Sprintf("%s-%s-%s", req.Institute, sportName, utility.ToPascalCase(req.FirstName)+utility.ToPascalCase(utility.CoalesceString(req.MiddleName))+utility.ToPascalCase(utility.CoalesceString(req.LastName)))
+
+	if err := utility.SaveProfilePic(req.ProfilePic); err != nil {
+		slog.Error("Failed to save profile pic", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save Profile Picture"})
+		return
+	}
+
+	if err := db.RegisterPlayerEdit(c, req, sportsData); err != nil {
+		slog.Error("Failed to register player edit", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to edit player."})
+		return
+	}
+	c.Status(http.StatusOK)
+}
+
 func RegisterCoach(c *gin.Context) {
 	var req schema.RegisterCoachRequest
 
@@ -190,6 +236,38 @@ func RegisterCoach(c *gin.Context) {
 
 	if err := db.RegisterCoach(c, req); err != nil {
 		slog.Error("Failed to register coach", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to register personnel."})
+		return
+	}
+	c.Status(http.StatusOK)
+}
+
+func RegisterCoachEdit(c *gin.Context) {
+	var req schema.RegisterCoachEditRequest
+
+	if err := c.Bind(&req); err != nil {
+		slog.Info("Bad request for edit coach", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
+		return
+	}
+
+	if req.ProfilePic.Size > 10*1024*1024 {
+		slog.Info("Profile Pic File size exceeded", "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "File Size exceeded"})
+		return
+	}
+
+	// IIT - Sport - Player
+	req.ProfilePic.Filename = fmt.Sprintf("%s-%s-%s", req.Institute, req.Gender, utility.ToPascalCase(req.FirstName)+utility.ToPascalCase(utility.CoalesceString(req.MiddleName))+utility.ToPascalCase(utility.CoalesceString(req.LastName)))
+
+	if err := utility.SaveProfilePic(req.ProfilePic); err != nil {
+		slog.Error("Failed to save profile pic", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save Profile Picture"})
+		return
+	}
+
+	if err := db.RegisterCoachEdit(c, req); err != nil {
+		slog.Error("Failed to edit coach", "error", err, "req", c.Request)
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to register personnel."})
 		return
 	}
@@ -254,4 +332,22 @@ func RemovePlayer(c *gin.Context) {
 	}
 
 	c.Status(http.StatusOK)
+}
+
+func GetPlayerData(c *gin.Context) {
+	var req schema.GetPlayerDataRequest
+
+	if err := c.Bind(&req); err != nil {
+		slog.Info("Bad request for get player data", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
+		return
+	}
+
+	data, err := db.GetPlayerData(c, req)
+	if err != nil {
+		slog.Error("Failed to Get player Data", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to get player data."})
+		return
+	}
+	c.JSON(http.StatusOK, data)
 }

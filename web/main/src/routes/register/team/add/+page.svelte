@@ -17,9 +17,11 @@
 	import StartToastifyInstance from 'toastify-js';
 	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
 	import Loading from '$lib/ui/components/Loading.svelte';
+	import { onMount } from 'svelte';
 
 	const sportId = page.url.searchParams.get('sport');
 	let profilePic = $state(false);
+	let isEditRegister = page.url.searchParams.has('edit');
 	let { data, form } = $props();
 
 	$effect(() => {
@@ -36,6 +38,19 @@
 				},
 				close: true
 			}).showToast();
+		}
+	});
+	onMount(() => {
+		if (isEditRegister) {
+			if (parseInt(sportId!) > 0) {
+				data.playerData!.sports = data.playerData!.sports.filter(
+					(val) => val.secondary || val.reserve
+				);
+			}
+			for (let i = 0; i < (data.playerData?.sports.length ?? 0); i++) {
+				secondarySports.push(i);
+				athleticSubSportArr[i] = data.playerData!.sports[i].sportId.toString();
+			}
 		}
 	});
 
@@ -91,16 +106,37 @@
 	<div class="title-text text-custom-orange col-span-3 mb-3">Personal Details</div>
 	<input hidden name="institute" value={data.me?.institute} />
 	<input hidden name="staff" value={globals.staff} />
-	{#if sportId && parseInt(sportId) > -10}
-		<input hidden name="gender" value={isSportFemale(parseInt(sportId)) ? 'Female' : 'Male'} />
+	{#if isEditRegister}
+		<input hidden name="user_id" value={page.url.searchParams.get('edit')} />
 	{/if}
-	<CustomInput required name="first_name">FIRST NAME *</CustomInput>
-	<CustomInput name="middle_name">MIDDLE NAME</CustomInput>
-	<CustomImagePicker bind:filled={profilePic} class="row-span-2">UPLOAD PHOTO *</CustomImagePicker>
-	<CustomInput name="last_name">LAST NAME</CustomInput>
+	{#if sportId && parseInt(sportId) > -10}
+		<input
+			hidden
+			name="gender"
+			value={isEditRegister
+				? data.playerData?.gender
+				: isSportFemale(parseInt(sportId))
+					? 'Female'
+					: 'Male'}
+		/>
+	{/if}
+	<CustomInput required value={isEditRegister ? data.playerData?.firstName : null} name="first_name"
+		>FIRST NAME *</CustomInput
+	>
+	<CustomInput value={isEditRegister ? data.playerData?.middleName : null} name="middle_name"
+		>MIDDLE NAME</CustomInput
+	>
+	<CustomImagePicker
+		profilePic={isEditRegister ? (data.playerData?.profilePic ?? undefined) : undefined}
+		bind:filled={profilePic}
+		class="row-span-2">UPLOAD PHOTO *</CustomImagePicker
+	>
+	<CustomInput value={isEditRegister ? data.playerData?.lastName : null} name="last_name"
+		>LAST NAME</CustomInput
+	>
 	{#if parseInt(sportId!) <= -10}
 		<CustomSelect
-			value={'Male'}
+			value={isEditRegister ? data.playerData?.gender : 'Male'}
 			items={[
 				{ value: 'Male', label: 'Male' },
 				{ value: 'Female', label: 'Female' },
@@ -111,15 +147,33 @@
 			name="gender">Gender*</CustomSelect
 		>
 	{/if}
-	<CustomInput name="phone" required minlength={10} maxlength={10}
-		>CONTACT NO. (WHATSAPP PREFERRED) *</CustomInput
+	<CustomInput
+		name="contact_no"
+		value={isEditRegister ? data.playerData?.contactNo : null}
+		required
+		minlength={10}
+		maxlength={10}>CONTACT NO. (WHATSAPP PREFERRED) *</CustomInput
 	>
-	<CustomInput type="email" name="email" required>EMAIL ID *</CustomInput>
-	<CustomInput required minlength={10} maxlength={10} name="emergency_phone"
-		>EMERGENCY CONTACT NO. *</CustomInput
+	<CustomInput
+		type="email"
+		value={isEditRegister ? data.playerData?.email : null}
+		name="email"
+		required>EMAIL ID *</CustomInput
+	>
+	{#if parseInt(sportId!) > -10}
+		<CustomInput name="jersey" value={isEditRegister ? data.playerData?.jersey : null} required
+			>JERSEY NO.</CustomInput
+		>
+	{/if}
+	<CustomInput
+		required
+		minlength={10}
+		maxlength={10}
+		value={isEditRegister ? data.playerData?.emergencyContactNo : null}
+		name="emergency_contact_no">EMERGENCY CONTACT NO. *</CustomInput
 	>
 	<CustomSelect
-		value={'A+'}
+		value={isEditRegister ? data.playerData?.bloodGroup : 'A+'}
 		items={[
 			{ value: 'A+', label: 'A+' },
 			{ value: 'A-', label: 'A-' },
@@ -136,19 +190,31 @@
 		name="blood_group">BLOOD GROUP *</CustomSelect
 	>
 	<CustomSelect
-		value={'Veg'}
+		value={isEditRegister ? data.playerData?.foodPreference : 'Veg'}
 		items={[
 			{ value: 'Non Veg', label: 'Non Vegetarian' },
 			{ value: 'Veg', label: 'Vegetarian' }
 		]}
 		type="single"
 		required
-		name="blood_group">FOOD PREFERENCE*</CustomSelect
+		name="food_preference">FOOD PREFERENCE*</CustomSelect
 	>
-	<CustomInput name="remark">Remark</CustomInput>
+	<CustomInput value={isEditRegister ? data.playerData?.remark : null} name="remark"
+		>REMARK</CustomInput
+	>
 	<div class="title-text text-custom-orange col-span-3 mb-3">Dates</div>
-	<CustomInput required type="date" name="check_in_date">CHECKOUT IN DATE *</CustomInput>
-	<CustomInput required type="date" name="check_out_date">CHECKOUT OUT DATE *</CustomInput>
+	<CustomInput
+		required
+		type="date"
+		value={isEditRegister ? data.playerData?.checkInDate : null}
+		name="check_in_date">CHECKOUT IN DATE *</CustomInput
+	>
+	<CustomInput
+		required
+		type="date"
+		name="check_out_date"
+		value={isEditRegister ? data.playerData?.checkOutDate : null}>CHECKOUT OUT DATE *</CustomInput
+	>
 	{#if parseInt(sportId!) > -10}
 		{#if parseInt(sportId!) > 0}
 			<div class="title-text text-custom-orange col-span-3">Sport</div>
@@ -156,7 +222,16 @@
 				>REGISTERED SPORT</CustomInput
 			>
 			<input type="hidden" value={parseInt(sportId!)} name="sport_1" />
-			<CustomInput required name="extra_1">POSITION IN SPORT *</CustomInput>
+			<CustomInput
+				required
+				name="extra_1"
+				value={isEditRegister
+					? data.playerData?.sports.filter(
+							(val) =>
+								val.sportId == parseInt(sportId!) && val.secondary == false && val.reserve == false
+						)[0].extra
+					: null}>POSITION IN SPORT *</CustomInput
+			>
 		{/if}
 		{#if sportId != getSportIdOfSport('Volleyball', 2, false).toString()}
 			<div class="title-text text-custom-orange col-span-3 flex gap-x-4">
@@ -206,18 +281,26 @@
 								.filter((val) => val != undefined)}>SPORT</CustomSelect
 				>
 				{#if parseInt(sportId!) > 0}
-					<CustomInput required name="extra_{idx + 2}">POSITION IN SPORT *</CustomInput>
+					<CustomInput
+						required
+						value={isEditRegister ? data.playerData?.sports[idx].extra : null}
+						name="extra_{idx + 2}">POSITION IN SPORT *</CustomInput
+					>
 				{:else}
 					<label class="button-text mt-auto mb-3 flex h-fit items-center gap-x-4 leading-0">
 						{#if (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.count ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 ? 4 : 2) || (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.reservedCount ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 && !globals.staff ? 2 : 1)}
 							<input
 								type="hidden"
 								name={'reserve_' + (idx + 1)}
-								value={(data.athleticSubSport?.find(
-									(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
-								)?.count ?? 0) >= 2
-									? 'on'
-									: ''}
+								value={isEditRegister
+									? (data.playerData?.sports[idx].reserve ?? false)
+										? 'on'
+										: ''
+									: (data.athleticSubSport?.find(
+												(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+										  )?.count ?? 0) >= 2
+										? 'on'
+										: ''}
 							/>
 						{/if}
 						<input
@@ -240,14 +323,18 @@
 									)?.type ?? 0) >= 7 && !globals.staff
 										? 2
 										: 1)}
-							checked={(data.athleticSubSport?.find(
-								(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
-							)?.count ?? 0) >=
-								((data.athleticSubSport?.find(
-									(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
-								)?.type ?? 0) >= 7
-									? 4
-									: 2)}
+							checked={isEditRegister
+								? data.playerData?.sports.find(
+										(val) => val.sportId.toString() == athleticSubSportArr[idx]
+									)?.reserve
+								: (data.athleticSubSport?.find(
+										(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+									)?.count ?? 0) >=
+									((data.athleticSubSport?.find(
+										(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+									)?.type ?? 0) >= 7
+										? 4
+										: 2)}
 						/>
 						<div class="button-text -mb-1">Reserve</div>
 					</label>
