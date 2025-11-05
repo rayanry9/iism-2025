@@ -95,6 +95,11 @@
 <section class="flex flex-wrap gap-8 2xl:gap-10">
 	{#each data.playerData as player}
 		<PlayerCard
+			editVisible={sportId == '-2' || sportId == '-5'
+				? player.extra == '4x400 M Relay ( Mixed ) (R)' || player.extra == '4x400 M Relay ( Mixed )'
+					? true
+					: false
+				: true}
 			playerName={(
 				player.firstName +
 				' ' +

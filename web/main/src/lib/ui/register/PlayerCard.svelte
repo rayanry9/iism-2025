@@ -6,13 +6,15 @@
 		photoUrl,
 		subText,
 		onRemove,
-		onEdit
+		onEdit,
+		editVisible = true
 	}: {
 		playerName: string;
 		photoUrl: string;
 		subText: string;
 		onRemove: () => void;
 		onEdit: () => void;
+		editVisible: boolean;
 	} = $props();
 </script>
 
@@ -30,10 +32,12 @@
 			class="text-custom-teal border-custom-teal mt-auto w-fit rounded-sm border bg-white p-6 leading-0 transition-all"
 			>REMOVE</Button
 		>
-		<Button
-			onclick={onEdit}
-			class="bg-custom-teal border-custom-teal mt-auto w-fit rounded-sm border p-6 leading-0 text-white transition-all"
-			>EDIT</Button
-		>
+		{#if editVisible}
+			<Button
+				onclick={onEdit}
+				class="bg-custom-teal border-custom-teal mt-auto w-fit rounded-sm border p-6 leading-0 text-white transition-all"
+				>EDIT</Button
+			>
+		{/if}
 	</div>
 </div>
