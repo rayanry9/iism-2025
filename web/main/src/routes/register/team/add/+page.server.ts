@@ -4,6 +4,12 @@ import type { Actions } from './$types';
 export const actions = {
 	default: async ({ request, fetch }) => {
 		let data = await request.formData();
+
+		for (const [key, val] of data.entries()) {
+			if (typeof val === 'string') {
+				data.set(key, val.trim());
+			}
+		}
 		console.log(data.entries().toArray());
 		if (data.get('sport_1') != '-10') {
 			let sportData = [
