@@ -38,9 +38,11 @@ from the perspective of the consumer of this component, it will be typed appropr
 		<Select.Portal>
 			<Select.Content
 				{...contentProps}
-				class="bg-custom-light-gray mt-2 w-[var(--bits-select-anchor-width)] rounded-sm p-2"
+				class="bg-custom-light-gray shadow-popover data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 mt-2 h-fit max-h-96  w-[var(--bits-select-anchor-width)] min-w-[var(--bits-select-anchor-width)] rounded-sm p-2 px-1 py-3 data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1"
 			>
-				<Select.ScrollUpButton>^</Select.ScrollUpButton>
+				<Select.ScrollUpButton class="mx-auto transition-all starting:opacity-0"
+					>^</Select.ScrollUpButton
+				>
 				<Select.Viewport class="w-full">
 					{#each items as { value, label, disabled } (value)}
 						<Select.Item
@@ -52,7 +54,7 @@ from the perspective of the consumer of this component, it will be typed appropr
 						>
 					{/each}
 				</Select.Viewport>
-				<Select.ScrollDownButton>v</Select.ScrollDownButton>
+				<Select.ScrollDownButton class="mx-auto transition-all">v</Select.ScrollDownButton>
 			</Select.Content>
 		</Select.Portal>
 	</Select.Root>

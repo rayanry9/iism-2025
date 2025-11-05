@@ -277,6 +277,12 @@
 											label: val.name + (val.type == 9 ? ' ( Mixed )' : '')
 										};
 									}
+									if (isEditRegister && athleticSubSportArr.includes(val.sportId.toString())) {
+										return {
+											value: val.sportId.toString(),
+											label: val.name + (val.type == 9 ? ' ( Mixed )' : '')
+										};
+									}
 								})
 								.filter((val) => val != undefined)}>SPORT</CustomSelect
 				>

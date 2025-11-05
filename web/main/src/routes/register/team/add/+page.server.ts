@@ -1,19 +1,5 @@
 import { PUBLIC_API_URL } from '$env/static/public';
-import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
-
-export const load: PageServerLoad = async ({ fetch, url, parent }) => {
-	const data = await parent();
-	if (url.searchParams.has('edit')) {
-		return {
-			...data,
-			playerData: await (
-				await fetch(PUBLIC_API_URL + '/get-player-data?id=' + url.searchParams.get('edit'))
-			).json()
-		};
-	}
-	return data;
-};
 
 export const actions = {
 	default: async ({ request, fetch }) => {
