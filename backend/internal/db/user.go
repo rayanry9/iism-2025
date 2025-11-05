@@ -536,6 +536,7 @@ func GetPlayerData(c *gin.Context, req schema.GetPlayerDataRequest) (*schema.Get
 		u.first_name,
 		u.middle_name,
 		u.last_name,
+		u.gender,
 		u.contact_no,
 		u.profile_pic,
 		u.email,
@@ -563,7 +564,7 @@ func GetPlayerData(c *gin.Context, req schema.GetPlayerDataRequest) (*schema.Get
 		u.id = $1
 	group by 
 		u.id
-	`, req.UserId).Scan(&data.FirstName, &data.MiddleName, &data.LastName, &data.ContactNo, &data.ProfilePic, &data.Email, &data.JerseyNo, &data.EmergencyContactNo, &data.BloodGroup, &data.FoodPreference, &data.Remark, &data.CheckInDate, &data.CheckOutDate, &data.Sports)
+	`, req.UserId).Scan(&data.FirstName, &data.MiddleName, &data.LastName, &data.Gender, &data.ContactNo, &data.ProfilePic, &data.Email, &data.JerseyNo, &data.EmergencyContactNo, &data.BloodGroup, &data.FoodPreference, &data.Remark, &data.CheckInDate, &data.CheckOutDate, &data.Sports)
 
 	return &data, err
 }
