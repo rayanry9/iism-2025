@@ -9,11 +9,18 @@ import 'package:iism_2025/screens/notification.dart';
 import 'package:iism_2025/screens/profile.dart';
 import 'package:iism_2025/screens/schedule.dart';
 import 'package:iism_2025/screens/teams.dart';
+import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: "/home",
+  initialLocation: "/splash",
   routes: [
+    GoRoute(
+      path: "/splash",
+      builder: (BuildContext context, GoRouterState state) {
+        return const SplashScreen();
+      },
+    ),
     GoRoute(
       path: "/login",
       builder: (BuildContext context, GoRouterState state) {
