@@ -12,7 +12,7 @@
 	}: { activeIIT: IITNames; sports: Sports[]; activeSport: Sports | undefined } = $props();
 </script>
 
-<div class="flex w-full flex-col items-center justify-between gap-8 p-8 xl:flex-row">
+<div class="flex w-full flex-col items-center justify-between gap-8 xl:flex-row">
 	<div class="flex min-w-fit items-center gap-[2rem]">
 		<img src={getIITImgSrc(activeIIT)} class="h-16 xl:h-12 2xl:h-24" alt="iit logo" />
 		<div class="flex flex-col">
@@ -33,4 +33,4 @@
 		{/each}
 	</div>
 </div>
-<div class="border-t-custom-gray mt-4 ml-4 h-0 w-[98%] border-t"></div>
+<div class="border-t-custom-gray mt-12 ml-4 h-0 w-[95%] border-t"></div>

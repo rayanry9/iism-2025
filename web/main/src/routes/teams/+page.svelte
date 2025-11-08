@@ -2,6 +2,7 @@
 	import { getAllIITNames, getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc.js';
 	import { getSportIdOfSport, getSportsAll, isSportFemale } from '$lib/utility/sport';
+	import playerBgImg from '$lib/assets/player-bg.webp';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import type { GetPlayers, GetPlayerCount } from '$lib/types/user';
 	import logoNoText from '$lib/assets/logo-no-text.svg';
@@ -12,24 +13,23 @@
 	import type { Sports } from '$lib/types/sports';
 	import Button from '$lib/ui/components/Button.svelte';
 	import CustomSelect2 from '$lib/ui/teams/CustomSelect2.svelte';
-	import { browser } from '$app/environment';
 	import men from '$lib/assets/icons/men.svg';
 	import women from '$lib/assets/icons/female.svg';
 	import TeamHeader from '$lib/ui/teams/TeamHeader.svelte';
 	import TeamAsideBar from '$lib/ui/teams/TeamAsideBar.svelte';
 	import { untrack } from 'svelte';
+	import { getJerseyFromIITName } from '$lib/utility/jersey';
 
 	let sports = $derived.by(() => {
 		return getSportsAll(globals.staff);
 	});
-	let activeSport = $state<Sports | undefined>(undefined);
-	let activeIIT = $state<IITNames | undefined | ''>(undefined);
+	let activeSport = $state<Sports | undefined>('Athletics');
+	let activeIIT = $state<IITNames | undefined | ''>('Hyderabad');
 	let activeGender = $state<'MEN' | 'WOMEN' | undefined>('MEN');
 	$effect(() => {
 		activeIIT;
 		activeSport;
 		untrack(() => (activeGender = 'MEN'));
-		console.log(activeIIT);
 	});
 	let playerData = $state<GetPlayers[]>([]);
 	let playerCount = $state<GetPlayerCount | null>(null);
@@ -65,17 +65,17 @@
 			// activeIIT = undefined;
 		} // Tailwind's lg breakpoint is 1280px
 	}
-	$effect(() => {
-		if (browser) {
-			checkIsMobile();
-			window.addEventListener('resize', checkIsMobile);
-		}
-		return () => {
-			if (browser) {
-				window.removeEventListener('resize', checkIsMobile);
-			}
-		};
-	});
+	// $effect(() => {
+	// 	if (browser) {
+	// 		checkIsMobile();
+	// 		window.addEventListener('resize', checkIsMobile);
+	// 	}
+	// 	return () => {
+	// 		if (browser) {
+	// 			window.removeEventListener('resize', checkIsMobile);
+	// 		}
+	// 	};
+	// });
 </script>
 
 <div class="flex flex-col overflow-x-clip xl:flex-row">
@@ -96,7 +96,7 @@
 	</MobileHeaderFrame>
 
 	{#if activeIIT == undefined || activeIIT == ''}
-		<main class="flex h-fit grow items-center justify-center">
+		<main class="flex grow items-center justify-center">
 			<section
 				class="mt-32 hidden flex-col items-center gap-y-6 text-center max-lg:mb-32 xl:mt-64 xl:flex"
 			>
@@ -116,65 +116,86 @@
 			</section>
 		</main>
 	{:else}
-		<main class="hidden grow flex-row overflow-y-auto lg:flex">
-			<div class="flex w-full flex-col p-[3rem]">
-				<TeamHeader {sports} bind:activeSport {activeIIT} />
+		<main class="my-12 flex h-[calc(100vh-10rem)] grow flex-col overflow-y-auto px-12">
+			<TeamHeader {sports} bind:activeSport {activeIIT} />
 
-				{#if activeSport}
-					<div class="flex flex-row items-center justify-between xl:mt-[1rem] 2xl:mt-[2.5rem]">
-						<!-- <h2>Team has not been decided yet.</h2> -->
+			{#if activeSport}
+				<!-- <h2>Team has not been decided yet.</h2> -->
 
-						<div class="flex flex-row items-center gap-[2rem]">
-							<img class="xl:h-16 2xl:h-20" alt="sport logo" src={getSportImageSrc(activeSport)} />
-							<div>
-								<span class="text-3xl uppercase">{activeSport}</span>
-								<span class="text-custom-blue text-2xl"> - Team Players</span>
-							</div>
+				<div class="mt-12 flex">
+					<div class="flex flex-row items-center gap-[2rem]">
+						<img class="xl:h-16 2xl:h-20" alt="sport logo" src={getSportImageSrc(activeSport)} />
+						<div>
+							<span class="text-3xl uppercase">{activeSport}</span>
+							<span class="text-custom-blue text-2xl"> - Team Players</span>
 						</div>
+					</div>
 
-						{#key activeSport}
-							<ToggleTabs.Root class="ml-auto h-fit ">
+					{#key activeSport}
+						<ToggleTabs.Root class="ml-auto h-fit">
+							<ToggleTabs.Item
+								onclick={() => {
+									activeGender = 'MEN';
+								}}
+								class="!px-5 !py-2"
+								><div class="flex flex-row items-center justify-center gap-2">
+									MEN <img src={men} alt="Male logo" />
+								</div></ToggleTabs.Item
+							>
+							{#if getSportIdOfSport(activeSport, 1, globals.staff) != getSportIdOfSport(activeSport, 2, globals.staff)}
 								<ToggleTabs.Item
 									onclick={() => {
-										activeGender = 'MEN';
+										activeGender = 'WOMEN';
 									}}
 									class="!px-5 !py-2"
-									><div class="flex flex-row items-center justify-center gap-2">
-										MEN <img src={men} alt="Male logo" />
+									><div class="flex flex-row items-center gap-2">
+										WOMEN <img src={women} alt="Female logo" />
 									</div></ToggleTabs.Item
 								>
-								{#if getSportIdOfSport(activeSport, 1, globals.staff) != getSportIdOfSport(activeSport, 2, globals.staff)}
-									<ToggleTabs.Item
-										onclick={() => {
-											activeGender = 'WOMEN';
-										}}
-										class="!px-5 !py-2"
-										><div class="flex flex-row items-center gap-2">
-											WOMEN <img src={women} alt="Female logo" />
-										</div></ToggleTabs.Item
-									>
-								{/if}
-							</ToggleTabs.Root>
-						{/key}
-					</div>
-					<div class="flex flex-row flex-wrap gap-[4rem] p-[1rem] pb-24 xl:mt-[1rem] 2xl:mt-[2rem]">
-						{#each playerData as player}
-							<div class="my-1 flex h-auto flex-col p-2 xl:w-[22rem] 2xl:w-[25rem]">
+							{/if}
+						</ToggleTabs.Root>
+					{/key}
+				</div>
+				<section class="flex flex-wrap">
+					{#each playerData as player}
+						<div class="relative my-1 flex w-min flex-col">
+							<div
+								class="relative"
+								style=" 
+									clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+							"
+							>
 								<img
 									alt="profile"
-									class="h-[20rem]"
-									src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+									class="z-20 min-h-[25rem] min-w-[25rem] -translate-x-3 object-cover"
+									src={'/teams/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
 								/>
-								<span class="mt-[1rem] xl:text-xl 2xl:text-3xl">
-									{player.firstName}
-									{player.lastName}
-								</span>
-								<span class="xl:text-xxl mt-[1rem] text-xl">{player.extra}</span>
+								<div
+									class=" absolute bottom-0 -z-10 h-3/5 w-full"
+									style="background-color: {getJerseyFromIITName(
+										activeIIT ?? 'Hyderabad',
+										globals.staff
+									).major};
+									"
+								>
+									<div
+										class="h-full mask-cover mask-bottom mask-repeat"
+										style="mask-image: url({playerBgImg}); background-color: {getJerseyFromIITName(
+											activeIIT ?? 'Hyderabad',
+											globals.staff
+										).minor}"
+									></div>
+								</div>
 							</div>
-						{/each}
-					</div>
-				{/if}
-			</div>
+							<span class="mt-[1rem] w-[calc(100%-2rem)] xl:text-xl 2xl:text-3xl">
+								{player.firstName}
+								{player.lastName}
+							</span>
+							<span class="mt-[1rem] w-[calc(100%-2rem)] text-xl xl:text-2xl">{player.extra}</span>
+						</div>
+					{/each}
+				</section>
+			{/if}
 		</main>
 	{/if}
 </div>
@@ -243,7 +264,7 @@
 								<img
 									alt="profile"
 									class="h-[9rem]"
-									src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+									src={'/teams/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
 								/>
 								<span class="mt-[0.2rem] text-xl"> {player.firstName} {player.lastName} </span>
 								<span class="mt-[0.3rem] text-base">{player.extra}</span>
