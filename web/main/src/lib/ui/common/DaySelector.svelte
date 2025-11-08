@@ -19,8 +19,8 @@
 </script>
 
 <section
-	class="flex flex-row gap-y-4 *:mx-2 max-xl:overflow-scroll xl:flex-wrap"
-	style="scrollbar-width: 0;"
+	class="flex flex-row gap-y-4 px-8 *:mx-2 max-xl:overflow-scroll xl:flex-wrap"
+	style="scrollbar-width: none;"
 >
 	{#each days as day, i}
 		<Button

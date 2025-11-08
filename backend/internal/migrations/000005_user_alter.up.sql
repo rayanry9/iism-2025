@@ -45,7 +45,7 @@ INSERT INTO sports (id, name, type) VALUES (31, '1500 M', 4);
 INSERT INTO sports (id, name, type) VALUES (32, '5000 M', 4);
 INSERT INTO sports (id, name, type) VALUES (33, '110 M Hurdles', 4);
 INSERT INTO sports (id, name, type) VALUES (34, '400 M Hurdles', 4);
-INSERT INTO sports (id, name, type) VALUES (35, '4x110 M Relay', 7);
+INSERT INTO sports (id, name, type) VALUES (35, '4x100 M Relay', 7);
 INSERT INTO sports (id, name, type) VALUES (36, '4x400 M Relay', 7);
 INSERT INTO sports (id, name, type) VALUES (37, 'High Jump', 4);
 INSERT INTO sports (id, name, type) VALUES (38, 'Long Jump', 4);

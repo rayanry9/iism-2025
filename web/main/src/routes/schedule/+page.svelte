@@ -14,7 +14,7 @@
 </script>
 
 <div
-	class="relative flex flex-col overflow-x-clip text-nowrap xl:h-[calc(100vh-4rem)] xl:flex-row *:[main]:overflow-y-scroll *:[main]:px-12 *:[main]:py-16 xl:*:[main]:px-24 2xl:*:[main]:py-24"
+	class="relative flex flex-col overflow-x-clip text-nowrap xl:h-[calc(100vh-4rem)] xl:flex-row *:[main]:overflow-y-scroll *:[main]:py-12 xl:*:[main]:px-24 2xl:*:[main]:py-24"
 >
 	<SportsAsideBar
 		bind:selectedSport
@@ -48,6 +48,7 @@
 			<FullSchedule institutes={[]} matchData={[]} />
 		{:then value}
 			<FullSchedule institutes={value[0]} matchData={value[1]} />
+			<!-- <FullSchedule institutes={[]} matchData={[]} /> -->
 		{/await}
 	{:else if selectedSport == 'Athletics'}
 		<AthleticsSchedule />

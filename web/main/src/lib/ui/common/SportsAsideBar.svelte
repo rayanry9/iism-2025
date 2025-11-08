@@ -5,23 +5,9 @@
 	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 	import { globals } from '$lib/state.svelte';
+	import { getSportsAll } from '$lib/utility/sport';
 	let sports = $derived.by(() => {
-		if (!globals.staff) {
-			return ['Athletics', 'Cricket', 'Football', 'Hockey', 'Volleyball'] satisfies Array<Sports>;
-		} else {
-			return [
-				'Athletics',
-				'Badminton',
-				'Basketball',
-				'Chess',
-				'Cricket',
-				'Football',
-				'Table Tennis',
-				'Tennis',
-				'Volleyball',
-				'Squash'
-			] satisfies Array<Sports>;
-		}
+		return getSportsAll(globals.staff);
 	});
 
 	let {

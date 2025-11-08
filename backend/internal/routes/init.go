@@ -1,6 +1,9 @@
 package routes
 
 import (
+	"net/http"
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/rayanry9/iism-2025/backend/internal/controller"
 	"github.com/rayanry9/iism-2025/backend/internal/middlewares"
@@ -29,6 +32,14 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.POST("register-coach-edit", middlewares.AuthJWT(), controller.RegisterCoach)
 	r.POST("remove-player", middlewares.AuthJWT(), controller.RemovePlayer)
 	r.Static("/profile-pic", "images/users/web").Use(middlewares.CacheHTTP(60 * 1))
+
+	r.Static("/gallery", "images/gallery").Use(middlewares.CacheHTTP(60 * 60 * 24))
+	r.GET("/get-gallery-count", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"count": os.Getenv("TOTAL_GALLERY_IMAGES"),
+		})
+	})
+
 	r.Static("/profile-pic-orig", "images/users/original").Use(middlewares.CacheHTTP(60 * 1))
 	r.GET("get-players", middlewares.CacheHTTP(24), controller.GetPlayers)
 	r.GET("get-player-data", middlewares.CacheHTTP(24), controller.GetPlayerData)

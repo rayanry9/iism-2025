@@ -1,5 +1,24 @@
 import type { GetAllSportsResponse, Sports } from '$lib/types/sports';
 
+export function getSportsAll(staff: boolean) {
+	if (!staff) {
+		return ['Athletics', 'Cricket', 'Football', 'Hockey', 'Volleyball'] satisfies Array<Sports>;
+	} else {
+		return [
+			'Athletics',
+			'Badminton',
+			'Basketball',
+			'Chess',
+			'Cricket',
+			'Football',
+			'Table Tennis',
+			'Tennis',
+			'Volleyball',
+			'Squash'
+		] satisfies Array<Sports>;
+	}
+}
+
 export function isSportIdStaff(id: number): boolean {
 	if ((id >= 16 && id <= 25) || (id >= -6 && id <= -3) || id == -11 || (id >= 59 && id <= 83)) {
 		return true;
@@ -105,9 +124,9 @@ export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 	if (staff) {
 		switch (sport) {
 			case 'Athletics':
-				if(type==1) return -3;
-				else if(type==2) return -4;
-				else if(type ==3) return -5 ;
+				if (type == 1) return -3;
+				else if (type == 2) return -4;
+				else if (type == 3) return -5;
 			case 'Volleyball':
 				return 25;
 			case 'Football':
@@ -134,9 +153,9 @@ export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 	} else {
 		switch (sport) {
 			case 'Athletics':
-				if(type==1) return 0;
-				else if(type==2) return -1;
-				else if(type ==3) return -2;
+				if (type == 1) return 0;
+				else if (type == 2) return -1;
+				else if (type == 3) return -2;
 			case 'Volleyball':
 				if (type == 1) return 14;
 				else return 15;
