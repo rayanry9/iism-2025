@@ -180,10 +180,11 @@
 									</div>
 								</div>
 								<span class="title-text mt-4 w-[calc(100%-2rem)] font-bold xl:mt-8">
-									{player.firstName}
-									{player.lastName}
+									{player.firstName.trim()}
+									{player.middleName?.trim() ?? ''}
+									{player.lastName?.trim() ?? ''}
 								</span>
-								<p class="mt-1 w-[calc(100%-2rem)] xl:mt-2">{player.extra}</p>
+								<p class="mt-1 w-[calc(100%-2rem)] xl:mt-2">{player.extra?.trim()}</p>
 							</div>
 						{/each}
 					{/if}
