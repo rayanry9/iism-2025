@@ -87,13 +87,11 @@
 
 	{#if activeIIT == undefined || activeIIT == ''}
 		<main class="flex grow items-center justify-center">
-			<section
-				class="mt-32 hidden flex-col items-center gap-y-6 text-center max-lg:mb-32 xl:mt-64 xl:flex"
-			>
+			<section class="mt-32 flex flex-col items-center gap-y-6 text-center max-xl:mb-32 xl:mt-64">
 				<div class="relative">
 					<div
 						style="filter: invert(48%) sepia(79%) saturate(26%) hue-rotate(86deg) brightness(118%) contrast(119%) opacity(70%); clip-path: polygon(100% 0%, 100% 100%, 0% 50%);"
-						class="absolute top-[calc(50%-1.5rem)] -left-24 h-12 w-4 bg-black"
+						class="absolute -top-20 left-0 mx-auto h-12 w-4 bg-black max-xl:right-0 max-xl:rotate-90 xl:top-[calc(50%-1.5rem)] xl:-left-24"
 					></div>
 					<img
 						src={logoNoText}
