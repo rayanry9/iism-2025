@@ -28,8 +28,6 @@
 				onclick={() => {
 					activeIIT = iit;
 				}}
-				data-umami-event="Team selection"
-				data-umami-event-team={activeIIT}
 			>
 				<img
 					src={getIITImgSrc(iit)}

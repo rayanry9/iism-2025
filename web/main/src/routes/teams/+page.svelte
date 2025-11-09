@@ -34,6 +34,15 @@
 	let playerCount = $state<GetPlayerCount | null>(null);
 	$effect(() => {
 		if (activeSport && activeIIT) {
+			try {
+				(window as any)?.umami.track('Team Search', {
+					iit: activeIIT,
+					sport: activeSport,
+					gender: activeGender
+				});
+			} catch (e) {
+				console.error(e);
+			}
 			// Fetch players
 			fetch(
 				`${PUBLIC_API_URL}/get-players?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
