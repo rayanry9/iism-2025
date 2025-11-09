@@ -13,10 +13,10 @@
 </script>
 
 <div class="flex w-full flex-col items-center justify-between gap-8 xl:flex-row">
-	<div class="flex min-w-fit items-center gap-[2rem]">
-		<img src={getIITImgSrc(activeIIT)} class="h-16 xl:h-12 2xl:h-24" alt="iit logo" />
+	<div class="flex min-w-fit flex-col items-center gap-[2rem] xl:flex-row">
+		<img src={getIITImgSrc(activeIIT)} class="h-32 xl:h-12 2xl:h-24" alt="iit logo" />
 		<div class="flex flex-col">
-			<span class="xl:text-2xl 2xl:text-4xl">IIT {activeIIT}</span>
+			<span class="title-text max-xl:font-bold">IIT {activeIIT}</span>
 			<!-- <span class="text-2xl xl:text-xl">Ranked 1st in Leaderboard</span> -->
 		</div>
 	</div>

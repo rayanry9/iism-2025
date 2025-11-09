@@ -11,7 +11,6 @@
 	import { ToggleTabs } from '$lib/ui/components/toggleTabs';
 	import { globals } from '$lib/state.svelte';
 	import type { Sports } from '$lib/types/sports';
-	import Button from '$lib/ui/components/Button.svelte';
 	import CustomSelect2 from '$lib/ui/teams/CustomSelect2.svelte';
 	import men from '$lib/assets/icons/men.svg';
 	import women from '$lib/assets/icons/female.svg';
@@ -24,7 +23,7 @@
 		return getSportsAll(globals.staff);
 	});
 	let activeSport = $state<Sports | undefined>('Athletics');
-	let activeIIT = $state<IITNames | undefined | ''>('Hyderabad');
+	let activeIIT = $state<IITNames | undefined | ''>();
 	let activeGender = $state<'MEN' | 'WOMEN' | undefined>('MEN');
 	$effect(() => {
 		activeIIT;
@@ -58,24 +57,6 @@
 			//   playerCount.set(null);
 		}
 	});
-	let isMobile = $state<boolean>(false);
-	function checkIsMobile() {
-		isMobile = window.innerWidth < 1280;
-		if (!isMobile) {
-			// activeIIT = undefined;
-		} // Tailwind's lg breakpoint is 1280px
-	}
-	// $effect(() => {
-	// 	if (browser) {
-	// 		checkIsMobile();
-	// 		window.addEventListener('resize', checkIsMobile);
-	// 	}
-	// 	return () => {
-	// 		if (browser) {
-	// 			window.removeEventListener('resize', checkIsMobile);
-	// 		}
-	// 	};
-	// });
 </script>
 
 <div class="flex flex-col overflow-x-clip xl:flex-row">
@@ -116,18 +97,24 @@
 			</section>
 		</main>
 	{:else}
-		<main class="my-12 flex h-[calc(100vh-10rem)] grow flex-col overflow-y-auto px-12">
+		<main
+			class="my-8 flex grow flex-col px-8 xl:my-12 xl:h-[calc(100vh-10rem)] xl:overflow-y-auto xl:px-12"
+		>
 			<TeamHeader {sports} bind:activeSport {activeIIT} />
 
 			{#if activeSport}
-				<!-- <h2>Team has not been decided yet.</h2> -->
-
 				<div class="mt-12 flex">
-					<div class="flex flex-row items-center gap-[2rem]">
-						<img class="xl:h-16 2xl:h-20" alt="sport logo" src={getSportImageSrc(activeSport)} />
-						<div>
-							<span class="text-3xl uppercase">{activeSport}</span>
-							<span class="text-custom-blue text-2xl"> - Team Players</span>
+					<div class="flex flex-row items-center gap-2 sm:gap-4 xl:gap-8">
+						<img
+							class="h-12 sm:h-20 xl:h-16 2xl:h-20"
+							alt="sport logo"
+							src={getSportImageSrc(activeSport)}
+						/>
+						<div class="flex flex-col items-center justify-center gap-x-2 sm:flex-row">
+							<span class="title-text">{activeSport}</span>
+							<p class="text-custom-blue flex gap-x-1">
+								<span class="hidden sm:block">- </span>Team Players
+							</p>
 						</div>
 					</div>
 
@@ -139,7 +126,8 @@
 								}}
 								class="!px-5 !py-2"
 								><div class="flex flex-row items-center justify-center gap-2">
-									MEN <img src={men} alt="Male logo" />
+									<div class="hidden leading-none sm:block">MEN</div>
+									<img src={men} alt="Male logo" class="h-6" />
 								</div></ToggleTabs.Item
 							>
 							{#if getSportIdOfSport(activeSport, 1, globals.staff) != getSportIdOfSport(activeSport, 2, globals.staff)}
@@ -149,130 +137,58 @@
 									}}
 									class="!px-5 !py-2"
 									><div class="flex flex-row items-center gap-2">
-										WOMEN <img src={women} alt="Female logo" />
+										<div class="hidden leading-none sm:block">WOMEN</div>
+										<img src={women} alt="Female logo" class="h-6" />
 									</div></ToggleTabs.Item
 								>
 							{/if}
 						</ToggleTabs.Root>
 					{/key}
 				</div>
-				<section class="flex flex-wrap">
-					{#each playerData as player}
-						<div class="relative my-1 flex w-min flex-col">
-							<div
-								class="relative"
-								style=" 
+				<section class="flex flex-wrap justify-center gap-y-4">
+					{#if playerData.length == 0}
+						<h2 class="mt-12">Team has not been decided yet</h2>
+					{:else}
+						{#each playerData as player}
+							<div class="relative my-1 flex w-min flex-col">
+								<div
+									class="relative"
+									style=" 
 									clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
 							"
-							>
-								<img
-									alt="profile"
-									class="z-20 min-h-[25rem] min-w-[25rem] -translate-x-3 object-cover"
-									src={'/teams/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
-								/>
-								<div
-									class=" absolute bottom-0 -z-10 h-3/5 w-full"
-									style="background-color: {getJerseyFromIITName(
-										activeIIT ?? 'Hyderabad',
-										globals.staff
-									).major};
-									"
 								>
+									<img
+										alt="profile"
+										class="z-20 min-h-40 min-w-40 -translate-x-3 object-cover sm:min-h-64 sm:min-w-64 xl:min-h-80 xl:min-w-80"
+										src={'/teams/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+									/>
 									<div
-										class="h-full mask-cover mask-bottom mask-repeat"
-										style="mask-image: url({playerBgImg}); background-color: {getJerseyFromIITName(
+										class="absolute bottom-0 -z-10 h-3/5 w-full"
+										style="background-color: {getJerseyFromIITName(
 											activeIIT ?? 'Hyderabad',
 											globals.staff
-										).minor}"
-									></div>
+										).major};
+									"
+									>
+										<div
+											class="h-full mask-cover mask-bottom mask-repeat"
+											style="mask-image: url({playerBgImg}); background-color: {getJerseyFromIITName(
+												activeIIT ?? 'Hyderabad',
+												globals.staff
+											).minor}"
+										></div>
+									</div>
 								</div>
+								<span class="title-text mt-4 w-[calc(100%-2rem)] font-bold xl:mt-8">
+									{player.firstName}
+									{player.lastName}
+								</span>
+								<p class="mt-1 w-[calc(100%-2rem)] xl:mt-2">{player.extra}</p>
 							</div>
-							<span class="mt-[1rem] w-[calc(100%-2rem)] xl:text-xl 2xl:text-3xl">
-								{player.firstName}
-								{player.lastName}
-							</span>
-							<span class="mt-[1rem] w-[calc(100%-2rem)] text-xl xl:text-2xl">{player.extra}</span>
-						</div>
-					{/each}
+						{/each}
+					{/if}
 				</section>
 			{/if}
 		</main>
 	{/if}
 </div>
-{#if isMobile}
-	<div class="xl:hidden">
-		<div class="flex"></div>
-		{#if activeIIT}
-			<div class="flex flex-col items-center">
-				<!-- <SelectSportMobile bind:activeSport /> -->
-				<img
-					src={getIITImgSrc(activeIIT)}
-					class=" mx-auto my-4 h-24"
-					alt={'IIT ' + activeIIT + ' logo'}
-				/>
-				<h2>IIT {activeIIT}</h2>
-				<span class="text-custom-orange text-xl">Current Rank in Leaderboard - 1</span>
-				<div
-					class={`mt-10 flex flex-row flex-wrap justify-center gap-x-5 *:rounded-sm *:p-2  **:[img]:size-9 `}
-				>
-					{#each sports as sport}
-						<Button
-							onclick={() => {
-								// window.open('https://www.linkedin.com/company/inter-iit-sports-meet-2025/', '_blank');
-								activeSport = sport;
-							}}
-							class={` border-1 border-black ${activeSport == sport ? 'bg-custom-blue' : 'bg-custom-white'}`}
-						>
-							<img src={getSportImageSrc(sport)} class="" alt="sport" />
-						</Button>
-					{/each}
-				</div>
-				{#if activeSport}
-					<div class="mt-10 mb-3 h-0 w-[92%] border-t-3 border-t-[#D9D9D9]"></div>
-					<div class="flex w-[92%] flex-row items-center justify-between">
-						<div class="mt-4 flex flex-row items-center gap-4">
-							<img class="h-10" alt="sport logo" src={getSportImageSrc(activeSport)} />
-							<div class="flex flex-col items-center">
-								<span class="text-xl font-semibold uppercase">{activeSport}</span>
-								<span class="text-l text-custom-blue"> Team Players</span>
-							</div>
-						</div>
-						<div>
-							<ToggleTabs.Root class="ml-auto h-fit ">
-								<ToggleTabs.Item
-									onclick={() => {
-										// sportType = 'Male';
-										activeGender = 'MEN';
-									}}
-									class="!px-5 !py-2"><img src={men} alt="Male logo" /></ToggleTabs.Item
-								>
-								<ToggleTabs.Item
-									onclick={() => {
-										// sportType = 'Female';
-										activeGender = 'WOMEN';
-									}}
-									class="!px-5 !py-2"><img src={women} alt="Female logo" /></ToggleTabs.Item
-								>
-							</ToggleTabs.Root>
-						</div>
-					</div>
-					<div
-						class="mt-10 flex flex-none flex-row flex-wrap gap-[4rem] overflow-y-auto p-[1rem] lg:h-[15rem] xl:mt-[1rem] xl:h-[23rem] 2xl:mt-[2rem] 2xl:h-[35rem] [@media(min-height:900px)]:h-[32rem]"
-					>
-						{#each playerData as player}
-							<div class=" my-1 flex h-auto w-[9.5rem] flex-col p-2">
-								<img
-									alt="profile"
-									class="h-[9rem]"
-									src={'/teams/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
-								/>
-								<span class="mt-[0.2rem] text-xl"> {player.firstName} {player.lastName} </span>
-								<span class="mt-[0.3rem] text-base">{player.extra}</span>
-							</div>
-						{/each}
-					</div>
-				{/if}
-			</div>
-		{/if}
-	</div>
-{/if}

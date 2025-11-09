@@ -47,8 +47,8 @@
 		{#await Promise.all([data.institutes, data.poolMatches])}
 			<FullSchedule institutes={[]} matchData={[]} />
 		{:then value}
-			<FullSchedule institutes={value[0]} matchData={value[1]} />
-			<!-- <FullSchedule institutes={[]} matchData={[]} /> -->
+			<!-- <FullSchedule institutes={value[0]} matchData={value[1]} /> -->
+			<FullSchedule institutes={[]} matchData={[]} />
 		{/await}
 	{:else if selectedSport == 'Athletics'}
 		<AthleticsSchedule />
