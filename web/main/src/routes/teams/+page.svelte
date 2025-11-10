@@ -156,7 +156,7 @@
 					{#if playerData.length == 0}
 						<h2 class="mt-12">Team has not been decided yet</h2>
 					{:else}
-						{#each playerData as player}
+						{#each playerData as player (player.profilePic)}
 							<div class="relative my-1 flex w-min flex-col">
 								<div
 									class="relative"
