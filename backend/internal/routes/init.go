@@ -29,7 +29,7 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.POST("register", middlewares.AuthJWT(), controller.RegisterPlayer)
 	r.POST("register-edit", middlewares.AuthJWT(), controller.RegisterPlayerEdit)
 	r.POST("register-coach", middlewares.AuthJWT(), controller.RegisterCoach)
-	r.POST("register-coach-edit", middlewares.AuthJWT(), controller.RegisterCoach)
+	r.POST("register-coach-edit", middlewares.AuthJWT(), controller.RegisterCoachEdit)
 	r.POST("remove-player", middlewares.AuthJWT(), controller.RemovePlayer)
 	r.Static("/profile-pic", "images/users/web").Use(middlewares.CacheHTTP(60 * 1))
 

@@ -53,19 +53,21 @@ func GetUserDetails(c *gin.Context, userId int) (schema.GetUserDetailsResponse, 
 		) 
 			FILTER ( 
 				WHERE us.sport_id IS NOT NULL 
-			) 
-		from 
-			users u 
-		left join 
-			user_sports us 
-			on us.user_id = u.id 
-		join 
-			institutes i 
-			on i.id = u.institute_id 
-		where 
-			u.id = $1 
-		group by 
-			u.id, i.id`, userId).Scan(&data.FirstName, &data.MiddleName, &data.LastName, &data.Gender, &data.Email, &data.ProfilePic, &data.ContactNo, &data.EmergencyContactNo, &data.BloodGroup, &data.FoodPreference, &data.Hostel, &data.CheckInDate, &data.CheckOutDate, &data.Role, &data.Staff, &data.AssignedId, &data.Institute, &data.Sports)
+			),
+		u.jersey_no,
+		u.designation
+	from 
+		users u 
+	left join 
+		user_sports us 
+		on us.user_id = u.id 
+	join 
+		institutes i 
+		on i.id = u.institute_id 
+	where 
+		u.id = $1 
+	group by 
+		u.id, i.id`, userId).Scan(&data.FirstName, &data.MiddleName, &data.LastName, &data.Gender, &data.Email, &data.ProfilePic, &data.ContactNo, &data.EmergencyContactNo, &data.BloodGroup, &data.FoodPreference, &data.Hostel, &data.CheckInDate, &data.CheckOutDate, &data.Role, &data.Staff, &data.AssignedId, &data.Institute, &data.Sports, &data.JerseyNo, &data.Designation)
 	return data, err
 }
 
@@ -180,10 +182,11 @@ func RegisterCoachEdit(c *gin.Context, req schema.RegisterCoachEditRequest) erro
 		institute_id = (
 			select id from institutes where name = $15
 		), 
-		staff = $16
+		staff = $16,
+		designation = $18
 	where
 		id = $17
-		`, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserCoach, req.Remark, req.Institute, req.Staff, req.UserId)
+		`, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserCoach, req.Remark, req.Institute, req.Staff, req.UserId, req.Designation)
 	if err != nil {
 		return err
 	}
@@ -200,13 +203,13 @@ func RegisterCoach(c *gin.Context, req schema.RegisterCoachRequest) error {
 	_, err = tx.Exec(c, `
 	insert into 
 		users 
-			(first_name, middle_name, last_name, gender, email, profile_pic, contact_no, emergency_contact_no, blood_group, food_preference, check_in_date, check_out_date, role, remark, institute_id, staff)
+			(first_name, middle_name, last_name, gender, email, profile_pic, contact_no, emergency_contact_no, blood_group, food_preference, check_in_date, check_out_date, role, remark, institute_id, staff, designation)
 	select	
-		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, id, $16 
+		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, id, $16, $17 
 	from 
 		institutes
 	where 
-		name = $15 `, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserCoach, req.Remark, req.Institute, req.Staff)
+		name = $15 `, req.FirstName, req.MiddleName, req.LastName, req.Gender, req.Email, req.ProfilePic.Filename, req.ContactNo, req.EmergencyContactNo, req.BloodGroup, req.FoodPreference, req.CheckInDate, req.CheckOutDate, schema.UserCoach, req.Remark, req.Institute, req.Staff, req.Designation)
 	if err != nil {
 		return err
 	}
@@ -226,7 +229,8 @@ func GetPlayers(c *gin.Context, req schema.GetPlayersRequest) (*[]schema.GetPlay
 				u.first_name,
 				u.middle_name,
 				u.last_name,
-				u.remark as extra
+				u.remark as extra,
+				true as isPrimary
 			from
 				users u
 			join 
@@ -243,7 +247,8 @@ func GetPlayers(c *gin.Context, req schema.GetPlayersRequest) (*[]schema.GetPlay
 				u.first_name,
 				u.middle_name,
 				u.last_name,
-				u.remark as extra
+				u.remark as extra,
+				true as isPrimary
 			from
 				users u
 			join 
@@ -277,7 +282,12 @@ func GetPlayers(c *gin.Context, req schema.GetPlayersRequest) (*[]schema.GetPlay
 						end
 					), 
 					', '
-				) as extra
+				) as extra,
+				NOT EXISTS (
+					select * from user_sports us 
+					join sports s ON us.sport_id = s.id AND s.type <= 3
+					where NOT us.secondary AND NOT us.reserve AND us.user_id = u.id
+				) as isPrimary
 			from
 				users u
 			join 
@@ -321,7 +331,12 @@ func GetPlayers(c *gin.Context, req schema.GetPlayersRequest) (*[]schema.GetPlay
 						end
 					), 
 					', '
-				) as extra
+				) as extra,
+				NOT EXISTS (
+					select * from user_sports us 
+					join sports s ON us.sport_id = s.id AND s.type <= 3
+					where NOT us.secondary AND NOT us.reserve AND us.user_id = u.id
+				) as isPrimary
 			from
 				users u
 			join 
@@ -349,7 +364,12 @@ func GetPlayers(c *gin.Context, req schema.GetPlayersRequest) (*[]schema.GetPlay
 				u.first_name,
 				u.middle_name,
 				u.last_name,
-				us.extra
+				us.extra,
+				EXISTS (
+					select * from user_sports us 
+					join sports s ON us.sport_id = s.id AND s.type <= 3
+					where NOT us.secondary AND NOT us.reserve AND us.user_id = u.id
+				) as isPrimary
 			from
 				users u
 			join
@@ -541,6 +561,7 @@ func GetPlayerData(c *gin.Context, req schema.GetPlayerDataRequest) (*schema.Get
 		u.profile_pic,
 		u.email,
 		u.jersey_no,
+		u.designation,
 		u.emergency_contact_no,
 		u.blood_group,
 		u.food_preference,
@@ -564,7 +585,7 @@ func GetPlayerData(c *gin.Context, req schema.GetPlayerDataRequest) (*schema.Get
 		u.id = $1
 	group by 
 		u.id
-	`, req.UserId).Scan(&data.FirstName, &data.MiddleName, &data.LastName, &data.Gender, &data.ContactNo, &data.ProfilePic, &data.Email, &data.JerseyNo, &data.EmergencyContactNo, &data.BloodGroup, &data.FoodPreference, &data.Remark, &data.CheckInDate, &data.CheckOutDate, &data.Sports)
+	`, req.UserId).Scan(&data.FirstName, &data.MiddleName, &data.LastName, &data.Gender, &data.ContactNo, &data.ProfilePic, &data.Email, &data.JerseyNo, &data.Designation, &data.EmergencyContactNo, &data.BloodGroup, &data.FoodPreference, &data.Remark, &data.CheckInDate, &data.CheckOutDate, &data.Sports)
 
 	return &data, err
 }

@@ -23,6 +23,9 @@
 	let profilePic = $state(false);
 	let isEditRegister = page.url.searchParams.has('edit');
 	let { data, form } = $props();
+	if (data.playerData && data.playerData?.sports == null) {
+		data.playerData!.sports = [];
+	}
 
 	$effect(() => {
 		if (form != undefined) {
@@ -165,6 +168,13 @@
 			>JERSEY NO.</CustomInput
 		>
 	{/if}
+	{#if parseInt(sportId!) <= -10}
+		<CustomInput
+			name="designation"
+			value={isEditRegister ? data.playerData?.designation : null}
+			required>DESIGNATION*</CustomInput
+		>
+	{/if}
 	<CustomInput
 		required
 		minlength={10}
@@ -233,26 +243,26 @@
 					: null}>POSITION IN SPORT *</CustomInput
 			>
 		{/if}
-		{#if sportId != getSportIdOfSport('Volleyball', 2, false).toString()}
-			<div class="title-text text-custom-orange col-span-3 flex gap-x-4">
-				{#if parseInt(sportId!) <= 0}
-					Sports
-				{:else}
-					Secondary Sports ( if any )
-				{/if}
-				{#if secondaryCount < 3}
-					<button
-						type="button"
-						class=""
-						onclick={() => {
-							secondarySports.push(
-								secondarySports.reduce((prev, curr) => (prev < curr ? curr : prev) + 1, 0)
-							);
-						}}><img src={plusIcon} alt="Add" class="hover:scale-105" /></button
-					>
-				{/if}
-			</div>
-			{#each secondarySports as id, idx (id)}
+		<div class="title-text text-custom-orange col-span-3 flex gap-x-4">
+			{#if parseInt(sportId!) <= 0}
+				Sports
+			{:else}
+				Secondary Sports ( if any )
+			{/if}
+			{#if secondaryCount < 3}
+				<button
+					type="button"
+					class=""
+					onclick={() => {
+						secondarySports.push(
+							secondarySports.reduce((prev, curr) => (prev < curr ? curr : prev) + 1, 0)
+						);
+					}}><img src={plusIcon} alt="Add" class="hover:scale-105" /></button
+				>
+			{/if}
+		</div>
+		{#each secondarySports as id, idx (id)}
+			{#if false}
 				<CustomSelect
 					required
 					type="single"
@@ -286,32 +296,82 @@
 								})
 								.filter((val) => val != undefined)}>SPORT</CustomSelect
 				>
-				{#if parseInt(sportId!) > 0}
+			{/if}
+
+			<CustomSelect
+				required
+				type="single"
+				name="sport_{parseInt(sportId!) > 0 ? idx + 2 : idx + 1}"
+				bind:value={athleticSubSportArr[idx]}
+				items={getRegisterableSports(globals.staff, data.sports ?? [])
+					.filter(
+						(item) =>
+							item.id > 0 &&
+							item.type == (isSportFemale(parseInt(sportId!)) ? 2 : 1) &&
+							item.id != parseInt(sportId!) &&
+							(parseInt(sportId!) > 0 || idx >= 1)
+					)
+					.map((item) => {
+						return { value: item.id.toString(), label: item.name };
+					})
+					.concat(
+						data
+							.athleticSubSport!.map((val) => {
+								if (
+									!(
+										val.count >= (val.type >= 7 ? 4 : 2) &&
+										val.reservedCount >= (val.type >= 7 && !globals.staff ? 2 : 1)
+									)
+								) {
+									return {
+										value: val.sportId.toString(),
+										label: val.name + (val.type == 9 ? ' ( Mixed )' : '')
+									};
+								}
+								if (isEditRegister && athleticSubSportArr.includes(val.sportId.toString())) {
+									return {
+										value: val.sportId.toString(),
+										label: val.name + (val.type == 9 ? ' ( Mixed )' : '')
+									};
+								}
+							})
+							.filter((val) => val != undefined)
+					)}>{parseInt(sportId!) <= 0 && idx == 0 ? 'PRIMARY ' : ''}SPORT</CustomSelect
+			>
+			<!-- asdfasdfasfasdf asdfa sdf -->
+
+			{#if athleticSubSportArr[idx]}
+				{#if getSportFromSportId(parseInt(athleticSubSportArr[idx]!))}
 					<CustomInput
 						required
 						value={isEditRegister ? data.playerData?.sports[idx].extra : null}
-						name="extra_{idx + 2}">POSITION IN SPORT *</CustomInput
+						name="extra_{idx + (parseInt(sportId!) > 0 ? 2 : 1)}">POSITION IN SPORT *</CustomInput
 					>
 				{:else}
 					<label class="button-text mt-auto mb-3 flex h-fit items-center gap-x-4 leading-0">
 						{#if (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.count ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 ? 4 : 2) || (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.reservedCount ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 && !globals.staff ? 2 : 1)}
 							<input
 								type="hidden"
-								name={'reserve_' + (idx + 1)}
+								name={'reserve_' + (idx + (parseInt(sportId!) > 0 ? 2 : 1))}
 								value={isEditRegister
-									? (data.playerData?.sports[idx].reserve ?? false)
+									? (data.playerData?.sports.at(idx)?.reserve ?? false)
 										? 'on'
 										: ''
 									: (data.athleticSubSport?.find(
 												(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
-										  )?.count ?? 0) >= 2
+										  )?.count ?? 0) >=
+										  ((data.athleticSubSport.find(
+												(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+										  )?.type ?? 0) >= 7
+												? 4
+												: 2)
 										? 'on'
 										: ''}
 							/>
 						{/if}
 						<input
 							type="checkbox"
-							name={'reserve_' + (idx + 1)}
+							name={'reserve_' + (idx + (parseInt(sportId!) > 0 ? 2 : 1))}
 							class="size-6 -skew-x-12 disabled:cursor-not-allowed"
 							disabled={(data.athleticSubSport?.find(
 								(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
@@ -345,18 +405,87 @@
 						<div class="button-text -mb-1">Reserve</div>
 					</label>
 				{/if}
-				<button
-					type="button"
-					class="flex h-full w-fit flex-col items-start justify-items-start"
-					onclick={() => {
-						secondarySports = secondarySports.filter((val) => val != id);
-						athleticSubSportArr.splice(idx, 1);
-						athleticSubSportArr.push(undefined);
-					}}
-					><img src={minusIcon} alt="Remove" class=" mt-auto mb-3 h-fit hover:scale-105" /></button
-				>
-			{/each}
-		{/if}
+			{:else}
+				<div></div>
+			{/if}
+
+			<!-- asdfasdfasfasdf asdfa sdf -->
+
+			{#if parseInt(sportId!) > 0 && false}
+				{#if athleticSubSportArr[idx]}
+					{#if getSportFromSportId(parseInt(athleticSubSportArr[idx]!))}
+						<CustomInput
+							required
+							value={isEditRegister ? data.playerData?.sports[idx].extra : null}
+							name="extra_{idx + 2}">POSITION IN SPORT *</CustomInput
+						>
+					{:else}{/if}
+				{:else}
+					<div></div>
+				{/if}
+			{:else if false}
+				<label class="button-text mt-auto mb-3 flex h-fit items-center gap-x-4 leading-0">
+					{#if (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.count ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 ? 4 : 2) || (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.reservedCount ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 && !globals.staff ? 2 : 1)}
+						<input
+							type="hidden"
+							name={'reserve_' + (idx + 1)}
+							value={isEditRegister
+								? (data.playerData?.sports[idx].reserve ?? false)
+									? 'on'
+									: ''
+								: (data.athleticSubSport?.find(
+											(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+									  )?.count ?? 0) >= 2
+									? 'on'
+									: ''}
+						/>
+					{/if}
+					<input
+						type="checkbox"
+						name={'reserve_' + (idx + 1)}
+						class="size-6 -skew-x-12 disabled:cursor-not-allowed"
+						disabled={(data.athleticSubSport?.find(
+							(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+						)?.count ?? 0) >=
+							((data.athleticSubSport?.find(
+								(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+							)?.type ?? 0) >= 7
+								? 4
+								: 2) ||
+							(data.athleticSubSport?.find(
+								(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+							)?.reservedCount ?? 0) >=
+								((data.athleticSubSport?.find(
+									(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+								)?.type ?? 0) >= 7 && !globals.staff
+									? 2
+									: 1)}
+						checked={isEditRegister
+							? data.playerData?.sports.find(
+									(val) => val.sportId.toString() == athleticSubSportArr[idx]
+								)?.reserve
+							: (data.athleticSubSport?.find(
+									(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+								)?.count ?? 0) >=
+								((data.athleticSubSport?.find(
+									(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
+								)?.type ?? 0) >= 7
+									? 4
+									: 2)}
+					/>
+					<div class="button-text -mb-1">Reserve</div>
+				</label>
+			{/if}
+			<button
+				type="button"
+				class="flex h-full w-fit flex-col items-start justify-items-start"
+				onclick={() => {
+					secondarySports = secondarySports.filter((val) => val != id);
+					athleticSubSportArr.splice(idx, 1);
+					athleticSubSportArr.push(undefined);
+				}}><img src={minusIcon} alt="Remove" class=" mt-auto mb-3 h-fit hover:scale-105" /></button
+			>
+		{/each}
 	{:else}
 		<input hidden name="sport_1" value={sportId} />
 	{/if}

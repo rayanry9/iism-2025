@@ -44,22 +44,22 @@
 				console.error(e);
 			}
 			// Fetch players
-			fetch(
-				`${PUBLIC_API_URL}/get-players?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
-			)
-				.then((res) => res.json())
-				.then((data: GetPlayers[]) => {
-					playerData = data;
-				});
-
-			// Fetch player count
-			fetch(
-				`${PUBLIC_API_URL}/get-player-count?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
-			)
-				.then((res) => res.json())
-				.then((data: GetPlayerCount) => {
-					playerCount = data;
-				});
+			// fetch(
+			// 	`${PUBLIC_API_URL}/get-players?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
+			// )
+			// 	.then((res) => res.json())
+			// 	.then((data: GetPlayers[]) => {
+			// 		playerData = data;
+			// 	});
+			//
+			// // Fetch player count
+			// fetch(
+			// 	`${PUBLIC_API_URL}/get-player-count?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
+			// )
+			// 	.then((res) => res.json())
+			// 	.then((data: GetPlayerCount) => {
+			// 		playerCount = data;
+			// 	});
 		} else {
 			// Clear data if sport or IIT not selected
 			//   playerData.set([]);

@@ -37,11 +37,11 @@ export function getRegisterableSports(
 		);
 		newArr.push({ id: -3, name: 'Athletics', staff: true, type: 1 });
 		newArr.push({ id: -4, name: 'Athletics', staff: true, type: 2 });
-		newArr.push({ id: -11, name: 'Sports Officer/Coach/PTI/Staff', staff: true, type: -1 });
+		newArr.push({ id: -11, name: 'Sports Officer/Coach/PTI/Ground Staff', staff: true, type: -1 });
 		return newArr.sort((a, b) => a.name.localeCompare(b.name));
 	} else {
 		return [
-			{ id: -10, name: 'Sports Officer/Coach/PTI/Staff', staff: false, type: -1 },
+			{ id: -10, name: 'Sports Officer/Coach/PTI/Ground Staff', staff: false, type: -1 },
 			{ name: 'Athletics', staff: false, type: 1, id: 0 },
 			{ name: 'Athletics', staff: false, type: 2, id: -1 },
 			{ name: 'Athletics', staff: false, type: 3, id: -2 },
