@@ -27,6 +27,10 @@ func (t Date) MarshalJSON() ([]byte, error) {
 }
 
 func (d *Date) Scan(src any) error {
+	if src == nil {
+		d = nil
+		return nil
+	}
 	*d = Date(src.(time.Time))
 	return nil
 }

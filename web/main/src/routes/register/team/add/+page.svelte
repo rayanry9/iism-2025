@@ -164,7 +164,7 @@
 		required>EMAIL ID *</CustomInput
 	>
 	{#if parseInt(sportId!) > -10}
-		<CustomInput name="jersey" value={isEditRegister ? data.playerData?.jersey : null} required
+		<CustomInput name="jersey" value={isEditRegister ? data.playerData?.jersey : null}
 			>JERSEY NO.</CustomInput
 		>
 	{/if}

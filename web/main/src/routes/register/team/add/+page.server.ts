@@ -34,8 +34,15 @@ export const actions = {
 				data.delete('sport_' + i);
 				data.delete('reserve_' + i);
 			}
+			if (data.get('check_in_date') == '') {
+				data.delete('check_in_date');
+			}
+			if (data.get('check_out_date') == '') {
+				data.delete('check_out_date');
+			}
 			console.log(sportData);
 			data.append('sports', JSON.stringify(sportData));
+
 			try {
 				let res: Response;
 				if (data.has('user_id')) {
