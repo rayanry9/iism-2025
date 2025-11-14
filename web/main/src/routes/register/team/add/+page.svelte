@@ -183,8 +183,9 @@
 		name="emergency_contact_no">EMERGENCY CONTACT NO. *</CustomInput
 	>
 	<CustomSelect
-		value={isEditRegister ? data.playerData?.bloodGroup : 'A+'}
+		value={isEditRegister ? data.playerData?.bloodGroup : 'Unknown'}
 		items={[
+			{ value: 'Unknown', label: 'Unknown' },
 			{ value: 'A+', label: 'A+' },
 			{ value: 'A-', label: 'A-' },
 			{ value: 'B+', label: 'B+' },
@@ -214,16 +215,14 @@
 	>
 	<div class="title-text text-custom-orange col-span-3 mb-3">Dates</div>
 	<CustomInput
-		required
 		type="date"
 		value={isEditRegister ? data.playerData?.checkInDate : null}
-		name="check_in_date">CHECKOUT IN DATE *</CustomInput
+		name="check_in_date">CHECK IN DATE</CustomInput
 	>
 	<CustomInput
-		required
 		type="date"
 		name="check_out_date"
-		value={isEditRegister ? data.playerData?.checkOutDate : null}>CHECKOUT OUT DATE *</CustomInput
+		value={isEditRegister ? data.playerData?.checkOutDate : null}>CHECK OUT DATE</CustomInput
 	>
 	{#if parseInt(sportId!) > -10}
 		{#if parseInt(sportId!) > 0}
@@ -233,14 +232,13 @@
 			>
 			<input type="hidden" value={parseInt(sportId!)} name="sport_1" />
 			<CustomInput
-				required
 				name="extra_1"
 				value={isEditRegister
 					? data.playerData?.sports.filter(
 							(val) =>
 								val.sportId == parseInt(sportId!) && val.secondary == false && val.reserve == false
 						)[0].extra
-					: null}>POSITION IN SPORT *</CustomInput
+					: null}>POSITION IN SPORT</CustomInput
 			>
 		{/if}
 		<div class="title-text text-custom-orange col-span-3 flex gap-x-4">
