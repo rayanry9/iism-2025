@@ -305,7 +305,7 @@
 					.filter(
 						(item) =>
 							item.id > 0 &&
-							item.type == (isSportFemale(parseInt(sportId!)) ? 2 : 1) &&
+							(item.type == (isSportFemale(parseInt(sportId!)) ? 2 : 1) || item.type == 3) &&
 							item.id != parseInt(sportId!) &&
 							(parseInt(sportId!) > 0 || idx >= 1)
 					)
