@@ -10,6 +10,12 @@ export const actions = {
 				data.set(key, val.trim());
 			}
 		}
+		if (data.get('check_in_date') == '') {
+			data.delete('check_in_date');
+		}
+		if (data.get('check_out_date') == '') {
+			data.delete('check_out_date');
+		}
 		console.log(data.entries().toArray());
 		if (data.get('sport_1') != '-10') {
 			let sportData = [
@@ -33,12 +39,6 @@ export const actions = {
 				data.delete('extra_' + i);
 				data.delete('sport_' + i);
 				data.delete('reserve_' + i);
-			}
-			if (data.get('check_in_date') == '') {
-				data.delete('check_in_date');
-			}
-			if (data.get('check_out_date') == '') {
-				data.delete('check_out_date');
 			}
 			console.log(sportData);
 			data.append('sports', JSON.stringify(sportData));
