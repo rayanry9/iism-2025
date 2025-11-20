@@ -17,7 +17,7 @@ export const actions = {
 			data.delete('check_out_date');
 		}
 		console.log(data.entries().toArray());
-		if (data.get('sport_1') != '-10') {
+		if (!(data.get('sport_1') == '-10' || data.get('sport_1') == '-11')) {
 			let sportData = [
 				{
 					sportId: parseInt(data.get('sport_1')!.toString()),

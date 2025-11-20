@@ -318,7 +318,7 @@
 								if (
 									!(
 										val.count >= (val.type >= 7 ? 4 : 2) &&
-										val.reservedCount >= (val.type >= 7 && !globals.staff ? 2 : 1)
+										val.reservedCount >= (val.type >= 7 ? 2 : 1)
 									)
 								) {
 									return {
