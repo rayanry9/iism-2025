@@ -439,7 +439,7 @@ func GetPlayerCount(c *gin.Context, req schema.GetPlayerCountRequest) (*schema.G
 				institutes i
 				on i.id = u.institute_id
 			where
-				s.type = ANY($1) and i.name ILIKE $2
+				s.type = ANY($1) and i.name ILIKE $2 and not s.staff
 		)
 
 		select 

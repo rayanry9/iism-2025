@@ -336,7 +336,6 @@
 							.filter((val) => val != undefined)
 					)}>{parseInt(sportId!) <= 0 && idx == 0 ? 'PRIMARY ' : ''}SPORT</CustomSelect
 			>
-			<!-- asdfasdfasfasdf asdfa sdf -->
 
 			{#if athleticSubSportArr[idx]}
 				{#if getSportFromSportId(parseInt(athleticSubSportArr[idx]!))}
@@ -347,7 +346,7 @@
 					>
 				{:else}
 					<label class="button-text mt-auto mb-3 flex h-fit items-center gap-x-4 leading-0">
-						{#if (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.count ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 ? 4 : 2) || (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.reservedCount ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 && !globals.staff ? 2 : 1)}
+						{#if (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.count ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 ? 4 : 2) || (data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.reservedCount ?? 0) >= ((data.athleticSubSport?.find((val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0'))?.type ?? 0) >= 7 ? 2 : 1)}
 							<input
 								type="hidden"
 								name={'reserve_' + (idx + (parseInt(sportId!) > 0 ? 2 : 1))}
@@ -384,7 +383,7 @@
 								)?.reservedCount ?? 0) >=
 									((data.athleticSubSport?.find(
 										(val) => val.sportId == parseInt(athleticSubSportArr[idx] ?? '0')
-									)?.type ?? 0) >= 7 && !globals.staff
+									)?.type ?? 0) >= 7
 										? 2
 										: 1)}
 							checked={isEditRegister

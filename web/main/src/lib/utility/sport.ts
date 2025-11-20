@@ -234,9 +234,9 @@ export function getSportMaxRegistrants(sportId: number): number {
 		case -10:
 			return 20;
 		case -4:
-			return 7 * 3 + 1 * 5;
+			return 7 * 3 + 1 * 6;
 		case -3:
-			return 12 * 3 + 1 * 5;
+			return 12 * 3 + 1 * 6;
 		case -2:
 			return 6;
 		case -1:
