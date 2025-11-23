@@ -350,7 +350,10 @@
 							<input
 								type="hidden"
 								name={'reserve_' + (idx + (parseInt(sportId!) > 0 ? 2 : 1))}
-								value={isEditRegister
+								value={isEditRegister &&
+								data.playerData?.sports.find(
+									(val) => val.sportId.toString() == athleticSubSportArr[idx]
+								) != undefined
 									? (data.playerData?.sports.at(idx)?.reserve ?? false)
 										? 'on'
 										: ''
@@ -386,7 +389,10 @@
 									)?.type ?? 0) >= 7
 										? 2
 										: 1)}
-							checked={isEditRegister
+							checked={isEditRegister &&
+							data.playerData?.sports.find(
+								(val) => val.sportId.toString() == athleticSubSportArr[idx]
+							) != undefined
 								? data.playerData?.sports.find(
 										(val) => val.sportId.toString() == athleticSubSportArr[idx]
 									)?.reserve
