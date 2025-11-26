@@ -1,0 +1,61 @@
+15/12/2025
+101 7:00 AM 1500m Women Final
+102 7:30 AM 1500m Men Final
+103 8:00 AM 100m Men Heats
+104 8:30 AM 100m Women Heats
+105 9:00 AM Polevault Men Final
+106 10:00 AM 4x400m Relay Mixed Heats/Semi-Final
+107 3:30 PM 100m Men Semi-Final
+108 4:00 PM 100m Women Semi-Final
+109 4:30 PM 4x400m Relay Mixed Final
+110 4:40 PM Hammer Throw Men Final
+16/12/2025
+201 8:00 AM 100m Men Final
+202 8:30 AM 100m Women Final
+203 9:00 AM 400m Hurdles Men Heats/Semi-Final
+204 9:30 AM Javelin Throw Women Final
+205 3:30 PM 200m Men Heats
+206 4:00 PM 200m Women Heats
+207 4:20 PM Discuss Throw Men Final
+208 4:30 PM Long Jump Men Final
+17/12/2025
+301 8:00 AM 200m Men Semi-Final
+302 8:30 AM 200m Women Semi-Final
+303 9:00 AM Discuss Throw Women Final
+304 10:00 AM 400m Hurdles Men Final
+305 3:30PM 200m Men Final
+306 4:00PM 200m Women Final
+307 4:30 PM Triple Jump Men Final
+18/12/2025
+401 7:00 AM 5000m Men Final
+402 8:00 AM 400m Men Heats
+403 8:30 AM 400m Women Heats
+404 9:00 AM High Jump Women Final
+405 9:15 AM 4x100m Relay Men Heats/Semi-Final
+406 9:30 AM 4x100m Relay Women Heats/Semi-Final
+407 3:30 PM 400m Men Semi-Final
+408 4:00 PM 400m Women Semi-Final
+409 4:15 PM 110m Hurdles Men Heats/Semi-Final
+410 4:30 PM 100m Hurdles Women Heats/Semi-Final
+411 4:30 PM Shotput Men Final
+19/12/2025
+501 8:00 AM 400m Men Final
+502 8:30 AM 400m Women Final
+503 9:00 AM Shotput Women Final
+504 9:15 AM 100m Hurdles Women Final
+505 9:30 AM 110m Hurdles Men Final
+506 3:30 PM 800m Men Heats/Semi-Final
+507 4:00 PM 800m Women Heats/Semi-Final
+508 4:30 PM 4x100m Relay Men Final
+509 5:00 PM 4x100m Relay Women 
+20/12/25
+601 8:00 AM 4x400m Relay Men Heats/Semi-Final
+602 8:30 AM 4x400m Relay Women Heats/Semi-Final
+603 9:00 AM High Jump Men Final
+604 3:30 PM 800m Men Final
+605 4:00 PM 800m Women Final
+606 4:15 PM Javelin Throw Men Final
+607 4:30 PM Long Jump Women Final
+21/12/2025
+701 9:00 AM 4x400m Relay Men Final
+702 9:30 AM 4x400m Relay Women Final
