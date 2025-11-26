@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -35,9 +36,14 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 
 	r.Static("/gallery", "images/gallery").Use(middlewares.CacheHTTP(60 * 60 * 24))
 	r.GET("/get-gallery-count", func(c *gin.Context) {
+		fmt.Println("TEST")
+
 		c.JSON(http.StatusOK, gin.H{
 			"count": os.Getenv("TOTAL_GALLERY_IMAGES"),
 		})
+		fmt.Println("TEST")
+		fmt.Println(os.Getenv(("TOTAL_GALLERY_IMAGES")))
+
 	})
 
 	r.Static("/profile-pic-orig", "images/users/original").Use(middlewares.CacheHTTP(60 * 1))
