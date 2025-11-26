@@ -37,10 +37,11 @@ export function getRegisterableSports(
 		);
 		newArr.push({ id: -3, name: 'Athletics', staff: true, type: 1 });
 		newArr.push({ id: -4, name: 'Athletics', staff: true, type: 2 });
-		newArr.push({ id: -11, name: 'Coach/PTI/Staff', staff: true, type: -1 });
+		newArr.push({ id: -11, name: 'Sports Officer/Coach/PTI/Ground Staff', staff: true, type: -1 });
 		return newArr.sort((a, b) => a.name.localeCompare(b.name));
 	} else {
 		return [
+			{ id: -10, name: 'Sports Officer/Coach/PTI/Ground Staff', staff: false, type: -1 },
 			{ name: 'Athletics', staff: false, type: 1, id: 0 },
 			{ name: 'Athletics', staff: false, type: 2, id: -1 },
 			{ name: 'Athletics', staff: false, type: 3, id: -2 },
@@ -48,8 +49,7 @@ export function getRegisterableSports(
 			{ name: 'Football', staff: false, type: 1, id: getSportIdOfSport('Football', 1, false) },
 			{ name: 'Hockey', staff: false, type: 1, id: getSportIdOfSport('Hockey', 1, false) },
 			{ name: 'Volleyball', staff: false, type: 1, id: getSportIdOfSport('Volleyball', 1, false) },
-			{ name: 'Volleyball', staff: false, type: 2, id: getSportIdOfSport('Volleyball', 2, false) },
-			{ id: -10, name: 'Coach/PTI/Staff', staff: false, type: -1 }
+			{ name: 'Volleyball', staff: false, type: 2, id: getSportIdOfSport('Volleyball', 2, false) }
 		].sort((a, b) => a.name.localeCompare(b.name));
 	}
 }
@@ -234,9 +234,9 @@ export function getSportMaxRegistrants(sportId: number): number {
 		case -10:
 			return 20;
 		case -4:
-			return 7 * 3 + 1 * 5;
+			return 7 * 3 + 1 * 6;
 		case -3:
-			return 12 * 3 + 1 * 5;
+			return 12 * 3 + 1 * 6;
 		case -2:
 			return 6;
 		case -1:

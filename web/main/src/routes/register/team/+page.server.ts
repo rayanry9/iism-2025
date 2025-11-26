@@ -11,12 +11,6 @@ export const load: PageServerLoad = async ({ fetch, url, parent }) => {
 					`/get-players?sport_id=${url.searchParams.get('sport')}&institute=${me!.institute}`,
 				{ method: 'get' }
 			)
-		).json()) as GetPlayers[],
-		playerCount: (await (
-			await fetch(
-				PUBLIC_API_URL +
-					`/get-player-count?sport_id=${url.searchParams.get('sport')}&institute=${me!.institute}`
-			)
-		).json()) as GetPlayerCount
+		).json()) as GetPlayers[]
 	};
 };

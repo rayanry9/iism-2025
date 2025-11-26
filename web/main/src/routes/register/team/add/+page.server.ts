@@ -10,8 +10,14 @@ export const actions = {
 				data.set(key, val.trim());
 			}
 		}
+		if (data.get('check_in_date') == '') {
+			data.delete('check_in_date');
+		}
+		if (data.get('check_out_date') == '') {
+			data.delete('check_out_date');
+		}
 		console.log(data.entries().toArray());
-		if (data.get('sport_1') != '-10') {
+		if (!(data.get('sport_1') == '-10' || data.get('sport_1') == '-11')) {
 			let sportData = [
 				{
 					sportId: parseInt(data.get('sport_1')!.toString()),
@@ -36,6 +42,7 @@ export const actions = {
 			}
 			console.log(sportData);
 			data.append('sports', JSON.stringify(sportData));
+
 			try {
 				let res: Response;
 				if (data.has('user_id')) {

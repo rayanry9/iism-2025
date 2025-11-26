@@ -23,7 +23,7 @@
 	<div class="flex gap-x-4">
 		<img
 			src={getSportImageSrc(sport)}
-			hidden={(sport as string) == 'Coach/PTI/Staff'}
+			hidden={(sport as string) == 'Sports Officer/Coach/PTI/Ground Staff'}
 			class="h-10"
 			alt={sport}
 		/>

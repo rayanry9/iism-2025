@@ -29,6 +29,7 @@ export interface GetPlayers {
 	middleName: string | null;
 	lastName: string | null;
 	extra: string | null;
+	isPrimary: boolean;
 }
 export interface GetPlayerCount {
 	sportId: number;
@@ -51,6 +52,7 @@ export interface GetPlayerData {
 	foodPreference: string;
 	checkInDate: string;
 	checkOutDate: string;
+	designation: string | null;
 	remark: string | null;
 	sports: {
 		sportId: number;

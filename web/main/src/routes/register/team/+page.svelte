@@ -52,7 +52,7 @@
 				<h2 hidden={parseInt(sportId) <= -10}>
 					{getSportFromSportId(parseInt(sportId))?.toUpperCase()} TEAM
 				</h2>
-				<h2 hidden={parseInt(sportId) > -10}>COACH/PTI/STAFF TEAM</h2>
+				<h2 hidden={parseInt(sportId) > -10}>SPORTS OFFICER/COACH/PTI/GROUND STAFF TEAM</h2>
 				<p>
 					IIT {data.me?.institute}{parseInt(sportId) > -10
 						? isSportFemale(parseInt(sportId))
@@ -99,7 +99,7 @@
 				? player.extra == '4x400 M Relay ( Mixed ) (R)' || player.extra == '4x400 M Relay ( Mixed )'
 					? true
 					: false
-				: true}
+				: player.isPrimary}
 			playerName={(
 				player.firstName +
 				' ' +

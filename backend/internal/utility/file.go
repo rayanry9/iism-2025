@@ -69,6 +69,9 @@ func DeleteProfilePic(fn string) error {
 	if err := os.Remove(fmt.Sprintf("images/users/original/%s.png", fn)); err != nil {
 		return err
 	}
+	if err := os.Remove(fmt.Sprintf("frontend/images/users/%s.webp", fn)); err != nil {
+		slog.Error("Frontend image remove error", "error", err)
+	}
 	return nil
 }
 

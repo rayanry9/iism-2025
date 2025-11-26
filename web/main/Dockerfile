@@ -1,12 +1,11 @@
-FROM node:latest
-
-RUN npm i -g pnpm
+FROM node:lts
 
 COPY package.json ./
-COPY pnpm-lock.yaml ./
-COPY build/ ./build/
+COPY yarn.lock ./
 
-RUN pnpm install --frozen-lockfile --prod
+RUN yarn install --frozen-lockfile --non-interactive --production
+
+COPY build/ ./build/
 
 ENV PORT=3000
 ENV ORIGIN=https://iism25.sports.iith.ac.in

@@ -39,6 +39,7 @@ type UserDB struct {
 	BloodGroup         *string      `db:"blood_group"`
 	FoodPreference     *string      `db:"food_preference"`
 	Hostel             *string      `db:"hostel"`
+	Designation        *string      `db:"designation"`
 	CheckInDate        *custom.Date `db:"check_in_date"`
 	CheckOutDate       *custom.Date `db:"check_out_date"`
 	Role               UserRole     `db:"role"`
@@ -66,6 +67,8 @@ type GetUserDetailsResponse struct {
 	ContactNo          *string                    `json:"contactNo"`
 	EmergencyContactNo *string                    `json:"emergencyContactNo"`
 	BloodGroup         *string                    `json:"bloodGroup"`
+	JerseyNo           *string                    `json:"jersey_no"`
+	Designation        *string                    `json:"designation"`
 	FoodPreference     *string                    `json:"foodPreference"`
 	Hostel             *string                    `json:"hostel"`
 	CheckInDate        *custom.Date               `json:"checkInDate"`
@@ -88,11 +91,11 @@ type RegisterPlayerRequest struct {
 	ProfilePic         multipart.FileHeader `form:"profile_pic"`
 	ContactNo          string               `form:"contact_no"`
 	EmergencyContactNo string               `form:"emergency_contact_no"`
-	JerseyNo           string               `form:"jersey"`
+	JerseyNo           *string              `form:"jersey"`
 	BloodGroup         string               `form:"blood_group"`
 	FoodPreference     string               `form:"food_preference"`
-	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
-	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	CheckInDate        *string              `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       *string              `form:"check_out_date" json:"check_out_date"`
 	Remark             *string              `form:"remark"`
 	Institute          string               `form:"institute"`
 	Sports             string               `form:"sports"`
@@ -116,11 +119,11 @@ type RegisterPlayerEditRequest struct {
 	ProfilePic         multipart.FileHeader `form:"profile_pic"`
 	ContactNo          string               `form:"contact_no"`
 	EmergencyContactNo string               `form:"emergency_contact_no"`
-	JerseyNo           string               `form:"jersey"`
+	JerseyNo           *string              `form:"jersey"`
 	BloodGroup         string               `form:"blood_group"`
 	FoodPreference     string               `form:"food_preference"`
-	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
-	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	CheckInDate        *string              `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       *string              `form:"check_out_date" json:"check_out_date"`
 	Remark             *string              `form:"remark"`
 	Institute          string               `form:"institute"`
 	Sports             string               `form:"sports"`
@@ -137,9 +140,10 @@ type RegisterCoachRequest struct {
 	ContactNo          string               `form:"contact_no"`
 	EmergencyContactNo string               `form:"emergency_contact_no"`
 	BloodGroup         string               `form:"blood_group"`
+	Designation        string               `form:"designation"`
 	FoodPreference     string               `form:"food_preference"`
-	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
-	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	CheckInDate        *string              `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       *string              `form:"check_out_date" json:"check_out_date"`
 	Remark             *string              `form:"remark"`
 	Institute          string               `form:"institute"`
 	Staff              bool                 `form:"staff"`
@@ -155,9 +159,10 @@ type RegisterCoachEditRequest struct {
 	ContactNo          string               `form:"contact_no"`
 	EmergencyContactNo string               `form:"emergency_contact_no"`
 	BloodGroup         string               `form:"blood_group"`
+	Designation        string               `form:"designation"`
 	FoodPreference     string               `form:"food_preference"`
-	CheckInDate        string               `form:"check_in_date" json:"check_in_date"`
-	CheckOutDate       string               `form:"check_out_date" json:"check_out_date"`
+	CheckInDate        *string              `form:"check_in_date" json:"check_in_date"`
+	CheckOutDate       *string              `form:"check_out_date" json:"check_out_date"`
 	Remark             *string              `form:"remark"`
 	Institute          string               `form:"institute"`
 	Staff              bool                 `form:"staff"`
@@ -185,6 +190,7 @@ type GetPlayersResponse struct {
 	MiddleName *string `json:"middleName"`
 	LastName   *string `json:"lastName"`
 	Extra      *string `json:"extra"`
+	IsPrimary  bool    `json:"isPrimary"`
 }
 
 type RemovePlayerRequest struct {
@@ -196,20 +202,21 @@ type GetPlayerDataRequest struct {
 }
 
 type GetPlayerDataResponse struct {
-	FirstName          string      `json:"firstName"`
-	MiddleName         *string     `json:"middleName"`
-	LastName           *string     `json:"lastName"`
-	Gender             string      `json:"gender"`
-	Email              string      `json:"email"`
-	ProfilePic         string      `json:"profilePic"`
-	ContactNo          string      `json:"contactNo"`
-	EmergencyContactNo string      `json:"emergencyContactNo"`
-	BloodGroup         string      `json:"bloodGroup"`
-	JerseyNo           *string     `json:"jersey"`
-	FoodPreference     string      `json:"foodPreference"`
-	CheckInDate        custom.Date `json:"checkInDate" `
-	CheckOutDate       custom.Date `json:"checkOutDate"`
-	Remark             *string     `json:"remark"`
+	FirstName          string       `json:"firstName"`
+	MiddleName         *string      `json:"middleName"`
+	LastName           *string      `json:"lastName"`
+	Gender             string       `json:"gender"`
+	Email              string       `json:"email"`
+	ProfilePic         string       `json:"profilePic"`
+	ContactNo          string       `json:"contactNo"`
+	EmergencyContactNo string       `json:"emergencyContactNo"`
+	BloodGroup         string       `json:"bloodGroup"`
+	JerseyNo           *string      `json:"jersey"`
+	Designation        *string      `json:"designation"`
+	FoodPreference     string       `json:"foodPreference"`
+	CheckInDate        *custom.Date `json:"checkInDate" `
+	CheckOutDate       *custom.Date `json:"checkOutDate"`
+	Remark             *string      `json:"remark"`
 	Sports             []struct {
 		SportId   int     `json:"sportId"`
 		Secondary bool    `json:"secondary"`

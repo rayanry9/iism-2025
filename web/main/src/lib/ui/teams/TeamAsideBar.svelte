@@ -6,7 +6,7 @@
 	let { activeIIT = $bindable() }: { activeIIT: IITNames | undefined | '' } = $props();
 </script>
 
-<aside class="mr-12 -ml-64 hidden min-w-fit -skew-x-12 flex-row xl:flex">
+<aside class="mr-20 -ml-64 hidden w-fit max-w-fit min-w-fit -skew-x-12 flex-row xl:flex">
 	<div class="bg-custom-dark-blue relative mr-4 flex w-[20rem] flex-row overflow-x-clip">
 		<img
 			src={asideBg}
@@ -28,8 +28,6 @@
 				onclick={() => {
 					activeIIT = iit;
 				}}
-				data-umami-event="Team selection"
-				data-umami-event-team={activeIIT}
 			>
 				<img
 					src={getIITImgSrc(iit)}

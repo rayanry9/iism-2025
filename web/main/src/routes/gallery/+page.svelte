@@ -1,5 +1,5 @@
 <script lang="ts">
-	// import FlairedTitle from '$lib/ui/components/FlairedTitle.svelte';
+	import FlairedTitle from '$lib/ui/components/FlairedTitle.svelte';
 	import Button from '$lib/ui/components/Button.svelte';
 	import arrowLeft from '$lib/assets/icons/arrow-left.svg';
 	import cameraIcon from '$lib/assets/icons/camera.svg'
