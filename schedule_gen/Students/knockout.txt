@@ -1,0 +1,129 @@
+CRICKET
+Men
+17/12/2025
+ 23  PQF1  Winner of Pool A  vs  Runner-up of Pool C  8:30 AM  1 
+ 24  PQF2  Winner of Pool B  vs  Runner-up of Pool D  8:30 AM  2 
+ 25  PQF3  Winner of Pool C  vs  Runner-up of Pool A  1:00 PM  1 
+ 26  PQF4  Winner of Pool D  vs  Runner-up of Pool B  1:00 PM  2 
+ 27  PQF5  Winner of Pool E  vs  Runner-up of Pool G  8:30 AM  3 
+ 28  PQF6  Winner of Pool F  vs  Runner-up of Pool H  8:30 AM  4 
+ 29  PQF7  Winner of Pool G  vs  Runner-up of Pool E  1:00 PM  3 
+ 30  PQF8  Winner of Pool H  vs  Runner-up of Pool F  1:00 PM  4
+CRICKET
+Men
+18/12/2025
+ 31  QF1  Winner of PQF1  vs  Winner of PQF6  8:30 AM  1 
+ 32  QF2  Winner of PQF2  vs  Winner of PQF5  8:30 AM  2 
+ 33  QF3  Winner of PQF3  vs  Winner of PQF8  1:00 PM  1 
+ 34  QF4  Winner of PQF4  vs  Winner of PQF7  1:00 PM  2
+CRICKET
+Men
+20/12/2025
+ 35  SF1  Winner of QF1  vs  Winner of QF4  8:30 AM  1 
+ 36  SF2  Winner of QF2  vs  Winner of QF3  1:00 PM  1 
+CRICKET
+Men
+21/12/2025
+ 37  3P  Loser of SF1  vs  Loser of SF2  8:30 AM  2 
+ 38  FINAL  Winner of SF1  vs  Winner of SF2  8:30 AM  1
+FOOTBALL
+Men
+18/12/2025
+ 23  PQF1  Winner of Pool A  vs  Runner-up of Pool C  8:00 AM  2 
+ 24  PQF2  Winner of Pool B  vs  Runner-up of Pool D  8:00 AM  1 
+ 25  PQF3  Winner of Pool C  vs  Runner-up of Pool A  9:30 AM  2 
+ 26  PQF4  Winner of Pool D  vs  Runner-up of Pool B  9:30 AM  1 
+ 27  PQF5  Winner of Pool E  vs  Runner-up of Pool G  3:00 PM  2 
+ 28  PQF6  Winner of Pool F  vs  Runner-up of Pool H  3:00 PM  1 
+ 29  PQF7  Winner of Pool G  vs  Runner-up of Pool E  4:30 PM  2 
+ 30  PQF8  Winner of Pool H  vs  Runner-up of Pool F  4:30 PM  1 
+FOOTBALL
+Men
+19/12/2025
+ 31  QF1  Winner of PQF1  vs  Winner of PQF6  8:00 AM  1 
+ 32  QF2  Winner of PQF2  vs  Winner of PQF5  9:30 AM  1 
+ 33  QF3  Winner of PQF3  vs  Winner of PQF8  3:00 PM  1 
+ 34  QF4  Winner of PQF4  vs  Winner of PQF7  4:30 PM  1
+FOOTBALL
+Men
+20/12/2025
+ 35  SF1  Winner of QF1  vs  Winner of QF4  8:00 AM  1 
+ 36  SF2  Winner of QF2  vs  Winner of QF3  9:30 AM  1
+FOOTBALL
+Men
+21/12/2025
+ 37  3P  Loser of SF1  vs  Loser of SF2  8:00 AM  1 
+ 38  FINAL  Winner of SF1  vs  Winner of SF2  9:30 AM  1
+HOCKEY
+Men
+19/12/2025
+ 16  QF1  Winner of Pool A  vs  Runner-up of Pool C  8:00 AM  1 
+ 17  QF2  Winner of Pool B  vs  Runner-up of Pool D  10:00 AM  1 
+ 18  QF3  Winner of Pool C  vs  Runner-up of Pool A  1:30 PM  1 
+ 19  QF4  Winner of Pool D  vs  Runner-up of Pool B  3:30 PM  1 
+HOCKEY
+Men
+20/12/2025
+ 20  SF1  Winner of QF1  vs  Winner of QF4  8:00 AM  1 
+ 21  SF2  Winner of QF2  vs  Winner of QF3  10:00 AM  1
+HOCKEY
+Men
+21/12/2025
+ 22  3P  Loser of SF1  vs  Loser of SF2  8:00 AM 1 
+ 23  FINAL  Winner of SF1  vs  Winner of SF2  10:00 AM  1
+VOLLEYBALL
+Men
+18/12/2025
+ 23  PQF1  Winner of Pool A  vs  Runner-up of Pool C  9:00 AM  1 
+ 24  PQF2  Winner of Pool B  vs  Runner-up of Pool D  9:00 AM  2 
+ 25  PQF3  Winner of Pool C  vs  Runner-up of Pool A  10:30 AM  1 
+ 26  PQF4  Winner of Pool D  vs  Runner-up of Pool B  10:30 AM  2 
+ 27  PQF5  Winner of Pool E  vs  Runner-up of Pool G  5:00 PM  1 
+ 28  PQF6  Winner of Pool F  vs  Runner-up of Pool H  5:00 PM  2 
+ 29  PQF7  Winner of Pool G  vs  Runner-up of Pool E  6:30 PM  1 
+ 30  PQF8  Winner of Pool H  vs  Runner-up of Pool F  6:30 PM  2
+VOLLEYBALL
+Men
+19/12/2025
+ 31  QF1  Winner of PQF1  vs  Winner of PQF6  10:00 AM  1 
+ 32  QF2  Winner of PQF2  vs  Winner of PQF5  10:00 AM  2 
+ 33  QF3  Winner of PQF3  vs  Winner of PQF8  5:00 PM  1 
+ 34  QF4  Winner of PQF4  vs  Winner of PQF7  5:00 PM  2 
+VOLLEYBALL
+Men
+20/12/2025
+ 35  SF1  Winner of QF1  vs  Winner of QF4  10:00 AM  1 
+ 36  SF2  Winner of QF2  vs  Winner of QF3  5:00 PM  1
+VOLLEYBALL
+Men
+21/12/2025
+ 37  3P  Loser of SF1  vs  Loser of SF2  10:30 AM  1 
+ 38  FINAL  Winner of SF1  vs  Winner of SF2  10:30 AM  2
+VOLLEYBALL
+Women
+18/12/2025
+ 21  PQF1  Winner of Pool A  vs  Runner-up of Pool C  9:00 AM  3 
+ 22  PQF2  Winner of Pool B  vs  Runner-up of Pool D  9:00 AM  4 
+ 23  PQF3  Winner of Pool C  vs  Runner-up of Pool A  11:00 AM  3 
+ 24  PQF4  Winner of Pool D  vs  Runner-up of Pool B  11:00 AM  4 
+ 25  PQF5  Winner of Pool E  vs  Runner-up of Pool G  4:30 PM  3 
+ 26  PQF6  Winner of Pool F  vs  Runner-up of Pool H  4:30 PM  4 
+ 27  PQF7  Winner of Pool G  vs  Runner-up of Pool E  6:00 PM  3 
+ 28  PQF8  Winner of Pool H  vs  Runner-up of Pool F  6:00 PM  4
+VOLLEYBALL
+Women
+19/12/2025
+ 29  QF1  Winner of PQF1  vs  Winner of PQF6  10:00 AM  3 
+ 30  QF2  Winner of PQF2  vs  Winner of PQF5  10:00 AM  4 
+ 31  QF3  Winner of PQF3  vs  Winner of PQF8  5:00 PM  3 
+ 32  QF4  Winner of PQF4  vs  Winner of PQF7  5:00 PM  4 
+VOLLEYBALL
+Women
+20/12/2025
+ 33  SF1  Winner of QF1  vs  Winner of QF4  10:00 AM  3 
+ 34  SF2  Winner of QF2  vs  Winner of QF3  5:00 PM  3
+VOLLEYBALL
+Women
+21/12/2025
+ 35  3P  Loser of SF1  vs  Loser of SF2  9:00 AM  3 
+ 36  FINAL  Winner of SF1  vs  Winner of SF2  9:00 AM  4 

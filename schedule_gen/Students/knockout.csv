@@ -1,0 +1,73 @@
+Sport,Gender,Date,Pool,Team1,Team2,Time
+CRICKET,Men,17/12/2025,PQF1,Winner of Pool A,Runner-up of Pool C,08:30 AM
+CRICKET,Men,17/12/2025,PQF2,Winner of Pool B,Runner-up of Pool D,08:30 AM
+CRICKET,Men,17/12/2025,PQF3,Winner of Pool C,Runner-up of Pool A,01:00 PM
+CRICKET,Men,17/12/2025,PQF4,Winner of Pool D,Runner-up of Pool B,01:00 PM
+CRICKET,Men,17/12/2025,PQF5,Winner of Pool E,Runner-up of Pool G,08:30 AM
+CRICKET,Men,17/12/2025,PQF6,Winner of Pool F,Runner-up of Pool H,08:30 AM
+CRICKET,Men,17/12/2025,PQF7,Winner of Pool G,Runner-up of Pool E,01:00 PM
+CRICKET,Men,17/12/2025,PQF8,Winner of Pool H,Runner-up of Pool F,01:00 PM
+CRICKET,Men,18/12/2025,QF1,Winner of PQF1,Winner of PQF6,08:30 AM
+CRICKET,Men,18/12/2025,QF2,Winner of PQF2,Winner of PQF5,08:30 AM
+CRICKET,Men,18/12/2025,QF3,Winner of PQF3,Winner of PQF8,01:00 PM
+CRICKET,Men,18/12/2025,QF4,Winner of PQF4,Winner of PQF7,01:00 PM
+CRICKET,Men,20/12/2025,SF1,Winner of QF1,Winner of QF4,08:30 AM
+CRICKET,Men,20/12/2025,SF2,Winner of QF2,Winner of QF3,01:00 PM
+CRICKET,Men,21/12/2025,3P,Loser of SF1,Loser of SF2,08:30 AM
+CRICKET,Men,21/12/2025,FINAL,Winner of SF1,Winner of SF2,08:30 AM
+FOOTBALL,Men,18/12/2025,PQF1,Winner of Pool A,Runner-up of Pool C,08:00 AM
+FOOTBALL,Men,18/12/2025,PQF2,Winner of Pool B,Runner-up of Pool D,08:00 AM
+FOOTBALL,Men,18/12/2025,PQF3,Winner of Pool C,Runner-up of Pool A,09:30 AM
+FOOTBALL,Men,18/12/2025,PQF4,Winner of Pool D,Runner-up of Pool B,09:30 AM
+FOOTBALL,Men,18/12/2025,PQF5,Winner of Pool E,Runner-up of Pool G,03:00 PM
+FOOTBALL,Men,18/12/2025,PQF6,Winner of Pool F,Runner-up of Pool H,03:00 PM
+FOOTBALL,Men,18/12/2025,PQF7,Winner of Pool G,Runner-up of Pool E,04:30 PM
+FOOTBALL,Men,18/12/2025,PQF8,Winner of Pool H,Runner-up of Pool F,04:30 PM
+FOOTBALL,Men,19/12/2025,QF1,Winner of PQF1,Winner of PQF6,08:00 AM
+FOOTBALL,Men,19/12/2025,QF2,Winner of PQF2,Winner of PQF5,09:30 AM
+FOOTBALL,Men,19/12/2025,QF3,Winner of PQF3,Winner of PQF8,03:00 PM
+FOOTBALL,Men,19/12/2025,QF4,Winner of PQF4,Winner of PQF7,04:30 PM
+FOOTBALL,Men,20/12/2025,SF1,Winner of QF1,Winner of QF4,08:00 AM
+FOOTBALL,Men,20/12/2025,SF2,Winner of QF2,Winner of QF3,09:30 AM
+FOOTBALL,Men,21/12/2025,3P,Loser of SF1,Loser of SF2,08:00 AM
+FOOTBALL,Men,21/12/2025,FINAL,Winner of SF1,Winner of SF2,09:30 AM
+HOCKEY,Men,19/12/2025,QF1,Winner of Pool A,Runner-up of Pool C,08:00 AM
+HOCKEY,Men,19/12/2025,QF2,Winner of Pool B,Runner-up of Pool D,10:00 AM
+HOCKEY,Men,19/12/2025,QF3,Winner of Pool C,Runner-up of Pool A,01:30 PM
+HOCKEY,Men,19/12/2025,QF4,Winner of Pool D,Runner-up of Pool B,03:30 PM
+HOCKEY,Men,20/12/2025,SF1,Winner of QF1,Winner of QF4,08:00 AM
+HOCKEY,Men,20/12/2025,SF2,Winner of QF2,Winner of QF3,10:00 AM
+HOCKEY,Men,21/12/2025,3P,Loser of SF1,Loser of SF2,08:00 AM
+HOCKEY,Men,21/12/2025,FINAL,Winner of SF1,Winner of SF2,10:00 AM
+VOLLEYBALL,Men,18/12/2025,PQF1,Winner of Pool A,Runner-up of Pool C,09:00 AM
+VOLLEYBALL,Men,18/12/2025,PQF2,Winner of Pool B,Runner-up of Pool D,09:00 AM
+VOLLEYBALL,Men,18/12/2025,PQF3,Winner of Pool C,Runner-up of Pool A,10:30 AM
+VOLLEYBALL,Men,18/12/2025,PQF4,Winner of Pool D,Runner-up of Pool B,10:30 AM
+VOLLEYBALL,Men,18/12/2025,PQF5,Winner of Pool E,Runner-up of Pool G,05:00 PM
+VOLLEYBALL,Men,18/12/2025,PQF6,Winner of Pool F,Runner-up of Pool H,05:00 PM
+VOLLEYBALL,Men,18/12/2025,PQF7,Winner of Pool G,Runner-up of Pool E,06:30 PM
+VOLLEYBALL,Men,18/12/2025,PQF8,Winner of Pool H,Runner-up of Pool F,06:30 PM
+VOLLEYBALL,Men,19/12/2025,QF1,Winner of PQF1,Winner of PQF6,10:00 AM
+VOLLEYBALL,Men,19/12/2025,QF2,Winner of PQF2,Winner of PQF5,10:00 AM
+VOLLEYBALL,Men,19/12/2025,QF3,Winner of PQF3,Winner of PQF8,05:00 PM
+VOLLEYBALL,Men,19/12/2025,QF4,Winner of PQF4,Winner of PQF7,05:00 PM
+VOLLEYBALL,Men,20/12/2025,SF1,Winner of QF1,Winner of QF4,10:00 AM
+VOLLEYBALL,Men,20/12/2025,SF2,Winner of QF2,Winner of QF3,05:00 PM
+VOLLEYBALL,Men,21/12/2025,3P,Loser of SF1,Loser of SF2,10:30 AM
+VOLLEYBALL,Men,21/12/2025,FINAL,Winner of SF1,Winner of SF2,10:30 AM
+VOLLEYBALL,Women,18/12/2025,PQF1,Winner of Pool A,Runner-up of Pool C,09:00 AM
+VOLLEYBALL,Women,18/12/2025,PQF2,Winner of Pool B,Runner-up of Pool D,09:00 AM
+VOLLEYBALL,Women,18/12/2025,PQF3,Winner of Pool C,Runner-up of Pool A,11:00 AM
+VOLLEYBALL,Women,18/12/2025,PQF4,Winner of Pool D,Runner-up of Pool B,11:00 AM
+VOLLEYBALL,Women,18/12/2025,PQF5,Winner of Pool E,Runner-up of Pool G,04:30 PM
+VOLLEYBALL,Women,18/12/2025,PQF6,Winner of Pool F,Runner-up of Pool H,04:30 PM
+VOLLEYBALL,Women,18/12/2025,PQF7,Winner of Pool G,Runner-up of Pool E,06:00 PM
+VOLLEYBALL,Women,18/12/2025,PQF8,Winner of Pool H,Runner-up of Pool F,06:00 PM
+VOLLEYBALL,Women,19/12/2025,QF1,Winner of PQF1,Winner of PQF6,10:00 AM
+VOLLEYBALL,Women,19/12/2025,QF2,Winner of PQF2,Winner of PQF5,10:00 AM
+VOLLEYBALL,Women,19/12/2025,QF3,Winner of PQF3,Winner of PQF8,05:00 PM
+VOLLEYBALL,Women,19/12/2025,QF4,Winner of PQF4,Winner of PQF7,05:00 PM
+VOLLEYBALL,Women,20/12/2025,SF1,Winner of QF1,Winner of QF4,10:00 AM
+VOLLEYBALL,Women,20/12/2025,SF2,Winner of QF2,Winner of QF3,05:00 PM
+VOLLEYBALL,Women,21/12/2025,3P,Loser of SF1,Loser of SF2,09:00 AM
+VOLLEYBALL,Women,21/12/2025,FINAL,Winner of SF1,Winner of SF2,09:00 AM

@@ -169,7 +169,7 @@ for (gender, date), group in groups:
     row_height = 125
     x_event_no = 275
     x_event     = 350
-    x_time      = 1700
+    x_time      = 1680
     
     for i, row in enumerate(rows):
         y = y_start + i * row_height
