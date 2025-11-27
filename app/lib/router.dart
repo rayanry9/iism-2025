@@ -10,6 +10,8 @@ import 'package:iism_2025/screens/profile.dart';
 import 'package:iism_2025/screens/schedule.dart';
 import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
+import 'package:iism_2025/screens/logindetails.dart';
+
 import 'package:iism_2025/widgets/tab_bar.dart';
 
 final GoRouter router = GoRouter(
@@ -25,6 +27,12 @@ final GoRouter router = GoRouter(
       path: "/login",
       builder: (BuildContext context, GoRouterState state) {
         return const LoginScreen();
+      },
+    ),
+    GoRoute(
+      path: "/logindetails",
+      builder: (BuildContext context, GoRouterState state) {
+        return const LogindetailsScreen();
       },
     ),
     GoRoute(

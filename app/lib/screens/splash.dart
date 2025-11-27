@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       await Future.delayed(const Duration(seconds: 2));
       if (!mounted) return;
 
-      context.replace('/home');
+      context.replace('/login');
     });
   }
 
