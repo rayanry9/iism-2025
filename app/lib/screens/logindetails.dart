@@ -35,6 +35,11 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
         "password": password,
       },
     );
+    List<Cookie> cookies = await cookieJar.loadForRequest(Uri.parse("http://192.168.1.17:8173"));
+print("test");
+for (var cookie in cookies) {
+  print("${cookie.name} = ${cookie.value}");
+}
     return response.statusCode == 200;
   } on DioException catch (e) {
     

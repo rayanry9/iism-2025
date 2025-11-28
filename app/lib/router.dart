@@ -11,8 +11,9 @@ import 'package:iism_2025/screens/schedule.dart';
 import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
-
+import 'package:iism_2025/widgets/global_fab.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
+import 'package:iism_2025/widgets/top_bar.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: "/splash",
@@ -55,40 +56,49 @@ final GoRouter router = GoRouter(
     ),
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
-        return MyTabBar(child: child);
+        return MyTabBar(
+          child: Scaffold(
+            appBar: TopBar(route: state.uri.toString()),  // <— your dynamic top bar
+            body: child,
+            floatingActionButton: GlobalFAB(
+              onPressed: () {
+                print("FAB clicked");
+              },
+              icon: Icons.add,
+              background: Colors.orange,
+            ),
+          ),
+        );
       },
+
       routes: [
         GoRoute(
           path: "/gallery",
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return NoTransitionPage(child: const GalleryScreen());
-          },
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: GalleryScreen()),
         ),
         GoRoute(
           path: "/home",
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return NoTransitionPage(child: const HomeScreen());
-          },
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: HomeScreen()),
         ),
         GoRoute(
           path: "/matches",
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return NoTransitionPage(child: const MatchesScreen());
-          },
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: MatchesScreen()),
         ),
         GoRoute(
           path: "/schedule",
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return NoTransitionPage(child: const ScheduleScreen());
-          },
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: ScheduleScreen()),
         ),
         GoRoute(
           path: "/teams",
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return NoTransitionPage(child: const TeamsScreen());
-          },
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: TeamsScreen()),
         ),
       ],
     ),
+
   ],
 );

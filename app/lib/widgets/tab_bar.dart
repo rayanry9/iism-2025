@@ -29,7 +29,7 @@ class _MyTabBarState extends State<MyTabBar>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My App")),
+      // appBar: AppBar(),
       body: widget.child,
       bottomNavigationBar: TabBar(
         controller: _tabController,
