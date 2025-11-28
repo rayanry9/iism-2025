@@ -22,6 +22,7 @@
 	import RayanImg from '$lib/assets/team/rayan.webp';
 	import SheesImg from '$lib/assets/team/shees.webp';
 	import VinitImg from '$lib/assets/team/vinit.webp';
+	import SimarImg from '$lib/assets/team/simar.webp';
 </script>
 
 <main class="my-12 flex flex-col items-center gap-y-12 xl:my-20 xl:gap-y-20 2xl:my-24 2xl:gap-y-24">
@@ -159,6 +160,13 @@
 				phone="+91 8657484442"
 				mail="interiit.oc@iith.ac.in"
 				name="Siya Shah"
+			/>
+			<ContactCard
+				imgSrc={SimarImg}
+				designation="Media & PR Head"
+				phone="+91 9422584709"
+				mail="interiit.oc@iith.ac.in"
+				name="Simar Bajwa"
 			/>
 			<ContactCard
 				imgSrc={RayanImg}
