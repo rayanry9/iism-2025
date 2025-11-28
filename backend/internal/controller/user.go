@@ -23,7 +23,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	id, password, exists, err := db.GetUserDetailFromEmailOrAssignedId(c, req.Email)
+	id, password, exists, canLogin, err := db.GetUserDetailFromEmailOrAssignedId(c, req.Email)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
 		slog.Error("Failed getting user detail", "error", err)
@@ -31,6 +31,10 @@ func Login(c *gin.Context) {
 	}
 	if !exists {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
+		return
+	}
+	if !canLogin {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "User cannot login"})
 		return
 	}
 	if password == nil {

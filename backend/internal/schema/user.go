@@ -47,6 +47,7 @@ type UserDB struct {
 	AssignedId         *string      `db:"assigned_id"`
 	Remark             *string      `db:"remark"`
 	InstituteId        int          `db:"institute_id"`
+	CanLogin           bool         `db:"can_login"`
 }
 
 type LoginRequest struct {
