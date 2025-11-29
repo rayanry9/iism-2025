@@ -27,15 +27,15 @@ staff_bg_path = "ID_Staff_Front.png"              # staff background (your provi
 # fonts (adjust paths or install system fonts)
 # Provide robust fallbacks to PIL default fonts if custom font not available
 
-name_font_big = ImageFont.truetype("../fonts/neue-haas-grotesk-display-pro/NeueHaasDisplayMedium.ttf",40)
-name_font_small = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",26)
-uni_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProRegular.otf",56)
-role_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProHeavy.otf",96)
-small_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",56)
-code_font=ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProDemi.otf",45)
+name_font_big = ImageFont.truetype("../fonts/neue-haas-grotesk-display-pro/NeueHaasDisplayMedium.ttf",72)
+name_font_small = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",60)
+uni_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProRegular.otf",36)
+role_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProHeavy.otf",78)
+small_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",36)
+code_font=ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProDemi.otf",24)
 
 # visual params
-photo_diameter = 360        # pixel diameter of circular photo
+photo_diameter = 405        # pixel diameter of circular photo
 photo_border = 18           # ring width
 photo_center_x = 960        # center X of photo on canvas
 photo_center_y = 260        # center Y of photo on canvas
@@ -46,46 +46,33 @@ CARD_W, CARD_H = 1000, 1400
 # text colors
 WHITE = (255, 255, 255)
 BLACK = (20, 20, 20)
-ORANGE = (232, 95, 33)   # sample orange, tweak if needed
 DARK = (30, 30, 30)
 
 # ------------------------- HELPERS -------------------------
 
-def make_circle_avatar(img, diameter, border=12, border_color=ORANGE):
-    """Return circular avatar with border"""
-    # resize and crop to square
+def make_circle_avatar(img, diameter):
+    """Return a clean circular avatar with NO border."""
     img = img.convert("RGBA")
     w, h = img.size
-    side = min(w,h)
-    # center crop
-    left = (w-side)//2
-    top = (h-side)//2
-    img = img.crop((left, top, left+side, top+side)).resize((diameter, diameter), Image.LANCZOS)
+    side = min(w, h)
 
-    # mask
+    # Center crop to square
+    left = (w - side) // 2
+    top = (h - side) // 2
+    img = img.crop((left, top, left + side, top + side))
+    img = img.resize((diameter, diameter), Image.LANCZOS)
+
+    # Create circle mask
     mask = Image.new("L", (diameter, diameter), 0)
     draw = ImageDraw.Draw(mask)
-    draw.ellipse((0,0,diameter-1,diameter-1), fill=255)
+    draw.ellipse((0, 0, diameter - 1, diameter - 1), fill=255)
 
-    # avatar base
-    avatar = Image.new("RGBA", (diameter, diameter), (0,0,0,0))
-    avatar.paste(img, (0,0), mask)
+    # Apply mask (circle crop)
+    avatar = Image.new("RGBA", (diameter, diameter), (0, 0, 0, 0))
+    avatar.paste(img, (0, 0), mask)
 
-    # ring
-    if border > 0:
-        ring_size = diameter + border*2
-        ring = Image.new("RGBA", (ring_size, ring_size), (0,0,0,0))
-        dr = ImageDraw.Draw(ring)
-        # outer circle
-        dr.ellipse((0,0,ring_size-1,ring_size-1), fill=border_color)
-        # inner hole
-        hole_bbox = (border, border, border+diameter-1, border+diameter-1)
-        dr.ellipse(hole_bbox, fill=(0,0,0,0))
-        # paste avatar onto ring
-        ring.paste(avatar, (border, border), avatar)
-        return ring
-    else:
-        return avatar
+    return avatar
+
 
 def generate_barcode_image(code_text, max_width=700, height=110):
     """Generate Code128 barcode using python-barcode and return PIL image"""
@@ -194,59 +181,77 @@ for idx, row in df.iterrows():
     # if no photo, use placeholder solid circle (orange)
     if pimg is None:
         placeholder = Image.new("RGBA", (photo_diameter, photo_diameter), (200,200,200))
-        avatar = make_circle_avatar(placeholder, photo_diameter, border=photo_border, border_color=ORANGE)
+        avatar = make_circle_avatar(placeholder, photo_diameter)
     else:
-        avatar = make_circle_avatar(pimg, photo_diameter, border=photo_border, border_color=ORANGE)
+        avatar = make_circle_avatar(pimg, photo_diameter)
 
     # compute paste location for avatar (top center area)
-    av_w, av_h = avatar.size
-    paste_x = photo_center_x - av_w // 2
-    paste_y = photo_center_y - av_h // 2
-    canvas.paste(avatar, (paste_x, paste_y), avatar)
+    canvas.paste(avatar, (282, 252), avatar)
 
     # Role (top-right)
     role_text = role.upper()
     # draw role text (orange)
-    role_x = CARD_W - 140
-    role_y = 80
-    draw.text((role_x, role_y), role_text, font=role_font, fill=ORANGE, anchor="rs")
+    role_x = CARD_W -40
+    role_y = 150
+    draw.text((role_x, role_y), role_text, font=role_font, fill="#EF4823", anchor="rs")
 
     # Draw name left area (under logo)
-    name_x = 140
-    name_y_top = photo_center_y + av_h//2 + 20
+    name_x = 50
+    name_y_top = 900
     # first line larger
     draw.text((name_x, name_y_top), name_l1, font=name_font_big, fill=BLACK, anchor="ls")
     # second (last name)
-    draw.text((name_x, name_y_top + 70), name_l2, font=name_font_small, fill=BLACK, anchor="ls")
+    draw.text((name_x, name_y_top + 80), name_l2, font=name_font_big, fill=BLACK, anchor="ls")
 
     # College (below name)
-    draw.text((name_x, name_y_top + 140), college_display, font=uni_font, fill=BLACK, anchor="ls")
+    draw.text((name_x, name_y_top + 160), college_display, font=name_font_small, fill=BLACK, anchor="ls")
 
     # Blood group and phone (below college)
-    draw.text((name_x, name_y_top + 200), f"Blood Group - {blood}", font=small_font, fill=BLACK, anchor="ls")
-    draw.text((name_x, name_y_top + 240), f"Ph. Number - {phone}", font=small_font, fill=BLACK, anchor="ls")
+    label = "Blood Group - "
+    value = blood  # e.g. "A+"
+
+    # Draw first part (uni_font)
+    draw.text((name_x, name_y_top + 230), label, font=uni_font, fill=BLACK, anchor="ls")
+
+    # Measure width of first part
+    label_width = draw.textbbox((0, 0), label, font=uni_font)[2]
+
+    # Draw second part (small_font) right after the first
+    draw.text((name_x + label_width, name_y_top + 230), value, font=small_font, fill=BLACK, anchor="ls")
+
+    label = "Ph. Number - "
+    value = phone  # e.g. "9344702682"
+
+    draw.text((name_x, name_y_top + 280), label, font=uni_font, fill=BLACK, anchor="ls")
+
+    label_width = draw.textbbox((0, 0), label, font=uni_font)[2]
+
+    draw.text((name_x + label_width, name_y_top + 280), value, font=small_font, fill=BLACK, anchor="ls")
+
+
 
     # Sport pictogram (bottom-right area)
     pict_path = os.path.join(pictogram_folder, f"{sport.capitalize()}.png")
 
     if os.path.exists(pict_path):
         pict = Image.open(pict_path).convert("RGBA")
-        pict.thumbnail((350,350),Image.LANCZOS)
-        pict_x = CARD_W - pict.width-40
-        pict_y = name_y_top + 300
+        pict.thumbnail((300,300),Image.LANCZOS)
+        pict_x = CARD_W - pict.width-50
+        pict_y = name_y_top - 80
         canvas.paste(pict, (pict_x, pict_y), pict)
 
     # Generate barcode
     if code_text:
         try:
-            barcode_img = generate_barcode_image(code_text, max_width=1400, height=80)
+            barcode_img = generate_barcode_image(code_text, max_width=1400, height=70)
             # paste barcode centered horizontally near bottom
             bc_w, bc_h = barcode_img.size
             bc_x = (CARD_W - bc_w) // 2
-            bc_y = CARD_H - bc_h - 100
+            bc_y = CARD_H - bc_h - 80
             canvas.paste(barcode_img, (bc_x, bc_y), barcode_img)
             # code text below barcode
-            draw.text((CARD_W//2, bc_y + bc_h + 22), code_text, font=code_font, fill=BLACK, anchor="mm")
+            spaced_code_text=" ".join(code_text)
+            draw.text((CARD_W//2, bc_y + bc_h + 22), spaced_code_text, font=code_font, fill=BLACK, anchor="mm")
         except Exception as e:
             print(f"Barcode generation failed for {code_text}: {e}")
 
