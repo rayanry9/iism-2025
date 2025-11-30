@@ -27,21 +27,20 @@ staff_bg_path = "ID_Staff_Front.png"              # staff background (your provi
 # fonts (adjust paths or install system fonts)
 # Provide robust fallbacks to PIL default fonts if custom font not available
 
-name_font_big = ImageFont.truetype("../fonts/neue-haas-grotesk-display-pro/NeueHaasDisplayMedium.ttf",72)
-name_font_small = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",60)
-uni_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProRegular.otf",36)
-role_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProHeavy.otf",78)
-small_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",36)
-code_font=ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProDemi.otf",24)
+name_font_big = ImageFont.truetype("../fonts/neue-haas-grotesk-display-pro/NeueHaasDisplayMedium.ttf",40)
+name_font_small = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",26)
+uni_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProRegular.otf",20)
+role_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProHeavy.otf",34)
+small_font = ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProBold.otf",20)
+code_font=ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProDemi.otf",16)
 
 # visual params
-photo_diameter = 405        # pixel diameter of circular photo
-photo_border = 18           # ring width
-photo_center_x = 960        # center X of photo on canvas
-photo_center_y = 260        # center Y of photo on canvas
+photo_diameter = 220        # pixel diameter of circular photo
+photo_center_x = 239        # center X of photo on canvas
+photo_center_y = 235        # center Y of photo on canvas
 
 # Card size assumed (use your background size, adjust if different)
-CARD_W, CARD_H = 1000, 1400
+CARD_W, CARD_H = 538, 742
 
 # text colors
 WHITE = (255, 255, 255)
@@ -186,47 +185,47 @@ for idx, row in df.iterrows():
         avatar = make_circle_avatar(pimg, photo_diameter)
 
     # compute paste location for avatar (top center area)
-    canvas.paste(avatar, (282, 252), avatar)
+    canvas.paste(avatar, (150, 130), avatar)
 
     # Role (top-right)
     role_text = role.upper()
     # draw role text (orange)
     role_x = CARD_W -40
     role_y = 150
-    draw.text((role_x, role_y), role_text, font=role_font, fill="#EF4823", anchor="rs")
+    draw.text((505, 85), role_text, font=role_font, fill="#EF4823", anchor="rs")
 
     # Draw name left area (under logo)
-    name_x = 50
-    name_y_top = 900
+    name_x = 28.92
+    name_y_top = 470
     # first line larger
     draw.text((name_x, name_y_top), name_l1, font=name_font_big, fill=BLACK, anchor="ls")
     # second (last name)
-    draw.text((name_x, name_y_top + 80), name_l2, font=name_font_big, fill=BLACK, anchor="ls")
+    draw.text((name_x, name_y_top + 42), name_l2, font=name_font_big, fill=BLACK, anchor="ls")
 
     # College (below name)
-    draw.text((name_x, name_y_top + 160), college_display, font=name_font_small, fill=BLACK, anchor="ls")
+    draw.text((name_x, 544), college_display.upper(), font=name_font_small, fill=BLACK, anchor="ls")
 
     # Blood group and phone (below college)
     label = "Blood Group - "
     value = blood  # e.g. "A+"
 
     # Draw first part (uni_font)
-    draw.text((name_x, name_y_top + 230), label, font=uni_font, fill=BLACK, anchor="ls")
+    draw.text((name_x, 580), label, font=uni_font, fill=BLACK, anchor="ls")
 
     # Measure width of first part
     label_width = draw.textbbox((0, 0), label, font=uni_font)[2]
 
     # Draw second part (small_font) right after the first
-    draw.text((name_x + label_width, name_y_top + 230), value, font=small_font, fill=BLACK, anchor="ls")
+    draw.text((name_x + label_width, 580), value, font=small_font, fill=BLACK, anchor="ls")
 
     label = "Ph. Number - "
     value = phone  # e.g. "9344702682"
 
-    draw.text((name_x, name_y_top + 280), label, font=uni_font, fill=BLACK, anchor="ls")
+    draw.text((name_x, 605), label, font=uni_font, fill=BLACK, anchor="ls")
 
     label_width = draw.textbbox((0, 0), label, font=uni_font)[2]
 
-    draw.text((name_x + label_width, name_y_top + 280), value, font=small_font, fill=BLACK, anchor="ls")
+    draw.text((name_x + label_width, 605), value, font=small_font, fill=BLACK, anchor="ls")
 
 
 
@@ -235,23 +234,17 @@ for idx, row in df.iterrows():
 
     if os.path.exists(pict_path):
         pict = Image.open(pict_path).convert("RGBA")
-        pict.thumbnail((300,300),Image.LANCZOS)
-        pict_x = CARD_W - pict.width-50
-        pict_y = name_y_top - 80
-        canvas.paste(pict, (pict_x, pict_y), pict)
+        pict.thumbnail((168,168),Image.LANCZOS)
+        canvas.paste(pict, (340, 440), pict)
 
     # Generate barcode
     if code_text:
         try:
-            barcode_img = generate_barcode_image(code_text, max_width=1400, height=70)
-            # paste barcode centered horizontally near bottom
-            bc_w, bc_h = barcode_img.size
-            bc_x = (CARD_W - bc_w) // 2
-            bc_y = CARD_H - bc_h - 80
-            canvas.paste(barcode_img, (bc_x, bc_y), barcode_img)
+            barcode_img = generate_barcode_image(code_text, max_width=285, height=65)
+            canvas.paste(barcode_img, (115,640), barcode_img)
             # code text below barcode
-            spaced_code_text=" ".join(code_text)
-            draw.text((CARD_W//2, bc_y + bc_h + 22), spaced_code_text, font=code_font, fill=BLACK, anchor="mm")
+            spaced_code_text="  ".join(code_text)
+            draw.text((CARD_W//2-13, 705), spaced_code_text, font=code_font, fill=BLACK, anchor="mm")
         except Exception as e:
             print(f"Barcode generation failed for {code_text}: {e}")
 
