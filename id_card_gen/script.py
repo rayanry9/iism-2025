@@ -14,8 +14,8 @@ except Exception as e:
     raise ImportError("Please install python-barcode: pip install python-barcode Pillow") from e
 
 # ------------------------- USER CONFIG -------------------------
-csv_path = "data.csv"                        # your CSV path
-photos_folder = "images"                    # photos folder
+csv_path = "data-hyd.csv"                        # your CSV path
+photos_folder = "images/users/original"                    # photos folder
 pictogram_folder = "../schedule_gen/Pictograms"             # sport icons
 output_folder = "final_ids"                 # output folder
 os.makedirs(output_folder, exist_ok=True)
@@ -84,6 +84,7 @@ def get_sport_from_id(id: int):
 def make_circle_avatar(img, diameter):
     """Return a clean circular avatar with NO border."""
     img = img.convert("RGBA")
+    img = img.crop(img.getbbox())
     w, h = img.size
     side = min(w, h)
 
@@ -91,7 +92,7 @@ def make_circle_avatar(img, diameter):
     left = (w - side) // 2
     top = (h - side) // 2
     img = img.crop((left, top, left + side, top + side))
-    img = img.resize((diameter, diameter), Image.LANCZOS)
+    img = img.resize((diameter, diameter), Image.Resampling.LANCZOS)
 
     # Create circle mask
     mask = Image.new("L", (diameter, diameter), 0)
@@ -132,7 +133,7 @@ def generate_barcode_image(code_text, max_width=700, height=110):
         w, h = img.size
         scale = min(1.0, max_width / w)
         new_size = (int(w*scale), int(h*scale))
-        img = img.resize(new_size, Image.LANCZOS)
+        img = img.resize(new_size, Image.Resampling.LANCZOS)
         # cleanup generated file
         try:
             os.remove(filename)
@@ -161,7 +162,7 @@ def split_name_two_lines(full_name):
 # ------------------------- Read CSV -------------------------
 df = pd.read_csv(csv_path, dtype=str).fillna("")
 # Ensure columns present
-expected = ["name","college","blood","phone","sport","role","staff","code"]
+expected = ["name","college","blood","phone","sport","role","staff","code","photo"]
 for c in expected:
     if c not in df.columns:
         df[c] = ""
@@ -175,6 +176,7 @@ for idx, row in df.iterrows():
     sport = row["sport"].strip()
     role = row["role"].strip() or "Participant"
     staff_flag = (str(row["staff"]).strip().lower() == "t")
+    photo = row["photo"].strip()
     code_text = str(row["code"]).strip()
 
     # Format college
@@ -195,12 +197,12 @@ for idx, row in df.iterrows():
         canvas = Image.open(bg_path).convert("RGBA")
         # if bg size differs from expected, resize to CARD_W x CARD_H
         if canvas.size != (CARD_W, CARD_H):
-            canvas = canvas.resize((CARD_W, CARD_H), Image.LANCZOS)
+            canvas = canvas.resize((CARD_W, CARD_H), Image.Resampling.LANCZOS)
 
     draw = ImageDraw.Draw(canvas)
 
     # Paste circular photo
-    photo_path = "./"+photos_folder+"/"+code_text+".webp"
+    photo_path = "./"+photos_folder+"/"+photo+".png"
     if photo_path and os.path.exists(photo_path):
         try:
             pimg = Image.open(photo_path).convert("RGBA")
@@ -265,13 +267,14 @@ for idx, row in df.iterrows():
 
 
     # Sport pictogram (bottom-right area)
-    sport_name=get_sport_from_id(int(sport))
-    pict_path = os.path.join(pictogram_folder, f"{sport_name}.png")
+    if sport != '':
+        sport_name=get_sport_from_id(int(sport))
+        pict_path = os.path.join(pictogram_folder, f"{sport_name}.png")
 
-    if os.path.exists(pict_path):
-        pict = Image.open(pict_path).convert("RGBA")
-        pict.thumbnail((168,168),Image.LANCZOS)
-        canvas.paste(pict, (340, 440), pict)
+        if os.path.exists(pict_path):
+            pict = Image.open(pict_path).convert("RGBA")
+            pict.thumbnail((168,168),Image.Resampling.LANCZOS)
+            canvas.paste(pict, (340, 440), pict)
 
     # Generate barcode
     if code_text:
@@ -286,7 +289,8 @@ for idx, row in df.iterrows():
 
     # Save final image
     save_name = f"{code_text or name.replace(' ','_')}.png"
-    out_path = os.path.join(output_folder, save_name)
+    out_path = os.path.join(output_folder,college_display,save_name)
+    os.makedirs(os.path.join(output_folder,college_display), exist_ok=True)
     canvas.save(out_path)
     print("Saved:", out_path)
 

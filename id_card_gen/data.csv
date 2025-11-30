@@ -1,2 +1,70 @@
-name,college,blood,phone,sport,role,staff,code
-Rayan Halder,Hyderabad,A+,9999999999,5,participant,f,HYD25FB1001
+name,college,blood,phone,sport,role,staff,code,photo
+Donga Shanmukha siva venkata sai,Bhilai,O+,8919257369,5,participant,f,IITBH25CK11005,Bhilai-Cricket-DongaShanmukha sivaVenkata sai
+Jessy ,Bhilai,A+,9381464812,5,participant,f,IITBH25CK11009,Bhilai-Cricket-Jessy
+PR Bhagat,Bhilai,AB+,93027 7331,,staff,f,IITBH25ST11002,Bhilai-Male-PRBhagat
+Hari Prasad,Bhilai,O+,7746030455,,staff,f,IITBH25ST11001,Bhilai-Male-HariPrasad
+Ankit Rath,Bhilai,O+,9304094370,30,participant,f,IITBH25AT11002,Bhilai-800 M-AnkitRath
+Nandyala Vaishnavi,Bhilai,AB+,7989543780,15,participant,f,IITBH25VB11009,Bhilai-Volleyball-NandyalaVaishnavi
+Rudra Patel,Bhilai,A+,9586288340,7,participant,f,IITBH25FB11014,Bhilai-Football-RudraPatel
+Akash Netam,Bhilai,B+,9301726273,28,participant,f,IITBH25AT11001,Bhilai-200 M-AkashNetam
+Daksh Thakur,Bhilai,A+,9390564457,27,participant,f,IITBH25AT11003,Bhilai-100 M-DakshThakur
+sanjani kumari,Bhilai,O+,6026575101,45,participant,f,IITBH25AT11009,Bhilai-100 M-SanjaniKumari
+Kollati Devi Chandrika,Bhilai,B+,9989448367,54,participant,f,IITBH25AT11004,Bhilai-Long Jump-KollatiDevi Chandrika
+Sanjoy Sarkar,Bhilai,O+,98044 8118,,staff,f,IITBH25ST11003,Bhilai-Male-SanjoySarkar
+Harsh Prajapati,Bhilai,AB+,8511102215,5,participant,f,IITBH25CK11007,Bhilai-Cricket-HarshPrajapati
+Nitish Kumar,Bhilai,O+,9153743730,35,participant,f,IITBH25AT11006,Bhilai-4x100 M Relay-NitishKumar
+Dosapati Ashirvadhan,Bhilai,A+,8985834597,14,participant,f,IITBH25VB11003,Bhilai-Volleyball-DosapatiAshirvadhan
+Ethamukkala Snehal,Bhilai,O+,6300397996,14,participant,f,IITBH25VB11004,Bhilai-Volleyball-EthamukkalaSnehal
+Palla Siddharth,Bhilai,B+,9032632887,14,participant,f,IITBH25VB11012,Bhilai-Volleyball-PallaSiddharth
+Shalvi Chaudary,Bhilai,O+,9045315907,15,participant,f,IITBH25VB11018,Bhilai-Volleyball-ShalviChaudary
+Devansh Tejwani,Bhilai,A+,7030429299,7,participant,f,IITBH25FB11008,Bhilai-Football-DevanshTejwani
+G Neeharika,Bhilai,AB-,9441109311,15,participant,f,IITBH25VB11005,Bhilai-Volleyball-GNeeharika
+Adem Gangaiahgari Neha Reddy,Bhilai,B+,7893972985,15,participant,f,IITBH25VB11001,Bhilai-Volleyball-Adem GangaiahgariNehaReddy
+Vuppalapati Deepika Lakshmi Bhargavi,Bhilai,A+,9849749571,15,participant,f,IITBH25VB11022,Bhilai-Volleyball-VuppalapatiDeepikaLakshmi Bhargavi
+Gurrala Hansika,Bhilai,O+,8309726702,15,participant,f,IITBH25VB11006,Bhilai-Volleyball-GurralaHansika
+Jeevana Gaddala,Bhilai,O+,8985091982,15,participant,f,IITBH25VB11007,Bhilai-Volleyball-JeevanaGaddala
+Malraju Srinayana,Bhilai,A+,7989776899,15,participant,f,IITBH25VB11008,Bhilai-Volleyball-MalrajuSrinayana
+Rishika Malve,Bhilai,A+,9420658024,15,participant,f,IITBH25VB11017,Bhilai-Volleyball-RishikaMalve
+V Suneetha,Bhilai,O+,9959664633,15,participant,f,IITBH25VB11021,Bhilai-Volleyball-VSuneetha
+Suraj Satish Deshmukh,Bhilai,AB+,8698709165,5,participant,f,IITBH25CK11015,Bhilai-Cricket-SurajSatishDeshmukh
+Bedanga Das,Bhilai,O+,8876473397,7,participant,f,IITBH25FB11003,Bhilai-Football-BedangaDas
+Ketan Rakesh,Bhilai,B+,9310431883,7,participant,f,IITBH25FB11009,Bhilai-Football-KetanRakesh
+Aditya Prakash,Bhilai,O+,8335025833,7,participant,f,IITBH25FB11001,Bhilai-Football-AdityaPrakash
+Adwaith Anoop,Bhilai,A+,9744335707,7,participant,f,IITBH25FB11002,Bhilai-Football-AdwaithAnoop
+Chaitanya Menghal,Bhilai,B+,7058446515,7,participant,f,IITBH25FB11005,Bhilai-Football-ChaitanyaMenghal
+Lavudya Abhishek,Bhilai,O+,9182168424,7,participant,f,IITBH25FB11010,Bhilai-Football-LavudyaAbhishek
+Pravar Gupta,Bhilai,O+,6377415115,7,participant,f,IITBH25FB11013,Bhilai-Football-PravarGupta
+Vijay Kumar,Bhilai,A+,8709911467,7,participant,f,IITBH25FB11016,Bhilai-Football-VijayKumar
+Daksh ,Bhilai,B-,7206869456,7,participant,f,IITBH25FB11007,Bhilai-Football-Daksh
+Sarthak Dhandhania,Bhilai,O+,9810792059,7,participant,f,IITBH25FB11015,Bhilai-Football-SarthakDhandhania
+Ramavath Vinayak,Bhilai,B+,7416979302,14,participant,f,IITBH25VB11015,Bhilai-Volleyball-RamavathVinayak
+Ravish Singh,Bhilai,B+,8374924823,14,participant,f,IITBH25VB11016,Bhilai-Volleyball-RavishSingh
+Prashant Sharma,Bhilai,B-,9805355861,14,participant,f,IITBH25VB11013,Bhilai-Volleyball-PrashantSharma
+Niket Tamrakar,Bhilai,B+,9993891986,14,participant,f,IITBH25VB11010,Bhilai-Volleyball-NiketTamrakar
+Tharun Nalike,Bhilai,O+,7036851387,14,participant,f,IITBH25VB11020,Bhilai-Volleyball-TharunNalike
+Nukala Devi Sai Ganesh,Bhilai,O+,8978911753,14,participant,f,IITBH25VB11011,Bhilai-Volleyball-Nukala Devi SaiGanesh
+Puneti Hemanth Kumar Reddy,Bhilai,O+,9398481212,14,participant,f,IITBH25VB11014,Bhilai-Volleyball-PunetiHemanth Kumar Reddy
+Nikam Bagang,Bhilai,A+,8413072805,7,participant,f,IITBH25FB11011,Bhilai-Football-NikamBagang
+Om patidar,Bhilai,AB+,9098076278,7,participant,f,IITBH25FB11012,Bhilai-Football-OmPatidar
+Chingkheinganba Saikhom,Bhilai,O+,6009057642,7,participant,f,IITBH25FB11006,Bhilai-Football-ChingkheinganbaSaikhom
+Samardeep singh kohli,Bhilai,AB+,9310434241,5,participant,f,IITBH25CK11011,Bhilai-Cricket-SamardeepSinghKohli
+Birendra Gurung,Bhilai,A+,7587263346,7,participant,f,IITBH25FB11004,Bhilai-Football-BirendraGurung
+Saurav ,Bhilai,O-,7877782147,5,participant,f,IITBH25CK11013,Bhilai-Cricket-Saurav
+Saurav Kumar,Bhilai,B+,8507993527,5,participant,f,IITBH25CK11014,Bhilai-Cricket-SauravKumar
+Harshit Kumawat,Bhilai,B+,9352914062,5,participant,f,IITBH25CK11008,Bhilai-Cricket-HarshitKumawat
+Vishvjeet kumar munakhiya,Bhilai,B+,9425268217,5,participant,f,IITBH25CK11016,Bhilai-Cricket-VishvjeetKumarMunakhiya
+Satyam Singh,Bhilai,A+,8839134544,5,participant,f,IITBH25CK11012,Bhilai-Cricket-SatyamSingh
+Anurag Hazra,Bhilai,A+,6290656802,5,participant,f,IITBH25CK11003,Bhilai-Cricket-AnuragHazra
+Amarjeet ,Bhilai,A+,7992269620,5,participant,f,IITBH25CK11002,Bhilai-Cricket-Amarjeet
+Gourav Gour,Bhilai,B-,8871910706,5,participant,f,IITBH25CK11006,Bhilai-Cricket-GouravGour
+ADITYA RAJ,Bhilai,B+,8521345960,5,participant,f,IITBH25CK11001,Bhilai-Cricket-ADITYARAJ
+Chandra Sekhar,Bhilai,B+,7032721590,14,participant,f,IITBH25VB11002,Bhilai-Volleyball-ChandraSekhar
+Tarigopula Dharshan Reddy,Bhilai,A+,9642832939,14,participant,f,IITBH25VB11019,Bhilai-Volleyball-TarigopulaDharshan Reddy
+Boby Bhati,Bhilai,B+,9873707467,5,participant,f,IITBH25CK11004,Bhilai-Cricket-BobyBhati
+Korrapati Karthikeya,Bhilai,A+,9391962275,30,participant,f,IITBH25AT11005,Bhilai-800 M-KorrapatiKarthikeya
+Rahul Kumar Gond,Bhilai,B+,9119660506,27,participant,f,IITBH25AT11008,Bhilai-100 M-RahulKumarGond
+S P Singh,Bhilai,A+,8839539286,,staff,f,IITBH25ST11004,Bhilai-Male-S PSingh
+wasim ,Bhilai,B+,9109859599,,staff,f,IITBH25ST11005,Bhilai-Male-Wasim
+Pushan Kumar,Bhilai,O+,7061738970,5,participant,f,IITBH25CK11010,Bhilai-Cricket-PushanKumar
+Rahul sisodiya,Bhilai,B+,8827594014,29,participant,f,IITBH25AT11007,Bhilai-400 M-RahulSisodiya
+

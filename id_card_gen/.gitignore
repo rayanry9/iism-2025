@@ -3,3 +3,8 @@ env
 cert_data.txt
 Neue_Haas_Grotesk_Collection
 cert_out
+final_ids
+images
+data.csv
+data-*.csv
+backup-images-*
