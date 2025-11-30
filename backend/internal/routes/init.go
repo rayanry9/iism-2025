@@ -51,4 +51,9 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.GET("get-player-data", middlewares.CacheHTTP(24), controller.GetPlayerData)
 	r.GET("get-player-count", middlewares.CacheHTTP(24), controller.GetPlayerCount)
 
+	r.POST("/outing/create", middlewares.AuthJWT(), controller.CreateOuting)
+	r.GET("/outing/all", middlewares.AuthJWT(), controller.GetAllOutings)
+	r.POST("/outing/approve", middlewares.AuthJWT(), controller.ApproveOuting)
+	r.POST("/outing/deny", middlewares.AuthJWT(), controller.DenyOuting)
+
 }

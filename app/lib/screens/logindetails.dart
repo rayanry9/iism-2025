@@ -29,7 +29,7 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
   Future<bool> login(String email, String password) async {
   try {
     final response = await dio.post(
-      "$apiUrl/api/login",
+      apiUrl+"/api/login",
       data: {
         "email": email,
         "password": password,
@@ -57,9 +57,6 @@ for (var cookie in cookies) {
 
   if (success) {
     context.replace('/home');
-  }
-  else{
-    print("failed loging");
   }
 }
   @override
