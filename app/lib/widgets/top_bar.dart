@@ -86,6 +86,7 @@ Widget build(BuildContext context) {
   }
 
   Widget _buildCenter(String route) {
+    print("TopBar route = $route");
     if (route == "/home") {
       return  Padding(padding: EdgeInsets.all(10.0),
     
@@ -100,6 +101,22 @@ Widget build(BuildContext context) {
                 child:Text("PROFILE",
           style: TextStyle(fontSize: 20, color: Colors.white))
               );
+    }
+    if(route == "/request-outing" || route == "/approve-request"){
+      print("you");
+      return Row(
+      children: [
+        GestureDetector(
+          onTap: () => context.replace('/profile'),
+          child: const Icon(Icons.arrow_back, size: 26,color: Colors.white,),
+        ),
+        const SizedBox(width: 12),
+        const Text(
+          "REQUEST FOR OUTING",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white, ),
+        ),
+      ],
+    );
     }
     return const SizedBox(width:0);
   }
