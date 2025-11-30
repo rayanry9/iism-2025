@@ -14,6 +14,8 @@ import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/widgets/global_fab.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
+import 'package:iism_2025/screens/request_outing.dart';
+import 'package:iism_2025/screens/approve_request.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: "/splash",
@@ -48,12 +50,7 @@ final GoRouter router = GoRouter(
         return const NotificationScreen();
       },
     ),
-    GoRoute(
-      path: "/profile",
-      builder: (BuildContext context, GoRouterState state) {
-        return const ProfileScreen();
-      },
-    ),
+     
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         return MyTabBar(
@@ -96,6 +93,22 @@ final GoRouter router = GoRouter(
           path: "/teams",
           pageBuilder: (_, __) =>
               const NoTransitionPage(child: TeamsScreen()),
+        ),
+        GoRoute(
+          path: "/profile",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: ProfileScreen()),
+        ),
+        GoRoute(
+          path: "/request-outing",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: RequestOutingScreen()),
+        ),
+
+        GoRoute(
+          path: "/approve-request",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: ApproveRequestScreen()),
         ),
       ],
     ),

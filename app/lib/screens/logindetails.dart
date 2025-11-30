@@ -25,17 +25,17 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
   bool _obscure = true; 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  String apiUrl = dotenv.env['API_URL']! ?? "http://localhost:8173";
+  String apiUrl = dotenv.env['API_URL']! ;
   Future<bool> login(String email, String password) async {
   try {
     final response = await dio.post(
-      apiUrl+"/api/login",
+      "$apiUrl/api/login",
       data: {
         "email": email,
         "password": password,
       },
     );
-    List<Cookie> cookies = await cookieJar.loadForRequest(Uri.parse("http://192.168.1.17:8173"));
+    List<Cookie> cookies = await cookieJar.loadForRequest(Uri.parse(dotenv.env['API_URL']!));
 print("test");
 for (var cookie in cookies) {
   print("${cookie.name} = ${cookie.value}");
@@ -57,6 +57,9 @@ for (var cookie in cookies) {
 
   if (success) {
     context.replace('/home');
+  }
+  else{
+    print("failed loging");
   }
 }
   @override
