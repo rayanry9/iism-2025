@@ -16,7 +16,7 @@ except Exception as e:
 # ------------------------- USER CONFIG -------------------------
 csv_path = "data.csv"                        # your CSV path
 photos_folder = "images"                    # photos folder
-pictogram_folder = "pictograms"             # sport icons
+pictogram_folder = "../schedule_gen/Pictograms"             # sport icons
 output_folder = "final_ids"                 # output folder
 os.makedirs(output_folder, exist_ok=True)
 
@@ -43,11 +43,43 @@ photo_center_y = 235        # center Y of photo on canvas
 CARD_W, CARD_H = 538, 742
 
 # text colors
-WHITE = (255, 255, 255)
-BLACK = (20, 20, 20)
-DARK = (30, 30, 30)
+BLACK = "#232323"
 
 # ------------------------- HELPERS -------------------------
+def get_sport_from_id(id: int):
+    match id:
+        case 5 | 19:
+            return "Cricket"
+        case 6 :
+            return "Hockey"
+        case 7 | 20:
+            return "Football"
+        case 14 | 15 | 25:
+            return "Volleyball"
+        case 27|28|29|30|31|32|45|46|47|48|49|60|61|62|63|64|65|66|67|68|76|77|78:
+            return "Running"
+        case 33|34|50:
+            return "Hurdle"
+        case 35|36|51|52|58|69|79:
+            return "Relay"
+        case 37|53|70:
+            return "HighJump"
+        case 38|54|71|80:
+            return "LongJump"
+        case 39:
+            return "TripleJump"
+        case 59:
+            return "Chess"
+        case 40:
+            return "PoleVault"
+        case 41|55|73|81:
+            return "ShotPut"
+        case 42|56|74|82:
+            return "DiscussThrow"
+        case 43|57|75|83:
+            return "JavelinThrow"
+        case 44|72:
+            return "HammerThrow"
 
 def make_circle_avatar(img, diameter):
     """Return a clean circular avatar with NO border."""
@@ -192,7 +224,10 @@ for idx, row in df.iterrows():
     # draw role text (orange)
     role_x = CARD_W -40
     role_y = 150
-    draw.text((505, 85), role_text, font=role_font, fill="#EF4823", anchor="rs")
+
+    if staff_flag: color="#227B80"
+    else: color="#EF4823"
+    draw.text((505, 85), role_text, font=role_font, fill=color, anchor="rs")
 
     # Draw name left area (under logo)
     name_x = 28.92
@@ -230,7 +265,8 @@ for idx, row in df.iterrows():
 
 
     # Sport pictogram (bottom-right area)
-    pict_path = os.path.join(pictogram_folder, f"{sport.capitalize()}.png")
+    sport_name=get_sport_from_id(int(sport))
+    pict_path = os.path.join(pictogram_folder, f"{sport_name}.png")
 
     if os.path.exists(pict_path):
         pict = Image.open(pict_path).convert("RGBA")
@@ -244,7 +280,7 @@ for idx, row in df.iterrows():
             canvas.paste(barcode_img, (115,640), barcode_img)
             # code text below barcode
             spaced_code_text="  ".join(code_text)
-            draw.text((CARD_W//2-13, 705), spaced_code_text, font=code_font, fill=BLACK, anchor="mm")
+            draw.text((CARD_W//2-11, 705), spaced_code_text, font=code_font, fill=BLACK, anchor="mm")
         except Exception as e:
             print(f"Barcode generation failed for {code_text}: {e}")
 
