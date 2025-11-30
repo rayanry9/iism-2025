@@ -22,39 +22,35 @@ func Login(c *gin.Context) {
 		slog.Error("Bad Request for login", "error", err)
 		return
 	}
+
 	id, password, exists, canLogin, err := db.GetUserDetailFromEmailOrAssignedId(c, req.Email)
-	if os.Getenv("GIN_MODE") != "debug" {
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
-			slog.Error("Failed getting user detail", "error", err)
-			return
-		}
-		if !exists {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
-			return
-		}
-		if !canLogin {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "User cannot login"})
-			return
-		}
-		if password == nil {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
-			return
-		}
-		match, err := utility.VerifyHashWithPassword(*password, req.Password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
+		slog.Error("Failed getting user detail", "error", err)
+		return
+	}
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
+		return
+	}
+	if !canLogin {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "User cannot login"})
+		return
+	}
+	if password == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
+		return
+	}
+	match, err := utility.VerifyHashWithPassword(*password, req.Password)
 
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
-			slog.Error("Failed getting user detail", "error", err)
-			return
-		}
-		if !match {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "Wrong Password"})
-			return
-		}
-
-	} else {
-		id = 1
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
+		slog.Error("Failed getting user detail", "error", err)
+		return
+	}
+	if !match {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Wrong Password"})
+		return
 	}
 	token, err := utility.CreateToken(id)
 	if err != nil {
@@ -220,8 +216,7 @@ func RegisterPlayerEdit(c *gin.Context) {
 
 func RegisterCoach(c *gin.Context) {
 	var req schema.RegisterCoachRequest
-	fmt.Println("FORM =", c.Request.PostForm)
-	fmt.Println("FILE =", c.Request.MultipartForm)
+
 	if err := c.Bind(&req); err != nil {
 		slog.Info("Bad request for register player", "error", err, "req", c.Request)
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
