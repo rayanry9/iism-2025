@@ -33,7 +33,7 @@
 	let playerData = $state<GetPlayers[]>([]);
 	let playerCount = $state<GetPlayerCount | null>(null);
 	$effect(() => {
-		if (activeSport && activeIIT) {
+		if (activeSport && activeIIT && !globals.staff) {
 			try {
 				(window as any)?.umami.track('Team Search', {
 					iit: activeIIT,
@@ -153,8 +153,10 @@
 					{/key}
 				</div>
 				<section class="flex flex-wrap justify-center gap-y-4">
-					{#if playerData.length == 0}
+					{#if playerData.length == 0 && globals.staff}
 						<h2 class="mt-12">Team has not been decided yet</h2>
+					{:else if playerData.length == 0}
+						<h2 class="mt-12">Not Participating</h2>
 					{:else}
 						{#each playerData as player (player.profilePic)}
 							<div class="relative my-1 flex w-min flex-col">

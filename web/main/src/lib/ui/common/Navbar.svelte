@@ -75,7 +75,7 @@
 			>
 				LOGOUT
 			</button>
-		{:else}
+		{:else if globals.staff}
 			<a
 				class={`${page.url.pathname.includes('/register') ? 'text-custom-orange ' : ''} `}
 				href="/register">REGISTER</a
