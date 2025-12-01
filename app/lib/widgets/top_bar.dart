@@ -15,7 +15,7 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
   State<TopBar> createState() => _TopBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(350);
 }
 
 // --------------------------------------------------------
@@ -39,14 +39,12 @@ class _TopBarState extends State<TopBar> {
 
   @override
 Widget build(BuildContext context) {
-  return PreferredSize(
-    preferredSize: const Size.fromHeight(kToolbarHeight),
-    child: DynamicNavbar(
-      background: const Color(0xFF191C2A),
-      left: _buildLeft(widget.route),
-      center: _buildCenter(widget.route),
-      right: _buildRight(widget.route),
-    ),
+  return DynamicNavbar(
+    background: const Color(0xFF191C2A),
+    left: _buildLeft(widget.route),
+    center: _buildCenter(widget.route),
+    right: _buildRight(widget.route),
+    // blueHeight: 300,  // 🔥 now this actually works
   );
 }
 
