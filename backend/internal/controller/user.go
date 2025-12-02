@@ -23,7 +23,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	id, password, exists, canLogin, err := db.GetUserDetailFromEmailOrAssignedId(c, req.Email)
+	id, password, exists, canLogin, isStaff, err := db.GetUserDetailFromEmailOrAssignedId(c, req.Email)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
 		slog.Error("Failed getting user detail", "error", err)
@@ -31,10 +31,12 @@ func Login(c *gin.Context) {
 	}
 	if !exists {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
+		slog.Info("User does not exist", "req", req)
 		return
 	}
 	if !canLogin {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "User cannot login"})
+		slog.Info("User cannot login", "req", req)
 		return
 	}
 	if password == nil {
@@ -52,7 +54,7 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Wrong Password"})
 		return
 	}
-	token, err := utility.CreateToken(id)
+	token, err := utility.CreateToken(id, isStaff)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
@@ -160,6 +162,8 @@ func RegisterPlayer(c *gin.Context) {
 		return
 	}
 
+	req.Staff = c.GetBool("isStaff")
+
 	if err := db.RegisterPlayer(c, req, sportsData); err != nil {
 		slog.Error("Failed to register player", "error", err, "req", c.Request)
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to register player."})
@@ -205,6 +209,7 @@ func RegisterPlayerEdit(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save Profile Picture"})
 		return
 	}
+	req.Staff = c.GetBool("isStaff")
 
 	if err := db.RegisterPlayerEdit(c, req, sportsData); err != nil {
 		slog.Error("Failed to register player edit", "error", err, "req", c.Request)
@@ -238,6 +243,8 @@ func RegisterCoach(c *gin.Context) {
 		return
 	}
 
+	req.Staff = c.GetBool("isStaff")
+
 	if err := db.RegisterCoach(c, req); err != nil {
 		slog.Error("Failed to register coach", "error", err, "req", c.Request)
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to register personnel."})
@@ -269,6 +276,8 @@ func RegisterCoachEdit(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save Profile Picture"})
 		return
 	}
+
+	req.Staff = c.GetBool("isStaff")
 
 	if err := db.RegisterCoachEdit(c, req); err != nil {
 		slog.Error("Failed to edit coach", "error", err, "req", c.Request)

@@ -149,7 +149,8 @@
 
 		<div class="mt-20 lg:mt-0 lg:ml-[5rem] xl:ml-[8.5rem] 2xl:ml-[15rem]">
 			<h1 class="hero-text flex flex-col items-center lg:block">
-				58TH<br />INTER IIT{globals.staff ? ' STAFF' : ''}<br />SPORTS MEET<br />2025<span
+				{globals.staff ? '30TH' : '58TH'}<br />INTER IIT{globals.staff ? ' STAFF' : ''}<br />SPORTS
+				MEET<br />2025<span
 					class="button-text text-custom-orange border-custom-orange flex h-fit w-fit gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic lg:mt-1 lg:ml-4 lg:inline-flex lg:pt-2 lg:pb-1.5 xl:mt-2 xl:pt-2.5 xl:pb-2"
 					><img src={pinImg} class="text-custom-orange -mt-1 inline" alt="pin" />IIT Hyderabad</span
 				>

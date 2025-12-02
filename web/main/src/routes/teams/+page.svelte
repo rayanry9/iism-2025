@@ -34,32 +34,32 @@
 	let playerCount = $state<GetPlayerCount | null>(null);
 	$effect(() => {
 		if (activeSport && activeIIT && !globals.staff) {
-			try {
-				(window as any)?.umami.track('Team Search', {
-					iit: activeIIT,
-					sport: activeSport,
-					gender: activeGender
-				});
-			} catch (e) {
-				console.error(e);
-			}
-			// Fetch players
-			fetch(
-				`${PUBLIC_API_URL}/get-players?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
-			)
-				.then((res) => res.json())
-				.then((data: GetPlayers[]) => {
-					playerData = data;
-				});
-
-			// Fetch player count
-			fetch(
-				`${PUBLIC_API_URL}/get-player-count?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
-			)
-				.then((res) => res.json())
-				.then((data: GetPlayerCount) => {
-					playerCount = data;
-				});
+			// try {
+			// 	(window as any)?.umami.track('Team Search', {
+			// 		iit: activeIIT,
+			// 		sport: activeSport,
+			// 		gender: activeGender
+			// 	});
+			// } catch (e) {
+			// 	console.error(e);
+			// }
+			// // Fetch players
+			// fetch(
+			// 	`${PUBLIC_API_URL}/get-players?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
+			// )
+			// 	.then((res) => res.json())
+			// 	.then((data: GetPlayers[]) => {
+			// 		playerData = data;
+			// 	});
+			//
+			// // Fetch player count
+			// fetch(
+			// 	`${PUBLIC_API_URL}/get-player-count?sport_id=${getSportIdOfSport(activeSport, activeGender == 'MEN' ? 1 : 2, globals.staff)}&institute=${activeIIT}`
+			// )
+			// 	.then((res) => res.json())
+			// 	.then((data: GetPlayerCount) => {
+			// 		playerCount = data;
+			// 	});
 		} else {
 			// Clear data if sport or IIT not selected
 			//   playerData.set([]);
@@ -153,10 +153,10 @@
 					{/key}
 				</div>
 				<section class="flex flex-wrap justify-center gap-y-4">
-					{#if playerData.length == 0 && globals.staff}
+					{#if playerData.length == 0 && (globals.staff || true)}
 						<h2 class="mt-12">Team has not been decided yet</h2>
-					{:else if playerData.length == 0}
-						<h2 class="mt-12">Not Participating</h2>
+						<!-- {:else if playerData.length == 0} -->
+						<!-- 	<h2 class="mt-12">Not Participating</h2> -->
 					{:else}
 						{#each playerData as player (player.profilePic)}
 							<div class="relative my-1 flex w-min flex-col">
