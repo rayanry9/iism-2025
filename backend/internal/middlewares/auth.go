@@ -28,6 +28,7 @@ func AuthJWT() gin.HandlerFunc {
 		}
 
 		c.Set("userId", claims.UserID)
+		c.Set("isStaff", claims.IsStaff)
 		c.Next()
 	}
 }

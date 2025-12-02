@@ -11,14 +11,16 @@ import (
 var secretKey = os.Getenv("JWT_SECRET")
 
 type JWTClaims struct {
-	UserID int `json:"userId"`
+	UserID  int  `json:"userId"`
+	IsStaff bool `json:"isStaff"`
 	jwt.RegisteredClaims
 }
 
-func CreateToken(userId int) (string, error) {
+func CreateToken(userId int, isStaff bool) (string, error) {
 
 	claims := JWTClaims{
-		UserID: userId,
+		UserID:  userId,
+		IsStaff: isStaff,
 		RegisteredClaims: jwt.RegisteredClaims{
 			Subject:   "UserData",
 			Issuer:    "iism-2025",

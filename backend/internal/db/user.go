@@ -11,15 +11,15 @@ import (
 	"github.com/rayanry9/iism-2025/backend/internal/utility"
 )
 
-func GetUserDetailFromEmailOrAssignedId(c *gin.Context, email string) (id int, password *string, exists bool, canLogin bool, err error) {
-	err = config.DB.QueryRow(c, `SELECT id, password, can_login FROM users WHERE email ILIKE $1 or assigned_id ILIKE $1`, email).Scan(&id, &password, &canLogin)
+func GetUserDetailFromEmailOrAssignedId(c *gin.Context, email string) (id int, password *string, exists bool, canLogin bool, isStaff bool, err error) {
+	err = config.DB.QueryRow(c, `SELECT id, password, can_login, staff FROM users WHERE email ILIKE $1 or assigned_id ILIKE $1`, email).Scan(&id, &password, &canLogin, &isStaff)
 
 	if err == pgx.ErrNoRows {
-		return -1, nil, false, false, nil
+		return -1, nil, false, false, false, nil
 	} else if err != nil {
 		return
 	}
-	return id, password, true, canLogin, nil
+	return id, password, true, canLogin, isStaff, nil
 }
 
 func GetUserDetails(c *gin.Context, userId int) (schema.GetUserDetailsResponse, error) {

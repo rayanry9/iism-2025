@@ -13,9 +13,6 @@
 			globals.staff = data.me.staff;
 			goto('/register');
 		}
-		if (!globals.staff) {
-			globals.staff = true;
-		}
 	});
 
 	$effect(() => {
