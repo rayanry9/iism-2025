@@ -167,17 +167,21 @@ for c in expected:
     if c not in df.columns:
         df[c] = ""
 
+
+def capitalize_words_lower_rest(s: str) -> str:
+    return " ".join(word.capitalize() for word in s.split(" "))
+
 # ------------------------- Processing Loop -------------------------
 for idx, row in df.iterrows():
-    name = row["name"].strip()
-    college = row["college"].strip()
-    blood = row["blood"].strip()
+    name = capitalize_words_lower_rest(row["name"].strip())
+    college = row["college"].strip().capitalize()
+    blood = row["blood"].strip().capitalize()
     phone = row["phone"].strip()
     sport = row["sport"].strip()
     role = row["role"].strip() or "Participant"
     staff_flag = (str(row["staff"]).strip().lower() == "t")
     photo = row["photo"].strip()
-    code_text = str(row["code"]).strip()
+    code_text = str(row["code"]).strip().capitalize()
 
     # Format college
     if "iit" not in college.lower() and college:

@@ -5,7 +5,8 @@
 </script>
 
 <button
-	class={className + ' button-text -skew-x-12 hover:cursor-pointer active:brightness-90'}
+	class={className +
+		' button-text -skew-x-12 transition-colors duration-200 hover:cursor-pointer active:brightness-90'}
 	{...rest}
 >
 	<div class="skew-x-12">

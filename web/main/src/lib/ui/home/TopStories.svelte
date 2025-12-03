@@ -1,48 +1,45 @@
- <script>
-    // @ts-nocheck
-	// Import JSON directly from /stories/index.json
-	// Path is relative to *project root*, not this file
-	import storiesData from '../../../../static/stories/index.json';
-    
+<script lang="ts">
+	import Button from '../components/Button.svelte';
+	import arrowLeft from '$lib/assets/icons/arrow-left.svg';
+	import type { TopStory } from '$lib/types/topStories';
+	import { PUBLIC_API_URL } from '$env/static/public';
+
+	let {
+		topStories
+	}: {
+		topStories: TopStory[];
+	} = $props();
 	let scrollContainer;
-    
-	// Create final stories array with full image paths
-	let stories = storiesData.map(s => ({
-		...s,
-		image: `/stories/images/${s.image}` // Construct image path
-	}));
 
 	function scrollLeft() {
-        if (!scrollContainer) return;
+		if (!scrollContainer) return;
 
-        scrollContainer.scrollBy({
-            left: -(scrollContainer.offsetWidth * 0.9),
-            behavior: "smooth"
-        });
-    }
+		scrollContainer.scrollBy({
+			left: -(scrollContainer.offsetWidth * 0.9),
+			behavior: 'smooth'
+		});
+	}
 
-    function scrollRight() {
-        if (!scrollContainer) return;
+	function scrollRight() {
+		if (!scrollContainer) return;
 
-        scrollContainer.scrollBy({
-            left: scrollContainer.offsetWidth * 0.9,
-            behavior: "smooth"
-        });
-    }
+		scrollContainer.scrollBy({
+			left: scrollContainer.offsetWidth * 0.9,
+			behavior: 'smooth'
+		});
+	}
 </script>
 
-<section class="w-full py-16 flex flex-col items-center">
-	<h2 class="text-center mb-2">TOP STORIES</h2>
+<section class="flex flex-col items-center py-16">
+	<h2 class="mb-2 text-center">TOP STORIES</h2>
 
-	<p class="text-center text-black mb-12">
-		See What is Happening Through top stories and Updates
-	</p>
+	<p class="mb-6 text-center text-black">See What is Happening Through top stories and Updates</p>
 
 	<!-- Horizontal Scroll -->
 	<div
-		bind:this={scrollContainer}
-		class="flex gap-10 w-11/12 xl:w-10/12 overflow-x-auto snap-x snap-mandatory px-2 pb-4 scroll-smooth"
+		class="flex h-fit max-w-full snap-x snap-mandatory items-center gap-10 overflow-x-auto scroll-smooth px-40"
 		style="scrollbar-width: none;"
+		bind:this={scrollContainer}
 	>
 		<style>
 			div::-webkit-scrollbar {
@@ -50,70 +47,64 @@
 			}
 		</style>
 
-		{#each stories as story}
-        <div class="story-card min-w-[300px] md:min-w-[380px] snap-start flex-shrink-0 flex flex-col rounded-xl border-[2px] border-[#D9D9D9] overflow-hidden bg-white">
-            <img src={story.image} alt={story.title} class="w-full aspect-[4/3] h-[250px] object-cover" />
-
-            <div class="px-6 py-4 flex justify-between items-center">
-                <p class="title-text">{story.title}</p>
-
-                <a 
-                    href={story.link}
-                    class="button-text px-7 py-2 rounded-full
-                        bg-[#D2EDF2] text-[#0A4C62]
-                        border border-[#0A4C62]
-                        hover:bg-custom-blue hover:border-custom-blue hover:text-white
-                        transition"
-                >
-                    VIEW
-                </a>
-            </div>
-        </div>
-    {/each}
-
+		{#each topStories as story}
+			<div class="relative flex min-w-120 flex-col overflow-hidden rounded-xl bg-white">
+				<img
+					src={PUBLIC_API_URL + '/gallery/' + story.imgSrc}
+					alt="post"
+					class="h-100 w-120 min-w-120 rounded-xl object-cover object-center"
+				/>
+				<div
+					class="border-custom-gray title-text bottom-0 flex w-full items-center rounded-b-xl border bg-white px-10 py-5 text-black"
+				>
+					{story.subText}
+					<a href={story.href} class="ml-auto w-fit" rel="noopener" target="_blank">
+						<button
+							class="button-text bg-custom-pastel-blue text-custom-teal hover:bg-custom-blue border-custom-teal w-fit rounded-full border px-5 py-2 transition-colors duration-200 hover:cursor-pointer hover:text-white"
+							>VIEW</button
+						>
+					</a>
+				</div>
+			</div>
+		{/each}
 	</div>
 
 	<!-- Navigation Buttons -->
 	<div class="mt-12 flex items-center gap-6">
-
 		<!-- VIEW ALL -->
-		<a href="/stories" class="inline-block">
-			<div 
-				class="-skew-x-6 cursor-pointer
-					   rounded-[8px] border border-[#0A4C62]
-					   bg-[#D2EDF2] text-[#0A4C62]
-					   px-8 py-3
-					   hover:bg-custom-blue hover:text-white hover:border-custom-blue transition"
+		<a
+			href="https://www.instagram.com/interiit_sportsmeet/"
+			rel="noopener"
+			target="_blank"
+			class="inline-block"
+		>
+			<Button
+				class="hover:bg-custom-blue hover:border-custom-blue
+					   border border-[#0A4C62]
+					   bg-[#D2EDF2] px-8
+					   py-3 text-[#0A4C62] transition hover:text-white"
 			>
-				<span class="skew-x-6 button-text flex items-center gap-2">
+				<span class="button-text flex skew-x-6 items-center gap-2">
 					VIEW ALL <span class="inline-block text-lg">↗</span>
 				</span>
-			</div>
+			</Button>
 		</a>
 
-		<!-- LEFT -->
-		<button on:click={scrollLeft} class="inline-block">
-			<div 
-				class="-skew-x-6 cursor-pointer
-					   rounded-[8px] border border-[#D3D3D3]
-					   bg-white text-black
-					   px-4 py-3"
+		<div class="*:border-custom-gray hidden gap-x-4 *:border *:p-4 xl:flex">
+			<Button
+				onclick={() => {
+					scrollContainer?.scrollBy({ behavior: 'smooth', left: -scrollContainer.clientWidth / 2 });
+				}}
 			>
-				<span class="skew-x-6 text-xl">←</span>
-			</div>
-		</button>
-
-		<!-- RIGHT -->
-		<button on:click={scrollRight} class="inline-block">
-			<div 
-				class="-skew-x-6 cursor-pointer
-					   rounded-[8px] border border-[#D3D3D3]
-					   bg-white text-black
-					   px-4 py-3"
+				<img src={arrowLeft} alt="Arrow Left" />
+			</Button>
+			<Button
+				onclick={() => {
+					scrollContainer?.scrollBy({ behavior: 'smooth', left: scrollContainer.clientWidth / 2 });
+				}}
 			>
-				<span class="skew-x-6 text-xl">→</span>
-			</div>
-		</button>
-
+				<img class="rotate-180" src={arrowLeft} alt="Arrow Left" />
+			</Button>
+		</div>
 	</div>
 </section>

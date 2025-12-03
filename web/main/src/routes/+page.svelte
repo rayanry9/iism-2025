@@ -6,7 +6,9 @@
 	import ParticipatingIiTs from '$lib/ui/home/ParticipatingIITs.svelte';
 	import Schedule from '$lib/ui/home/Schedule.svelte';
 	import SportsToPlay from '$lib/ui/home/SportsToPlay.svelte';
-	// import TopStories from '$lib/ui/home/TopStories.svelte';
+	import TopStories from '$lib/ui/home/TopStories.svelte';
+
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -18,7 +20,7 @@
 </svelte:head>
 
 <Header />
-<!-- <TopStories /> -->
+<TopStories topStories={data.topStories} />
 <!-- <Schedule /> -->
 <InfoBanner />
 <FeaturedEvents />
