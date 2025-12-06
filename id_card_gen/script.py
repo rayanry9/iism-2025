@@ -14,7 +14,7 @@ except Exception as e:
     raise ImportError("Please install python-barcode: pip install python-barcode Pillow") from e
 
 # ------------------------- USER CONFIG -------------------------
-csv_path = "data-hyd.csv"                        # your CSV path
+csv_path = "data-updated.csv"                        # your CSV path
 photos_folder = "images/users/original"                    # photos folder
 pictogram_folder = "../schedule_gen/Pictograms"             # sport icons
 output_folder = "final_ids"                 # output folder
@@ -181,7 +181,7 @@ for idx, row in df.iterrows():
     role = row["role"].strip() or "Participant"
     staff_flag = (str(row["staff"]).strip().lower() == "t")
     photo = row["photo"].strip()
-    code_text = str(row["code"]).strip().capitalize()
+    code_text = str(row["code"]).strip()
 
     # Format college
     if "iit" not in college.lower() and college:

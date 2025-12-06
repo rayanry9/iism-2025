@@ -8,3 +8,6 @@ images
 data.csv
 data-*.csv
 backup-images-*
+barcode.txt
+barcodes
+
