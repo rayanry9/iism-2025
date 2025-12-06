@@ -54,17 +54,24 @@ final GoRouter router = GoRouter(
      
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
+        final hideFabScreens = {
+          "/chat",
+          // add more screens here
+        };
+
+        final showFab = !hideFabScreens.contains(state.uri.toString());
+        print(state.uri.toString());
         return MyTabBar(
           child: Scaffold(
             appBar: TopBar(route: state.uri.toString()),  // <— your dynamic top bar
             body: child,
-            floatingActionButton: GlobalFAB(
+            floatingActionButton: showFab ? GlobalFAB(
               onPressed: () {
                 context.push('/chat');
               },
               icon: Icons.add,
               background: Colors.orange,
-            ),
+            ) : null,
           ),
         );
       },
