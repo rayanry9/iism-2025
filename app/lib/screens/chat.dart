@@ -168,7 +168,7 @@ class _WelcomeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userName = UserCache().name ?? "there";
+    final userName = UserCache().firstName ?? "there";
     return Column(
       key: const ValueKey("welcome"),
       children: [
