@@ -30,7 +30,7 @@
 	}
 </script>
 
-<section class="flex flex-col items-center py-16">
+<section class="flex flex-col items-center pt-24">
 	<h2 class="mb-2 text-center">TOP STORIES</h2>
 
 	<p class="mb-6 text-center text-black">See What is Happening Through top stories and Updates</p>

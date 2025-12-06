@@ -19,19 +19,21 @@
 			<div
 				class="tags-text bg-custom-teal w-full -skew-x-[14deg] px-7 py-4 text-center leading-0 text-white 2xl:px-10 2xl:py-5"
 			>
-				<div class="skew-x-[14deg]">
+				<div class="skew-x-14">
 					{phone}
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="3xl:pr-6 w-full max-2xl:pr-5">
-		<div class="border-custom-teal bg-custom-pastel-blue mt-4 w-full -skew-x-[14deg] border">
-			<div class=" text-custom-teal flex skew-x-[14deg] items-center">
-				<img src={mailIcon} alt="mail icon" class="p-3 max-xl:size-12 xl:p-5" />
-				<p>{mail}</p>
+	{#if mail != ''}
+		<div class="3xl:pr-6 w-full max-2xl:pr-5">
+			<div class="border-custom-teal bg-custom-pastel-blue mt-4 w-full -skew-x-[14deg] border">
+				<div class=" text-custom-teal flex skew-x-[14deg] items-center">
+					<img src={mailIcon} alt="mail icon" class="p-3 max-xl:size-12 xl:p-5" />
+					<p>{mail}</p>
+				</div>
 			</div>
 		</div>
-	</div>
+	{/if}
 </div>

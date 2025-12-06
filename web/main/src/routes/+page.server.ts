@@ -4,6 +4,6 @@ import type { TopStory } from '$lib/types/topStories';
 
 export const load: PageServerLoad = async () => {
 	return {
-		topStories: JSON.parse((await readFile('top_stories.json')).toString()) satisfies TopStory[]
+		topStories: JSON.parse((await readFile('top_stories.json')).toString()) as TopStory[]
 	};
 };

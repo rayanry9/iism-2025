@@ -28,7 +28,9 @@
 	$effect(() => {
 		activeIIT;
 		activeSport;
-		untrack(() => (activeGender = 'MEN'));
+		untrack(() => {
+			activeGender = 'MEN';
+		});
 	});
 	let playerData = $state<GetPlayers[]>([]);
 	let playerCount = $state<GetPlayerCount | null>(null);
@@ -125,7 +127,7 @@
 						</div>
 					</div>
 
-					{#key activeSport}
+					{#key activeSport && activeIIT}
 						<ToggleTabs.Root class="ml-auto h-fit">
 							<ToggleTabs.Item
 								onclick={() => {

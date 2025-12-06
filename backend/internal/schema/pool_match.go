@@ -23,9 +23,9 @@ const (
 )
 
 const (
-	PoolMatchPending   MatchStatus = 1
-	PoolMatchOngoing   MatchStatus = 2
-	PoolMatchConcluded MatchStatus = 3
+	MatchPending   MatchStatus = 1
+	MatchOngoing   MatchStatus = 2
+	MatchConcluded MatchStatus = 3
 )
 
 func (d PoolMatchType) IsValid() bool {
@@ -33,7 +33,7 @@ func (d PoolMatchType) IsValid() bool {
 }
 
 func (d MatchStatus) IsValid() bool {
-	return d == PoolMatchPending || d == PoolMatchConcluded || d == PoolMatchOngoing
+	return d == MatchPending || d == MatchConcluded || d == MatchOngoing
 }
 
 type PoolMatchDB struct {

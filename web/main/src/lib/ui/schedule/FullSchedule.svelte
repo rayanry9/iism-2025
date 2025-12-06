@@ -52,8 +52,8 @@
 			<div class="button-text ml-8">Select a Sport</div>
 			<SportSelector bind:currentSport />
 		</div>
-		<div class="flex flex-col gap-y-4 {currentSport != 'All Matches' ? 'hidden' : ''}">
-			<div class="button-text ml-8 xl:hidden">Select a day</div>
+		<div class="ml-8 flex flex-col gap-y-4 xl:ml-0 {currentSport != 'All Matches' ? 'hidden' : ''}">
+			<div class="button-text xl:hidden">Select a day</div>
 			<DaySelector bind:currentDate />
 		</div>
 		<hr class="text-custom-gray mx-12 mt-8" />

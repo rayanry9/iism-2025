@@ -20,7 +20,9 @@
 </svelte:head>
 
 <Header />
-<TopStories topStories={data.topStories} />
+{#if data.topStories.length}
+	<TopStories topStories={data.topStories} />
+{/if}
 <!-- <Schedule /> -->
 <InfoBanner />
 <FeaturedEvents />

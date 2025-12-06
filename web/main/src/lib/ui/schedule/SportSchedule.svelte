@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getPoolsBySportId } from '$lib/api/pools';
+	import { globals } from '$lib/state.svelte';
 	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
 	import type { GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
 	import type { Sports, SportType } from '$lib/types/sports';
@@ -18,7 +19,7 @@
 		matchData: Array<GetAllPoolMatchesResponse>;
 	} = $props();
 	let data = $derived.by(() =>
-		getPoolsBySportId(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, false))
+		getPoolsBySportId(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff))
 	);
 	$effect(() => {
 		sport;
