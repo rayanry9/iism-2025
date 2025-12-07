@@ -187,6 +187,10 @@ export function getSportIdOfSport(sport: Sports, type: number, staff: boolean) {
 	return 1;
 }
 
+export function isSportMixed(id: number) {
+	return id == 58;
+}
+
 export function isSportFemale(id: number) {
 	switch (id) {
 		case 2:

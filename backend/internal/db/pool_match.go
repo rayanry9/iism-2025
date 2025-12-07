@@ -10,9 +10,32 @@ import (
 func GetAllPoolMatches(c *gin.Context) (*[]schema.GetAllPoolMatchesResponse, error) {
 	rows, err := config.DB.Query(c, `
 	SELECT 
-	*
+		pm.id,
+		pm.sport_id,
+		pm.team1_temp_name,
+		(
+			select pt.institute_id
+			from pool_teams pt
+			join pools p on pt.pool_id = p.id and p.sport_id = pm.sport_id
+			where pt.id = pm.team1_id
+		) as team1Id,
+		pm.team2_temp_name,
+		(
+			select pt.institute_id
+			from pool_teams pt
+			join pools p on pt.pool_id = p.id and p.sport_id = pm.sport_id
+			where pt.id = pm.team2_id
+		) as team2Id,
+		pm.status,
+		pm.result,
+		pm.start_time,
+		pm.end_time,
+		pm.venue,
+		pm.type,
+		pm.match_name,
+		pm.live_stream_link
 	FROM 
-		pool_matches
+		pool_matches pm
 	`)
 	if err != nil {
 		return nil, err
