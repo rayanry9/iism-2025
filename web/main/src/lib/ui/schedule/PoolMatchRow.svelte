@@ -2,12 +2,11 @@
 	import type { IITNames } from '$lib/types/iitNames';
 	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
 	import { MatchStatus, type GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
-	import type { Sports } from '$lib/types/sports';
 	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import menSvg from '$lib/assets/icons/men.svg';
 	import womenSvg from '$lib/assets/icons/female.svg';
-	import { getSportFromSportId, getSportIdOfSport, isSportFemale } from '$lib/utility/sport';
+	import { getSportFromSportId, isSportFemale } from '$lib/utility/sport';
 
 	let {
 		sportId,
@@ -38,11 +37,13 @@
 		/>
 	</div>
 	<div class="flex h-full grow">
-		<div class="flex grow flex-col gap-y-3 px-4 py-3 xl:flex-row xl:py-0 xl:*:py-3 2xl:*:py-4">
+		<div
+			class="flex grow grid-cols-[1fr_auto_1fr] flex-col gap-y-3 px-4 py-3 xl:grid xl:py-0 xl:*:py-3 2xl:*:py-4"
+		>
 			{#if instituteData.find((val) => val.id == matchData.team1Id)}
 				<div class="flex items-center xl:mr-auto">
 					<img
-						class="mr-4 size-8"
+						class="mr-2 size-8 xl:mr-4"
 						src={getIITImgSrc(
 							(instituteData.find((val) => val.id == matchData.team1Id)?.name ??
 								'Hyderabad') as IITNames
@@ -66,7 +67,7 @@
 			{#if instituteData.find((val) => val.id == matchData.team2Id)}
 				<div class="flex items-center xl:ml-auto">
 					<img
-						class="mr-4 size-8"
+						class="mr-2 size-8 xl:mr-4"
 						src={getIITImgSrc(
 							(instituteData.find((val) => val.id == matchData.team2Id)?.name ??
 								'Hyderabad') as IITNames
@@ -82,7 +83,7 @@
 			{/if}
 		</div>
 		<div
-			class="border-l-custom-gray flex min-h-full flex-col items-center justify-center border-l px-4 text-wrap xl:ml-auto xl:w-min"
+			class="border-l-custom-gray flex min-h-full flex-col items-center justify-center border-l px-2 text-wrap md:px-4 xl:ml-auto xl:w-min"
 		>
 			<span class="mx-auto w-min leading-6 md:w-fit 2xl:w-max"
 				>STATUS-

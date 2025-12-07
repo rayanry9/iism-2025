@@ -3,7 +3,6 @@
 	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
 	import type { GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
 	import { getIITImgSrc, getIITShortCode } from '$lib/utility/iitLogoImgSrc';
-	import { slide } from 'svelte/transition';
 	let {
 		institutes,
 		matchData
@@ -27,9 +26,9 @@
 	<tbody>
 		{#each matchData.sort((a, b) => a.id - b.id) as match (match.id)}
 			<tr class="*:border-custom-gray text-center *:border">
-				<td class="bg-custom-gray px-4">{match.id}</td>
+				<td class="bg-custom-light-gray px-4">{match.id}</td>
 				<td class="px-4">{match.matchName?.toUpperCase()}</td>
-				<td class="flex px-4 *:py-2.5">
+				<td class="grid grid-cols-[1fr_auto_1fr] px-4 *:py-2.5">
 					{#if institutes.find((val) => val.id == match.team1Id)}
 						<div class="flex items-center xl:mr-auto">
 							<img

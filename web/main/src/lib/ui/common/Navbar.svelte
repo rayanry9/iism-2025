@@ -10,11 +10,11 @@
 	let { isLoggedIn }: { isLoggedIn: boolean } = $props();
 </script>
 
-<nav class="border-b-custom-gray flex flex-row items-center border-b bg-white px-6 py-3 md:px-8">
+<nav class="border-b-custom-gray flex flex-row items-center border-b bg-white px-3 py-3 md:px-8">
 	<img src={logoWithText} alt="Logo IISM" class="h-10" />
 	{#if globals.staff}
 		<button
-			class="border-b-custom-gray text-custom-dark-gray button-text ml-2 rounded-full border px-4 py-1 font-bold xl:ml-3 2xl:ml-4 2xl:py-1.5"
+			class="border-b-custom-gray text-custom-dark-gray button-text ml-2 rounded-full border px-3 py-1 font-bold xl:ml-3 2xl:ml-4 2xl:py-1.5"
 			in:fade
 			onclick={() => {
 				globals.staff = false;

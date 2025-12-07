@@ -10,7 +10,7 @@
 		return arr;
 	});
 	let { currentSport = $bindable() }: { currentSport: undefined | Sports } = $props();
-	let activeSport = $state(sports.findIndex((val) => val == currentSport));
+	let activeSport = $derived(sports.findIndex((val) => val == currentSport));
 </script>
 
 <section
@@ -21,7 +21,7 @@
 		<Button
 			class="{activeSport == i
 				? 'bg-custom-orange text-white'
-				: 'outline-custom-gray outline'} rounded-sm px-6 py-2.5"
+				: 'outline-custom-gray outline'} my-0.5 rounded-sm px-6 py-2.5"
 			onclick={() => {
 				activeSport = i;
 				currentSport = sport;

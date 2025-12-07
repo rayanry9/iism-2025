@@ -43,7 +43,11 @@
 						<span class="text-custom-blue">MATCH</span> : {match.id}
 					</div>
 					<div>
-						<span class="text-custom-blue">TIME</span> : {match.startTime.toLocaleTimeString()}
+						<span class="text-custom-blue">TIME</span> : {match.startTime
+							.toLocaleTimeString()
+							.split(':00 ')
+							.join(' ')
+							.toUpperCase()}
 					</div>
 					<div>
 						{match.matchName}

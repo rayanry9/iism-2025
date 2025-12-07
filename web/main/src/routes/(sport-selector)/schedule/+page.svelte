@@ -23,10 +23,10 @@
 		<!-- <FullSchedule institutes={[]} matchData={[]} /> -->
 	{/await}
 {:else if selectedSport == 'Athletics'}
-	{#await Promise.all([data.athleticMatches])}
-		<AthleticsSchedule athleticMatchData={[]} />
+	{#await Promise.all([data.athleticMatches, data.institutes, data.allSports])}
+		<AthleticsSchedule athleticMatchData={[]} institutes={[]} allSports={[]} />
 	{:then value}
-		<AthleticsSchedule athleticMatchData={value[0]} />
+		<AthleticsSchedule athleticMatchData={value[0]} institutes={value[1]} allSports={value[2]} />
 	{/await}
 {:else}
 	{#await Promise.all([data.institutes, data.poolMatches])}
