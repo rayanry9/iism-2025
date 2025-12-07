@@ -38,7 +38,7 @@
 	</div>
 	<div class="flex h-full grow">
 		<div
-			class="flex grow grid-cols-[1fr_auto_1fr] flex-col gap-y-3 px-4 py-3 xl:grid xl:py-0 xl:*:py-3 2xl:*:py-4"
+			class="flex grow grid-cols-[1fr_auto_1fr] flex-col gap-y-3 px-4 py-3 xl:flex-row xl:py-0 xl:*:py-3 2xl:grid 2xl:*:py-4"
 		>
 			<div class="flex items-center xl:mr-auto">
 				{#if instituteData.find((val) => val.id == matchData.team1Id)}
@@ -56,7 +56,7 @@
 							?.name.toUpperCase()}</span
 					>
 				{:else}
-					{matchData.team1TempName}
+					{matchData.team1TempName.toUpperCase()}
 				{/if}
 			</div>
 			<div
