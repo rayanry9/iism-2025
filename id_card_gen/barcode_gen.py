@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 output_folder = "barcodes" 
 # output folder 
 os.makedirs(output_folder, exist_ok=True) 
-subBarcodeFont = ImageFont.truetype('../fonts/optima-nova-lt-pro/OptimaNovaLTProDemi.otf', size=2*16) 
+subBarcodeFont = ImageFont.truetype('../fonts/optima-nova-lt-pro/OptimaNovaLTProDemi.otf', size=28) 
 with open('./barcode.txt', "r") as file: 
     lines = file.readlines() 
     for idx in range(len(lines)): 

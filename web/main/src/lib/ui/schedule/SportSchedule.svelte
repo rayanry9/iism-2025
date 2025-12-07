@@ -8,6 +8,11 @@
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import { ToggleTabs } from '../components/toggleTabs';
 	import SchedulePoolCard from './SchedulePoolCard.svelte';
+	import menSvg from '$lib/assets/icons/men.svg';
+	import womenSvg from '$lib/assets/icons/female.svg';
+	import { untrack } from 'svelte';
+	import SportScheduleMatchesMobile from './SportScheduleMatchesMobile.svelte';
+	import SportScheduleMatchDesktop from './SportScheduleMatchDesktop.svelte';
 
 	let {
 		sport,
@@ -18,17 +23,25 @@
 		institutes: GetAllInstitutesResponse[];
 		matchData: Array<GetAllPoolMatchesResponse>;
 	} = $props();
-	let data = $derived.by(() =>
-		getPoolsBySportId(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff))
-	);
+	let sportType = $state<SportType>('Male');
+	let poolData = $derived.by(() => {
+		return getPoolsBySportId(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff));
+	});
 	$effect(() => {
 		sport;
-		sportType = 'Male';
+		untrack(() => {
+			sportType = 'Male';
+		});
 	});
-	let sportType = $state<SportType>('Male');
+
+	let sportMatches = $derived(
+		matchData.filter(
+			(val) => val.sportId == getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff)
+		)
+	);
 </script>
 
-<main class="flex w-full flex-col">
+<main class="flex w-full flex-col px-6 xl:px-0">
 	<div class="mb-12 flex w-full">
 		<div class="flex flex-col">
 			<h2 class="flex items-center">
@@ -37,32 +50,43 @@
 			</h2>
 
 			<p>
-				{sportType == 'Male' ? 'Men' : sportType == 'Female' ? 'Women' : ''} - {#await data then dat}
+				{sportType == 'Male' ? 'Men' : sportType == 'Female' ? 'Women' : ''} - {#await poolData then dat}
 					{dat.flatMap((val) => val.teams).length}
 				{/await} Teams
 			</p>
 		</div>
-		{#if sport == 'Volleyball'}
-			<ToggleTabs.Root class="ml-auto h-fit">
-				<ToggleTabs.Item
-					onclick={() => {
-						sportType = 'Male';
-					}}
-					class="!px-5 !py-2">MEN</ToggleTabs.Item
-				>
-				<ToggleTabs.Item
-					onclick={() => {
-						sportType = 'Female';
-					}}
-					class="!px-5 !py-2">WOMEN</ToggleTabs.Item
-				>
-			</ToggleTabs.Root>
-		{/if}
+		{#key sport}
+			{#if getSportIdOfSport(sport, 1, globals.staff) != getSportIdOfSport(sport, 2, globals.staff)}
+				<ToggleTabs.Root class="ml-auto h-fit">
+					<ToggleTabs.Item
+						onclick={() => {
+							sportType = 'Male';
+						}}
+						class="flex gap-x-2 px-3! py-2! xl:px-5!"
+					>
+						<span class="hidden xl:block">MEN</span><img
+							src={menSvg}
+							alt="men"
+							class="size-4 xl:size-6"
+						/></ToggleTabs.Item
+					>
+					<ToggleTabs.Item
+						onclick={() => {
+							sportType = 'Female';
+						}}
+						class="flex gap-x-1 px-3! py-2! xl:px-5!"
+					>
+						<span class="hidden xl:block">WOMEN</span>
+						<img src={womenSvg} alt="women" class="size-4 xl:size-6" /></ToggleTabs.Item
+					>
+				</ToggleTabs.Root>
+			{/if}
+		{/key}
 	</div>
 
 	<!-- <section class="grid w-full grid-flow-col grid-rows-2 gap-12"> -->
-	<section class="flex w-full flex-wrap xl:gap-8 2xl:gap-12">
-		{#await data}
+	<section class="flex w-full flex-wrap justify-center gap-8 md:justify-start 2xl:gap-12">
+		{#await poolData}
 			{#each [1, 2, 3, 4, 5, 6, 7, 8] as key}
 				<SchedulePoolCard
 					poolName="A"
@@ -80,5 +104,46 @@
 		{/await}
 	</section>
 
-	<section></section>
+	<section class="mt-12 flex flex-col gap-y-6">
+		{#each sportMatches
+			.map((val) => {
+				return { date: val.startTime.getDate(), month: val.startTime.getMonth() };
+			})
+			.filter((val, idx, arr) => {
+				if (arr.findLastIndex((v) => v.date == val.date && v.month == val.month) == idx) {
+					return val;
+				}
+			})
+			.sort((a, b) => {
+				if (a.month == b.month) {
+					return a.date - b.date;
+				} else if (a.month < b.month) {
+					return -40;
+				} else {
+					return 40;
+				}
+			}) as day, idx}
+			<div class="flex flex-col">
+				<div class="button-text">
+					DAY {idx + 1} - <span class="text-custom-teal">{day.date}/{day.month}/2025</span>
+				</div>
+				<SportScheduleMatchesMobile
+					{institutes}
+					matchData={matchData.filter((m) => {
+						if (m.startTime.getDate() == day.date && m.startTime.getMonth() == day.month) {
+							return m;
+						}
+					})}
+				/>
+				<SportScheduleMatchDesktop
+					{institutes}
+					matchData={matchData.filter((m) => {
+						if (m.startTime.getDate() == day.date && m.startTime.getMonth() == day.month) {
+							return m;
+						}
+					})}
+				/>
+			</div>
+		{/each}
+	</section>
 </main>

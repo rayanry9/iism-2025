@@ -8,6 +8,7 @@
 	import 'toastify-js/src/toastify.css';
 	import Navbar from '$lib/ui/common/Navbar.svelte';
 	import { globals } from '$lib/state.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	let { children, data } = $props();
 </script>
@@ -33,8 +34,11 @@
 					class="bg-custom-blue my-auto border border-white px-6 py-3 text-white 2xl:px-8"
 					onclick={() => {
 						globals.staff = !globals.staff;
+						invalidateAll();
 						localStorage.setItem('staff', globals.staff.toString());
-						scrollTo({ behavior: 'smooth', top: 0 });
+						setTimeout(() => {
+							scrollTo({ behavior: 'smooth', top: 0 });
+						}, 500);
 					}}
 				>
 					<div class="flex gap-x-4">

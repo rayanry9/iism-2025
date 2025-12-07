@@ -48,19 +48,19 @@
 		</style>
 
 		{#each topStories as story}
-			<div class="relative flex min-w-120 flex-col overflow-hidden rounded-xl bg-white">
+			<div class="relative flex min-w-80 flex-col overflow-hidden rounded-xl bg-white md:min-w-120">
 				<img
 					src={PUBLIC_API_URL + '/gallery/' + story.imgSrc}
 					alt="post"
-					class="h-100 w-120 min-w-120 rounded-xl object-cover object-center"
+					class="h-60 w-80 rounded-t-xl object-cover object-center md:h-100 md:w-120 md:min-w-120"
 				/>
 				<div
-					class="border-custom-gray title-text bottom-0 flex w-full items-center rounded-b-xl border bg-white px-10 py-5 text-black"
+					class="border-custom-gray title-text bottom-0 flex w-full items-center rounded-b-xl border bg-white px-4 py-4 text-black md:px-10 md:py-5"
 				>
 					{story.subText}
 					<a href={story.href} class="ml-auto w-fit" rel="noopener" target="_blank">
 						<button
-							class="button-text bg-custom-pastel-blue text-custom-teal hover:bg-custom-blue border-custom-teal w-fit rounded-full border px-5 py-2 transition-colors duration-200 hover:cursor-pointer hover:text-white"
+							class="button-text bg-custom-pastel-blue text-custom-teal hover:bg-custom-blue border-custom-teal w-fit rounded-full border px-4 py-1 transition-colors duration-200 hover:cursor-pointer hover:text-white md:px-5 md:py-2"
 							>VIEW</button
 						>
 					</a>

@@ -200,7 +200,7 @@
 			<FlairedTitle>CONVENORS</FlairedTitle>
 
 			<div
-				class="3xl:px-32 grid grid-cols-1 gap-14 px-8 lg:grid-cols-2 xl:px-16 2xl:grid-cols-3 2xl:gap-20 2xl:px-24"
+				class="3xl:px-32 grid grid-cols-1 items-center gap-14 lg:grid-cols-2 xl:px-16 2xl:grid-cols-3 2xl:gap-20 2xl:px-24"
 			>
 				<ContactCard
 					imgSrc={'https://avatar.iran.liara.run/public/boy'}
@@ -233,7 +233,7 @@
 			<FlairedTitle>Organizing Secrataries</FlairedTitle>
 
 			<div
-				class="3xl:px-32 grid grid-cols-1 gap-14 px-8 lg:grid-cols-2 xl:px-16 2xl:grid-cols-3 2xl:gap-20 2xl:px-24"
+				class="3xl:px-32 grid grid-cols-1 items-center gap-14 lg:grid-cols-2 xl:px-16 2xl:grid-cols-3 2xl:gap-20 2xl:px-24"
 			>
 				<ContactCard
 					imgSrc={'https://avatar.iran.liara.run/public/boy'}

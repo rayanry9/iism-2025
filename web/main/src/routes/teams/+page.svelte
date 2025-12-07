@@ -26,7 +26,6 @@
 	let activeIIT = $state<IITNames | undefined | ''>();
 	let activeGender = $state<'MEN' | 'WOMEN' | undefined>('MEN');
 	$effect(() => {
-		activeIIT;
 		activeSport;
 		untrack(() => {
 			activeGender = 'MEN';
@@ -71,7 +70,15 @@
 </script>
 
 <div class="flex flex-col overflow-x-clip xl:flex-row">
-	<TeamAsideBar bind:activeIIT />
+	<TeamAsideBar
+		bind:activeIIT={
+			() => activeIIT,
+			(val) => {
+				activeIIT = val;
+				activeGender = 'MEN';
+			}
+		}
+	/>
 	<MobileHeaderFrame>
 		<CustomSelect2
 			items={[
@@ -81,7 +88,13 @@
 					imgSrc: getIITImgSrc(iit)
 				}))
 			]}
-			bind:value={activeIIT}
+			bind:value={
+				() => activeIIT,
+				(val) => {
+					activeIIT = val;
+					activeGender = 'MEN';
+				}
+			}
 			placeholder="Select a College"
 			type="single"
 		/>
@@ -109,7 +122,17 @@
 		<main
 			class="my-8 flex grow flex-col px-8 xl:my-12 xl:h-[calc(100vh-10rem)] xl:overflow-y-auto xl:px-12"
 		>
-			<TeamHeader {sports} bind:activeSport {activeIIT} />
+			<TeamHeader
+				{sports}
+				bind:activeSport={
+					() => activeSport,
+					(val) => {
+						activeSport = val;
+						activeGender = 'MEN';
+					}
+				}
+				{activeIIT}
+			/>
 
 			{#if activeSport}
 				<div class="mt-12 flex">
@@ -127,7 +150,7 @@
 						</div>
 					</div>
 
-					{#key activeSport && activeIIT}
+					{#key activeSport + activeIIT}
 						<ToggleTabs.Root class="ml-auto h-fit">
 							<ToggleTabs.Item
 								onclick={() => {
