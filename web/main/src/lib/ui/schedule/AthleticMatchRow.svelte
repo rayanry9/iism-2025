@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { getIITShortCode, type IITNames } from '$lib/types/iitNames';
+	import type { IITNames } from '$lib/types/iitNames';
 	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
 	import { MatchStatus, type GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
-	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
+	import { getIITImgSrc, getIITShortCode } from '$lib/utility/iitLogoImgSrc';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import menSvg from '$lib/assets/icons/men.svg';
 	import womenSvg from '$lib/assets/icons/female.svg';

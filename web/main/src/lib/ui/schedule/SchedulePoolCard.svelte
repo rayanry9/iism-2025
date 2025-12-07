@@ -5,6 +5,7 @@
 	import type { ClassValue } from 'svelte/elements';
 	import chevronUpSvg from '$lib/assets/icons/chevron-up.svg';
 	import { slide } from 'svelte/transition';
+	import { innerWidth } from 'svelte/reactivity/window';
 
 	let {
 		poolName,
@@ -40,12 +41,12 @@
 		>
 	</div>
 	{#each teamData as team}
-		{#if team.name != null && (poolOpen || innerWidth >= 768)}
+		{#if team.name != null && (poolOpen || (innerWidth.current ?? 1) >= 768)}
 			<div class="flex items-center leading-none" transition:slide>
 				<img class="mr-2 h-fit w-6" src={getIITImgSrc(team.name as IITNames)} alt="iit logo" />
 				<span class="pt-2">IIT {team.name}</span>
 			</div>
-		{:else if poolOpen || innerWidth >= 768}
+		{:else if poolOpen || (innerWidth.current ?? 1) >= 768}
 			<div transition:slide>{team.tempName}</div>
 		{/if}
 	{/each}

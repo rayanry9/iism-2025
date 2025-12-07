@@ -6,7 +6,7 @@
 	import downloadIcon from '$lib/assets/icons/download.svg';
 	import type { Sports } from '$lib/types/sports';
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import SportSelector from '$lib/ui/common/SportSelector.svelte';
 
 	let { children } = $props();
