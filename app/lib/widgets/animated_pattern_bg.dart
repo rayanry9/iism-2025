@@ -3,7 +3,12 @@ import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
 
 class AnimatedPatternBackground extends StatefulWidget {
-  const AnimatedPatternBackground({super.key});
+  final bool animated;
+
+  const AnimatedPatternBackground({
+    super.key,
+    this.animated = true, // default: animated pattern
+  });
 
   @override
   State<AnimatedPatternBackground> createState() => _AnimatedPatternBackgroundState();
@@ -13,39 +18,37 @@ class _AnimatedPatternBackgroundState extends State<AnimatedPatternBackground>
     with SingleTickerProviderStateMixin {
 
   late AnimationController _controller;
-  ui.Image? _pattern; // this will hold the loaded WEBP image
+  ui.Image? _pattern;
 
   @override
   void initState() {
     super.initState();
 
-    // Animation controller (0 → 1 → 0 → repeat)
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 10),
-    )..repeat();
+    );
+
+    // Only animate when widget.animated == true
+    if (widget.animated) {
+      _controller.repeat();
+    }
 
     _loadPattern();
   }
 
-  /// Load WEBP image as ui.Image for use in CustomPaint
   Future<void> _loadPattern() async {
     final data = await rootBundle.load('assets/pattern.webp');
-
-    final codec = await ui.instantiateImageCodec(
-      data.buffer.asUint8List(),
-    );
-
+    final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
     final frame = await codec.getNextFrame();
 
     setState(() {
-      _pattern = frame.image; // ready to draw!
+      _pattern = frame.image;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // If image not loaded, just show nothing
     if (_pattern == null) {
       return const SizedBox.expand();
     }
@@ -56,7 +59,7 @@ class _AnimatedPatternBackgroundState extends State<AnimatedPatternBackground>
         return CustomPaint(
           painter: PatternPainter(
             image: _pattern!,
-            shift: _controller.value,
+            shift: widget.animated ? _controller.value : 0, // STATIC or ANIMATED
           ),
         );
       },
@@ -81,24 +84,24 @@ class PatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
+    final paint = Paint()
+      ..color = Colors.white.withOpacity(0.4);
 
-    // 🌟 1. Rotate the entire canvas (adjust angle for your look)
+    // Rotation
     canvas.save();
     canvas.translate(size.width / 2, size.height / 2);
-    canvas.rotate(0.25); // ~ -26°, tweak to match exactly
+    canvas.rotate(0.06);
     canvas.translate(-size.width / 2, -size.height / 2);
 
-    // 🌟 2. Movement for animation
-    final dx = shift * 200;
-    final dy = shift * 200;
+    // Movement for animation (or static)
+    final dx = shift * 150;
+    final dy = shift * 150;
 
-    // 🌟 3. Tile size (adjust as needed)
-    final scale = 0.45;  // ratio based on your reference tile density
+    // Tile scaling
+    const scale = 0.3;
     final tileW = image.width * scale;
     final tileH = image.height * scale;
 
-    // Source rectangle
     final src = Rect.fromLTWH(
       0,
       0,
@@ -106,7 +109,7 @@ class PatternPainter extends CustomPainter {
       image.height.toDouble(),
     );
 
-    // 🌟 4. Tile the pattern in a grid
+    // Draw tiling
     for (double x = -tileW + dx; x < size.width + tileW; x += tileW) {
       for (double y = -tileH + dy; y < size.height + tileH; y += tileH) {
         final dst = Rect.fromLTWH(x, y, tileW, tileH);
@@ -114,7 +117,7 @@ class PatternPainter extends CustomPainter {
       }
     }
 
-    canvas.restore(); // restore rotation
+    canvas.restore();
   }
 
   @override
