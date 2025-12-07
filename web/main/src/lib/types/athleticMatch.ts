@@ -8,7 +8,7 @@ export interface GetAllAthleticMatchesResponse {
 	id: number;
 	sportId: number;
 	participantsTempText: string;
-	participants: number[];
+	participants: number[] | null;
 	startTime: Date;
 	endTime: Date | null;
 	venue: string | null;

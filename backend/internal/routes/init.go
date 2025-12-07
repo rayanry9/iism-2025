@@ -20,8 +20,8 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.GET("get-all-pools", middlewares.CacheHTTP(60*60*12), controller.GetAllPools)
 	r.GET("get-all-pool-teams", middlewares.CacheHTTP(60*60*12), controller.GetAllPoolTeams)
 
-	r.GET("get-all-pool-matches", middlewares.CacheHTTP(60), controller.GetAllPoolMatches)
-	r.GET("get-all-athletic-matches", middlewares.CacheHTTP(60), controller.GetAllAthleticMatches)
+	r.GET("get-all-pool-matches", middlewares.CacheHTTP(2), controller.GetAllPoolMatches)
+	r.GET("get-all-athletic-matches", middlewares.CacheHTTP(2), controller.GetAllAthleticMatches)
 
 	r.POST("login", controller.Login)
 	r.POST("logout", middlewares.AuthJWT(), controller.Logout)

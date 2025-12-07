@@ -129,7 +129,7 @@
 				</div>
 				<SportScheduleMatchesMobile
 					{institutes}
-					matchData={matchData.filter((m) => {
+					matchData={sportMatches.filter((m) => {
 						if (m.startTime.getDate() == day.date && m.startTime.getMonth() == day.month) {
 							return m;
 						}
@@ -137,7 +137,7 @@
 				/>
 				<SportScheduleMatchDesktop
 					{institutes}
-					matchData={matchData.filter((m) => {
+					matchData={sportMatches.filter((m) => {
 						if (m.startTime.getDate() == day.date && m.startTime.getMonth() == day.month) {
 							return m;
 						}

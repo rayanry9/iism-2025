@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { globals } from '$lib/state.svelte';
 	import type { GetAllAthleticMatchesResponse } from '$lib/types/athleticMatch';
 	import type { GetAllSportsResponse } from '$lib/types/sports';
+	import { isSportIdStaff } from '$lib/utility/sport';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import AthleticScheduleMobile from './AthleticScheduleMobile.svelte';
 	import AthleticsScheduleDesktop from './AthleticsScheduleDesktop.svelte';
@@ -22,6 +24,7 @@
 
 	<section class="flex h-full flex-col gap-y-4">
 		{#each athleticMatchData
+			.filter((m) => isSportIdStaff(m.sportId) == globals.staff)
 			.map((val) => {
 				return { date: val.startTime.getDate(), month: val.startTime.getMonth() };
 			})
@@ -39,14 +42,18 @@
 					return 40;
 				}
 			}) as day, idx}
-			<div class="flex flex-col gap-y-1">
+			<div class="flex flex-col gap-y-1 pb-8">
 				<div class="button-text">
 					<span class="text-custom-teal">{day.date}/{day.month}/2025</span> - DAY {idx + 1}
 				</div>
 				<AthleticsScheduleDesktop
 					{allSports}
 					matchData={athleticMatchData.filter((m) => {
-						if (m.startTime.getDate() == day.date && m.startTime.getMonth() == day.month) {
+						if (
+							m.startTime.getDate() == day.date &&
+							m.startTime.getMonth() == day.month &&
+							isSportIdStaff(m.sportId) == globals.staff
+						) {
 							return m;
 						}
 					})}
@@ -54,7 +61,11 @@
 				<AthleticScheduleMobile
 					{allSports}
 					matchData={athleticMatchData.filter((m) => {
-						if (m.startTime.getDate() == day.date && m.startTime.getMonth() == day.month) {
+						if (
+							m.startTime.getDate() == day.date &&
+							m.startTime.getMonth() == day.month &&
+							isSportIdStaff(m.sportId) == globals.staff
+						) {
 							return m;
 						}
 					})}

@@ -58,10 +58,10 @@
 					Final
 				{/if}
 				<br class="md:hidden" />
-				({#if matchData.participants.length == 23}
+				({#if (matchData.participants?.length ?? 0) == 23}
 					All
 				{/if}
-				{matchData.participants.length} IITs )
+				{matchData.participants?.length ?? 0} IITs )
 				<button
 					class="p-2 hover:cursor-pointer hover:brightness-99"
 					onclick={() => {
