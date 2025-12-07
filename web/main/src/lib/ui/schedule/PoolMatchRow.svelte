@@ -66,14 +66,14 @@
 			{#if instituteData.find((val) => val.id == matchData.team2Id)}
 				<div class="flex items-center xl:ml-auto">
 					<img
-						class="mr-4 size-8 xl:order-2 xl:mr-0 xl:ml-4"
+						class="mr-4 size-8"
 						src={getIITImgSrc(
 							(instituteData.find((val) => val.id == matchData.team2Id)?.name ??
 								'Hyderabad') as IITNames
 						)}
 						alt="IIT Logo"
 					/>
-					<span class="xl:order-1">
+					<span class="">
 						IIT {instituteData.find((val) => val.id == matchData.team2Id)?.name.toUpperCase()}
 					</span>
 				</div>

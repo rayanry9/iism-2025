@@ -3,19 +3,22 @@
 	import type { GetAllAthleticMatchesResponse } from '$lib/types/athleticMatch';
 	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
 	import type { GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
-	import type { Sports } from '$lib/types/sports';
+	import type { GetAllSportsResponse, Sports } from '$lib/types/sports';
 	import { getSportFromSportId } from '$lib/utility/sport';
 	import DaySelector from '../common/DaySelector.svelte';
+	import AthleticMatchRow from './AthleticMatchRow.svelte';
 	import PoolMatchRow from './PoolMatchRow.svelte';
 
 	let {
 		poolMatchData,
 		athleticMatchData,
-		institutes
+		institutes,
+		sportData
 	}: {
 		institutes: GetAllInstitutesResponse[];
 		poolMatchData: Array<GetAllPoolMatchesResponse>;
 		athleticMatchData: Array<GetAllAthleticMatchesResponse>;
+		sportData: Array<GetAllSportsResponse>;
 	} = $props();
 	let currentDate: Date = $state<Date>(new Date(2025, 11, globals.staff ? 23 : 13));
 	let currentSport: 'All Matches' | Sports = $state('All Matches');
@@ -92,6 +95,14 @@
 				</div>
 				{#each poolMatchData.filter((val) => val.startTime.getDate() == currentDate.getDate() && val.startTime.getHours() == time.hour && val.startTime.getMinutes() == time.min) as match}
 					<PoolMatchRow sportId={match.sportId} instituteData={institutes} matchData={match} />
+				{/each}
+				{#each athleticMatchData.filter((val) => val.startTime.getDate() == currentDate.getDate() && val.startTime.getHours() == time.hour && val.startTime.getMinutes() == time.min) as match}
+					<AthleticMatchRow
+						sportId={match.sportId}
+						allSportData={sportData}
+						instituteData={institutes}
+						matchData={match}
+					/>
 				{/each}
 			</div>
 		{/each}

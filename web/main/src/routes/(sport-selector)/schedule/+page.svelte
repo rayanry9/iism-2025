@@ -11,10 +11,15 @@
 </script>
 
 {#if selectedSport == undefined}
-	{#await Promise.all([data.institutes, data.poolMatches, data.athleticMatches])}
-		<FullSchedule institutes={[]} poolMatchData={[]} athleticMatchData={[]} />
+	{#await Promise.all([data.institutes, data.poolMatches, data.athleticMatches, data.allSports])}
+		<FullSchedule institutes={[]} poolMatchData={[]} athleticMatchData={[]} sportData={[]} />
 	{:then value}
-		<FullSchedule institutes={value[0]} poolMatchData={value[1]} athleticMatchData={value[2]} />
+		<FullSchedule
+			institutes={value[0]}
+			poolMatchData={value[1]}
+			athleticMatchData={value[2]}
+			sportData={value[3]}
+		/>
 		<!-- <FullSchedule institutes={[]} matchData={[]} /> -->
 	{/await}
 {:else if selectedSport == 'Athletics'}

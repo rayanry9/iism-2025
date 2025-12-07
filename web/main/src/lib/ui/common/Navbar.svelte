@@ -6,16 +6,31 @@
 	import { globals } from '$lib/state.svelte';
 	import StartToastifyInstance from 'toastify-js';
 	import NavScreenMobile from '../components/NavScreenMobile.svelte';
+	import { fade } from 'svelte/transition';
 	let { isLoggedIn }: { isLoggedIn: boolean } = $props();
 </script>
 
-<nav class="border-b-custom-gray flex flex-row items-center border-b bg-white px-8 py-3">
+<nav class="border-b-custom-gray flex flex-row items-center border-b bg-white px-6 py-3 md:px-8">
 	<img src={logoWithText} alt="Logo IISM" class="h-10" />
 	{#if globals.staff}
-		<div class="ml-2 font-bold">( STAFF )</div>
+		<button
+			class="border-b-custom-gray text-custom-dark-gray button-text ml-2 rounded-full border px-4 py-1 font-bold xl:ml-3 2xl:ml-4 2xl:py-1.5"
+			in:fade
+			onclick={() => {
+				globals.staff = false;
+			}}>Switch to Student Meet</button
+		>
+	{:else}
+		<button
+			in:fade
+			class="border-b-custom-gray text-custom-dark-gray button-text ml-2 rounded-full border px-4 py-1 font-bold xl:ml-3 2xl:ml-4 2xl:py-1.5"
+			onclick={() => {
+				globals.staff = true;
+			}}>Switch to Staff Meet</button
+		>
 	{/if}
 	<div
-		class="button-text ml-auto hidden flex-row items-center gap-x-5 *:hover:cursor-pointer lg:flex xl:gap-x-8 2xl:gap-x-12"
+		class="button-text ml-auto hidden flex-row items-center gap-x-5 *:hover:cursor-pointer lg:flex 2xl:gap-x-12"
 	>
 		<a class={`${page.url.pathname == '/' ? 'text-custom-orange ' : ''} `} href="/">HOME</a>
 		<a class={`${page.url.pathname == '/schedule' ? 'text-custom-orange ' : ''} `} href="/schedule"

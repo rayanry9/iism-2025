@@ -4,7 +4,7 @@
 	import mobileImg from '$lib/assets/legacy-mobile.webp';
 </script>
 
-<section class="relative mt-40">
+<section class="relative mt-16 md:mt-40">
 	<img
 		src={mainImg}
 		alt="stylised img"

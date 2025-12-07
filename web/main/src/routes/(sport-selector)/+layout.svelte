@@ -54,7 +54,7 @@
 					<a
 						href={globals.staff
 							? '/30th%20IISSM%20Staff%20Schedule.pdf'
-							: '/58th%20IISM%20Student%20Schedule.pdf'}
+							: '/58th%20IISM%20Student%20Meet%20Schedule.pdf'}
 						target="_blank"
 						download
 					>
