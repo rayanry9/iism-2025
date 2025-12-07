@@ -40,8 +40,8 @@
 		<div
 			class="flex grow grid-cols-[1fr_auto_1fr] flex-col gap-y-3 px-4 py-3 xl:grid xl:py-0 xl:*:py-3 2xl:*:py-4"
 		>
-			{#if instituteData.find((val) => val.id == matchData.team1Id)}
-				<div class="flex items-center xl:mr-auto">
+			<div class="flex items-center xl:mr-auto">
+				{#if instituteData.find((val) => val.id == matchData.team1Id)}
 					<img
 						class="mr-2 size-8 xl:mr-4"
 						src={getIITImgSrc(
@@ -55,17 +55,17 @@
 							.find((val) => val.id == matchData.team1Id)
 							?.name.toUpperCase()}</span
 					>
-				</div>
-			{:else}
-				<div>{matchData.team1TempName}</div>
-			{/if}
+				{:else}
+					{matchData.team1TempName}
+				{/if}
+			</div>
 			<div
 				class="border-l-custom-gray border-r-custom-gray mx-2 hidden h-full -skew-x-12 items-center border-r border-l px-3 xl:flex"
 			>
 				<span class="skew-x-12">VS</span>
 			</div>
-			{#if instituteData.find((val) => val.id == matchData.team2Id)}
-				<div class="flex items-center xl:ml-auto">
+			<div class="flex items-center xl:ml-auto">
+				{#if instituteData.find((val) => val.id == matchData.team2Id)}
 					<img
 						class="mr-2 size-8 xl:mr-4"
 						src={getIITImgSrc(
@@ -77,10 +77,10 @@
 					<span class="">
 						IIT {instituteData.find((val) => val.id == matchData.team2Id)?.name.toUpperCase()}
 					</span>
-				</div>
-			{:else}
-				<div>{matchData.team2TempName.toUpperCase()}</div>
-			{/if}
+				{:else}
+					{matchData.team2TempName.toUpperCase()}
+				{/if}
+			</div>
 		</div>
 		<div
 			class="border-l-custom-gray flex min-h-full flex-col items-center justify-center border-l px-2 text-wrap md:px-4 xl:ml-auto xl:w-min"
