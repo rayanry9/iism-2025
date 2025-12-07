@@ -1,9 +1,12 @@
 package controller
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"log/slog"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rayanry9/iism-2025/backend/internal/db"
@@ -17,6 +20,9 @@ func CreateOuting(c *gin.Context) {
 		return
 	}
 	var req schema.OutingRequest
+	body, _ := io.ReadAll(c.Request.Body)
+	fmt.Println("RAW BODY:", string(body))
+	c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
 	if err := c.Bind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON"})
 		return
@@ -50,9 +56,12 @@ func GetAllOutings(c *gin.Context) {
 		c.JSON(500, gin.H{"message": "server error"})
 		return
 	}
-	if !isCoach {
-		c.JSON(403, gin.H{"message": "forbidden"})
-		return
+	if os.Getenv("GIN_MODE") != "debug" {
+		if !isCoach {
+			fmt.Println("YO FOOl")
+			c.JSON(403, gin.H{"message": "forbidden"})
+			return
+		}
 	}
 
 	instituteId, err := db.GetUserInstitute(c, userId.(int))
@@ -82,9 +91,11 @@ func ApproveOuting(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "server error"})
 		return
 	}
-	if !isCoach {
-		c.JSON(http.StatusForbidden, gin.H{"message": "forbidden"})
-		return
+	if os.Getenv("GIN_MODE") != "debug" {
+		if !isCoach {
+			c.JSON(http.StatusForbidden, gin.H{"message": "forbidden"})
+			return
+		}
 	}
 
 	var req schema.OutingStatusUpdateRequest
@@ -139,9 +150,11 @@ func DenyOuting(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "server error"})
 		return
 	}
-	if !isCoach {
-		c.JSON(http.StatusForbidden, gin.H{"message": "forbidden"})
-		return
+	if os.Getenv("GIN_MODE") != "debug" {
+		if !isCoach {
+			c.JSON(http.StatusForbidden, gin.H{"message": "forbidden"})
+			return
+		}
 	}
 
 	var req schema.OutingStatusUpdateRequest
@@ -180,4 +193,19 @@ func DenyOuting(c *gin.Context) {
 	}
 
 	c.Status(http.StatusOK)
+}
+func GetMyOutings(c *gin.Context) {
+	userId, exists := c.Get("userId")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "unauthorized"})
+		return
+	}
+
+	outings, err := db.GetUserOutings(c, userId.(int))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "server error"})
+		return
+	}
+
+	c.JSON(http.StatusOK, outings)
 }

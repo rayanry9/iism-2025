@@ -133,3 +133,49 @@ func GetAllOutings(c *gin.Context, instituteId int) ([]schema.OutingData, error)
 
 	return outings, nil
 }
+func GetUserOutings(c *gin.Context, userId int) ([]schema.OutingData, error) {
+
+	rows, err := config.DB.Query(c, `
+        SELECT
+            o.id,
+            o.reason,
+            o.entry_time,
+            o.exit_time,
+            o.created_at,
+            o.status,
+            u.first_name,
+            u.last_name
+        FROM outings o
+        JOIN users u ON u.id = o.user_id
+        WHERE o.user_id = $1
+        ORDER BY o.created_at DESC
+    `, userId)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	outings := []schema.OutingData{}
+
+	for rows.Next() {
+		var o schema.OutingData
+		err := rows.Scan(
+			&o.OutingId,
+			&o.Reason,
+			&o.EntryTime,
+			&o.ExitTime,
+			&o.CreatedAt,
+			&o.Status,
+			&o.FirstName,
+			&o.LastName,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		outings = append(outings, o)
+	}
+
+	return outings, nil
+}

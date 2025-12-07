@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:iism_2025/screens/logindetails.dart';
 
 class ApproveRequestScreen extends StatefulWidget {
   const ApproveRequestScreen({super.key});
@@ -10,39 +12,152 @@ class ApproveRequestScreen extends StatefulWidget {
 class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
   bool showApproveTab = true;
 
-  List<Map<String, dynamic>> pending = [
-    {
-      "name": "Rohit Sharma",
-      "title": "Going out Secunderabad",
-      "exit": "11:30 AM",
-      "entry": "3:00 PM",
-      "time": "Today 8:30 AM"
-    },
-    {
-      "name": "Virat Kohli",
-      "title": "Going out for hyderaba…",
-      "exit": "11:30 AM",
-      "entry": "3:00 PM",
-      "time": "Today 8:30 AM"
-    },
-  ];
+  List<Map<String, dynamic>> pending = [];
 
-  final List<Map<String, dynamic>> history = [
-    {
-      "date": "14 December",
-      "list": [
-        {
-          "name": "Rohit Sharma",
-          "title": "Going out Secunderabad (8:30 AM)",
-          "exit": "11:30 AM",
-          "entry": "3:00 PM",
-          "approved": true
-        },
-      ]
-    }
-  ];
+  List<Map<String, dynamic>> history = [];
 
   Map<String, dynamic>? lastDeniedItem;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAllOutings();
+  }
+
+  Future<void> _approveOuting(int id) async {
+    try {
+      String apiUrl = dotenv.env['API_URL']!;
+      await dio.post(apiUrl + "/api/outing/approve", data: {"outingId": id});
+      _loadAllOutings(); // refresh lists
+    } catch (e) {
+      print("Approve error: $e");
+    }
+  }
+
+  Future<void> _denyOuting(int id) async {
+    try {
+      String apiUrl = dotenv.env['API_URL']!;
+      await dio.post(apiUrl + "/api/outing/deny", data: {"outingId": id});
+      _loadAllOutings(); // refresh lists
+    } catch (e) {
+      print("Deny error: $e");
+    }
+  }
+
+  Future<void> _loadAllOutings() async {
+    try {
+      String apiUrl = dotenv.env['API_URL']!;
+      final response = await dio.get(apiUrl + "/api/outing/all");
+
+      if (response.statusCode == 200) {
+        final List<dynamic> raw = response.data;
+        final List<Map<String, dynamic>> newPending = [];
+        final List<Map<String, dynamic>> allHistoryItems = [];
+
+        for (final item in raw) {
+          final map = Map<String, dynamic>.from(item as Map);
+          final int status = map["status"] ?? 0;
+
+          final DateTime createdAt = DateTime.parse(map["createdAt"]);
+          final DateTime entryTime = DateTime.parse(map["entryTime"]);
+          final DateTime exitTime = DateTime.parse(map["exitTime"]);
+
+          final String name =
+              "${map["firstName"] ?? ""} ${map["lastName"] ?? ""}".trim();
+          final String reason = map["reason"] ?? "";
+          final int outingId = map["outingId"];
+          
+          final String createdTimeLabel =
+              _formatTime(TimeOfDay.fromDateTime(createdAt));
+          final String entryLabel =
+              _formatTime(TimeOfDay.fromDateTime(entryTime));
+          final String exitLabel =
+              _formatTime(TimeOfDay.fromDateTime(exitTime));
+
+          if (status == 0) {
+            newPending.add({
+              "outingId": outingId,
+              "name": name,
+              "title": reason,
+              "exit": exitLabel,
+              "entry": entryLabel,
+              "time": createdTimeLabel,
+            });
+          } else {
+            final String dateLabel = _dateLabel(createdAt);
+            allHistoryItems.add({
+              "outingId": outingId,
+              "date": dateLabel,
+              "name": name,
+              "title": "$reason ($createdTimeLabel)",
+              "exit": exitLabel,
+              "entry": entryLabel,
+              "approved": status == 1,
+            });
+          }
+        }
+
+        final Map<String, List<Map<String, dynamic>>> grouped = {};
+        for (final item in allHistoryItems) {
+          final String date = item["date"];
+          grouped.putIfAbsent(date, () => []);
+          grouped[date]!.add({
+            "outingId": item["outingId"],
+            "name": item["name"],
+            "title": item["title"],
+            "exit": item["exit"],
+            "entry": item["entry"],
+            "approved": item["approved"],
+          });
+        }
+
+        final List<Map<String, dynamic>> newHistory = [];
+        grouped.forEach((date, list) {
+          newHistory.add({
+            "date": date,
+            "list": list,
+          });
+        });
+
+        setState(() {
+          pending = newPending;
+          history = newHistory;
+        });
+      }
+    } catch (e) {
+      print("Error loading outings (all): $e");
+    }
+  }
+
+  String _monthName(int m) {
+    const months = [
+      "",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    return months[m];
+  }
+
+  String _dateLabel(DateTime d) {
+    return "${d.day} ${_monthName(d.month)}";
+  }
+
+  String _formatTime(TimeOfDay t) {
+    final hour = (t.hour % 12 == 0) ? 12 : t.hour % 12;
+    final min = t.minute.toString().padLeft(2, '0');
+    final period = t.period == DayPeriod.am ? "AM" : "PM";
+    return "$hour:$min $period";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +171,24 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
             children: [
               _tabs(),
               const SizedBox(height: 12),
-               Center(
-                child: showApproveTab ? Text(
-                  "Approve the Outing Requests here.",
-                  style: TextStyle(color: Colors.black, fontSize: 13),
-                ): SizedBox(width: 0,),
+              Center(
+                child: showApproveTab
+                    ? const Text(
+                        "Approve the Outing Requests here.",
+                        style: TextStyle(color: Colors.black, fontSize: 13),
+                      )
+                    : const SizedBox(width: 0),
               ),
               const SizedBox(height: 12),
               const Divider(
                 height: 1,
                 color: Color(0xffD9D9D9),
               ),
-              showApproveTab ? SizedBox(height: 0) : SizedBox(height: 12,),
-
+              showApproveTab ? const SizedBox(height: 0) : const SizedBox(height: 12),
               Expanded(
                 child:
                     showApproveTab ? _buildApproveList() : _buildPastRequests(),
               ),
-              
             ],
           ),
         ),
@@ -81,9 +196,6 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
     );
   }
 
-  // ----------------------------------------------------------
-  // TOGGLE TABS
-  // ----------------------------------------------------------
   Widget _tabs() {
     return Container(
       decoration: BoxDecoration(
@@ -127,28 +239,24 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
     );
   }
 
-  // ----------------------------------------------------------
-  // APPROVE LIST  (Padding added)
-  // ----------------------------------------------------------
- Widget _buildApproveList() {
-  return ListView.separated(
-    itemCount: pending.length + 1,          // +1 for divider
-    separatorBuilder: (_, __) => const Divider(
-      height: 1,
-      color: Color(0xffD9D9D9),
-    ),
-    itemBuilder: (context, index) {
-      if (index == pending.length) {
-        // LAST ITEM → the bottom divider
-        return const Divider(
-          height: 0,
-          color: Color(0xffD9D9D9),
-        );
-      }
-      return _pendingTile(pending[index], index);
-    },
-  );
-}
+  Widget _buildApproveList() {
+    return ListView.separated(
+      itemCount: pending.length + 1,
+      separatorBuilder: (_, __) => const Divider(
+        height: 1,
+        color: Color(0xffD9D9D9),
+      ),
+      itemBuilder: (context, index) {
+        if (index == pending.length) {
+          return const Divider(
+            height: 0,
+            color: Color(0xffD9D9D9),
+          );
+        }
+        return _pendingTile(pending[index], index);
+      },
+    );
+  }
 
   Widget _approveDenyButtons({
     required VoidCallback onApprove,
@@ -221,6 +329,8 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
   }
 
   Widget _pendingTile(Map<String, dynamic> req, int index) {
+    final int id = req["outingId"];
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Row(
@@ -263,62 +373,53 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
                         Text("${req["entry"]}"),
                       ],
                     ),
-                    
                   ],
                 ),
-                
               ],
             ),
           ),
           const SizedBox(width: 15),
           _approveDenyButtons(
-            onApprove: () {},
-            onDeny: () {},
+            onApprove: () => _approveOuting(id),
+            onDeny: () => _denyOuting(id),
           ),
-          
         ],
       ),
     );
   }
 
-  // ----------------------------------------------------------
-  // PAST REQUESTS  (Padding added)
-  // ----------------------------------------------------------
   Widget _buildPastRequests() {
     return ListView.builder(
-      padding: const EdgeInsets.only(bottom: 16), // << ADDED
+      padding: const EdgeInsets.only(bottom: 16),
       itemCount: history.length,
       itemBuilder: (context, i) => _historyBlock(history[i]),
     );
   }
 
-Widget _historyBlock(Map<String, dynamic> block) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 16),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          block["date"],
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-
-        // Each card + divider
-        ...block["list"].map((e) => Column(
-              children: [
-                _pastTile(e),
-                const Divider(
-                  height: 2,
-                  color: Color(0xffD9D9D9),
-                ),
-              ],
-            )),
-      ],
-    ),
-  );
-}
-
+  Widget _historyBlock(Map<String, dynamic> block) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            block["date"],
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          const SizedBox(height: 10),
+          ...block["list"].map((e) => Column(
+                children: [
+                  _pastTile(e),
+                  const Divider(
+                    height: 2,
+                    color: Color(0xffD9D9D9),
+                  ),
+                ],
+              )),
+        ],
+      ),
+    );
+  }
 
   Widget _pastTile(Map<String, dynamic> item) {
     return Container(

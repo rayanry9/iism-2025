@@ -49,5 +49,6 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.GET("/outing/all", middlewares.AuthJWT(), controller.GetAllOutings)
 	r.POST("/outing/approve", middlewares.AuthJWT(), controller.ApproveOuting)
 	r.POST("/outing/deny", middlewares.AuthJWT(), controller.DenyOuting)
+	r.GET("/outing/mine", middlewares.AuthJWT(), controller.GetMyOutings)
 
 }
