@@ -7,13 +7,14 @@
 	import type { Sports } from '$lib/types/sports';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
+	import SportSelector from '$lib/ui/common/SportSelector.svelte';
 
 	let { children } = $props();
 	let selectedSport = $derived<Sports | undefined>(page.url.searchParams.get('sport') as Sports);
 </script>
 
 <div
-	class="relative flex flex-col overflow-x-clip text-nowrap xl:h-[calc(100vh-4rem)] xl:flex-row *:[main]:overflow-y-scroll *:[main]:py-12 xl:*:[main]:px-24 2xl:*:[main]:py-24"
+	class="relative flex flex-col overflow-x-clip text-nowrap xl:h-[calc(100vh-4rem)] xl:flex-row *:[main]:overflow-y-scroll *:[main]:py-12 xl:*:[main]:px-12 2xl:*:[main]:px-18 2xl:*:[main]:py-24"
 >
 	<SportsAsideBar
 		bind:selectedSport={
@@ -72,6 +73,23 @@
 			<h2>LIVE MATCHES</h2>
 		{/if}
 	</MobileHeaderFrame>
+
+	<div class="mt-12 flex flex-col gap-y-4 xl:hidden">
+		<div class="button-text ml-8">Select a Sport</div>
+		<SportSelector
+			bind:currentSport={
+				() => selectedSport,
+				(val) => {
+					if (val != undefined) {
+						goto(page.url.pathname + '?sport=' + val);
+					} else {
+						goto(page.url.pathname);
+					}
+					selectedSport = val;
+				}
+			}
+		/>
+	</div>
 
 	{@render children?.()}
 </div>

@@ -2,28 +2,29 @@
 	import { globals } from '$lib/state.svelte';
 	import Button from '../components/Button.svelte';
 
-	let days = globals.staff
-		? [
-				new Date(2025, 11, 23),
-				new Date(2025, 11, 24),
-				new Date(2025, 11, 25),
-				new Date(2025, 11, 26),
-				new Date(2025, 11, 27),
-				new Date(2025, 11, 28),
-				new Date(2025, 11, 29)
-			]
-		: [
-				new Date(2025, 11, 13),
-				new Date(2025, 11, 14),
-				new Date(2025, 11, 15),
-				new Date(2025, 11, 16),
-				new Date(2025, 11, 17),
-				new Date(2025, 11, 18),
-				new Date(2025, 11, 19),
-				new Date(2025, 11, 20),
-				new Date(2025, 11, 21)
-			];
-
+	let days = $derived(
+		globals.staff
+			? [
+					new Date(2025, 11, 23),
+					new Date(2025, 11, 24),
+					new Date(2025, 11, 25),
+					new Date(2025, 11, 26),
+					new Date(2025, 11, 27),
+					new Date(2025, 11, 28),
+					new Date(2025, 11, 29)
+				]
+			: [
+					new Date(2025, 11, 13),
+					new Date(2025, 11, 14),
+					new Date(2025, 11, 15),
+					new Date(2025, 11, 16),
+					new Date(2025, 11, 17),
+					new Date(2025, 11, 18),
+					new Date(2025, 11, 19),
+					new Date(2025, 11, 20),
+					new Date(2025, 11, 21)
+				]
+	);
 	let activeDate = $state(0);
 	let { currentDate = $bindable() }: { currentDate: Date } = $props();
 </script>

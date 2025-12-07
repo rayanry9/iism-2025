@@ -1,23 +1,28 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { Sports } from '$lib/types/sports';
 	import AthleticsSchedule from '$lib/ui/schedule/AthleticsSchedule.svelte';
 	import FullSchedule from '$lib/ui/schedule/FullSchedule.svelte';
 	import SportSchedule from '$lib/ui/schedule/SportSchedule.svelte';
 	import type { PageProps } from './$types';
 
-	let selectedSport = $state<Sports | undefined>(undefined);
+	let selectedSport = $derived<Sports | undefined>(page.url.searchParams.get('sport') as Sports);
 	let { data }: PageProps = $props();
 </script>
 
 {#if selectedSport == undefined}
-	{#await Promise.all([data.institutes, data.poolMatches])}
-		<FullSchedule institutes={[]} matchData={[]} />
+	{#await Promise.all([data.institutes, data.poolMatches, data.athleticMatches])}
+		<FullSchedule institutes={[]} poolMatchData={[]} athleticMatchData={[]} />
 	{:then value}
-		<FullSchedule institutes={value[0]} matchData={value[1]} />
+		<FullSchedule institutes={value[0]} poolMatchData={value[1]} athleticMatchData={value[2]} />
 		<!-- <FullSchedule institutes={[]} matchData={[]} /> -->
 	{/await}
 {:else if selectedSport == 'Athletics'}
-	<AthleticsSchedule />
+	{#await Promise.all([data.athleticMatches])}
+		<AthleticsSchedule athleticMatchData={[]} />
+	{:then value}
+		<AthleticsSchedule athleticMatchData={value[0]} />
+	{/await}
 {:else}
 	{#await Promise.all([data.institutes, data.poolMatches])}
 		<SportSchedule institutes={[]} matchData={[]} sport={selectedSport} />

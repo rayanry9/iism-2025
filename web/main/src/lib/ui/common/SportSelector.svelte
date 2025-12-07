@@ -5,12 +5,12 @@
 	import Button from '../components/Button.svelte';
 
 	let sports = $derived.by(() => {
-		let arr = getSportsAll(globals.staff) as ('All Matches' | Sports)[];
-		arr.unshift('All Matches');
+		let arr = getSportsAll(globals.staff) as (undefined | Sports)[];
+		arr.unshift(undefined);
 		return arr;
 	});
-	let activeSport = $state(0);
-	let { currentSport = $bindable() }: { currentSport: 'All Matches' | Sports } = $props();
+	let { currentSport = $bindable() }: { currentSport: undefined | Sports } = $props();
+	let activeSport = $state(sports.findIndex((val) => val == currentSport));
 </script>
 
 <section
@@ -29,7 +29,11 @@
 			data-umami-event="Day selector used"
 			data-umami-event-day={sport}
 		>
-			{sports[i]}
+			{#if sports[i]}
+				{sports[i]}
+			{:else}
+				Overall
+			{/if}
 		</Button>
 	{/each}
 </section>
