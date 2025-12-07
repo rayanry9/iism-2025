@@ -25,7 +25,6 @@
 		$inspect(sportType);
 	});
 	let data = $derived.by(() => {
-		console.log(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff));
 		return getPoolsBySportId(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff));
 	});
 </script>

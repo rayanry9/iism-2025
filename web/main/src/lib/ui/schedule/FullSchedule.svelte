@@ -89,7 +89,7 @@
 		</div>
 		<hr class="text-custom-gray mx-12 mt-8" />
 		{#each timeSets as time}
-			<div class="my-4 flex flex-col gap-y-3 *:max-xl:mx-8 xl:my-12">
+			<div class="my-4 flex flex-col gap-y-3 *:max-xl:mx-8 xl:my-8">
 				<div class="bg-custom-light-blue title-text px-5 py-3 text-white xl:w-fit">
 					{time.val}
 				</div>

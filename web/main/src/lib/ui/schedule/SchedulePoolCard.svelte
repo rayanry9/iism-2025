@@ -3,7 +3,7 @@
 	import type { GetPoolsBySportIdResponseTeamData } from '$lib/types/pools';
 	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
 	import type { ClassValue } from 'svelte/elements';
-	import chevronUpDownSvg from '$lib/assets/icons/chevron-up-down.svg';
+	import chevronUpSvg from '$lib/assets/icons/chevron-up.svg';
 	import { slide } from 'svelte/transition';
 
 	let {
@@ -31,7 +31,12 @@
 			class="ml-auto hover:cursor-pointer md:hidden"
 			onclick={() => {
 				poolOpen = !poolOpen;
-			}}><img src={chevronUpDownSvg} alt="open/close" /></button
+			}}
+			><img
+				src={chevronUpSvg}
+				class="{poolOpen ? '' : 'rotate-180'} transition-all"
+				alt="open/close"
+			/></button
 		>
 	</div>
 	{#each teamData as team}
