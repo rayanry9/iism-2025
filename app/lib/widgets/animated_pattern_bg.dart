@@ -56,14 +56,14 @@ class _AnimatedPatternBackgroundState extends State<AnimatedPatternBackground>
     return AnimatedBuilder(
       animation: _controller,
       builder: (_, __) {
-        return CustomPaint(
+        return SizedBox.expand(
+        child: CustomPaint(
           painter: PatternPainter(
             image: _pattern!,
-            shift: widget.animated
-                ? _controller.value
-                : 0, // STATIC or ANIMATED
+            shift: widget.animated ? _controller.value : 0,
           ),
-        );
+        ),
+      );
       },
     );
   }
