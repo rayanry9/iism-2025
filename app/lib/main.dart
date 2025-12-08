@@ -1,10 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:iism_2025/firebase_options.dart';
 import 'package:iism_2025/router.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/services/user_cache.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   setupDio();
   await dotenv.load(fileName: ".env");
   // if (dotenv.env['DEBUG'] == "TRUE") {
@@ -14,6 +16,8 @@ Future<void> main() async{
   //   UserCache().assignedId = "2";
   //   UserCache().role = 2;
   // }
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iism_2025/widgets/dynamic_bar.dart';
 import 'package:dio/dio.dart';
-import 'package:iism_2025/screens/logindetails.dart'; 
+import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/services/user_cache.dart';
 import 'package:iism_2025/services/user_loader.dart';
 import 'package:go_router/go_router.dart';
@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String route;
 
-   TopBar({super.key, required this.route});
+  TopBar({super.key, required this.route});
 
   @override
   State<TopBar> createState() => _TopBarState();
@@ -29,45 +29,67 @@ class _TopBarState extends State<TopBar> {
     super.initState();
     load();
   }
+
   Future<void> load() async {
-    await loadUserData();   
+    await loadUserData();
     loading = false;
     setState(() {});
   }
 
- 
-
   @override
-Widget build(BuildContext context) {
-  return DynamicNavbar(
-    background: const Color(0xFF191C2A),
-    left: _buildLeft(widget.route),
-    center: _buildCenter(widget.route),
-    right: _buildRight(widget.route),
-    // blueHeight: 300,  // 🔥 now this actually works
-  );
-}
+  Widget build(BuildContext context) {
+    return DynamicNavbar(
+      background: const Color(0xFF191C2A),
+      left: _buildLeft(widget.route),
+      center: _buildCenter(widget.route),
+      right: _buildRight(widget.route),
+      // blueHeight: 300,  // 🔥 now this actually works
+    );
+  }
 
   Widget _buildLeft(String route) {
     if (route == "/home") {
-      return  Padding(padding: EdgeInsets.all(10.0),
-      child: Row(children: [
-                CircleAvatar(
-                  radius: 18,
-                  backgroundImage: UserCache().profilePic != null
-                      ? NetworkImage(UserCache().profilePic!)
-                      : null,
-                  child: UserCache().profilePic == null
-                      ? const Icon(Icons.person, color: Colors.white)
-                      : null,
+      return Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 18,
+              backgroundImage: UserCache().profilePic != null
+                  ? NetworkImage(UserCache().profilePic!)
+                  : null,
+              child: UserCache().profilePic == null
+                  ? const Icon(Icons.person, color: Colors.white)
+                  : null,
+            ),
+            SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome Back,",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                SizedBox(width: 12),
-                Column(crossAxisAlignment: CrossAxisAlignment.start,children:[
-                  Text("Welcome Back,", style: TextStyle(fontSize: 20, color: Colors.white)),
-                  Row(children: [Text(UserCache().firstName ?? "", style: TextStyle(fontSize: 20, color: Colors.white)),SizedBox(width: 5,),GestureDetector(onTap: () {context.push('/profile');},child: Icon(Icons.expand_more, color: Colors.white),)],)
-                ])
-                ],)
-              );
+                Row(
+                  children: [
+                    Text(
+                      UserCache().firstName ?? "",
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () {
+                        context.push('/profile');
+                      },
+                      child: Icon(Icons.expand_more, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
     }
     if (route == "/gallery") {
       return const Padding(
@@ -76,9 +98,7 @@ Widget build(BuildContext context) {
       );
     }
     if (route == "/profile") {
-      return const Padding(
-        padding: EdgeInsets.all(50.0),
-      );
+      return const Padding(padding: EdgeInsets.all(50.0));
     }
     return const SizedBox(width: 0);
   }
@@ -86,37 +106,44 @@ Widget build(BuildContext context) {
   Widget _buildCenter(String route) {
     print("TopBar route = $route");
     if (route == "/home") {
-      return  Padding(padding: EdgeInsets.all(10.0),
-    
-              );
+      return Padding(padding: EdgeInsets.all(10.0));
     }
     if (route == "/gallery") {
-      return  Text("Gallery",
-          style: TextStyle(fontSize: 20, color: Colors.white));
+      return Text(
+        "Gallery",
+        style: TextStyle(fontSize: 20, color: Colors.white),
+      );
     }
-    if(route.startsWith("/profile")){
-      return   Padding(padding: EdgeInsets.all(10.0),
-                child:Text("PROFILE",
-          style: TextStyle(fontSize: 20, color: Colors.white))
-              );
+    if (route.startsWith("/profile")) {
+      return Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Text(
+          "PROFILE",
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      );
     }
-    if(route == "/request-outing" || route == "/approve-request"){
+    if (route == "/request-outing" || route == "/approve-request") {
       print("you");
       return Row(
-      children: [
-        GestureDetector(
-          onTap: () => context.replace('/profile'),
-          child: const Icon(Icons.arrow_back, size: 26,color: Colors.white,),
-        ),
-        const SizedBox(width: 12),
-        const Text(
-          "REQUEST FOR OUTING",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white, ),
-        ),
-      ],
-    );
+        children: [
+          GestureDetector(
+            onTap: () => context.replace('/profile'),
+            child: const Icon(Icons.arrow_back, size: 26, color: Colors.white),
+          ),
+          const SizedBox(width: 12),
+          const Text(
+            "REQUEST FOR OUTING",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      );
     }
-    return const SizedBox(width:0);
+    return const SizedBox(width: 0);
   }
 
   Widget _buildRight(String route) {

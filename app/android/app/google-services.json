@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "947024614806",
+    "project_id": "iism-mobile",
+    "storage_bucket": "iism-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947024614806:android:99f8467ff3049dcba6b9b7",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCdYi14_5On7imhJ75pyRwGHcBzrkHFvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947024614806:android:c6d61337b128e8f4a6b9b7",
+        "android_client_info": {
+          "package_name": "com.iism25.iith.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCdYi14_5On7imhJ75pyRwGHcBzrkHFvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
