@@ -21,8 +21,14 @@ import 'package:iism_2025/screens/request_outing.dart';
 import 'package:iism_2025/screens/approve_request.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: "/splash",
+  initialLocation: "/login",
   routes: [
+    GoRoute(
+      path: "/login",
+      builder: (BuildContext context, GoRouterState state) {
+        return const LoginScreen();
+      },
+    ),
     ShellRoute(
       builder: (context, state, child) {
         return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -44,12 +50,6 @@ final GoRouter router = GoRouter(
           path: "/splash",
           builder: (BuildContext context, GoRouterState state) {
             return const SplashScreen();
-          },
-        ),
-        GoRoute(
-          path: "/login",
-          builder: (BuildContext context, GoRouterState state) {
-            return const LoginScreen();
           },
         ),
         GoRoute(

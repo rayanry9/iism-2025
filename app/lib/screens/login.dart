@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/constants/constants.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -46,65 +47,51 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            return Align(
-              alignment: Alignment.topCenter,
-              child: SizedBox(
-                width: null,
-                height: constraints.maxHeight / 2,
-                child: Center(
-                  child: SvgPicture.asset(
-                    "assets/logo-no-text.svg",
-                    width: 140,
-                    height: 119,
-                    colorFilter: ColorFilter.mode(
-                      Colors.white,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+        Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/logo-no-text.svg",
+                  width: 140,
+                  height: 119,
+                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 ),
               ),
-            );
-          },
-        ),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            return Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                height: constraints.maxHeight / 2,
-                width: null,
-                child: Center(
-                  child: Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.skewX(-0.26),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: CustomColors.orange,
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsetsGeometry.symmetric(
-                          horizontal: 42,
-                          vertical: 10,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
+            ),
+            Expanded(
+              child: Center(
+                child: Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.skewX(-Constants.skewXValue),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomColors.orange,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsetsGeometry.symmetric(
+                        horizontal: 42,
+                        vertical: 10,
                       ),
-                      onPressed: () {
-                        context.push("/logindetails");
-                      },
-                      child: Transform(
-                        transform: Matrix4.skewX(0.26),
-                        alignment: Alignment.center,
-                        child: Text("LOGIN", style: TextStyle(fontSize: 16)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    onPressed: () {
+                      context.push("/logindetails");
+                    },
+                    child: Transform(
+                      transform: Matrix4.skewX(Constants.skewXValue),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "LOGIN",
+                        style: TextStyle(fontSize: Constants.buttonTextSize),
                       ),
                     ),
                   ),
                 ),
               ),
-            );
-          },
+            ),
+          ],
         ),
       ],
     );
