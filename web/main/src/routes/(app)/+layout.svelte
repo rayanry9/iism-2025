@@ -4,7 +4,6 @@
 	import iithLogoFull from '$lib/assets/iith-logo-full.png';
 	import footerLogo from '$lib/assets/footer-logo.webp';
 	import arrowUpRight from '$lib/assets/icons/diag-up-right-arrow.svg';
-	import '../../app.css';
 	import 'toastify-js/src/toastify.css';
 	import Navbar from '$lib/ui/common/Navbar.svelte';
 	import { globals } from '$lib/state.svelte';
