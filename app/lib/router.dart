@@ -14,13 +14,23 @@ import 'package:iism_2025/screens/schedule.dart';
 import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
+import 'package:iism_2025/services/auth.dart';
 import 'package:iism_2025/widgets/global_fab.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:iism_2025/screens/request_outing.dart';
 import 'package:iism_2025/screens/approve_request.dart';
 
-final GoRouter router = GoRouter(
+GoRouter router({required AuthStatus auth}) => GoRouter(
+  refreshListenable: auth,
+  redirect: (context, state) {
+    if (auth.isLoggedIn && (state.path?.contains('/login') ?? true)) {
+      return '/home';
+    } else if (!auth.isLoggedIn && !(state.path?.contains('/login') ?? true)) {
+      return '/login';
+    }
+    return null;
+  },
   initialLocation: "/login",
   routes: [
     GoRoute(

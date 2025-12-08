@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iism_2025/firebase_options.dart';
 import 'package:iism_2025/router.dart';
-import 'package:iism_2025/screens/logindetails.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:iism_2025/services/user_cache.dart';
+import 'package:iism_2025/services/api_service.dart';
+import 'package:iism_2025/services/auth.dart';
 
 Future<void> main() async {
-  setupDio();
   await dotenv.load(fileName: ".env");
   // if (dotenv.env['DEBUG'] == "TRUE") {
   //   UserCache().sports = [
@@ -18,19 +17,25 @@ Future<void> main() async {
   //   UserCache().role = 2;
   // }
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await configureAPIService();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  auth = AuthStatus();
+  await auth.checkLoginState();
+
+  runApp(MyApp(auth: auth));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AuthStatus auth;
+
+  const MyApp({super.key, required this.auth});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: router(auth: auth),
       theme: ThemeData(fontFamily: 'Optima Nova LT Pro'),
     );
   }
