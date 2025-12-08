@@ -1,7 +1,7 @@
 <script lang="ts">
 	import chevronUpSvg from '$lib/assets/icons/chevron-up.svg';
 	import { AthleticMatchType, type GetAllAthleticMatchesResponse } from '$lib/types/athleticMatch';
-	import { isSportFemale } from '$lib/utility/sport';
+	import { isSportFemale, isSportMixed } from '$lib/utility/sport';
 	import { slide } from 'svelte/transition';
 
 	import menSvg from '$lib/assets/icons/men.svg';
@@ -53,8 +53,11 @@
 							.toUpperCase()}
 					</div>
 					<div class="flex gap-x-3">
-						{isSportFemale(match.sportId) ? 'WOMEN' : 'MEN'}
+						{isSportFemale(match.sportId) ? 'WOMEN' : isSportMixed(match.sportId) ? 'MIXED' : 'MEN'}
 						<img src={isSportFemale(match.sportId) ? womenSvg : menSvg} alt="svg" class="mb-1" />
+						{#if isSportMixed(match.sportId)}
+							<img src={womenSvg} alt="svg" class="mb-1" />
+						{/if}
 					</div>
 				</div>
 				<div class="grid grid-cols-[1fr_1fr] items-center px-4 py-4">

@@ -6,7 +6,12 @@
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import menSvg from '$lib/assets/icons/men.svg';
 	import womenSvg from '$lib/assets/icons/female.svg';
-	import { getSportFromSportId, getSportIdOfSport, isSportFemale } from '$lib/utility/sport';
+	import {
+		getSportFromSportId,
+		getSportIdOfSport,
+		isSportFemale,
+		isSportMixed
+	} from '$lib/utility/sport';
 	import { AthleticMatchType, type GetAllAthleticMatchesResponse } from '$lib/types/athleticMatch';
 	import type { GetAllSportsResponse } from '$lib/types/sports';
 	import chevronUpSvg from '$lib/assets/icons/chevron-up.svg';
@@ -43,6 +48,9 @@
 				src={isSportFemale(sportId ?? 1) ? womenSvg : menSvg}
 				alt="sport icon"
 			/>
+			{#if isSportMixed(sportId)}
+				<img src={womenSvg} alt="svg" class="h-4 w-fit" />
+			{/if}
 		</div>
 		<div class="flex grow">
 			<div
