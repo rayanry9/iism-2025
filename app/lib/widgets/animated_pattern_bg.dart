@@ -11,12 +11,12 @@ class AnimatedPatternBackground extends StatefulWidget {
   });
 
   @override
-  State<AnimatedPatternBackground> createState() => _AnimatedPatternBackgroundState();
+  State<AnimatedPatternBackground> createState() =>
+      _AnimatedPatternBackgroundState();
 }
 
 class _AnimatedPatternBackgroundState extends State<AnimatedPatternBackground>
     with SingleTickerProviderStateMixin {
-
   late AnimationController _controller;
   ui.Image? _pattern;
 
@@ -59,7 +59,9 @@ class _AnimatedPatternBackgroundState extends State<AnimatedPatternBackground>
         return CustomPaint(
           painter: PatternPainter(
             image: _pattern!,
-            shift: widget.animated ? _controller.value : 0, // STATIC or ANIMATED
+            shift: widget.animated
+                ? _controller.value
+                : 0, // STATIC or ANIMATED
           ),
         );
       },
@@ -77,15 +79,11 @@ class PatternPainter extends CustomPainter {
   final ui.Image image;
   final double shift;
 
-  PatternPainter({
-    required this.image,
-    required this.shift,
-  });
+  PatternPainter({required this.image, required this.shift});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withOpacity(0.4);
+    final paint = Paint()..color = Colors.white.withOpacity(0.4);
 
     // Rotation
     canvas.save();

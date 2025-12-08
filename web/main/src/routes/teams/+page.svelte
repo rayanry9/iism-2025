@@ -178,10 +178,10 @@
 					{/key}
 				</div>
 				<section class="flex flex-wrap justify-center gap-y-4">
-					{#if playerData.length == 0 && (globals.staff || true)}
+					{#if playerData.length == 0 && globals.staff}
 						<h2 class="mt-12">Team has not been decided yet</h2>
-						<!-- {:else if playerData.length == 0} -->
-						<!-- 	<h2 class="mt-12">Not Participating</h2> -->
+					{:else if playerData.length == 0}
+						<h2 class="mt-12">Not Participating</h2>
 					{:else}
 						{#each playerData as player (player.profilePic)}
 							<div class="relative my-1 flex w-min flex-col">
@@ -194,7 +194,7 @@
 									<img
 										alt="profile"
 										class="z-20 min-h-40 min-w-40 -translate-x-3 object-cover sm:min-h-64 sm:min-w-64 xl:min-h-80 xl:min-w-80"
-										src={'/teams/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+										src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
 									/>
 									<div
 										class="absolute bottom-0 -z-10 h-3/5 w-full"
