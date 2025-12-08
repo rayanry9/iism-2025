@@ -38,7 +38,7 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
 
     if (success) {
       if (context.mounted) {
-        context.replace('/home');
+        context.go('/home');
       }
     }
   }

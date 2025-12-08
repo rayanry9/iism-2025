@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iism_2025/constants/colors.dart';
 
 class MyTabBar extends StatefulWidget {
   final Widget child;
@@ -12,7 +13,6 @@ class MyTabBar extends StatefulWidget {
 
 class _MyTabBarState extends State<MyTabBar>
     with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
 
   @override
@@ -40,7 +40,7 @@ class _MyTabBarState extends State<MyTabBar>
 
         // 👇 This tints ONLY the drawn SVG paths, NOT the background box
         colorFilter: ColorFilter.mode(
-          selected ? const Color(0xFFFF6B35) : Colors.black,
+          selected ? CustomColors.orange : Colors.black,
           BlendMode.srcIn,
         ),
       ),
@@ -75,10 +75,7 @@ class _MyTabBarState extends State<MyTabBar>
           labelPadding: const EdgeInsets.only(bottom: 4),
 
           tabs: [
-            Tab(
-              icon: buildIcon("assets/icons/home.svg", 0),
-              text: "Home",
-            ),
+            Tab(icon: buildIcon("assets/icons/home.svg", 0), text: "Home"),
             Tab(
               icon: buildIcon("assets/icons/matches.svg", 1),
               text: "Matches",
@@ -87,26 +84,33 @@ class _MyTabBarState extends State<MyTabBar>
               icon: buildIcon("assets/icons/schedule.svg", 2),
               text: "Schedule",
             ),
-            Tab(
-              icon: buildIcon("assets/icons/teams.svg", 3),
-              text: "Teams",
-            ),
+            Tab(icon: buildIcon("assets/icons/teams.svg", 3), text: "Teams"),
             Tab(
               icon: buildIcon("assets/icons/gallery.svg", 4),
               text: "Gallery",
             ),
           ],
 
-          labelColor: const Color(0xFFFF6B35),
+          labelColor: CustomColors.orange,
           unselectedLabelColor: Colors.black,
 
           onTap: (index) {
             switch (index) {
-              case 0: context.go("/home"); break;
-              case 1: context.go("/matches"); break;
-              case 2: context.go("/schedule"); break;
-              case 3: context.go("/teams"); break;
-              case 4: context.go("/gallery"); break;
+              case 0:
+                context.go("/home");
+                break;
+              case 1:
+                context.go("/matches");
+                break;
+              case 2:
+                context.go("/schedule");
+                break;
+              case 3:
+                context.go("/teams");
+                break;
+              case 4:
+                context.go("/gallery");
+                break;
             }
           },
         ),

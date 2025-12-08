@@ -24,9 +24,9 @@ import 'package:iism_2025/screens/approve_request.dart';
 GoRouter router({required AuthStatus auth}) => GoRouter(
   refreshListenable: auth,
   redirect: (context, state) {
-    if (auth.isLoggedIn && (state.path?.contains('/login') ?? true)) {
+    if (auth.isLoggedIn && (state.uri.path.contains('/login'))) {
       return '/home';
-    } else if (!auth.isLoggedIn && !(state.path?.contains('/login') ?? true)) {
+    } else if (!auth.isLoggedIn && !(state.uri.path.contains('/login'))) {
       return '/login';
     }
     return null;
@@ -68,94 +68,93 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             return const LogindetailsScreen();
           },
         ),
+      ],
+    ),
+
+    GoRoute(
+      path: "/contact",
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return NoTransitionPage(child: const ContactScreen());
+      },
+    ),
+    GoRoute(
+      path: "/notification",
+      builder: (BuildContext context, GoRouterState state) {
+        return const NotificationScreen();
+      },
+    ),
+
+    ShellRoute(
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        final hideFabScreens = {
+          "/chat",
+          // add more screens here
+        };
+
+        final showFab = !hideFabScreens.contains(state.uri.toString());
+        return MyTabBar(
+          child: Scaffold(
+            appBar: TopBar(
+              route: state.uri.toString(),
+            ), // <— your dynamic top bar
+            body: child,
+            floatingActionButton: showFab
+                ? GlobalFAB(
+                    onPressed: () {
+                      context.push('/chat');
+                    },
+                    icon: Icons.add,
+                    background: Colors.orange,
+                  )
+                : null,
+          ),
+        );
+      },
+
+      routes: [
         GoRoute(
-          path: "/contact",
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return NoTransitionPage(child: const ContactScreen());
-          },
+          path: "/gallery",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: GalleryScreen()),
         ),
         GoRoute(
-          path: "/notification",
-          builder: (BuildContext context, GoRouterState state) {
-            return const NotificationScreen();
-          },
+          path: "/home",
+          pageBuilder: (_, __) => const NoTransitionPage(child: HomeScreen()),
+        ),
+        GoRoute(
+          path: "/matches",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: MatchesScreen()),
+        ),
+        GoRoute(
+          path: "/schedule",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: ScheduleScreen()),
+        ),
+        GoRoute(
+          path: "/teams",
+          pageBuilder: (_, __) => const NoTransitionPage(child: TeamsScreen()),
+        ),
+        GoRoute(
+          path: "/profile",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: ProfileScreen()),
+        ),
+        GoRoute(
+          path: "/request-outing",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: RequestOutingScreen()),
         ),
 
-        ShellRoute(
-          builder: (BuildContext context, GoRouterState state, Widget child) {
-            final hideFabScreens = {
-              "/chat",
-              // add more screens here
-            };
-
-            final showFab = !hideFabScreens.contains(state.uri.toString());
-            return MyTabBar(
-              child: Scaffold(
-                appBar: TopBar(
-                  route: state.uri.toString(),
-                ), // <— your dynamic top bar
-                body: child,
-                floatingActionButton: showFab
-                    ? GlobalFAB(
-                        onPressed: () {
-                          context.push('/chat');
-                        },
-                        icon: Icons.add,
-                        background: Colors.orange,
-                      )
-                    : null,
-              ),
-            );
-          },
-
-          routes: [
-            GoRoute(
-              path: "/gallery",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: GalleryScreen()),
-            ),
-            GoRoute(
-              path: "/home",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: HomeScreen()),
-            ),
-            GoRoute(
-              path: "/matches",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: MatchesScreen()),
-            ),
-            GoRoute(
-              path: "/schedule",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: ScheduleScreen()),
-            ),
-            GoRoute(
-              path: "/teams",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: TeamsScreen()),
-            ),
-            GoRoute(
-              path: "/profile",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: ProfileScreen()),
-            ),
-            GoRoute(
-              path: "/request-outing",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: RequestOutingScreen()),
-            ),
-
-            GoRoute(
-              path: "/approve-request",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: ApproveRequestScreen()),
-            ),
-            GoRoute(
-              path: '/chat',
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: AskSimhiScreen()),
-            ),
-          ],
+        GoRoute(
+          path: "/approve-request",
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: ApproveRequestScreen()),
+        ),
+        GoRoute(
+          path: '/chat',
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: AskSimhiScreen()),
         ),
       ],
     ),
