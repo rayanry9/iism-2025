@@ -36,11 +36,11 @@ code_font=ImageFont.truetype("../fonts/optima-nova-lt-pro/OptimaNovaLTProDemi.ot
 
 # visual params
 photo_diameter = 220        # pixel diameter of circular photo
-photo_center_x = 239        # center X of photo on canvas
-photo_center_y = 235        # center Y of photo on canvas
+photo_center_x = 130 + 100        # center X of photo on canvas
+photo_center_y = 134 + 100        # center Y of photo on canvas
 
 # Card size assumed (use your background size, adjust if different)
-CARD_W, CARD_H = 538, 742
+CARD_W, CARD_H = 482, 737
 
 # text colors
 BLACK = "#232323"
