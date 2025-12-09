@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/screens/campus_map_screen.dart';
 import 'package:iism_2025/screens/chat.dart';
 import 'package:iism_2025/screens/contact.dart';
 import 'package:iism_2025/screens/gallery.dart';
@@ -144,24 +145,34 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             ),
             GoRoute(
               path: "/profile",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: ProfileScreen()),
+              builder: (context, state) {
+                return ProfileScreen();
+              },
             ),
             GoRoute(
               path: "/request-outing",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: RequestOutingScreen()),
+              builder: (context, state) {
+                return RequestOutingScreen();
+              },
             ),
 
             GoRoute(
               path: "/approve-request",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: ApproveRequestScreen()),
+              builder: (context, state) {
+                return ApproveRequestScreen();
+              },
             ),
             GoRoute(
               path: '/chat',
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: AskSimhiScreen()),
+              builder: (context, state) {
+                return AskSimhiScreen();
+              },
+            ),
+            GoRoute(
+              path: '/campus-map',
+              builder: (context, state) {
+                return CampusMapScreen();
+              },
             ),
           ],
         ),

@@ -99,7 +99,8 @@ class _TopBarState extends State<TopBar> {
         route == '/contact' ||
         route == '/notifications' ||
         route == '/request-outing' ||
-        route == '/approve-request') {
+        route == '/approve-request' ||
+        route == "/campus-map") {
       var headText = '';
 
       if (route == '/profile') {
@@ -116,6 +117,9 @@ class _TopBarState extends State<TopBar> {
       }
       if (route == '/notifications') {
         headText = 'Notifications';
+      }
+      if (route == '/campus-map') {
+        headText = 'Campus Map';
       }
       return Stack(
         children: [

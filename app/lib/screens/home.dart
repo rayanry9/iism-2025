@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,30 +8,54 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 12,
         horizontal: Constants.screenWidthPadding,
       ),
       child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 145,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              image: DecorationImage(
-                image: AssetImage("assets/campus_map_hero.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                children: [
-                  Text("CAMPUS MAP"),
-                  Text("Find match venues and\nlocations easily."),
-                ],
+          Material(
+            elevation: 3,
+            borderRadius: BorderRadius.circular(16),
+            clipBehavior: Clip.antiAlias, // ensures ripple is clipped to radius
+            child: InkWell(
+              onTap: () {
+                context.push("/campus-map");
+              }, // your onPressed action
+              child: Ink(
+                height: 145,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/campus_map_hero.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "CAMPUS MAP",
+                        style: TextStyle(
+                          fontSize: Constants.heading2TextSize,
+                          fontWeight: FontWeight.w600,
+                          color: CustomColors.darkTeal,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "Find match venues and\nlocations easily.",
+                        style: TextStyle(
+                          color: CustomColors.darkTeal,
+                          fontSize: Constants.buttonTextSize,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
