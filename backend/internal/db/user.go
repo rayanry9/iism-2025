@@ -589,3 +589,8 @@ func GetPlayerData(c *gin.Context, req schema.GetPlayerDataRequest) (*schema.Get
 
 	return &data, err
 }
+
+func SaveFcmToken(c *gin.Context, req schema.SaveFcmTokenRequest, userId int) error {
+	_, err := config.DB.Exec(c, `update users set fcm_token = $1 where id = $2`, req.Token, userId)
+	return err
+}

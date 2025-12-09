@@ -6,6 +6,7 @@ import 'package:iism_2025/router.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/services/auth.dart';
+import 'package:iism_2025/services/notification.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -22,6 +23,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   auth = AuthStatus();
   await auth.checkLoginState();
+  await NotificationService.initialize();
 
   runApp(MyApp(auth: auth));
 }

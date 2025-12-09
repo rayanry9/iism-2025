@@ -51,4 +51,6 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.POST("/outing/deny", middlewares.AuthJWT(), controller.DenyOuting)
 	r.GET("/outing/mine", middlewares.AuthJWT(), controller.GetMyOutings)
 
+	r.POST("/save-fcm-token", middlewares.AuthJWT(), controller.SaveFcmToken)
+
 }
