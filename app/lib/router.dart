@@ -31,14 +31,8 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/login",
+  initialLocation: "/home",
   routes: [
-    GoRoute(
-      path: "/login",
-      builder: (BuildContext context, GoRouterState state) {
-        return const LoginScreen();
-      },
-    ),
     ShellRoute(
       builder: (context, state, child) {
         return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -47,114 +41,129 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             statusBarBrightness: Brightness.light,
             statusBarIconBrightness: Brightness.light,
           ),
-          child: Stack(
-            children: [
-              Container(color: CustomColors.darkBlue),
-              SafeArea(child: child),
-            ],
-          ),
+          child: child,
         );
       },
       routes: [
         GoRoute(
-          path: "/splash",
+          path: "/login",
           builder: (BuildContext context, GoRouterState state) {
-            return const SplashScreen();
+            return const LoginScreen();
+          },
+        ),
+        ShellRoute(
+          builder: (context, state, child) {
+            return Stack(
+              children: [
+                Container(color: CustomColors.darkBlue),
+                SafeArea(child: child),
+              ],
+            );
+          },
+          routes: [
+            GoRoute(
+              path: "/splash",
+              builder: (BuildContext context, GoRouterState state) {
+                return const SplashScreen();
+              },
+            ),
+            GoRoute(
+              path: "/logindetails",
+              builder: (BuildContext context, GoRouterState state) {
+                return const LogindetailsScreen();
+              },
+            ),
+          ],
+        ),
+
+        GoRoute(
+          path: "/contact",
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return NoTransitionPage(child: const ContactScreen());
           },
         ),
         GoRoute(
-          path: "/logindetails",
+          path: "/notification",
           builder: (BuildContext context, GoRouterState state) {
-            return const LogindetailsScreen();
+            return const NotificationScreen();
           },
         ),
-      ],
-    ),
 
-    GoRoute(
-      path: "/contact",
-      pageBuilder: (BuildContext context, GoRouterState state) {
-        return NoTransitionPage(child: const ContactScreen());
-      },
-    ),
-    GoRoute(
-      path: "/notification",
-      builder: (BuildContext context, GoRouterState state) {
-        return const NotificationScreen();
-      },
-    ),
+        ShellRoute(
+          builder: (BuildContext context, GoRouterState state, Widget child) {
+            final hideFabScreens = {
+              "/chat",
+              // add more screens here
+            };
 
-    ShellRoute(
-      builder: (BuildContext context, GoRouterState state, Widget child) {
-        final hideFabScreens = {
-          "/chat",
-          // add more screens here
-        };
+            final showFab = !hideFabScreens.contains(state.uri.path.toString());
+            return MyTabBar(
+              child: Scaffold(
+                appBar: TopBar(
+                  route: state.uri.path.toString(),
+                ), // <— your dynamic top bar
+                body: child,
+                floatingActionButton: showFab
+                    ? GlobalFAB(
+                        onPressed: () {
+                          context.push('/chat');
+                        },
+                        icon: Icons.add,
+                        background: Colors.orange,
+                      )
+                    : null,
+              ),
+            );
+          },
 
-        final showFab = !hideFabScreens.contains(state.uri.toString());
-        return MyTabBar(
-          child: Scaffold(
-            appBar: TopBar(
-              route: state.uri.toString(),
-            ), // <— your dynamic top bar
-            body: child,
-            floatingActionButton: showFab
-                ? GlobalFAB(
-                    onPressed: () {
-                      context.push('/chat');
-                    },
-                    icon: Icons.add,
-                    background: Colors.orange,
-                  )
-                : null,
-          ),
-        );
-      },
+          routes: [
+            GoRoute(
+              path: "/gallery",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: GalleryScreen()),
+            ),
+            GoRoute(
+              path: "/home",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: HomeScreen()),
+            ),
+            GoRoute(
+              path: "/matches",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: MatchesScreen()),
+            ),
+            GoRoute(
+              path: "/schedule",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: ScheduleScreen()),
+            ),
+            GoRoute(
+              path: "/teams",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: TeamsScreen()),
+            ),
+            GoRoute(
+              path: "/profile",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: ProfileScreen()),
+            ),
+            GoRoute(
+              path: "/request-outing",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: RequestOutingScreen()),
+            ),
 
-      routes: [
-        GoRoute(
-          path: "/gallery",
-          pageBuilder: (_, __) =>
-              const NoTransitionPage(child: GalleryScreen()),
-        ),
-        GoRoute(
-          path: "/home",
-          pageBuilder: (_, __) => const NoTransitionPage(child: HomeScreen()),
-        ),
-        GoRoute(
-          path: "/matches",
-          pageBuilder: (_, __) =>
-              const NoTransitionPage(child: MatchesScreen()),
-        ),
-        GoRoute(
-          path: "/schedule",
-          pageBuilder: (_, __) =>
-              const NoTransitionPage(child: ScheduleScreen()),
-        ),
-        GoRoute(
-          path: "/teams",
-          pageBuilder: (_, __) => const NoTransitionPage(child: TeamsScreen()),
-        ),
-        GoRoute(
-          path: "/profile",
-          pageBuilder: (_, __) =>
-              const NoTransitionPage(child: ProfileScreen()),
-        ),
-        GoRoute(
-          path: "/request-outing",
-          pageBuilder: (_, __) =>
-              const NoTransitionPage(child: RequestOutingScreen()),
-        ),
-
-        GoRoute(
-          path: "/approve-request",
-          pageBuilder: (_, __) =>
-              const NoTransitionPage(child: ApproveRequestScreen()),
-        ),
-        GoRoute(
-          path: '/chat',
-          pageBuilder: (_, __) =>
-              const NoTransitionPage(child: AskSimhiScreen()),
+            GoRoute(
+              path: "/approve-request",
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: ApproveRequestScreen()),
+            ),
+            GoRoute(
+              path: '/chat',
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: AskSimhiScreen()),
+            ),
+          ],
         ),
       ],
     ),

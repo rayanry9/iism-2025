@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/widgets/dynamic_bar.dart';
 import 'package:iism_2025/services/user_cache.dart';
 import 'package:iism_2025/services/user_loader.dart';
@@ -37,19 +39,17 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return DynamicNavbar(
-      background: const Color(0xFF191C2A),
-      left: _buildLeft(widget.route),
-      center: _buildCenter(widget.route),
-      right: _buildRight(widget.route),
-      // blueHeight: 300,  // 🔥 now this actually works
+      background: CustomColors.darkBlue,
+      child: _buildChild(widget.route),
     );
   }
 
-  Widget _buildLeft(String route) {
-    if (route == "/home") {
+  Widget? _buildChild(String route) {
+    if (route.contains("/home")) {
       return Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(0.0),
         child: Row(
+          spacing: 12,
           children: [
             CircleAvatar(
               radius: 18,
@@ -60,28 +60,34 @@ class _TopBarState extends State<TopBar> {
                   ? const Icon(Icons.person, color: Colors.white)
                   : null,
             ),
-            SizedBox(width: 12),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome Back,",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  "Welcome Back",
+                  style: TextStyle(
+                    fontSize: Constants.buttonTextSize,
+                    color: Colors.white,
+                    height: 0.9,
+                  ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      UserCache().firstName ?? "",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    SizedBox(width: 5),
-                    GestureDetector(
-                      onTap: () {
-                        context.push('/profile');
-                      },
-                      child: Icon(Icons.expand_more, color: Colors.white),
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    context.push('/profile');
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        UserCache().firstName ?? "",
+                        style: TextStyle(
+                          fontSize: Constants.heading2TextSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Icon(Icons.expand_more, color: Colors.white),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -89,16 +95,47 @@ class _TopBarState extends State<TopBar> {
         ),
       );
     }
-    if (route == "/gallery") {
-      return const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Icon(Icons.arrow_back, color: Colors.white),
+    if (route == '/profile' ||
+        route == '/contact' ||
+        route == 'notifications') {
+      var headText = '';
+
+      if (route == '/profile') {
+        headText = 'Profile';
+      }
+      if (route == '/contact') {
+        headText = 'Contact';
+      }
+      if (route == '/notifications') {
+        headText = 'Notifications';
+      }
+      return Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              headText,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: Constants.heading2TextSize,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: GestureDetector(
+              onTap: () {
+                context.pop();
+              },
+              child: Icon(Icons.arrow_back, color: Colors.white),
+            ),
+          ),
+        ],
       );
     }
-    if (route == "/profile") {
-      return const Padding(padding: EdgeInsets.all(50.0));
-    }
-    return const SizedBox(width: 0);
+
+    return SizedBox();
   }
 
   Widget _buildCenter(String route) {
@@ -112,13 +149,10 @@ class _TopBarState extends State<TopBar> {
         style: TextStyle(fontSize: 20, color: Colors.white),
       );
     }
-    if (route.startsWith("/profile")) {
-      return Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Text(
-          "PROFILE",
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
+    if (route.contains("/profile")) {
+      return Text(
+        "PROFILE",
+        style: TextStyle(fontSize: 20, color: Colors.white),
       );
     }
     if (route == "/request-outing" || route == "/approve-request") {
@@ -139,16 +173,6 @@ class _TopBarState extends State<TopBar> {
             ),
           ),
         ],
-      );
-    }
-    return const SizedBox(width: 0);
-  }
-
-  Widget _buildRight(String route) {
-    if (route == "/home") {
-      return const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Icon(Icons.person, color: Colors.white),
       );
     }
     return const SizedBox(width: 0);

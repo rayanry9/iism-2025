@@ -54,8 +54,11 @@ class _MyTabBarState extends State<MyTabBar>
 
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 0),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
+          border: BoxBorder.fromLTRB(
+            top: BorderSide(color: CustomColors.gray, width: 1),
+          ),
           // borderRadius: BorderRadius.only(
           //   topLeft: Radius.circular(28),
           //   topRight: Radius.circular(28),
@@ -70,6 +73,7 @@ class _MyTabBarState extends State<MyTabBar>
         ),
 
         child: TabBar(
+          padding: const EdgeInsets.only(bottom: 4),
           controller: _tabController,
           indicatorColor: Colors.transparent,
           labelPadding: const EdgeInsets.only(bottom: 4),
