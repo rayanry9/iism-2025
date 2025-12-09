@@ -11,4 +11,5 @@ class CustomColors {
   static const pastelBlue = Color.fromARGB(255, 210, 237, 242);
   static const teal = Color.fromARGB(255, 34, 123, 128);
   static const darkTeal = Color.fromARGB(255, 14, 45, 47);
+  static const lightBlue = Color.fromARGB(255, 120, 130, 185);
 }
