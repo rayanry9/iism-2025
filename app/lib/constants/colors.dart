@@ -8,4 +8,7 @@ class CustomColors {
   static const gray = Color.fromARGB(255, 217, 217, 217);
   static const darkGray = Color.fromARGB(255, 122, 122, 122);
   static const lightGray = Color.fromARGB(255, 240, 240, 240);
+  static const pastelBlue = Color.fromARGB(255, 210, 237, 242);
+  static const teal = Color.fromARGB(255, 34, 123, 128);
+  static const darkTeal = Color.fromARGB(255, 14, 45, 47);
 }
