@@ -68,7 +68,7 @@ class _TopBarState extends State<TopBar> {
                   "Welcome Back",
                   style: TextStyle(
                     fontSize: Constants.buttonTextSize,
-                    color: Colors.white,
+                    color: CustomColors.lightGray,
                     height: 0.9,
                   ),
                 ),
@@ -97,7 +97,9 @@ class _TopBarState extends State<TopBar> {
     }
     if (route == '/profile' ||
         route == '/contact' ||
-        route == 'notifications') {
+        route == '/notifications' ||
+        route == '/request-outing' ||
+        route == '/approve-request') {
       var headText = '';
 
       if (route == '/profile') {
@@ -105,6 +107,12 @@ class _TopBarState extends State<TopBar> {
       }
       if (route == '/contact') {
         headText = 'Contact';
+      }
+      if (route == '/request-outing') {
+        headText = 'Request For Outing';
+      }
+      if (route == '/approve-request') {
+        headText = 'Approve Outing Request';
       }
       if (route == '/notifications') {
         headText = 'Notifications';
