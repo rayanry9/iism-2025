@@ -31,7 +31,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/profile",
+  initialLocation: "/home",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
