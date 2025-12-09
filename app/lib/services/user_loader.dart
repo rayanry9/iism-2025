@@ -1,21 +1,12 @@
 import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/services/user_cache.dart';
-import 'package:dio/dio.dart';
-import 'package:iism_2025/screens/logindetails.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> loadUserData() async {
   if (UserCache().hasData) return;
 
   try {
-    final uri = Uri.parse(dotenv.env['API_URL']!);
-    final cookies = await cookieJar.loadForRequest(uri);
-    String cookieHeader = cookies.map((c) => "${c.name}=${c.value}").join("; ");
-
-    final response = await dio.get(
-      dotenv.env['API_URL']! + "/api/me",
-      options: Options(headers: {"Cookie": cookieHeader}),
-    );
+    final response = await dio.get('api/me');
 
     UserCache().fromJson(response.data);
 

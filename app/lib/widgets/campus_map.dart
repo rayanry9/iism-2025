@@ -192,7 +192,7 @@ class _CampusMapState extends State<CampusMap> {
 
 class VenueMarker extends Marker {
   final String name;
-  VenueMarker({
+  const VenueMarker({
     required super.point,
     required super.child,
     required super.rotate,

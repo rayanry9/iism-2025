@@ -12,7 +12,10 @@ late final PersistCookieJar cookieJar;
 Future<void> configureAPIService() async {
   dio = Dio(
     BaseOptions(
-      baseUrl: dotenv.get("API_URL", fallback: "http://192.168.0.100:8173"),
+      baseUrl: dotenv.get(
+        "API_URL",
+        fallback: "https://iism25.sports.iith.ac.in",
+      ),
     ),
   );
 
