@@ -1,89 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/constants/constants.dart';
 
 class DynamicNavbar extends StatelessWidget implements PreferredSizeWidget {
-  final Widget? left;
-  final Widget? center;
-  final Widget? right;
+  final Widget? child;
   final Color background;
 
   const DynamicNavbar({
-    this.left,
-    this.center,
-    this.right,
-    this.background = const Color(0xff191C2A),
+    this.child,
+    this.background = CustomColors.darkBlue,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: preferredSize.height - 70, // 🔥 Make navbar area taller
+      height: preferredSize.height + 20, // 🔥 Make navbar area taller
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          
-          
           Positioned(
-            top: kToolbarHeight + 25, // aligned with above
-            left: 100,
-            right: -40,
+            top: kToolbarHeight + 30, // aligned with above
+            left: 0,
+            right: 0,
             child: Transform.rotate(
               angle: 0.07,
-              child: Container(
-                height: 15,
-                color: const Color(0xFFFFD265),
-              ),
+              child: Container(height: 45, color: CustomColors.yellow),
             ),
           ),
           Positioned(
-            top: kToolbarHeight + 13, // 🔥 push BELOW BLUE
-            left: -40,
-            right: -40,
+            top: kToolbarHeight + 23, // 🔥 push BELOW BLUE
+            left: 0,
+            right: 0,
             child: Transform.rotate(
               angle: 0.0, // tilt correctly
-              child: Container(
-                height: 20,
-                color: const Color(0xFFFF9F1C),
-              ),
+              child: Container(height: 50, color: CustomColors.orange),
             ),
           ),
 
-          Positioned.fill(
-            top: -80,
-            left:-10,
+          Positioned(
+            top: -20,
+            left: -0,
+            right: 0,
             child: Transform.rotate(
               angle: -0.05, // adjust tilt here 🔥
               child: Container(
                 color: background,
+                height: preferredSize.height + 20,
               ),
             ),
           ),
 
           // APPBAR (inside blue)
           Positioned(
-            top: 0,
+            top: 5,
             left: 0,
             right: 0,
-            child: SafeArea(
-              bottom: false,
-              child: SizedBox(
-                height: kToolbarHeight,
-                child: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  automaticallyImplyLeading: false,
-                  titleSpacing: 0,
-                  title: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      children: [
-                        left ?? const SizedBox(width: 0),
-                        Expanded(child: center ?? const SizedBox()),
-                        right ?? const SizedBox(width: 0),
-                      ],
-                    ),
-                  ),
+            child: SizedBox(
+              height: preferredSize.height,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  Constants.screenWidthPadding,
+                  40,
+                  Constants.screenWidthPadding,
+                  0,
                 ),
+                child: child,
               ),
             ),
           ),
@@ -93,5 +75,5 @@ class DynamicNavbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 100);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 70);
 }

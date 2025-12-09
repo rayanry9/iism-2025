@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/screens/logindetails.dart';
+import 'package:iism_2025/services/api_service.dart';
 
 class ApproveRequestScreen extends StatefulWidget {
   const ApproveRequestScreen({super.key});
@@ -66,13 +67,16 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
               "${map["firstName"] ?? ""} ${map["lastName"] ?? ""}".trim();
           final String reason = map["reason"] ?? "";
           final int outingId = map["outingId"];
-          
-          final String createdTimeLabel =
-              _formatTime(TimeOfDay.fromDateTime(createdAt));
-          final String entryLabel =
-              _formatTime(TimeOfDay.fromDateTime(entryTime));
-          final String exitLabel =
-              _formatTime(TimeOfDay.fromDateTime(exitTime));
+
+          final String createdTimeLabel = _formatTime(
+            TimeOfDay.fromDateTime(createdAt),
+          );
+          final String entryLabel = _formatTime(
+            TimeOfDay.fromDateTime(entryTime),
+          );
+          final String exitLabel = _formatTime(
+            TimeOfDay.fromDateTime(exitTime),
+          );
 
           if (status == 0) {
             newPending.add({
@@ -113,10 +117,7 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
 
         final List<Map<String, dynamic>> newHistory = [];
         grouped.forEach((date, list) {
-          newHistory.add({
-            "date": date,
-            "list": list,
-          });
+          newHistory.add({"date": date, "list": list});
         });
 
         setState(() {
@@ -143,7 +144,7 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
       "September",
       "October",
       "November",
-      "December"
+      "December",
     ];
     return months[m];
   }
@@ -180,14 +181,14 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
                     : const SizedBox(width: 0),
               ),
               const SizedBox(height: 12),
-              const Divider(
-                height: 1,
-                color: Color(0xffD9D9D9),
-              ),
-              showApproveTab ? const SizedBox(height: 0) : const SizedBox(height: 12),
+              const Divider(height: 1, color: Color(0xffD9D9D9)),
+              showApproveTab
+                  ? const SizedBox(height: 0)
+                  : const SizedBox(height: 12),
               Expanded(
-                child:
-                    showApproveTab ? _buildApproveList() : _buildPastRequests(),
+                child: showApproveTab
+                    ? _buildApproveList()
+                    : _buildPastRequests(),
               ),
             ],
           ),
@@ -242,16 +243,11 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
   Widget _buildApproveList() {
     return ListView.separated(
       itemCount: pending.length + 1,
-      separatorBuilder: (_, __) => const Divider(
-        height: 1,
-        color: Color(0xffD9D9D9),
-      ),
+      separatorBuilder: (_, __) =>
+          const Divider(height: 1, color: Color(0xffD9D9D9)),
       itemBuilder: (context, index) {
         if (index == pending.length) {
-          return const Divider(
-            height: 0,
-            color: Color(0xffD9D9D9),
-          );
+          return const Divider(height: 0, color: Color(0xffD9D9D9));
         }
         return _pendingTile(pending[index], index);
       },
@@ -272,10 +268,7 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: leftRight,
-        border: Border.all(
-          color: Color(0xffD9D9D9),
-          width: 1,
-        ),
+        border: Border.all(color: Color(0xffD9D9D9), width: 1),
       ),
       child: Column(
         children: [
@@ -407,15 +400,14 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 10),
-          ...block["list"].map((e) => Column(
-                children: [
-                  _pastTile(e),
-                  const Divider(
-                    height: 2,
-                    color: Color(0xffD9D9D9),
-                  ),
-                ],
-              )),
+          ...block["list"].map(
+            (e) => Column(
+              children: [
+                _pastTile(e),
+                const Divider(height: 2, color: Color(0xffD9D9D9)),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -434,7 +426,9 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
                 Text(
                   item["name"],
                   style: const TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 15),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                  ),
                 ),
                 Text(item["title"]),
                 const SizedBox(height: 4),

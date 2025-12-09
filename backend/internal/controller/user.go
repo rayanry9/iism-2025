@@ -370,3 +370,22 @@ func GetPlayerData(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, data)
 }
+
+func SaveFcmToken(c *gin.Context) {
+	var req schema.SaveFcmTokenRequest
+
+	if err := c.Bind(&req); err != nil {
+		slog.Info("Bad request for save fcm token", "error", err, "req", c.Request)
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request"})
+		return
+	}
+
+	userId, _ := c.Get("userId")
+
+	if err := db.SaveFcmToken(c, req, userId.(int)); err != nil {
+		slog.Error("Failed to save fcm token", "error", err, "req", c.Request)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save fcm token."})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "Successfully saved fcm token"})
+}

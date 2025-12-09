@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/services/user_cache.dart';
 import 'package:iism_2025/services/user_loader.dart';
 import 'package:iism_2025/widgets/sbs.dart';
 import 'package:iism_2025/services/sport.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:go_router/go_router.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -24,16 +25,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     load();
     //    print("yo");
     // print(sportImage);
-   
   }
 
   Future<void> load() async {
-    await loadUserData();   
-  
+    await loadUserData();
 
     if (UserCache().sports != null && UserCache().sports!.isNotEmpty) {
-  //       print("FIRST SPORT ENTRY: ${UserCache().sports![0]}");
-  // print("TYPE: ${UserCache().sports![0].runtimeType}");
+      //       print("FIRST SPORT ENTRY: ${UserCache().sports![0]}");
+      // print("TYPE: ${UserCache().sports![0].runtimeType}");
       final firstSport = UserCache().sports![0];
 
       final sportId = firstSport["sportId"];
@@ -41,9 +40,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       sportImage = getSportImageSrc(sportEnum);
     }
     setState(() {
-    loading = false;    // set once, AFTER async load
-  });
-   
+      loading = false; // set once, AFTER async load
+    });
   }
 
   @override
@@ -53,7 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       body: loading
           ? const Center(child: CircularProgressIndicator())
-
           : Padding(
               padding: const EdgeInsets.all(16.0),
 
@@ -61,14 +58,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
-
                   // --------------------------
                   // PROFILE HEADER (TOP)
                   // --------------------------
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 16,
                     children: [
-
                       // Avatar
                       CircleAvatar(
                         radius: 35,
@@ -76,48 +72,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ? NetworkImage(UserCache().profilePic!)
                             : null,
                         child: UserCache().profilePic == null
-                            ? const Icon(Icons.person, color: Colors.white, size: 40)
+                            ? const Icon(
+                                Icons.person,
+                                color: Colors.white,
+                                size: 40,
+                              )
                             : null,
                       ),
-
-                      const SizedBox(width: 16),
 
                       // Text info
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Row(
-                            children: [Text(
-                              UserCache().firstName ?? "",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(width: 5,),
-                            Text(
-                              UserCache().lastName ?? "",
-                              style: const TextStyle(
-                                fontSize: 22,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                           ),
-                          const SizedBox(height: 2),
-                          Text(UserCache().email ?? "",
-                            style: const TextStyle(
-                                  fontSize: 16,
+                          Row(
+                            children: [
+                              Text(
+                                (UserCache().firstName ?? "") +
+                                    " " +
+                                    (UserCache().lastName ?? ""),
+                                style: TextStyle(
+                                  fontSize: Constants.titlesTextSize,
                                   color: Colors.black,
                                 ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            UserCache().email ?? "",
+                            style: const TextStyle(
+                              fontSize: Constants.buttonTextSize,
+                              color: CustomColors.darkGray,
+                            ),
                           ),
                           const SizedBox(height: 2),
-                          Text("IIT " + (UserCache().institute ?? ""),
+                          Text(
+                            "IIT " + (UserCache().institute ?? ""),
                             style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                          )
+                              fontSize: Constants.buttonTextSize,
+                              color: CustomColors.darkGray,
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -126,14 +120,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 24),
 
                   UserRow(
-                    title: (UserCache().sports != null && UserCache().sports!.isNotEmpty)
-                              ? sportEnum?.name ?? "NULL"
-                              : "NULL",
+                    title:
+                        (UserCache().sports != null &&
+                            UserCache().sports!.isNotEmpty)
+                        ? sportEnum?.name ?? "NULL"
+                        : "NULL",
                     gender: UserCache().gender ?? "No name",
                     imageUrl: sportImage,
-                    right: Text(
-                      "View",
-                    ),
+                    right: Text("View"),
                   ),
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -167,11 +161,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
+
                   // -----------------------------
                   // OUTING CARDS BASED ON ROLE
                   // -----------------------------
-
-                  if (UserCache().role == 2) 
+                  if (UserCache().role == 2)
                     GestureDetector(
                       onTap: () {
                         context.push("/request-outing");
@@ -179,11 +173,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Container(
                         width: double.infinity,
                         margin: const EdgeInsets.only(top: 20),
-                        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 18,
+                          horizontal: 16,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFE3F7F7),
                           borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: Color(0xFF0A6C70), width: 1.5),
+                          border: Border.all(
+                            color: Color(0xFF0A6C70),
+                            width: 1.5,
+                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -202,7 +202,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 SizedBox(height: 4),
                                 Text(
                                   "Request campus outing approval here.",
-                                  style: TextStyle(fontSize: 14, color: Colors.black54),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black54,
+                                  ),
                                 ),
                               ],
                             ),
@@ -220,11 +223,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Container(
                         width: double.infinity,
                         margin: const EdgeInsets.only(top: 20),
-                        padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 22,
+                          horizontal: 16,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFE3F7F7),
                           borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: Color(0xFF0A6C70), width: 1.5),
+                          border: Border.all(
+                            color: Color(0xFF0A6C70),
+                            width: 1.5,
+                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,18 +252,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 SizedBox(height: 4),
                                 Text(
                                   "Approve the Outing Requests here.",
-                                  style: TextStyle(fontSize: 15, color: Colors.black54),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black54,
+                                  ),
                                 ),
                               ],
                             ),
-                            Icon(Icons.double_arrow, color: Color(0xFF0A3B3D), size: 28),
+                            Icon(
+                              Icons.double_arrow,
+                              color: Color(0xFF0A3B3D),
+                              size: 28,
+                            ),
                           ],
                         ),
                       ),
                     ),
 
                   const SizedBox(height: 20),
-                  
+
                   const Text(
                     "More profile info coming here...",
                     style: TextStyle(fontSize: 16),

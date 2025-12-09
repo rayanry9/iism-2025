@@ -1,130 +1,135 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iism_2025/widgets/animated_pattern_bg.dart';
-
+import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/constants/constants.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        SizedBox(
-          height: 800,
-          child: Stack(children: [
-                      Positioned(
-                        top: -10,
-                        left: 13,
-                        child: Opacity(opacity:0.4 ,
-                          child: Image.asset(
-                                  'assets/legacy-mobile.webp',
-                                  height: 500,
-                                  width: 360,
-                                  // color: Colors.white,
-                                ),
-                        )
+        Opacity(
+          opacity: 0.4,
+          child: Image.asset(
+            "assets/legacy-mobile.webp",
+            width: double.infinity,
+          ),
+        ),
+        ClipPath(
+          clipper: _SplashClipperYellow(),
+          child: Container(color: CustomColors.yellow),
+        ),
+        ClipPath(
+          clipper: _SplashClipperBlue(),
+          child: Container(color: CustomColors.blue),
+        ),
+        ClipPath(
+          clipper: _SplashClipperBlue(),
+          child: SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: Transform(
+              transform: Matrix4.identity()
+                ..scaleByDouble(2.5, 2.5, 1, 1)
+                ..rotateZ(0.4),
+              alignment: Alignment.center,
+              child: Opacity(
+                opacity: 0.3,
+                child: Image.asset(
+                  "assets/pattern.webp",
+                  repeat: ImageRepeat.repeat,
+                  scale: 7,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/logo-no-text.svg",
+                  width: 140,
+                  height: 119,
+                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.skewX(-Constants.skewXValue),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomColors.orange,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsetsGeometry.symmetric(
+                        horizontal: 42,
+                        vertical: 10,
                       ),
-                      Positioned(
-                          top: 200,
-                          left: 138,
-                          child: SvgPicture.asset(
-                                    'assets/logo-no-text.svg',
-                                    height: 100,
-                                    width: 150,
-                                    color: Colors.white,
-                                  )
-                        ),
-                       
-                        Positioned(
-                          top: 420, // 🔥 push BELOW BLUE
-                          left: -40,
-                          right: -40,
-                          child: Transform.rotate(
-                            angle: -0.05, // tilt correctly
-                            child: Container(
-                              height: 20,
-                              color: const Color(0xFFFF9F1C),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 430,
-                          width: 360,
-                          child: SizedBox(
-                            width: 360,
-                            child: Stack(
-                              children: [
-                                
-
-                                Container(
-                                  padding: const EdgeInsets.all(24),
-                                  color: const Color(0xFF1F3BB2),
-                                  width: 360,
-
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      
-
-                                      const SizedBox(height: 16),
-
-                                      SizedBox(
-                                        height: 300,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Positioned.fill(
-                                  left :0,
-                                  top : 172,
-                                  child: AnimatedPatternBackground(animated: false),
-                                ),
-                                Positioned(
-                                  top :130,
-                                  left : 125,
-                                  child: Transform(
-                                        transform: Matrix4.skewX(-0.25),   // 🔶 button skew (left tilt)
-                                        child: SizedBox(
-                                          width: 120,
-                                          height: 50,
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: const Color(0xFFFF8A00),
-                                              foregroundColor: Colors.white,
-                                              shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.zero, // ⛔ no rounding
-                                              ),
-                                              elevation: 4,
-                                              padding: EdgeInsets.zero,
-                                            ),
-                                            onPressed: () {
-                                              context.replace('/logindetails');
-                                            },
-                                            child: Transform(
-                                              transform: Matrix4.skewX(0.25),   // 🔷 opposite skew for text
-                                              alignment: Alignment.center,
-                                              child: const Text(
-                                                "LOGIN",
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                  // fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      ),
-                              ],
-                            ),
-                          ),
-                        )
-                    ],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    onPressed: () {
+                      context.push("/logindetails");
+                    },
+                    child: Transform(
+                      transform: Matrix4.skewX(Constants.skewXValue),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "LOGIN",
+                        style: TextStyle(fontSize: Constants.buttonTextSize),
+                      ),
+                    ),
                   ),
-        )
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     );
+  }
+}
+
+class _SplashClipperYellow extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, size.height * 0.5);
+    path.lineTo(size.width, size.height * 0.45);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
+
+class _SplashClipperBlue extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, size.height * 0.5);
+    path.lineTo(size.width, size.height * 0.47);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return false;
   }
 }

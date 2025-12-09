@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/widgets/animated_pattern_bg.dart';
 
-// import 'home.dart';
-
 class SplashScreen extends StatelessWidget {
-  // Schedule navigation after first frame is built
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(seconds: 4));
-      // if (!mounted) return;
-      //
-      // context.replace('/login');
+      await Future.delayed(const Duration(seconds: 2), () {
+        if (context.mounted) {
+          context.go('/login');
+        }
+      });
     });
     return Stack(
       children: [
         ClipPath(
-          clipper: SplashClipperYellow(),
+          clipper: _SplashClipperYellow(),
           child: Container(color: CustomColors.yellow),
         ),
         ClipPath(
-          clipper: SplashClipperBlue(),
+          clipper: _SplashClipperBlue(),
           child: Stack(
             children: [
               Container(color: CustomColors.blue),
@@ -47,7 +44,7 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-class SplashClipperYellow extends CustomClipper<Path> {
+class _SplashClipperYellow extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
@@ -65,7 +62,7 @@ class SplashClipperYellow extends CustomClipper<Path> {
   }
 }
 
-class SplashClipperBlue extends CustomClipper<Path> {
+class _SplashClipperBlue extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();

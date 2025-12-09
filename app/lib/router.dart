@@ -14,14 +14,24 @@ import 'package:iism_2025/screens/schedule.dart';
 import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
+import 'package:iism_2025/services/auth.dart';
 import 'package:iism_2025/widgets/global_fab.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:iism_2025/screens/request_outing.dart';
 import 'package:iism_2025/screens/approve_request.dart';
 
-final GoRouter router = GoRouter(
-  initialLocation: "/splash",
+GoRouter router({required AuthStatus auth}) => GoRouter(
+  refreshListenable: auth,
+  redirect: (context, state) {
+    if (auth.isLoggedIn && (state.uri.path.contains('/login'))) {
+      return '/home';
+    } else if (!auth.isLoggedIn && !(state.uri.path.contains('/login'))) {
+      return '/login';
+    }
+    return null;
+  },
+  initialLocation: "/profile",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -31,33 +41,41 @@ final GoRouter router = GoRouter(
             statusBarBrightness: Brightness.light,
             statusBarIconBrightness: Brightness.light,
           ),
-          child: Stack(
-            children: [
-              Container(color: CustomColors.darkBlue),
-              SafeArea(child: child),
-            ],
-          ),
+          child: child,
         );
       },
       routes: [
-        GoRoute(
-          path: "/splash",
-          builder: (BuildContext context, GoRouterState state) {
-            return const SplashScreen();
-          },
-        ),
         GoRoute(
           path: "/login",
           builder: (BuildContext context, GoRouterState state) {
             return const LoginScreen();
           },
         ),
-        GoRoute(
-          path: "/logindetails",
-          builder: (BuildContext context, GoRouterState state) {
-            return const LogindetailsScreen();
+        ShellRoute(
+          builder: (context, state, child) {
+            return Stack(
+              children: [
+                Container(color: CustomColors.darkBlue),
+                SafeArea(child: child),
+              ],
+            );
           },
+          routes: [
+            GoRoute(
+              path: "/splash",
+              builder: (BuildContext context, GoRouterState state) {
+                return const SplashScreen();
+              },
+            ),
+            GoRoute(
+              path: "/logindetails",
+              builder: (BuildContext context, GoRouterState state) {
+                return const LogindetailsScreen();
+              },
+            ),
+          ],
         ),
+
         GoRoute(
           path: "/contact",
           pageBuilder: (BuildContext context, GoRouterState state) {
@@ -78,11 +96,11 @@ final GoRouter router = GoRouter(
               // add more screens here
             };
 
-            final showFab = !hideFabScreens.contains(state.uri.toString());
+            final showFab = !hideFabScreens.contains(state.uri.path.toString());
             return MyTabBar(
               child: Scaffold(
                 appBar: TopBar(
-                  route: state.uri.toString(),
+                  route: state.uri.path.toString(),
                 ), // <— your dynamic top bar
                 body: child,
                 floatingActionButton: showFab

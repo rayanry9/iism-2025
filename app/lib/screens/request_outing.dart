@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:iism_2025/services/api_service.dart';
 
 class RequestOutingScreen extends StatefulWidget {
   const RequestOutingScreen({super.key});
@@ -28,9 +29,9 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
     if (reasonController.text.isEmpty ||
         selectedExitTime == null ||
         selectedEntryTime == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please fill all fields")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
       return;
     }
 
@@ -45,7 +46,10 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
 
         final offset = dt.timeZoneOffset;
         final hours = offset.inHours.abs().toString().padLeft(2, '0');
-        final minutes = (offset.inMinutes.abs() % 60).toString().padLeft(2, '0');
+        final minutes = (offset.inMinutes.abs() % 60).toString().padLeft(
+          2,
+          '0',
+        );
         final sign = offset.isNegative ? '-' : '+';
 
         final offsetString = "$sign$hours:$minutes";
@@ -60,8 +64,20 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
         return "${y}-${m}-${d}T${h}:${min}:${s}${offsetString}";
       }
 
-      DateTime exitTime = DateTime(now.year, now.month, now.day, exitTOD.hour, exitTOD.minute);
-      DateTime entryTime = DateTime(now.year, now.month, now.day, entryTOD.hour, entryTOD.minute);
+      DateTime exitTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        exitTOD.hour,
+        exitTOD.minute,
+      );
+      DateTime entryTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        entryTOD.hour,
+        entryTOD.minute,
+      );
 
       final formattedExit = _formatRFC3339(exitTime);
       final formattedEntry = _formatRFC3339(entryTime);
@@ -78,15 +94,17 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Outing request submitted successfully")),
+          const SnackBar(
+            content: Text("Outing request submitted successfully"),
+          ),
         );
         setState(() => showNewRequest = false);
       }
     } catch (e) {
       print("Outing error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Failed to send request")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Failed to send request")));
     }
   }
 
@@ -143,7 +161,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
       "September",
       "October",
       "November",
-      "December"
+      "December",
     ];
     return months[m];
   }
@@ -239,8 +257,10 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Request campus outing approval here.",
-              style: TextStyle(color: Colors.black54)),
+          const Text(
+            "Request campus outing approval here.",
+            style: TextStyle(color: Colors.black54),
+          ),
           const SizedBox(height: 20),
           _textInput("Reason For Outing", reasonController),
           const SizedBox(height: 20),
@@ -254,7 +274,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
           const SizedBox(height: 30),
           Center(
             child: Transform(
-              transform: Matrix4.skewX(-0.2),   // button skew
+              transform: Matrix4.skewX(-0.2), // button skew
               child: ElevatedButton(
                 onPressed: () {
                   print("Reason: ${reasonController.text}");
@@ -264,22 +284,29 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF227B80),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
                 ),
                 child: Transform(
-                  transform: Matrix4.skewX(0.2),  // opposite direction to straighten text visually
+                  transform: Matrix4.skewX(
+                    0.2,
+                  ), // opposite direction to straighten text visually
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children:  [
+                    children: [
                       Text(
                         "SUBMIT FOR APPROVAL",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       SizedBox(width: 5),
                       Transform.translate(
-                        offset:  Offset(0, -2), // (x, y) → adjust manually
+                        offset: Offset(0, -2), // (x, y) → adjust manually
                         child: Icon(
                           Icons.arrow_forward_ios,
                           size: 17,
@@ -290,7 +317,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
                   ),
                 ),
               ),
-            )
+            ),
           ),
         ],
       ),
@@ -320,7 +347,11 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
     );
   }
 
-  Widget _dropdownTime(String label, String? selected, Function(String?) onChange) {
+  Widget _dropdownTime(
+    String label,
+    String? selected,
+    Function(String?) onChange,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -365,23 +396,27 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(req["date"],
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          Text(
+            req["date"],
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 4),
           Container(
             padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
+            decoration: BoxDecoration(color: Colors.white),
             child: Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(req["title"],
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 15)),
+                      Text(
+                        req["title"],
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
+                      ),
                       const SizedBox(height: 6),
                       Text("Exit Time – ${req["exit"]}"),
                       Text("Entry Time – ${req["entry"]}"),
@@ -392,15 +427,15 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
                   req["status"] == 1
                       ? Icons.check_circle
                       : req["status"] == 2
-                          ? Icons.cancel
-                          : Icons.remove, // dash for pending
+                      ? Icons.cancel
+                      : Icons.remove, // dash for pending
                   color: req["status"] == 1
                       ? Colors.green
                       : req["status"] == 2
-                          ? Colors.red
-                          : Colors.grey, // grey for dash
+                      ? Colors.red
+                      : Colors.grey, // grey for dash
                   size: 26,
-                )
+                ),
               ],
             ),
           ),

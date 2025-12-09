@@ -48,6 +48,7 @@ type UserDB struct {
 	Remark             *string      `db:"remark"`
 	InstituteId        int          `db:"institute_id"`
 	CanLogin           bool         `db:"can_login"`
+	FcmToken           *string      `db:"fcm_token"`
 }
 
 type LoginRequest struct {
@@ -224,4 +225,8 @@ type GetPlayerDataResponse struct {
 		Reserve   bool    `json:"reserve"`
 		Extra     *string `json:"extra"`
 	} `json:"sports"`
+}
+
+type SaveFcmTokenRequest struct {
+	Token string `json:"token"`
 }
