@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/screens/campus_map_screen.dart';
 import 'package:iism_2025/screens/chat.dart';
 import 'package:iism_2025/screens/contact.dart';
 import 'package:iism_2025/screens/gallery.dart';
@@ -15,11 +16,11 @@ import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/services/auth.dart';
-import 'package:iism_2025/widgets/global_fab.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:iism_2025/screens/request_outing.dart';
 import 'package:iism_2025/screens/approve_request.dart';
+import 'package:provider/provider.dart';
 
 GoRouter router({required AuthStatus auth}) => GoRouter(
   refreshListenable: auth,
@@ -31,7 +32,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/profile",
+  initialLocation: "/teams",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -97,21 +98,43 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             };
 
             final showFab = !hideFabScreens.contains(state.uri.path.toString());
-            return MyTabBar(
-              child: Scaffold(
-                appBar: TopBar(
-                  route: state.uri.path.toString(),
-                ), // <— your dynamic top bar
-                body: child,
-                floatingActionButton: showFab
-                    ? GlobalFAB(
-                        onPressed: () {
-                          context.push('/chat');
-                        },
-                        icon: Icons.add,
-                        background: Colors.orange,
-                      )
-                    : null,
+            return ChangeNotifierProvider(
+              create: (_) => TeamPageState(),
+              child: MyTabBar(
+                child: Scaffold(
+                  appBar: TopBar(
+                    route: state.uri.path.toString(),
+                  ), // <— your dynamic top bar
+                  backgroundColor: Colors.white,
+                  body: child,
+                  floatingActionButton: showFab
+                      ? Material(
+                          elevation: 6,
+                          color: CustomColors.orange,
+                          borderRadius: BorderRadius.circular(40),
+                          clipBehavior: Clip.antiAlias,
+                          child: InkWell(
+                            onTap: () {
+                              context.push('/chat');
+                            },
+                            highlightColor: CustomColors.orange,
+                            splashColor: Colors.orange,
+                            borderRadius: BorderRadius.circular(40),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/simhi.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                              height: 65,
+                              width: 65,
+                            ),
+                          ),
+                        )
+                      : null,
+                ),
               ),
             );
           },
@@ -119,49 +142,60 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
           routes: [
             GoRoute(
               path: "/gallery",
-              pageBuilder: (_, __) =>
+              pageBuilder: (_, _) =>
                   const NoTransitionPage(child: GalleryScreen()),
             ),
             GoRoute(
               path: "/home",
-              pageBuilder: (_, __) =>
+              pageBuilder: (context, _) =>
                   const NoTransitionPage(child: HomeScreen()),
             ),
             GoRoute(
               path: "/matches",
-              pageBuilder: (_, __) =>
+              pageBuilder: (_, _) =>
                   const NoTransitionPage(child: MatchesScreen()),
             ),
             GoRoute(
               path: "/schedule",
-              pageBuilder: (_, __) =>
+              pageBuilder: (_, _) =>
                   const NoTransitionPage(child: ScheduleScreen()),
             ),
             GoRoute(
               path: "/teams",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: TeamsScreen()),
+              pageBuilder: (context, _) {
+                return const NoTransitionPage(child: TeamsScreen());
+              },
             ),
             GoRoute(
               path: "/profile",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: ProfileScreen()),
+              pageBuilder: (_, _) {
+                return NoTransitionPage(child: const ProfileScreen());
+              },
             ),
             GoRoute(
               path: "/request-outing",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: RequestOutingScreen()),
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return NoTransitionPage(child: const RequestOutingScreen());
+              },
             ),
 
             GoRoute(
               path: "/approve-request",
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: ApproveRequestScreen()),
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return NoTransitionPage(child: const ApproveRequestScreen());
+              },
             ),
             GoRoute(
               path: '/chat',
-              pageBuilder: (_, __) =>
-                  const NoTransitionPage(child: AskSimhiScreen()),
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return NoTransitionPage(child: const AskSimhiScreen());
+              },
+            ),
+            GoRoute(
+              path: '/campus-map',
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return NoTransitionPage(child: const CampusMapScreen());
+              },
             ),
           ],
         ),

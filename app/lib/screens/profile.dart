@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
+import 'package:iism_2025/constants/sport.dart';
 import 'package:iism_2025/services/user_cache.dart';
 import 'package:iism_2025/services/user_loader.dart';
 import 'package:iism_2025/widgets/sbs.dart';
-import 'package:iism_2025/services/sport.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:go_router/go_router.dart';
 
@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: loading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(Constants.screenWidthPadding),
 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,32 +129,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     imageUrl: sportImage,
                     right: Text("View"),
                   ),
+
+                  const SizedBox(height: 24),
+
                   Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(10),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: Constants.screenWidthPadding,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    decoration: BoxDecoration(
+                      color: CustomColors.lightGray,
+                      border: Border.all(color: CustomColors.gray),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 20,
                       children: [
                         const Text(
                           "MESS CODE",
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: Constants.buttonTextSize,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 8),
 
                         // 🔥 Barcode 128 using assignedId
                         if (UserCache().assignedId != null)
-                          BarcodeWidget(
-                            barcode: Barcode.code128(),
-                            data: UserCache().assignedId.toString(),
-                            width: double.infinity,
-                            height: 40,
-                            drawText: false,
+                          Expanded(
+                            child: BarcodeWidget(
+                              barcode: Barcode.code128(),
+                              data: UserCache().assignedId.toString(),
+                              width: null,
+                              height: 56,
+                              drawText: false,
+                            ),
                           )
                         else
                           const Text("No Code Available"),
@@ -174,15 +182,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: double.infinity,
                         margin: const EdgeInsets.only(top: 20),
                         padding: const EdgeInsets.symmetric(
-                          vertical: 18,
-                          horizontal: 16,
+                          vertical: 14,
+                          horizontal: Constants.screenWidthPadding,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE3F7F7),
-                          borderRadius: BorderRadius.circular(14),
+                          color: CustomColors.pastelBlue,
+                          borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: Color(0xFF0A6C70),
-                            width: 1.5,
+                            color: CustomColors.teal,
+                            width: 1,
                           ),
                         ),
                         child: Row(
@@ -194,22 +202,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Text(
                                   "REQUEST FOR OUTING",
                                   style: TextStyle(
-                                    fontSize: 17,
+                                    fontSize: Constants.heading2TextSize,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF0A3B3D),
+                                    color: CustomColors.darkTeal,
                                   ),
                                 ),
-                                SizedBox(height: 4),
                                 Text(
                                   "Request campus outing approval here.",
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.black54,
+                                    color: CustomColors.darkTeal,
                                   ),
                                 ),
                               ],
                             ),
-                            Icon(Icons.double_arrow, color: Color(0xFF0A3B3D)),
+                            Icon(
+                              Icons.double_arrow,
+                              color: CustomColors.darkTeal,
+                            ),
                           ],
                         ),
                       ),
@@ -268,13 +278,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                     ),
-
-                  const SizedBox(height: 20),
-
-                  const Text(
-                    "More profile info coming here...",
-                    style: TextStyle(fontSize: 16),
-                  ),
                 ],
               ),
             ),

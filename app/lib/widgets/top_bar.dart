@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
+import 'package:iism_2025/constants/iit.dart';
 import 'package:iism_2025/widgets/dynamic_bar.dart';
 import 'package:iism_2025/services/user_cache.dart';
 import 'package:iism_2025/services/user_loader.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String route;
@@ -23,6 +25,7 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 // --------------------------------------------------------
 class _TopBarState extends State<TopBar> {
   bool loading = true;
+  String? selectedInstituteTeamPage;
 
   @override
   void initState() {
@@ -46,60 +49,59 @@ class _TopBarState extends State<TopBar> {
 
   Widget? _buildChild(String route) {
     if (route.contains("/home")) {
-      return Padding(
-        padding: EdgeInsets.all(0.0),
-        child: Row(
-          spacing: 12,
-          children: [
-            CircleAvatar(
-              radius: 18,
-              backgroundImage: UserCache().profilePic != null
-                  ? NetworkImage(UserCache().profilePic!)
-                  : null,
-              child: UserCache().profilePic == null
-                  ? const Icon(Icons.person, color: Colors.white)
-                  : null,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Welcome Back",
-                  style: TextStyle(
-                    fontSize: Constants.buttonTextSize,
-                    color: CustomColors.lightGray,
-                    height: 0.9,
-                  ),
+      return Row(
+        spacing: 12,
+        children: [
+          CircleAvatar(
+            radius: 18,
+            backgroundImage: UserCache().profilePic != null
+                ? NetworkImage(UserCache().profilePic!)
+                : null,
+            child: UserCache().profilePic == null
+                ? const Icon(Icons.person, color: Colors.white)
+                : null,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Welcome Back",
+                style: TextStyle(
+                  fontSize: Constants.buttonTextSize,
+                  color: CustomColors.lightGray,
+                  height: 0.9,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    context.push('/profile');
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        UserCache().firstName ?? "",
-                        style: TextStyle(
-                          fontSize: Constants.heading2TextSize,
-                          color: Colors.white,
-                        ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  context.push('/profile');
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      UserCache().firstName ?? "",
+                      style: TextStyle(
+                        fontSize: Constants.heading2TextSize,
+                        color: Colors.white,
                       ),
-                      Icon(Icons.expand_more, color: Colors.white),
-                    ],
-                  ),
+                    ),
+                    Icon(Icons.expand_more, color: Colors.white),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       );
     }
     if (route == '/profile' ||
         route == '/contact' ||
         route == '/notifications' ||
         route == '/request-outing' ||
-        route == '/approve-request') {
+        route == '/approve-request' ||
+        route == "/campus-map" ||
+        route == '/chat') {
       var headText = '';
 
       if (route == '/profile') {
@@ -116,6 +118,12 @@ class _TopBarState extends State<TopBar> {
       }
       if (route == '/notifications') {
         headText = 'Notifications';
+      }
+      if (route == '/campus-map') {
+        headText = 'Campus Map';
+      }
+      if (route == '/chat') {
+        headText = 'ASK SIMHI';
       }
       return Stack(
         children: [
@@ -143,6 +151,61 @@ class _TopBarState extends State<TopBar> {
       );
     }
 
+    if (route == '/teams') {
+      return Container(
+        margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: BoxBorder.all(color: CustomColors.lightBlue, width: 1),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            padding: EdgeInsets.all(16),
+            icon: Icon(Icons.keyboard_arrow_down, color: CustomColors.blue),
+            isExpanded: true,
+            menuMaxHeight: 400,
+            hint: Text(
+              "Select a College",
+              style: TextStyle(
+                color: CustomColors.blue,
+                fontSize: Constants.titlesTextSize,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            items: getAllIITNames().map((val) {
+              return DropdownMenuItem(
+                value: val,
+                child: Row(
+                  spacing: 12,
+                  children: [
+                    Image.asset(getIITImgSrcFromName(val), width: 20),
+                    Text('IIT $val'),
+                  ],
+                ),
+              );
+            }).toList(),
+            dropdownColor: Colors.white,
+            value: context.read<TeamPageState>().selectedCollege,
+            onChanged: (value) {
+              setState(() {
+                selectedInstituteTeamPage = value;
+                context.read<TeamPageState>().setCollege(value);
+              });
+            },
+          ),
+        ),
+      );
+    }
+
     return SizedBox();
+  }
+}
+
+class TeamPageState extends ChangeNotifier {
+  String? selectedCollege;
+
+  void setCollege(String? value) {
+    selectedCollege = value;
+    notifyListeners();
   }
 }
