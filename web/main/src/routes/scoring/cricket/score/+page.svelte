@@ -5,7 +5,7 @@
 	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
     import cricketIcon from '$lib/assets/sport/cricket.webp' 
 	import type { IITNames } from '$lib/types/iitNames';
-
+    import PopoverBox from '$lib/ui/score/Popover.svelte'
 
     let teams:IITNames[] = ["Madras", "Guwahati"]
 
@@ -20,6 +20,16 @@
 	let thisOver: string[] = $state([]);
 
 	let history: any[] = $state([]);
+    let showWicketPopup = $state(false)
+    let showFielderPopup = $state(false)
+    let dismissalType = $state<string | null>(null)
+    let fielders = [
+        "J. Bumrah",
+        "Harbhajan Singh",
+        "Suresh Yadav",
+        "Vikas Reddy"
+    ]
+
 
 	function saveState() {
 	history.push({
@@ -308,12 +318,49 @@
             </button>
 
             <!-- WICKET -->
-            <button onclick={wicket}
+            <button onclick={() => showWicketPopup = true}
                 class="flex-1 col-span-1 h-20 bg-[#ef4823] text-white border border-gray-300 flex items-center justify-center text-xl font-semibold">
                 WICKET
             </button>
 	</div>
 </div>
+
+{#if showWicketPopup}
+    <div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+        <PopoverBox
+            title="Confirm wicket"
+            buttons={["Bowled", "Caught", "LBW", "Run Out", "Stumped", "Hit Wicket"]}
+            onSelect={(type: string) => {
+                // If caught / stumped / run out → open second popup
+                if (type === "Caught" || type === "Stumped" || type === "Run Out") {
+                    dismissalType = type
+                    showWicketPopup = false
+                    showFielderPopup = true
+                    return
+                }
+
+                // Otherwise it's a normal bowled / lbw / hit wicket
+                showWicketPopup = false
+                wicket()
+            }}
+            onClose={() => showWicketPopup = false}
+        />
+    </div>
+{/if}
+{#if showFielderPopup}
+    <div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+        <PopoverBox
+            title={`${dismissalType} by ?`}
+            buttons={fielders}
+            onSelect={(fielder:string) => {
+                console.log("Out:", dismissalType, "by", fielder)
+                showFielderPopup = false
+                wicket()
+            }}
+            onClose={() => showFielderPopup = false}
+        />
+    </div>
+{/if}
 
 
 </div>
