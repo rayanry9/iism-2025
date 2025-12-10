@@ -2,6 +2,13 @@
 	// ---------------------------
 	// STATE (RUNES)
 	// ---------------------------
+	import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc';
+    import cricketIcon from '$lib/assets/sport/cricket.webp' 
+	import type { IITNames } from '$lib/types/iitNames';
+
+
+    let teams:IITNames[] = ["Madras", "Guwahati"]
+
 	let score = $state({ runs: 71, wickets: 2 });
 	let overs = $state({ over: 8, ball: 1 });
 
@@ -109,15 +116,18 @@
 <div class="w-full min-h-screen bg-white flex flex-col p-4">
 
 	<!-- TOP BAR -->
-	<div class="flex justify-between items-center text-sm text-gray-700 mb-4">
+	<div class="flex justify-between items-center text-sm text-gray-700">
 		<div class="flex items-center gap-2">
-			<div class="w-5 h-5 rounded-full bg-gray-300"></div>
+            <img alt="logo" src={getIITImgSrc(teams[1])} class="h-5 w-5 object-contain" />
 			<span>IITG</span>
-			<span class="text-blue-500 font-bold">VS</span>
+			<span class="text-[#283891]"> VS</span>
+            <img alt="logo" src={getIITImgSrc(teams[0])} class="h-5 w-5 object-contain" />
 			<span>IITM</span>
 		</div>
-		<div class="w-6 h-6 bg-gray-300 rounded"></div>
+            <img alt="cricket logo" src={cricketIcon} class="ml-auto h-10 object-contain" />
+		
 	</div>
+        <div class="w-screen h-[1.5px] bg-gray-300 -mx-4 mb-3"></div>
 
 	<!-- SCORE PANEL -->
     <div class=" overflow-hidden border border-[#e5e5e5] bg-white">
@@ -125,8 +135,8 @@
         <!-- Top row (logo + team + menu) -->
         <div class="flex justify-between items-center px-4 py-3 border-b border-[#e5e5e5]">
             <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-full bg-[#d9d9d9]"></div>
-                <span class="text-xl font-semibold tracking-tight">
+            	<img alt="logo" src={getIITImgSrc(teams[0])} class="h-5 w-5 object-contain" />
+                <span class="text-md font-semibold tracking-tight">
                     IIT MADRAS <span class="text-gray-500 font-normal">[Batting]</span>
                 </span>
             </div>
@@ -137,29 +147,27 @@
         <div class="flex justify-between">
             <!-- LEFT SCORE -->
             <div class="flex-1 px-4 py-5 border-[#e5e5e5]">
-                <div class="text-orange-300 text-5xl font-bold leading-none ">
+                <div class="text-[#EF4823] text-5xl font-bold leading-none ">
                     {score.runs}/{score.wickets}
                 </div>
             </div>
 
             <!-- RIGHT OVERS (full-height box) -->
             <div class="w-28 flex flex-col  border-l justify-center items-center p-5">
-                <div class="text-xl font-semibold leading-none">
+                <div class="text-xl  font-semibold leading-none">
                     {overs.over}.{overs.ball}
                 </div>
-                <div class="text-[11px] text-gray-600 tracking-wide mt-1">
+                <div class="text-md  tracking-wide mt-1">
                     OVERS
                 </div>
             </div>
         </div>
     </div>
-    <!-- SCORE PANEL ... unchanged above -->
-
-<!-- 🔵 STRIKER / NON-STRIKER BOXES -->
+<!-- STRIKER / NON-STRIKER BOX -->
 <div class="mt-4 bg-white border border-gray-200 rounded-lg overflow-hidden">
 
     <!-- Striker -->
-    <div class="px-4 py-3 bg-[#e9f7ff] flex justify-between items-center border-b border-gray-200">
+    <div class="px-4 py-3 bg-[#e9f7ff] flex justify-between items-center border-b border-gray-200 relative">
         <div>
             <div class="text-sm text-blue-600 font-semibold">Striker</div>
             <div class="font-bold text-gray-900">{striker.name}</div>
@@ -168,6 +176,16 @@
         <div class="font-semibold text-gray-700">
             {striker.runs}/{striker.balls}
         </div>
+
+        <!-- SWITCH BUTTON → moved to the RIGHT -->
+        <button
+            onclick={rotateStrike}
+            class="absolute right-20 top-2/2 -translate-y-1/2
+                   w-8 h-8 rounded-full border border-[#3aa2b3] bg-white
+                   flex items-center justify-center text-[#3aa2b3]"
+        >
+            ↑↓
+        </button>
     </div>
 
     <!-- Non Striker -->
@@ -184,6 +202,7 @@
 </div>
 
 
+
 <!-- 🟤 BOWLER BOX -->
 <div class="mt-4 bg-white border border-gray-200 rounded-lg p-4">
     <div class="text-sm text-gray-500">Bowler</div>
@@ -198,7 +217,7 @@
     <!-- Ball history -->
     <div class="flex gap-2 mt-3 flex-wrap">
         {#each thisOver as b}
-            <div class="px-2 py-1 text-sm rounded-full border 
+            <div class="w-6 h-6 px-2 py-1 text-sm rounded-full border flex items-center justify-center
                 {b === 'W' ? 'bg-red-100 text-red-600 border-red-300' : ''}
                 {b === 'WD' ? 'bg-blue-100 text-blue-700 border-blue-300' : ''}
                 {b === 'NB' ? 'bg-yellow-100 text-yellow-700 border-yellow-300' : ''}
@@ -210,31 +229,91 @@
 </div>
 
 
-	<!-- RUN BUTTON GRID -->
-	<div class="grid grid-cols-3 gap-2 mt-4 text-center select-none">
+<!-- BOTTOM BUTTON PANEL -->
+<div class="mt-4 select-none">
 
-		<!-- wides -->
-		<button class="border rounded-lg p-4" onclick={wide}>WD<br><span class="text-xl font-semibold">0</span></button>
-		<button class="border rounded-lg p-4" onclick={() => scoreRuns(1)}>1</button>
-		<button class="border rounded-lg p-4" onclick={() => scoreRuns(2)}>2</button>
+    <div class="flex gap-2">
 
-		<button class="border rounded-lg p-4" onclick={noBall}>NB<br><span class="text-xl font-semibold">+</span></button>
-		<button class="border rounded-lg p-4" onclick={() => scoreRuns(3)}>3</button>
-		<button class="border rounded-lg p-4" onclick={() => scoreRuns(4)}>4</button>
+        <!-- LEFT COLUMN (GRAY) -->
+        <div class="flex flex-col w-24">
 
-		<button class="border rounded-lg p-4" onclick={() => bye(4)}>BYE<br>4</button>
-		<button class="border rounded-lg p-4" onclick={() => legBye(6)}>LB<br>6</button>
-		<button class="border rounded-lg p-4" onclick={() => scoreRuns(6)}>6</button>
+            <!-- WD -->
+            <button onclick={wide}
+                class="h-20 bg-[#f3f3f3] border border-gray-300 flex flex-col items-center justify-center">
+                <span class="text-xl text-gray-700 font-medium">WD</span>
+            </button>
+
+            <!-- NB -->
+            <button onclick={noBall}
+                class="h-20 bg-[#f3f3f3] border border-gray-300 flex flex-col items-center justify-center">
+                <span class="text-xl text-gray-700 font-medium">NB</span>
+            </button>
+
+            <!-- BYE -->
+            <button onclick={() => bye(1)}
+                class="h-10 bg-[#f3f3f3] border border-gray-300 flex items-center justify-center text-gray-700 font-medium">
+                BYE
+            </button>
+
+            <!-- LEG BYE -->
+            <button onclick={() => legBye(1)}
+                class="h-10 bg-[#f3f3f3] border border-gray-300 flex items-center justify-center text-gray-700 font-medium">
+                LEG BYE
+            </button>
+        </div>
+
+        <!-- RIGHT GRID -->
+        <div class="grid grid-cols-2  flex-1">
+
+            <button onclick={() => scoreRuns(0)}
+                class="h-20 border border-gray-300 flex items-center justify-center text-xl font-semibold">
+                0
+            </button>
+
+            <button onclick={() => scoreRuns(1)}
+                class="h-20 border border-gray-300 flex items-center justify-center text-xl font-semibold">
+                1
+            </button>
+
+            <button onclick={() => scoreRuns(3)}
+                class="h-20 border border-gray-300 flex items-center justify-center text-xl font-semibold">
+                3
+            </button>
+
+            <button onclick={() => scoreRuns(2)}
+                class="h-20 border border-gray-300 flex items-center justify-center text-xl font-semibold">
+                2
+            </button>
+
+            <button onclick={() => scoreRuns(4)}
+                class="h-20 border border-gray-300 flex items-center justify-center text-xl font-semibold text-teal-600">
+                4
+            </button>
+
+            <button onclick={() => scoreRuns(6)}
+                class="h-20 border border-gray-300 flex items-center justify-center text-xl font-semibold text-blue-600">
+                6
+            </button>
+
+            
+
+        </div>
+		
+    </div>
+	<div class="flex flex-row mt-2 gap-1 w-full">
+		<button onclick={undo}
+                class="w-30 col-span-1  h-20 bg-[#f4eed7] border border-gray-300 flex flex-col items-center justify-center text-gray-700">
+                <span class="text-2xl">↶</span>
+                <span class="text-sm -mt-1">Undo</span>
+            </button>
+
+            <!-- WICKET -->
+            <button onclick={wicket}
+                class="flex-1 col-span-1 h-20 bg-[#ef4823] text-white border border-gray-300 flex items-center justify-center text-xl font-semibold">
+                WICKET
+            </button>
 	</div>
+</div>
 
-	<!-- FOOTER BUTTONS -->
-	<div class="flex gap-4 mt-4">
-		<button class="flex-1 bg-[#efe2c8] text-black py-3 rounded-lg" onclick={undo}>
-			Undo
-		</button>
-		<button class="flex-1 bg-[#ff5630] text-white py-3 rounded-lg font-semibold" onclick={wicket}>
-			WICKET
-		</button>
-	</div>
 
 </div>
