@@ -10,6 +10,15 @@
 	let numberOfPages = $state<number>(1);
 	let images = $state<string[]>([]);
 	let isMobile = $state<boolean>(false);
+	
+	$effect(() => {
+		const check = () => {
+			isMobile = window.innerWidth < 768;
+		};
+		check();
+		window.addEventListener('resize', check);
+		return () => window.removeEventListener('resize', check);
+	});
 
 	// ✅ Fetch total image count
 	$effect(() => {
@@ -35,37 +44,44 @@
 	});
 
 
-	// ✅ Fetch paginated images (mobile = 4, desktop = 8)
+	let prevIsMobile = $state<boolean>(false);
+
 	$effect(() => {
-		// ✅ If no images exist, do NOT call gallery API
 		if (totalImages === 0) return;
 
 		const perPage = isMobile ? 4 : 8;
+		const newTotalPages = Math.ceil(totalImages / perPage);
 
-		numberOfPages = Math.ceil(totalImages / perPage);
+		// ✅ Only update numberOfPages if it actually changed
+		if (numberOfPages !== newTotalPages) {
+			numberOfPages = newTotalPages;
+		}
 
-		// ✅ If activePage was 0 (from empty state), reset to 1 safely
-		if (activePage === 0) {
+		// ✅ Reset page ONLY when switching between mobile & desktop
+		if (isMobile !== prevIsMobile) {
 			activePage = 1;
-			return;
+			prevIsMobile = isMobile;
 		}
 
-		// ✅ Prevent overflow
-		if (activePage > numberOfPages) {
-			activePage = numberOfPages;
-			return;
+		const safePage = Math.min(
+			Math.max(activePage, 1),
+			numberOfPages
+		);
+
+		const startIndex = (safePage - 1) * perPage + 1;
+		const endIndex = Math.min(startIndex + perPage - 1, totalImages);
+
+		const base = `${PUBLIC_API_URL}/gallery`;
+
+		const newImages: string[] = [];
+		for (let i = startIndex; i <= endIndex; i++) {
+			newImages.push(`${base}/${i}.webp?v=${safePage}-${perPage}`);
 		}
 
-		fetch(`${PUBLIC_API_URL}/get-gallery?page=${activePage}&limit=${perPage}`)
-			.then((res) => res.json())
-			.then((data) => {
-				images = data.images ?? [];
-			})
-			.catch((err) => {
-				console.error('Error fetching gallery images:', err);
-				images = [];
-			});
+		images = newImages;
 	});
+
+
 
 </script>
 
@@ -74,13 +90,14 @@
 	<main class="flex w-full flex-col items-center">
 
 		<!-- ================= MOBILE HEADER ================= -->
-		<div class="w-full flex flex-col items-center gap-4 py-4 md:hidden">
+		<div class="w-full flex flex-col items-center gap-4 py-4 md:hidden mb-6">
 			<h1 class="text-2xl font-semibold">GALLERY</h1>
 
-			<div class="bg-custom-orange flex h-[42px] w-[170px] items-center justify-center gap-2">
-				<img src={cameraIcon} class="h-5 w-5" alt="" />
-				<span class="text-white text-sm">GET YOUR PHOTOS</span>
+			<div class="bg-custom-orange flex h-[3rem] w-[14rem] -skew-x-12 flex-row items-center justify-center gap-[1rem] p-[0.5rem]">
+				<img src={cameraIcon} alt="" class="w-[2rem] skew-x-12" />
+				<span class="skew-x-12 text-white">GET YOUR PHOTOS</span>
 			</div>
+
 		</div>
 
 		<!-- ================= MOBILE IMAGES ================= -->
@@ -175,7 +192,7 @@
 		</div>
 
 		<!-- ================= DESKTOP GRID ================= -->
-		<div class="hidden md:grid w-[95%] grid-cols-5 grid-rows-3 gap-6 pb-10">
+		<div class="hidden md:grid w-[95%] grid-cols-5 grid-rows-3 gap-4 pb-10">
 
 			{#if images[0]}
 				<div class="col-start-1 col-span-2 row-start-1 row-span-2 overflow-hidden">
