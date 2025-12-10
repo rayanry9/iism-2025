@@ -6,7 +6,7 @@ Future<void> loadUserData() async {
   if (UserCache().hasData) return;
 
   try {
-    final response = await dio.get('api/me');
+    final response = await dio.get('/api/me');
 
     UserCache().fromJson(response.data);
 

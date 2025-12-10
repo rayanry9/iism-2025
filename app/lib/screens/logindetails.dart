@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/services/api_service.dart';
+import 'package:iism_2025/services/auth.dart';
 
 class LogindetailsScreen extends StatefulWidget {
   const LogindetailsScreen({super.key});
@@ -38,7 +39,10 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
 
     if (success) {
       if (context.mounted) {
-        context.go('/home');
+        await auth.checkLoginState();
+        if (context.mounted) {
+          context.go('/home');
+        }
       }
     }
   }

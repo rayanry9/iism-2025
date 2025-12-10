@@ -6,6 +6,7 @@ import 'package:iism_2025/widgets/dynamic_bar.dart';
 import 'package:iism_2025/services/user_cache.dart';
 import 'package:iism_2025/services/user_loader.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String route;
@@ -184,10 +185,11 @@ class _TopBarState extends State<TopBar> {
               );
             }).toList(),
             dropdownColor: Colors.white,
-            value: selectedInstituteTeamPage,
+            value: context.read<TeamPageState>().selectedCollege,
             onChanged: (value) {
               setState(() {
                 selectedInstituteTeamPage = value;
+                context.read<TeamPageState>().setCollege(value);
               });
             },
           ),
@@ -196,5 +198,14 @@ class _TopBarState extends State<TopBar> {
     }
 
     return SizedBox();
+  }
+}
+
+class TeamPageState extends ChangeNotifier {
+  String? selectedCollege;
+
+  void setCollege(String? value) {
+    selectedCollege = value;
+    notifyListeners();
   }
 }

@@ -20,6 +20,7 @@ import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:iism_2025/screens/request_outing.dart';
 import 'package:iism_2025/screens/approve_request.dart';
+import 'package:provider/provider.dart';
 
 GoRouter router({required AuthStatus auth}) => GoRouter(
   refreshListenable: auth,
@@ -97,40 +98,43 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             };
 
             final showFab = !hideFabScreens.contains(state.uri.path.toString());
-            return MyTabBar(
-              child: Scaffold(
-                appBar: TopBar(
-                  route: state.uri.path.toString(),
-                ), // <— your dynamic top bar
-                backgroundColor: Colors.white,
-                body: child,
-                floatingActionButton: showFab
-                    ? Material(
-                        elevation: 6,
-                        color: CustomColors.orange,
-                        borderRadius: BorderRadius.circular(40),
-                        clipBehavior: Clip.antiAlias,
-                        child: InkWell(
-                          onTap: () {
-                            context.push('/chat');
-                          },
-                          highlightColor: CustomColors.orange,
-                          splashColor: Colors.orange,
+            return ChangeNotifierProvider(
+              create: (_) => TeamPageState(),
+              child: MyTabBar(
+                child: Scaffold(
+                  appBar: TopBar(
+                    route: state.uri.path.toString(),
+                  ), // <— your dynamic top bar
+                  backgroundColor: Colors.white,
+                  body: child,
+                  floatingActionButton: showFab
+                      ? Material(
+                          elevation: 6,
+                          color: CustomColors.orange,
                           borderRadius: BorderRadius.circular(40),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("assets/simhi.png"),
-                                fit: BoxFit.cover,
+                          clipBehavior: Clip.antiAlias,
+                          child: InkWell(
+                            onTap: () {
+                              context.push('/chat');
+                            },
+                            highlightColor: CustomColors.orange,
+                            splashColor: Colors.orange,
+                            borderRadius: BorderRadius.circular(40),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/simhi.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                                shape: BoxShape.circle,
                               ),
-                              shape: BoxShape.circle,
+                              height: 65,
+                              width: 65,
                             ),
-                            height: 65,
-                            width: 65,
                           ),
-                        ),
-                      )
-                    : null,
+                        )
+                      : null,
+                ),
               ),
             );
           },
@@ -143,7 +147,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             ),
             GoRoute(
               path: "/home",
-              pageBuilder: (_, _) =>
+              pageBuilder: (context, _) =>
                   const NoTransitionPage(child: HomeScreen()),
             ),
             GoRoute(
@@ -158,12 +162,13 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             ),
             GoRoute(
               path: "/teams",
-              pageBuilder: (_, _) =>
-                  const NoTransitionPage(child: TeamsScreen()),
+              pageBuilder: (context, _) {
+                return const NoTransitionPage(child: TeamsScreen());
+              },
             ),
             GoRoute(
               path: "/profile",
-              pageBuilder: (BuildContext context, GoRouterState state) {
+              pageBuilder: (_, _) {
                 return NoTransitionPage(child: const ProfileScreen());
               },
             ),
