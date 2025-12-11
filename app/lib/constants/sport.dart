@@ -15,6 +15,8 @@ enum Sports {
   const Sports(this.displayName);
 }
 
+enum Gender { men, women }
+
 List<Sports> getSportsAll(bool staff) {
   if (!staff) {
     return [
@@ -38,6 +40,105 @@ List<Sports> getSportsAll(bool staff) {
       Sports.squash,
     ];
   }
+}
+
+int getSportIdFromSport(Sports sport, int type, bool staff) {
+  if (staff) {
+    switch (sport) {
+      case Sports.athletics:
+        if (type == 1) {
+          return -3;
+        } else if (type == 2) {
+          return -4;
+        } else if (type == 3) {
+          return -5;
+        }
+      case Sports.volleyball:
+        return 25;
+      case Sports.football:
+        return 20;
+      case Sports.cricket:
+        return 19;
+      case Sports.badminton:
+        if (type == 1) {
+          return 16;
+        } else {
+          return 17;
+        }
+      case Sports.basketball:
+        return 18;
+      case Sports.tennis:
+        return 22;
+      case Sports.squash:
+        return 21;
+      case Sports.tableTennis:
+        if (type == 1) {
+          return 23;
+        } else {
+          return 24;
+        }
+      case Sports.chess:
+        return 59;
+      default:
+        return 0;
+    }
+  } else {
+    switch (sport) {
+      case Sports.athletics:
+        if (type == 1) {
+          return 0;
+        } else if (type == 2) {
+          return -1;
+        } else if (type == 3) {
+          return -2;
+        }
+      case Sports.volleyball:
+        if (type == 1) {
+          return 14;
+        } else {
+          return 15;
+        }
+      case Sports.football:
+        return 7;
+      case Sports.cricket:
+        return 5;
+      case Sports.hockey:
+        return 6;
+      case Sports.badminton:
+        if (type == 1) {
+          return 1;
+        } else {
+          return 2;
+        }
+      case Sports.basketball:
+        if (type == 1) {
+          return 3;
+        } else {
+          return 4;
+        }
+      case Sports.squash:
+        if (type == 1) {
+          return 8;
+        } else {
+          return 9;
+        }
+      case Sports.tableTennis:
+        if (type == 1) {
+          return 10;
+        } else {
+          return 11;
+        }
+      case Sports.tennis:
+        if (type == 1) {
+          return 12;
+        } else {
+          return 13;
+        }
+      default:
+        return 1;
+    }
+  }
+  return 1;
 }
 
 /// Convert sportId → Sports enum (TS version translated to Dart)

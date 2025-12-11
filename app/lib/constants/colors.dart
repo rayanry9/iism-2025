@@ -12,4 +12,5 @@ class CustomColors {
   static const teal = Color.fromARGB(255, 34, 123, 128);
   static const darkTeal = Color.fromARGB(255, 14, 45, 47);
   static const lightBlue = Color.fromARGB(255, 120, 130, 185);
+  static const pink = Color.fromARGB(255, 217, 217, 217);
 }

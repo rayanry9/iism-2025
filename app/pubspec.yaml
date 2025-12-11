@@ -52,6 +52,7 @@ dependencies:
   url_launcher: ^6.3.2
   flutter_map_marker_popup: ^8.1.0
   provider: ^6.1.5+1
+  custom_sliding_segmented_control: ^1.8.5
   
 dev_dependencies:
   flutter_test:

@@ -44,7 +44,7 @@
 <main class="mx-auto my-32 flex w-fit flex-col items-center gap-y-12">
 	<div class="flex flex-col items-center gap-y-4">
 		<h2>LOGIN</h2>
-		<p class="px-4">Login with your Contingent Leader credentials</p>
+		<p class="px-4">Login with your admin credentials</p>
 	</div>
 	<form use:enhance method="post" class="flex w-full flex-col gap-y-12">
 		<Input
