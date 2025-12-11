@@ -3,6 +3,7 @@
   import footballIcon from '$lib/assets/sport/football.webp'
   import type { IITNames } from '$lib/types/iitNames'
   import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc'
+  import PopoverBox  from '$lib/ui/score/Popover.svelte';
 
   // teams
   let teams: IITNames[] = ['Guwahati', 'Madras']
@@ -14,12 +15,25 @@
     redCard: boolean
     yellowCard: boolean
   }
-
+  let players = [
+		{ js: 67, name: "Virat Kohli", id: 1 },
+		{ js: 13, name: "Rohit Sharma", id: 2 },
+		{ js: 83, name: "Virat Kohli", id: 3 },
+		{ js: 39, name: "Virat Kohli", id: 4 },
+		{ js: 67, name: "Virat Kohli", id: 5 },
+		{ js: 67, name: "Virat Kohli", id: 6 },
+		{ js: 67, name: "Virat Kohli", id: 7 },
+		{ js: 67, name: "Virat Kohli", id: 8 },
+		{ js: 67, name: "Virat Kohli", id: 9 },
+		{ js: 67, name: "Virat Kohli", id: 10 }
+	]
   let teamA: TeamState = { name: teams[0], goals: 0, redCard: false, yellowCard: false }
   let teamB: TeamState = { name: teams[1], goals: 0, redCard: false, yellowCard: false }
 
   // history for undo
   let history: [TeamState, TeamState][] = []
+  let showCardPopup = $state(false)
+  let cardType = $state<"red" | "yellow" | null>(null)
 
 
   function pushHistory() {
@@ -157,7 +171,10 @@
 
         <div class="px-4 py-4 flex gap-3">
           <button
-            onclick={() => toggleRed('A')}
+            onclick={() => {
+    cardType = "red"
+    showCardPopup = true
+  }}
             class="flex-1 border  py-2 font-semibold text-sm"
             style="border-color: #ef4823; color: #ef4823; background: white;"
           >
@@ -165,7 +182,9 @@
           </button>
 
           <button
-            onclick={() => toggleYellow('A')}
+            onclick={() => {
+                cardType = "yellow"
+                showCardPopup = true}}
             class="flex-1 border  py-2 font-semibold text-sm"
             style="border-color: #f3b45a; color: #f3b45a; background: white;"
           >
@@ -206,7 +225,10 @@
 
         <div class="px-4 py-4 flex gap-3">
           <button
-            onclick={() => toggleRed('B')}
+            onclick={() => {
+    cardType = "red"
+    showCardPopup = true
+  }}
             class="flex-1 border  py-2 font-semibold text-sm"
             style="border-color: #ef4823; color: #ef4823; background: white;"
           >
@@ -214,7 +236,9 @@
           </button>
 
           <button
-            onclick={() => toggleYellow('B')}
+            onclick={() => {
+                cardType = "yellow"
+                showCardPopup = true}}
             class="flex-1 border  py-2 font-semibold text-sm"
             style="border-color: #f3b45a; color: #f3b45a; background: white;"
           >
@@ -240,7 +264,7 @@
         <div class="p-2">
             <button 
         onclick={resetTimer}
-        class="flex flex-col items-center justify-center border border-gray-500 py-3 bg-[#F0F0F0] w-[73.25px] h-[73.25px]"
+        class="flex flex-col items-center justify-center border border-gray-300 py-3 bg-[#F0F0F0] w-[73.25px] h-[73.25px]"
         >
         <svg width="17" height="20" viewBox="0 0 17 20" fill="none">
 <path d="M8.0472 3.32833C7.85194 3.52359 7.85194 3.84017 8.0472 4.03544L11.2292 7.21742C11.4244 7.41268 11.741 7.41268 11.9363 7.21742C12.1316 7.02216 12.1316 6.70557 11.9363 6.51031L9.10786 3.68188L11.9363 0.853456C12.1316 0.658193 12.1316 0.341611 11.9363 0.146348C11.741 -0.0489125 11.4244 -0.0489125 11.2292 0.146348L8.0472 3.32833ZM13.6948 5.71793L14.0299 5.34678L13.6948 5.71793ZM16.2603 10.7767L15.7629 10.8277L16.2603 10.7767ZM14.7749 16.2508L15.1783 16.5462L15.1783 16.5462L14.7749 16.2508ZM10.0043 19.319L9.9028 18.8294L10.0043 19.319ZM4.40717 18.3998L4.15443 18.8312L4.15443 18.8312L4.40717 18.3998ZM0.86837 13.967L0.391682 14.1179L0.86837 13.967ZM1.2118 8.30531L0.756851 8.0979L0.756851 8.0979L1.2118 8.30531ZM5.45919 4.79159C5.71259 4.68183 5.82903 4.38744 5.71927 4.13404C5.60951 3.88065 5.31512 3.76421 5.06173 3.87397L5.26046 4.33278L5.45919 4.79159ZM8.40076 3.68188L8.40076 4.18188C10.2329 4.18188 11.9998 4.86144 13.3598 6.08908L13.6948 5.71793L14.0299 5.34678C12.4861 3.95327 10.4804 3.18188 8.40076 3.18188L8.40076 3.68188ZM13.6948 5.71793L13.3598 6.08908C14.7197 7.31671 15.576 9.00514 15.7629 10.8277L16.2603 10.7767L16.7577 10.7257C16.5455 8.65687 15.5736 6.74029 14.0299 5.34678L13.6948 5.71793ZM16.2603 10.7767L15.7629 10.8277C15.9498 12.6502 15.454 14.4773 14.3715 15.9554L14.7749 16.2508L15.1783 16.5462C16.4071 14.8684 16.9698 12.7945 16.7577 10.7257L16.2603 10.7767ZM14.7749 16.2508L14.3715 15.9554C13.289 17.4335 11.6968 18.4575 9.9028 18.8294L10.0043 19.319L10.1058 19.8086C12.1421 19.3865 13.9496 18.2241 15.1783 16.5462L14.7749 16.2508ZM10.0043 19.319L9.9028 18.8294C8.10884 19.2012 6.24071 18.8944 4.6599 17.9683L4.40717 18.3998L4.15443 18.8312C5.94885 19.8824 8.06939 20.2306 10.1058 19.8086L10.0043 19.319ZM4.40717 18.3998L4.6599 17.9683C3.07909 17.0423 1.89796 15.5628 1.34506 13.8161L0.86837 13.967L0.391682 14.1179C1.01929 16.1006 2.36002 17.78 4.15443 18.8312L4.40717 18.3998ZM0.86837 13.967L1.34506 13.8161C0.792155 12.0694 0.906781 10.1797 1.66676 8.51271L1.2118 8.30531L0.756851 8.0979C-0.105814 9.99019 -0.235929 12.1352 0.391682 14.1179L0.86837 13.967ZM1.2118 8.30531L1.66676 8.51271C2.42673 6.84568 3.77803 5.51979 5.45919 4.79159L5.26046 4.33278L5.06173 3.87397C3.15341 4.70056 1.61952 6.20561 0.756851 8.0979L1.2118 8.30531Z" fill="black"/>
@@ -251,7 +275,7 @@
         </div>
 
         <!-- TIMER DISPLAY -->
-        <div class="flex items-center justify-center text-3xl font-bold tracking-wide">
+        <div class="flex items-center justify-center text-4xl font-bold  tracking-wide">
         {formatTime(timerSeconds)}
         </div>
 
@@ -281,7 +305,7 @@
         <!-- ADD TIME -->
         <button 
         onclick={addTime}
-        class="bg-[#DDF2FA] border border-gray-400 py-3 text-sm font-medium flex items-center justify-center"
+        class="bg-[#DDF2FA]  py-3 text-sm font-medium flex items-center justify-center"
         >
         <svg class="mr-2"width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0.5 6.36054L6.29634 6.29682M6.29634 6.29682L12.2209 6.36041M6.29634 6.29682L6.36054 0.5M6.29634 6.29682L6.36041 12.2209" stroke="black" stroke-linecap="round"/>
@@ -293,7 +317,7 @@
         <!-- UNDO -->
         <button 
         onclick={undo}
-        class="bg-[#F7F3DF] border border-gray-400 py-3 text-sm font-medium flex items-center justify-center"
+        class="bg-[#F7F3DF]  py-3 text-sm font-medium flex items-center justify-center"
         >
         <svg class="mr-2"width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0.146447 3.32833C-0.0488155 3.52359 -0.0488155 3.84018 0.146447 4.03544L3.32843 7.21742C3.52369 7.41268 3.84027 7.41268 4.03553 7.21742C4.2308 7.02216 4.2308 6.70557 4.03553 6.51031L1.20711 3.68188L4.03553 0.853458C4.2308 0.658195 4.2308 0.341613 4.03553 0.146351C3.84027 -0.0489113 3.52369 -0.0489113 3.32843 0.146351L0.146447 3.32833ZM0.5 3.68188V4.18188H10.7845V3.68188V3.18188H0.5V3.68188ZM10.7845 14.0227V13.5227H8.88982V14.0227V14.5227H10.7845V14.0227ZM15.955 8.85229H15.455C15.455 11.4317 13.3639 13.5227 10.7845 13.5227V14.0227V14.5227C13.9162 14.5227 16.455 11.984 16.455 8.85229H15.955ZM10.7845 3.68188V4.18188C13.3639 4.18188 15.455 6.2729 15.455 8.85229H15.955H16.455C16.455 5.72061 13.9162 3.18188 10.7845 3.18188V3.68188Z" fill="black"/>
@@ -317,6 +341,30 @@
 
     </div>
   </div>
+  {#if showCardPopup}
+<div class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center">
+
+    <PopoverBox
+      title={cardType === "red" ? "Red Card to" : "Yellow Card to"}
+      color={cardType === "red" ? "#ef4823" : "#f3b45a"}
+      buttons={players.map(p => p.name)}
+      onSelect={(playerName:string) => {
+        
+        // handle assignment
+        if (cardType === "red") {
+          console.log("RED CARD to", playerName)
+          // YOUR LOGIC HERE
+        } else {
+          console.log("YELLOW CARD to", playerName)
+        }
+
+        showCardPopup = false
+      }}
+      onClose={() => showCardPopup = false}
+    />
+</div>
+{/if}
+
 </div>
 
 <!-- <style>
