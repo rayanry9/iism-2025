@@ -22,6 +22,8 @@
 	let history: any[] = $state([]);
     let showWicketPopup = $state(false)
     let showFielderPopup = $state(false)
+    let showOutPopup = $state(false)
+    let showInPopup = $state(false)
     let dismissalType = $state<string | null>(null)
     let fielders = [
         "J. Bumrah",
@@ -355,12 +357,48 @@
             onSelect={(fielder:string) => {
                 console.log("Out:", dismissalType, "by", fielder)
                 showFielderPopup = false
-                wicket()
+                showOutPopup = true
             }}
             onClose={() => showFielderPopup = false}
         />
     </div>
 {/if}
+{#if showOutPopup}
+    <div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+        <PopoverBox
+            title="Who is going Out ?"
+            buttons={fielders}
+            color = "black"
+            onSelect={(outPlayer: string) => {
+                console.log("Outgoing:", outPlayer)
+                showOutPopup = false
+                showInPopup = true
+            }}
+            onClose={() => showOutPopup = false}
+        />
+    </div>
+{/if}
+{#if showInPopup}
+    <div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+        <PopoverBox
+            title="Who is Coming In ?"
+            buttons={fielders}
+            color = "black"
+            onSelect={(inPlayer: string) => {
+                console.log("Incoming:", inPlayer)
+                showInPopup = false
+
+                // Replace striker with selected new player
+                striker = { name: inPlayer, runs: 0, balls: 0 }
+
+                // Finally register wicket
+                wicket()
+            }}
+            onClose={() => showInPopup = false}
+        />
+    </div>
+{/if}
+
 
 
 </div>
