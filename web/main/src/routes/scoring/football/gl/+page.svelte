@@ -45,7 +45,7 @@
         } else {
             // next → dummy redirect
             console.log("Redirecting to match page...");
-            goto('/scoring/football/gl') // dummy route
+            goto('/scoring/football/score') // dummy route
         }
     }
 
