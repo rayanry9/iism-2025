@@ -16,6 +16,7 @@ import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/services/auth.dart';
+import 'package:iism_2025/viewmodel/teams_view_model.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:iism_2025/screens/request_outing.dart';
@@ -32,7 +33,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/login",
+  initialLocation: "/home",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -102,7 +103,8 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
 
             final showFab = !hideFabScreens.contains(state.uri.path.toString());
             return ChangeNotifierProvider(
-              create: (_) => TeamPageState(),
+              create: (_) =>
+                  TeamsViewModel(user: context.read(), api: context.read()),
               child: MyTabBar(
                 child: Scaffold(
                   appBar: TopBar(

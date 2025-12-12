@@ -62,6 +62,7 @@ class ApiService {
   Future<Me?> getMyData() async {
     try {
       final response = await dio.get('/api/me');
+      print(response);
 
       var instance = Me.fromJson(response.data);
 

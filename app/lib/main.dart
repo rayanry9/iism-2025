@@ -32,10 +32,10 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        Provider(create: (context) => apiService),
-        ChangeNotifierProvider(create: (context) => auth),
-        Provider(create: (context) => notificationService),
-        ChangeNotifierProvider(create: (context) => user),
+        Provider.value(value: apiService),
+        ChangeNotifierProvider.value(value: auth),
+        Provider.value(value: notificationService),
+        ChangeNotifierProvider.value(value: user),
       ],
       child: const MyApp(),
     ),

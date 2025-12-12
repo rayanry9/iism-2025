@@ -231,3 +231,43 @@ String? getSportImageSrc(Sports? sport) {
       return "assets/sport/table-tennis.webp";
   }
 }
+
+bool isSportIdFemale(int sportId) {
+  switch (sportId) {
+    case 2:
+    case 4:
+    case 9:
+    case 11:
+    case 13:
+    case 15:
+    case 17:
+    case 24:
+    case 45:
+    case 46:
+    case 47:
+    case 48:
+    case 49:
+    case 50:
+    case 51:
+    case 52:
+    case 53:
+    case 54:
+    case 55:
+    case 56:
+    case 57:
+    case 62:
+    case 76:
+    case 77:
+    case 78:
+    case 79:
+    case 80:
+    case 81:
+    case 82:
+    case 83:
+    case -1:
+    case -4:
+      return true;
+    default:
+      return false;
+  }
+}

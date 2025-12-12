@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
+import 'package:iism_2025/viewmodel/teams_view_model.dart';
 import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/dynamic_bar.dart';
 import 'package:go_router/go_router.dart';
@@ -25,10 +26,8 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 // 🔥 This MUST be outside TopBar class
 // --------------------------------------------------------
 class _TopBarState extends State<TopBar> {
-  String? selectedInstituteTeamPage;
   @override
   void initState() {
-    print(widget._userViewModel.me);
     super.initState();
   }
 
@@ -73,7 +72,7 @@ class _TopBarState extends State<TopBar> {
                 child: Row(
                   children: [
                     Text(
-                      widget._userViewModel.me!.firstName,
+                      widget._userViewModel.me?.firstName ?? '',
                       style: TextStyle(
                         fontSize: Constants.heading2TextSize,
                         color: Colors.white,
@@ -145,6 +144,7 @@ class _TopBarState extends State<TopBar> {
     }
 
     if (route == '/teams') {
+      context.watch<TeamsViewModel>();
       return Container(
         margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
         decoration: BoxDecoration(
@@ -178,12 +178,9 @@ class _TopBarState extends State<TopBar> {
               );
             }).toList(),
             dropdownColor: Colors.white,
-            value: context.read<TeamPageState>().selectedCollege,
+            value: context.read<TeamsViewModel>().institute,
             onChanged: (value) {
-              setState(() {
-                selectedInstituteTeamPage = value;
-                context.read<TeamPageState>().setCollege(value);
-              });
+              context.read<TeamsViewModel>().updateInstitute(value!);
             },
           ),
         ),

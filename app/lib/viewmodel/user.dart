@@ -12,7 +12,6 @@ class UserViewModel extends ChangeNotifier {
   static Future<UserViewModel> init(ApiService apiService) async {
     final instance = UserViewModel._(apiService: apiService);
     await instance.refetchData();
-    print(instance.me);
     return instance;
   }
 
