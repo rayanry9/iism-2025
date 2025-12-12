@@ -34,8 +34,8 @@ class ApiService {
     int sportId,
     String institute,
   ) async {
-    final res = await dio.get(
-      "/api/get-players?sportId=$sportId&institute=$institute",
+    var res = await dio.get(
+      "/api/get-players?sport_id=$sportId&institute=$institute",
     );
     if (res.statusCode != 200) {
       return null;

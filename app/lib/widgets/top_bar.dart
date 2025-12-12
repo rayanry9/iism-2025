@@ -41,6 +41,7 @@ class _TopBarState extends State<TopBar> {
 
   Widget? _buildChild(String route) {
     if (route.contains("/home")) {
+      context.watch<UserViewModel>();
       return Row(
         spacing: 12,
         children: [

@@ -8,6 +8,7 @@ import 'package:iism_2025/viewmodel/user.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iism_2025/widgets/sport_card_full.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   final UserViewModel _userViewModel;
@@ -26,7 +27,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     if (widget._userViewModel.me!.sports != null) {
-      print("ASDASD");
       if ((widget._userViewModel.me!.sports as List<dynamic>).isNotEmpty) {
         final firstSport = widget._userViewModel.me!.sports![0];
 
@@ -40,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<UserViewModel>();
     return SingleChildScrollView(
       child: loading
           ? const Center(child: CircularProgressIndicator())

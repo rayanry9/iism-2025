@@ -27,34 +27,31 @@ class TeamsViewModel extends ChangeNotifier {
 
   void updateGender(Gender gender) {
     _gender = gender;
-    notifyListeners();
     updatePlayerData();
   }
 
   void updateSport(Sports sport) {
     _sport = sport;
     _gender = Gender.men;
-    notifyListeners();
     updatePlayerData();
   }
 
   void updateInstitute(String institute) {
     _institute = institute;
-    notifyListeners();
     updatePlayerData();
   }
 
-  void updatePlayerData() async {
-    if (institute != null) {
+  Future<void> updatePlayerData() async {
+    if (_institute != null) {
       _playerData = await _apiService.getPlayersData(
         getSportIdFromSport(
-          sport,
-          gender == Gender.men ? 1 : 2,
+          _sport,
+          _gender == Gender.men ? 1 : 2,
           _userViewModel.me!.staff,
         ),
         _institute!,
       );
-      notifyListeners();
     }
+    notifyListeners();
   }
 }
