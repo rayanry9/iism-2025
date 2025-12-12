@@ -7,7 +7,14 @@ import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/services/auth.dart';
 
 class LogindetailsScreen extends StatefulWidget {
-  const LogindetailsScreen({super.key});
+  final ApiService _apiService;
+  final AuthStatus _authStatus;
+  const LogindetailsScreen({
+    super.key,
+    required ApiService apiService,
+    required AuthStatus auth,
+  }) : _apiService = apiService,
+       _authStatus = auth;
 
   @override
   State<LogindetailsScreen> createState() => _LogindetailsScreenState();
@@ -17,29 +24,15 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
   bool _obscure = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  Future<bool> login(String email, String password) async {
-    try {
-      final response = await dio.post(
-        "/api/login",
-        data: {"email": email, "password": password},
-      );
-      return response.statusCode == 200;
-    } on DioException catch (e) {
-      return false;
-    } catch (e) {
-      return false;
-    }
-  }
 
   void onLoginPressed(BuildContext context) async {
-    bool success = await login(
+    bool success = await widget._apiService.login(
       emailController.text.trim(),
       passwordController.text.trim(),
     );
-
     if (success) {
       if (context.mounted) {
-        await auth.checkLoginState();
+        await widget._authStatus.checkLoginState();
         if (context.mounted) {
           context.go('/home');
         }

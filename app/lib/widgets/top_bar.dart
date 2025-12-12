@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/dynamic_bar.dart';
-import 'package:iism_2025/services/user_cache.dart';
-import 'package:iism_2025/services/user_loader.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String route;
+  final UserViewModel _userViewModel;
 
-  const TopBar({super.key, required this.route});
+  const TopBar({super.key, required this.route, required UserViewModel user})
+    : _userViewModel = user;
 
   @override
   State<TopBar> createState() => _TopBarState();
@@ -24,19 +25,11 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 // 🔥 This MUST be outside TopBar class
 // --------------------------------------------------------
 class _TopBarState extends State<TopBar> {
-  bool loading = true;
   String? selectedInstituteTeamPage;
-
   @override
   void initState() {
+    print(widget._userViewModel.me);
     super.initState();
-    load();
-  }
-
-  Future<void> load() async {
-    await loadUserData();
-    loading = false;
-    setState(() {});
   }
 
   @override
@@ -54,10 +47,10 @@ class _TopBarState extends State<TopBar> {
         children: [
           CircleAvatar(
             radius: 18,
-            backgroundImage: UserCache().profilePic != null
-                ? NetworkImage(UserCache().profilePic!)
+            backgroundImage: (widget._userViewModel.me?.profilePic) != null
+                ? NetworkImage(widget._userViewModel.me!.profilePic!)
                 : null,
-            child: UserCache().profilePic == null
+            child: widget._userViewModel.me?.profilePic == null
                 ? const Icon(Icons.person, color: Colors.white)
                 : null,
           ),
@@ -80,7 +73,7 @@ class _TopBarState extends State<TopBar> {
                 child: Row(
                   children: [
                     Text(
-                      UserCache().firstName ?? "",
+                      widget._userViewModel.me!.firstName,
                       style: TextStyle(
                         fontSize: Constants.heading2TextSize,
                         color: Colors.white,

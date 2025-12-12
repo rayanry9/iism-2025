@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/services/api_service.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 
 class ApproveRequestScreen extends StatefulWidget {
-  const ApproveRequestScreen({super.key});
+  final UserViewModel _userViewModel;
+  final ApiService _apiService;
+  const ApproveRequestScreen({
+    super.key,
+    required UserViewModel user,
+    required ApiService api,
+  }) : _userViewModel = user,
+       _apiService = api;
 
   @override
   State<ApproveRequestScreen> createState() => _ApproveRequestScreenState();
@@ -26,8 +33,10 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
 
   Future<void> _approveOuting(int id) async {
     try {
-      String apiUrl = dotenv.env['API_URL']!;
-      await dio.post(apiUrl + "/api/outing/approve", data: {"outingId": id});
+      await widget._apiService.dio.post(
+        "/api/outing/approve",
+        data: {"outingId": id},
+      );
       _loadAllOutings(); // refresh lists
     } catch (e) {
       print("Approve error: $e");
@@ -36,8 +45,10 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
 
   Future<void> _denyOuting(int id) async {
     try {
-      String apiUrl = dotenv.env['API_URL']!;
-      await dio.post(apiUrl + "/api/outing/deny", data: {"outingId": id});
+      await widget._apiService.dio.post(
+        "/api/outing/deny",
+        data: {"outingId": id},
+      );
       _loadAllOutings(); // refresh lists
     } catch (e) {
       print("Deny error: $e");
@@ -46,8 +57,7 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
 
   Future<void> _loadAllOutings() async {
     try {
-      String apiUrl = dotenv.env['API_URL']!;
-      final response = await dio.get(apiUrl + "/api/outing/all");
+      final response = await widget._apiService.dio.get("/api/outing/all");
 
       if (response.statusCode == 200) {
         final List<dynamic> raw = response.data;

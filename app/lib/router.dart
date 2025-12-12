@@ -32,7 +32,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/teams",
+  initialLocation: "/login",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -71,7 +71,10 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             GoRoute(
               path: "/logindetails",
               builder: (BuildContext context, GoRouterState state) {
-                return const LogindetailsScreen();
+                return LogindetailsScreen(
+                  apiService: context.read(),
+                  auth: context.read(),
+                );
               },
             ),
           ],
@@ -104,6 +107,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
                 child: Scaffold(
                   appBar: TopBar(
                     route: state.uri.path.toString(),
+                    user: context.read(),
                   ), // <— your dynamic top bar
                   backgroundColor: Colors.white,
                   body: child,
@@ -163,32 +167,48 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             GoRoute(
               path: "/teams",
               pageBuilder: (context, _) {
-                return const NoTransitionPage(child: TeamsScreen());
+                return NoTransitionPage(
+                  child: TeamsScreen(user: context.read()),
+                );
               },
             ),
             GoRoute(
               path: "/profile",
-              pageBuilder: (_, _) {
-                return NoTransitionPage(child: const ProfileScreen());
+              pageBuilder: (context, _) {
+                return NoTransitionPage(
+                  child: ProfileScreen(userViewModel: context.read()),
+                );
               },
             ),
             GoRoute(
               path: "/request-outing",
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return NoTransitionPage(child: const RequestOutingScreen());
+                return NoTransitionPage(
+                  child: RequestOutingScreen(
+                    api: context.read(),
+                    user: context.read(),
+                  ),
+                );
               },
             ),
 
             GoRoute(
               path: "/approve-request",
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return NoTransitionPage(child: const ApproveRequestScreen());
+                return NoTransitionPage(
+                  child: ApproveRequestScreen(
+                    api: context.read(),
+                    user: context.read(),
+                  ),
+                );
               },
             ),
             GoRoute(
               path: '/chat',
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return NoTransitionPage(child: const AskSimhiScreen());
+                return NoTransitionPage(
+                  child: AskSimhiScreen(user: context.read()),
+                );
               },
             ),
             GoRoute(

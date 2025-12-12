@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/sport.dart';
-import 'package:iism_2025/services/user_cache.dart';
-import 'package:iism_2025/services/user_loader.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/sbs.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final UserViewModel _userViewModel;
+  const ProfileScreen({super.key, required UserViewModel userViewModel})
+    : _userViewModel = userViewModel;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -22,26 +23,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    load();
-    //    print("yo");
-    // print(sportImage);
-  }
-
-  Future<void> load() async {
-    await loadUserData();
-
-    if (UserCache().sports != null && UserCache().sports!.isNotEmpty) {
-      //       print("FIRST SPORT ENTRY: ${UserCache().sports![0]}");
-      // print("TYPE: ${UserCache().sports![0].runtimeType}");
-      final firstSport = UserCache().sports![0];
+    if (widget._userViewModel.me!.sports != null &&
+        (widget._userViewModel.me!.sports as List<dynamic>).isNotEmpty) {
+      final firstSport = widget._userViewModel.me!.sports![0];
 
       final sportId = firstSport["sportId"];
       sportEnum = getSportFromSportId(sportId);
       sportImage = getSportImageSrc(sportEnum);
     }
-    setState(() {
-      loading = false; // set once, AFTER async load
-    });
+    loading = false;
   }
 
   @override
@@ -68,10 +58,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       // Avatar
                       CircleAvatar(
                         radius: 35,
-                        backgroundImage: UserCache().profilePic != null
-                            ? NetworkImage(UserCache().profilePic!)
+                        backgroundImage:
+                            widget._userViewModel.me!.profilePic != null
+                            ? NetworkImage(
+                                widget._userViewModel.me!.profilePic!,
+                              )
                             : null,
-                        child: UserCache().profilePic == null
+                        child: widget._userViewModel.me!.profilePic == null
                             ? const Icon(
                                 Icons.person,
                                 color: Colors.white,
@@ -87,9 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Row(
                             children: [
                               Text(
-                                (UserCache().firstName ?? "") +
-                                    " " +
-                                    (UserCache().lastName ?? ""),
+                                '${widget._userViewModel.me?.firstName} ${widget._userViewModel.me?.lastName ?? " "}',
                                 style: TextStyle(
                                   fontSize: Constants.titlesTextSize,
                                   color: Colors.black,
@@ -98,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ],
                           ),
                           Text(
-                            UserCache().email ?? "",
+                            widget._userViewModel.me!.email,
                             style: const TextStyle(
                               fontSize: Constants.buttonTextSize,
                               color: CustomColors.darkGray,
@@ -106,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            "IIT " + (UserCache().institute ?? ""),
+                            "IIT ${widget._userViewModel.me!.institute}",
                             style: const TextStyle(
                               fontSize: Constants.buttonTextSize,
                               color: CustomColors.darkGray,
@@ -121,11 +112,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   UserRow(
                     title:
-                        (UserCache().sports != null &&
-                            UserCache().sports!.isNotEmpty)
+                        (widget._userViewModel.me!.sports != null &&
+                            widget._userViewModel.me!.sports!.isNotEmpty)
                         ? sportEnum?.name ?? "NULL"
                         : "NULL",
-                    gender: UserCache().gender ?? "No name",
+                    gender: widget._userViewModel.me!.gender,
                     imageUrl: sportImage,
                     right: Text("View"),
                   ),
@@ -154,11 +145,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
 
                         // 🔥 Barcode 128 using assignedId
-                        if (UserCache().assignedId != null)
+                        if (widget._userViewModel.me!.assignedId != null)
                           Expanded(
                             child: BarcodeWidget(
                               barcode: Barcode.code128(),
-                              data: UserCache().assignedId.toString(),
+                              data: widget._userViewModel.me!.assignedId
+                                  .toString(),
                               width: null,
                               height: 56,
                               drawText: false,
@@ -173,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // -----------------------------
                   // OUTING CARDS BASED ON ROLE
                   // -----------------------------
-                  if (UserCache().role == 2)
+                  if (widget._userViewModel.me!.role == 2)
                     GestureDetector(
                       onTap: () {
                         context.push("/request-outing");
@@ -225,7 +217,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
 
-                  if (UserCache().role == 6)
+                  if (widget._userViewModel.me!.role == 6)
                     GestureDetector(
                       onTap: () {
                         context.push("/approve-request");

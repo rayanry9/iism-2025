@@ -4,13 +4,14 @@ import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
 import 'package:iism_2025/constants/sport.dart';
-import 'package:iism_2025/models/user.dart';
-import 'package:iism_2025/services/user_cache.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:provider/provider.dart';
 
 class TeamsScreen extends StatefulWidget {
-  const TeamsScreen({super.key});
+  final UserViewModel _userViewModel;
+  const TeamsScreen({super.key, required UserViewModel user})
+    : _userViewModel = user;
 
   @override
   State<StatefulWidget> createState() => _TeamsScreenState();
@@ -19,7 +20,6 @@ class TeamsScreen extends StatefulWidget {
 class _TeamsScreenState extends State<TeamsScreen> {
   Sports _selectedSport = Sports.athletics;
   Gender _selectedGender = Gender.men;
-  List<GetPlayersData>? _playersData;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,9 @@ class _TeamsScreenState extends State<TeamsScreen> {
             child: Wrap(
               spacing: 12,
               runSpacing: 16,
-              children: getSportsAll(UserCache().staff!).map((val) {
+              children: getSportsAll(widget._userViewModel.me!.staff).map((
+                val,
+              ) {
                 return Transform(
                   alignment: AlignmentGeometry.center,
                   transform: Matrix4.skewX(-Constants.skewXValue),
