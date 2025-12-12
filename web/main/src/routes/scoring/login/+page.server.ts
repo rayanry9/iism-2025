@@ -15,6 +15,7 @@ export const actions = {
 				text: (await res.json())['message']
 			};
 		} else if (res.status == 200) {
+			console.log(res);
 			cookies.set('jwt', res.headers.getSetCookie()[0].split(';')[0].split('=')[1], {
 				path: '/',
 				maxAge: 60 * 60 * 6,

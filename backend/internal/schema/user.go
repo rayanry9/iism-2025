@@ -187,7 +187,7 @@ type GetPlayerCountResponse struct {
 
 type GetPlayersResponse struct {
 	UserId     int     `json:"userId"`
-	ProfilePic string  `json:"profilePic"`
+	ProfilePic *string `json:"profilePic"`
 	FirstName  string  `json:"firstName"`
 	MiddleName *string `json:"middleName"`
 	LastName   *string `json:"lastName"`

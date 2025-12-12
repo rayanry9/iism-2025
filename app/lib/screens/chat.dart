@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iism_2025/services/user_cache.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 
 class AskSimhiScreen extends StatefulWidget {
-  const AskSimhiScreen({super.key});
+  final UserViewModel _userViewModel;
+  const AskSimhiScreen({super.key, required UserViewModel user})
+    : _userViewModel = user;
 
   @override
   State<AskSimhiScreen> createState() => _AskSimhiScreenState();
@@ -23,7 +25,7 @@ class _AskSimhiScreenState extends State<AskSimhiScreen> {
             duration: const Duration(milliseconds: 300),
             child: hasMessages
                 ? _ChatSection(messages: messages)
-                : const _WelcomeSection(),
+                : _WelcomeSection(user: widget._userViewModel),
           ),
         ),
         _InputArea(controller: _controller, onSend: sendMessage),
@@ -164,11 +166,12 @@ class _InputArea extends StatelessWidget {
 // ---------------------- WELCOME SECTION ----------------------
 
 class _WelcomeSection extends StatelessWidget {
-  const _WelcomeSection();
+  final UserViewModel _userViewModel;
+  const _WelcomeSection({required UserViewModel user}) : _userViewModel = user;
 
   @override
   Widget build(BuildContext context) {
-    final userName = UserCache().firstName ?? "there";
+    final userName = _userViewModel.me!.firstName;
     return Column(
       key: const ValueKey("welcome"),
       children: [
