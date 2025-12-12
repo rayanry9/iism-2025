@@ -1,5 +1,7 @@
 <script lang="ts">
 //   import { goto } from '$app/navigation'
+    // import { $state } from 'svelte-runes'
+
   import footballIcon from '$lib/assets/sport/football.webp'
   import type { IITNames } from '$lib/types/iitNames'
   import { getIITImgSrc } from '$lib/utility/iitLogoImgSrc'
@@ -27,13 +29,40 @@
 		{ js: 67, name: "Virat Kohli", id: 9 },
 		{ js: 67, name: "Virat Kohli", id: 10 }
 	]
-  let teamA: TeamState = { name: teams[0], goals: 0, redCard: false, yellowCard: false }
-  let teamB: TeamState = { name: teams[1], goals: 0, redCard: false, yellowCard: false }
+  let teamA = $state<TeamState>({
+    name: teams[0],
+    goals: 0,
+    redCard: false,
+    yellowCard: false
+    });
+
+    let teamB = $state<TeamState>({
+    name: teams[1],
+    goals: 0,
+    redCard: false,
+    yellowCard: false
+    });
 
   // history for undo
   let history: [TeamState, TeamState][] = []
   let showCardPopup = $state(false)
   let cardType = $state<"red" | "yellow" | null>(null)
+    let showEndMatchPopup = $state(false);
+
+  let showKickTakerPopup = $state(false);
+let showKickResultPopup = $state(false);
+
+    let selectedKicker = $state<string | null>(null);
+    let showGoalPopup = $state(false);
+        let goalTeam: 'A' | 'B' | null = $state(null);
+
+        let showTeamMenu = $state(false);
+let activeTeam: 'A' | 'B' | null = $state(null);
+
+let showOutPopup = $state(false);
+let showInPopup = $state(false);
+
+let outgoingPlayer = $state<string | null>(null);
 
 
   function pushHistory() {
@@ -69,9 +98,13 @@
   }
 
   // timer
-  let timerRunning = false
-  let timerSeconds = 0 // seconds elapsed
-  let timerInterval: number | null = null
+    let timerRunning = $state(false);
+    let timerSeconds = $state(0); // seconds elapsed
+    let timerInterval: number | null = null;
+
+    let showPenaltyPopup = $state(false);
+    let selectedPenaltyTeam = $state<string | null>(null);
+
 
   function formatTime(s: number) {
     const mm = Math.floor(s / 60).toString().padStart(2, '0')
@@ -145,7 +178,14 @@
             <img src={getIITImgSrc(teamA.name)} class="h-5 w-5" alt="logo" />
             <span class="font-semibold text-gray-700">IIT GUWAHATI</span>
           </div>
-          <div class="text-gray-600">⋮</div>
+                <button
+        onclick={() => {
+            activeTeam = 'A'
+            showTeamMenu = true
+        }}
+        class="text-gray-600 text-xl"
+        >⋮</button>
+
         </div>
 
         <div class="grid grid-cols-2 items-center border-t border-b border-gray-500">
@@ -157,7 +197,12 @@
           <!-- add goal -->
           <div class="p-6 h-[100%] flex items-center justify-center border-l border-gray-500">
             <button
-              onclick={() => addGoal('A')}
+              onclick={() => {
+                goalTeam = 'A';
+                showGoalPopup = true;
+            }}
+
+              
               class="flex flex-col items-center gap-2"
             >
               <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +245,14 @@
             <img src={getIITImgSrc(teamB.name)} class="h-5 w-5" alt="logo" />
             <span class="font-semibold text-gray-700">IIT MADRAS</span>
           </div>
-          <div class="text-gray-600">⋮</div>
+          <button
+            onclick={() => {
+                activeTeam = 'B'
+                showTeamMenu = true
+            }}
+            class="text-gray-600 text-xl"
+            >⋮</button>
+
         </div>
 
         <div class="grid grid-cols-2 items-center border-t border-b border-gray-500">
@@ -212,7 +264,11 @@
           <!-- add goal -->
           <div class="p-6  flex items-center justify-center h-[100%] border-l border-gray-500">
             <button
-              onclick={() => addGoal('B')}
+              onclick={() => {
+                goalTeam = 'B';
+                showGoalPopup = true;
+            }}
+
               class="flex flex-col items-center gap-2"
             >
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +305,7 @@
 
       <!-- RECORD PENALTY -->
       <div class="px-4">
-        <button class="w-full bg-[#F0F0F0] text-gray-700 py-3  font-semibold">
+        <button onclick={()=>showPenaltyPopup=true} class="w-full bg-[#F0F0F0] text-gray-700 py-3  font-semibold">
           RECORD PENALTY
         </button>
       </div>
@@ -328,11 +384,12 @@
 
         <!-- END MATCH -->
         <button 
-        onclick={endMatch}
-        class="bg-[#ef4823] text-white py-3 text-sm font-semibold"
-        >
-        END MATCH
-        </button>
+  onclick={() => showEndMatchPopup = true}
+  class="bg-[#ef4823] text-white py-3 text-sm font-semibold"
+>
+  END MATCH
+</button>
+
 
     </div>
 
@@ -364,6 +421,282 @@
     />
 </div>
 {/if}
+{#if showPenaltyPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <div class="bg-white w-[350px] border border-gray-300 shadow-lg rounded-md overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="flex justify-between items-center px-3 py-2 border-b border-gray-300">
+      <span class="font-semibold text-gray-800 text-lg">Penalty Awarded To</span>
+      <button 
+        onclick={() => showPenaltyPopup = false}
+        class="text-gray-700 text-xl font-bold"
+      >×</button>
+    </div>
+
+    <!-- TEAM SELECT GRID -->
+    <div class="grid grid-cols-2 p-3 gap-x-3">
+
+      <!-- TEAM A BOX -->
+      <button
+        onclick={() => {
+            selectedPenaltyTeam = teamA.name; // keep your highlight
+            showPenaltyPopup = false;         // close popup
+            showKickTakerPopup = true;        // open popup 1
+        }}
+        class="relative flex flex-col items-center justify-center gap-2 p-4 border rounded-md transition-all"
+        class:border-orange-500={selectedPenaltyTeam === teamA.name}
+        class:border-gray-300={selectedPenaltyTeam !== teamA.name}
+      >
+        <!-- ORANGE TICK -->
+        {#if selectedPenaltyTeam === teamA.name}
+          <div class="absolute top-2 right-2 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 3.63882L3.26466 5.90346C3.45992 6.09872 3.77651 6.09872 3.97177 5.90346L8.87522 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        {/if}
+
+        <img src={getIITImgSrc(teamA.name)} class="h-12 w-12 object-contain" />
+        <span class="text-sm font-semibold">IIT {teamA.name.toUpperCase()}</span>
+      </button>
+
+      <!-- TEAM B BOX -->
+      <button
+        onclick={() => {
+            selectedPenaltyTeam = teamB.name;
+            showPenaltyPopup = false;
+            showKickTakerPopup = true;
+        }}
+
+        class="relative flex flex-col items-center justify-center gap-2 p-4 border rounded-md transition-all"
+        class:border-orange-500={selectedPenaltyTeam === teamB.name}
+        class:border-gray-300={selectedPenaltyTeam !== teamB.name}
+      >
+        <!-- ORANGE TICK -->
+        {#if selectedPenaltyTeam === teamB.name}
+          <div class="absolute top-2 right-2 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 3.63882L3.26466 5.90346C3.45992 6.09872 3.77651 6.09872 3.97177 5.90346L8.87522 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+
+          </div>
+        {/if}
+
+        <img src={getIITImgSrc(teamB.name)} class="h-12 w-12 object-contain" />
+        <span class="text-sm font-semibold">IIT {teamB.name.toUpperCase()}</span>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+{/if}
+{#if showKickTakerPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+
+    <PopoverBox
+        title="Who is doing the kick?"
+        buttons={players.map(p => p.name)}
+        onSelect={(name: string) => {
+            selectedKicker = name;
+            showKickTakerPopup = false;
+            showKickResultPopup = true; // open popup 2
+        }}
+        onClose={() => showKickTakerPopup = false}
+    />
+
+</div>
+{/if}
+{#if showKickResultPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+
+    <PopoverBox
+        title="Did they get point?"
+        buttons={["Yes (Goal)", "No (Miss)"]}
+        onSelect={(result: string) => {
+            
+            console.log("Penalty by:", selectedPenaltyTeam);
+            console.log("Kicker:", selectedKicker);
+            console.log("Result:", result);
+
+            // YOUR LOGIC HERE:
+            // if result === "Yes (Goal)" -> addGoal to that team
+
+            if (result.startsWith("Yes")) {
+                if (selectedPenaltyTeam === teamA.name) teamA.goals++;
+                else teamB.goals++;
+            }
+
+            showKickResultPopup = false;
+        }}
+        onClose={() => showKickResultPopup = false}
+    />
+
+</div>
+{/if}
+{#if showGoalPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+  
+  <div class="bg-white w-[330px] border border-gray-300 rounded-md shadow-lg overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="flex justify-between items-center px-4 py-3 border-b border-[#ef4823] ">
+      <span class="text-lg font-semibold text-[#ef4823]">Goal Scored By</span>
+      <button 
+        onclick={() => showGoalPopup = false} 
+        class="text-gray-600 text-xl font-bold">×</button>
+    </div>
+
+    <!-- UNKNOWN / OWN GOAL BUTTON -->
+    <div class="p-3">
+      <button
+        onclick={() => {
+          if (goalTeam) addGoal(goalTeam);  // ← updates Team A or B
+          console.log("Goal: Unknown / Own Goal");
+          showGoalPopup = false;
+        }}
+        class="w-full py-3 bg-[#F8F8F8] border border-gray-300 text-gray-700 font-medium"
+      >
+        Unknown / Own Goal
+      </button>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="text-center text-gray-500 text-sm pb-2">
+      Or Select Player
+    </div>
+
+    <!-- PLAYER GRID -->
+    <div class="grid grid-cols-2 gap-2 p-3 max-h-[260px] overflow-y-auto">
+
+      {#each players as p}
+        <button
+          onclick={() => {
+            if (goalTeam) addGoal(goalTeam);  // ← also updates correct team
+            console.log("Goal Scored By:", p.name);
+            showGoalPopup = false;
+          }}
+          class="py-3 bg-[#F3F3F3] border border-gray-300 text-gray-800 text-sm font-medium"
+        >
+          {p.name}
+        </button>
+      {/each}
+
+    </div>
+
+  </div>
+
+</div>
+{/if}
+{#if showTeamMenu}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <PopoverBox
+    title={activeTeam === 'A' ? "IIT GUWAHATI" : "IIT MADRAS"}
+    buttons={["Add Substitute", "Change Goalkeeper"]}
+    color="black"
+    onSelect={(choice: string) => {
+      showTeamMenu = false;
+
+      if (choice === "Add Substitute") {
+        showOutPopup = true;     // open next popup
+      }
+
+      if (choice === "Change Goalkeeper") {
+        console.log("GK Change for", activeTeam);
+        showOutPopup = true;
+      }
+    }}
+    onClose={() => showTeamMenu = false}
+  />
+
+</div>
+{/if}
+{#if showOutPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <PopoverBox
+    title="Who is going Out?"
+    buttons={players.map(p => p.name)}
+    color="black"
+    onSelect={(name: string) => {
+      outgoingPlayer = name;
+      showOutPopup = false;
+      showInPopup = true;    // open next popup
+    }}
+    onClose={() => showOutPopup = false}
+  />
+
+</div>
+{/if}
+{#if showInPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <PopoverBox
+    title="Who is Coming In?"
+    buttons={players.map(p => p.name)}
+    color="black"
+    onSelect={(incoming: string) => {
+
+      console.log("Substitution for team:", activeTeam);
+      console.log("OUT:", outgoingPlayer);
+      console.log("IN:", incoming);
+
+      // TODO: update your roster logic here
+
+      showInPopup = false;
+    }}
+    onClose={() => showInPopup = false}
+  />
+
+</div>
+{/if}
+{#if showEndMatchPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <div class="bg-white w-[90%] border border-gray-300 shadow-lg rounded-md overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="px-3 py-2 flex justify-between items-center">
+      <span class="text-lg font-semibold text-[#ef4823]">End the Match ?</span>
+      
+    </div>
+
+    <!-- ORANGE BAR -->
+    <div class="w-full h-[1.5px] bg-[#ef4823] mb-3"></div>
+
+    <!-- BUTTON ROW -->
+    <div class="grid grid-cols-2 gap-2 px-3 pb-3">
+
+      <!-- GO BACK -->
+      <button
+        onclick={() => showEndMatchPopup = false}
+        class="py-3 bg-[#F0F0F0] text-gray-700 font-medium border border-gray-300"
+      >
+        Go back
+      </button>
+
+      <!-- YES -->
+      <button
+        onclick={() => {
+          console.log("END MATCH CONFIRMED");
+          showEndMatchPopup = false;
+          // TODO: navigate or finish match
+        }}
+        class="py-3 bg-[#ef4823] text-white font-medium"
+      >
+        Yes
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+{/if}
+
 
 </div>
 
