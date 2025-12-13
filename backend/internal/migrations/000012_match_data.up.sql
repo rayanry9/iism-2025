@@ -22,5 +22,6 @@ create table if not exists leaderboards (
 	hosting_iit int not null constraint fk_hosting_institute references institutes (id) constraint allowed_hosting_iit check (hosting_iit = ANY(array[10,17,23])),
 	points int not null,
 	achieved_from text not null,
+	staff bool not null default false,
 	created_at timestamptz not null default now()
 );

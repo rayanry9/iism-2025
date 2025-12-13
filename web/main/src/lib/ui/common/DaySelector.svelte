@@ -45,7 +45,7 @@
 			data-umami-event="Day selector used"
 			data-umami-event-day={currentDate}
 		>
-			DAY {i} - {day.getDate()}/{day.getMonth()}/{day.getFullYear()}
+			DAY {i} - {day.getDate()}/{day.getMonth() + 1}/{day.getFullYear()}
 		</Button>
 	{/each}
 </section>
