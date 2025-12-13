@@ -33,7 +33,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/home",
+  initialLocation: "/campus-map",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
