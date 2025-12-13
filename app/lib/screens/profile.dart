@@ -93,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ],
                           ),
                           Text(
-                            widget._userViewModel.me!.email,
+                            widget._userViewModel.me?.email ?? "",
                             style: const TextStyle(
                               fontSize: Constants.buttonTextSize,
                               color: CustomColors.darkGray,
