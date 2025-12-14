@@ -232,6 +232,10 @@ String? getSportImageSrc(Sports? sport) {
   }
 }
 
+bool isSportIdMixed(int sportId) {
+  return sportId == 58;
+}
+
 bool isSportIdFemale(int sportId) {
   switch (sportId) {
     case 2:

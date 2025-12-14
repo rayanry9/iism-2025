@@ -36,7 +36,7 @@ class Me {
   String? middleName;
   String? lastName;
   String gender;
-  String email;
+  String? email;
   String? profilePic;
   String? contactNo;
   String? emergencyContactNo;

@@ -16,7 +16,9 @@ import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/services/auth.dart';
+import 'package:iism_2025/viewmodel/common_data_view_model.dart';
 import 'package:iism_2025/viewmodel/teams_view_model.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:iism_2025/screens/request_outing.dart';
@@ -27,13 +29,15 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
   refreshListenable: auth,
   redirect: (context, state) {
     if (auth.isLoggedIn && (state.uri.path.contains('/login'))) {
+      context.read<UserViewModel>().refetchData();
       return '/home';
     } else if (!auth.isLoggedIn && !(state.uri.path.contains('/login'))) {
+      context.read<UserViewModel>().refetchData();
       return '/login';
     }
     return null;
   },
-  initialLocation: "/campus-map",
+  initialLocation: "/schedule",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -98,13 +102,28 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
           builder: (BuildContext context, GoRouterState state, Widget child) {
             final hideFabScreens = {
               "/chat",
+              "/campus-map",
               // add more screens here
             };
 
             final showFab = !hideFabScreens.contains(state.uri.path.toString());
-            return ChangeNotifierProvider(
-              create: (_) =>
-                  TeamsViewModel(user: context.read(), api: context.read()),
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProxyProvider<UserViewModel, TeamsViewModel>(
+                  create: (_) =>
+                      TeamsViewModel(user: context.read(), api: context.read()),
+                  update: (context, user, teams) {
+                    teams!.updateUserViewModel(user);
+                    return teams;
+                  },
+                ),
+                FutureProvider(
+                  create: (context) async {
+                    return CommonDataViewModel.init(context.read());
+                  },
+                  initialData: CommonDataViewModel.base(context.read()),
+                ),
+              ],
               child: MyTabBar(
                 child: Scaffold(
                   appBar: TopBar(
@@ -163,7 +182,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             ),
             GoRoute(
               path: "/schedule",
-              pageBuilder: (_, _) =>
+              pageBuilder: (context, _) =>
                   const NoTransitionPage(child: ScheduleScreen()),
             ),
             GoRoute(

@@ -22,10 +22,14 @@ class LogindetailsScreen extends StatefulWidget {
 
 class _LogindetailsScreenState extends State<LogindetailsScreen> {
   bool _obscure = true;
+  bool _requested = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   void onLoginPressed(BuildContext context) async {
+    setState(() {
+      _requested = true;
+    });
     bool success = await widget._apiService.login(
       emailController.text.trim(),
       passwordController.text.trim(),
@@ -37,6 +41,8 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
           context.go('/home');
         }
       }
+    } else {
+      _requested = false;
     }
   }
 
@@ -140,17 +146,21 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
                           ),
                         ),
                         onPressed: () {
-                          onLoginPressed(context);
+                          if (!_requested) {
+                            onLoginPressed(context);
+                          }
                         },
                         child: Transform(
                           transform: Matrix4.skewX(Constants.skewXValue),
                           alignment: Alignment.center,
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              fontSize: Constants.buttonTextSize,
-                            ),
-                          ),
+                          child: _requested
+                              ? CircularProgressIndicator(color: Colors.white)
+                              : Text(
+                                  "LOGIN",
+                                  style: TextStyle(
+                                    fontSize: Constants.buttonTextSize,
+                                  ),
+                                ),
                         ),
                       ),
                     ),

@@ -11,7 +11,7 @@ class TeamsViewModel extends ChangeNotifier {
   List<GetPlayersData>? _playerData;
 
   final ApiService _apiService;
-  final UserViewModel _userViewModel;
+  UserViewModel _userViewModel;
 
   TeamsViewModel({required ApiService api, required UserViewModel user})
     : _sport = Sports.athletics,
@@ -24,6 +24,11 @@ class TeamsViewModel extends ChangeNotifier {
   Sports get sport => _sport;
   List<GetPlayersData>? get playersData => _playerData;
   String? get institute => _institute;
+
+  void updateUserViewModel(UserViewModel user) {
+    _userViewModel = user;
+    notifyListeners();
+  }
 
   void updateGender(Gender gender) {
     _gender = gender;

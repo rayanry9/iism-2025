@@ -1,7 +1,13 @@
+import 'dart:developer';
+
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:iism_2025/models/athletic_match.dart';
+import 'package:iism_2025/models/institute.dart';
+import 'package:iism_2025/models/pool_match.dart';
+import 'package:iism_2025/models/sport.dart';
 import 'package:iism_2025/models/user.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -62,7 +68,6 @@ class ApiService {
   Future<Me?> getMyData() async {
     try {
       final response = await dio.get('/api/me');
-      print(response);
 
       var instance = Me.fromJson(response.data);
 
@@ -71,11 +76,61 @@ class ApiService {
           {"sportId": 6, "name": "Tennis", "staff": false, "type": 1},
         ];
         instance.assignedId = '1';
-        instance.role = 6; // Forces the outing card to appear
+        instance.role = 2; // Forces the outing card to appear
       }
       return instance;
     } catch (e) {
-      print("User API error: $e");
+      log("Failed to fetch my data", name: "Api Service");
+    }
+    return null;
+  }
+
+  Future<List<GetAllSportsResponse>?> getAllSports() async {
+    try {
+      final res = (await dio.get('/api/get-all-sports')).data;
+
+      return (res as List).map((elem) {
+        return GetAllSportsResponse.fromJson(elem);
+      }).toList();
+    } catch (e) {
+      log("Failed to fetch all sports", name: "Api Service");
+    }
+    return null;
+  }
+
+  Future<List<GetAllInstitutesResponse>?> getAllInstitutes() async {
+    try {
+      final res = (await dio.get('/api/get-all-institutes')).data;
+
+      return (res as List).map((elem) {
+        return GetAllInstitutesResponse.fromJson(elem);
+      }).toList();
+    } catch (e) {
+      log("Failed to fetch all institutes", name: "Api Service");
+    }
+    return null;
+  }
+
+  Future<List<GetAllPoolMatchesResponse>?> getAllPoolMatches() async {
+    try {
+      final res = (await dio.get('/api/get-all-pool-matches')).data;
+      return (res as List).map((elem) {
+        return GetAllPoolMatchesResponse.fromJson(elem);
+      }).toList();
+    } catch (e) {
+      log("Failed to fetch all pool matches", name: "Api Service");
+    }
+    return null;
+  }
+
+  Future<List<GetAllAthleticMatchesResponse>?> getAllAthleticMatches() async {
+    try {
+      final res = (await dio.get('/api/get-all-athletic-matches')).data;
+      return (res as List).map((elem) {
+        return GetAllAthleticMatchesResponse.fromJson(elem);
+      }).toList();
+    } catch (e) {
+      log("Failed to fetch all athletic matches", name: "Api Service");
     }
     return null;
   }

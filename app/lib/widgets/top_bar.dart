@@ -1,3 +1,4 @@
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
@@ -33,15 +34,17 @@ class _TopBarState extends State<TopBar> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<UserViewModel>();
     return DynamicNavbar(
       background: CustomColors.darkBlue,
       child: _buildChild(widget.route),
     );
   }
 
+  bool _liveMatches = true;
+
   Widget? _buildChild(String route) {
     if (route.contains("/home")) {
-      context.watch<UserViewModel>();
       return Row(
         spacing: 12,
         children: [
@@ -182,6 +185,84 @@ class _TopBarState extends State<TopBar> {
             value: context.read<TeamsViewModel>().institute,
             onChanged: (value) {
               context.read<TeamsViewModel>().updateInstitute(value!);
+            },
+          ),
+        ),
+      );
+    }
+
+    if (route == "/schedule") {
+      return Align(
+        alignment: AlignmentGeometry.centerLeft,
+        child: Text(
+          "FULL SCHEDULE",
+          style: TextStyle(
+            fontSize: Constants.heading2TextSize,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      );
+    }
+    if (route == '/gallery') {
+      return Align(
+        alignment: AlignmentGeometry.centerLeft,
+        child: Text(
+          "GALLERY",
+          style: TextStyle(
+            fontSize: Constants.heading2TextSize,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      );
+    }
+
+    if (route == '/matches') {
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 18),
+        child: Align(
+          alignment: Alignment.center,
+          child: CustomSlidingSegmentedControl<bool>(
+            initialValue: _liveMatches,
+            innerPadding: EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: BoxBorder.all(color: CustomColors.gray, width: 0.5),
+              borderRadius: BorderRadius.circular(40),
+            ),
+            thumbDecoration: BoxDecoration(
+              color: CustomColors.orange,
+              borderRadius: BorderRadius.circular(40),
+            ),
+            children: {
+              true: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Text(
+                  "LIVE MATCHES",
+                  style: TextStyle(
+                    color: _liveMatches ? Colors.white : Colors.black,
+                    fontSize: Constants.buttonTextSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              false: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                child: Text(
+                  "RESULTS",
+                  style: TextStyle(
+                    color: !_liveMatches ? Colors.white : Colors.black,
+                    fontSize: Constants.buttonTextSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            },
+            onValueChanged: (v) {
+              setState(() {
+                _liveMatches = v;
+              });
             },
           ),
         ),
