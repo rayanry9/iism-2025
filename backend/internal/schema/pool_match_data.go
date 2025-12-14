@@ -17,6 +17,7 @@ type GetPoolMatchDataByIdRequest struct {
 
 type GetPoolMatchDataByIdResponse struct {
 	Id           int   `json:"id"`
+	MatchId      int   `json:"matchId"`
 	Team1Score   []int `json:"team1Score"`
 	Team1Balls   int   `json:"team1Balls"`
 	Team1Wickets int   `json:"team1Wickets"`

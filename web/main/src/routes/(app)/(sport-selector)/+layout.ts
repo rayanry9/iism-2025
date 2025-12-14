@@ -7,10 +7,9 @@ import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ fetch }) => {
 	return {
-		athleticMatches: getAllAthleticMatches(fetch),
-		poolMatches: getAllPoolMatches(fetch),
-		institutes: getAllInstitutes(fetch),
-		allSports: getAllSports(fetch),
-		poolTeams: getAllPoolTeams()
+		athleticMatches: await getAllAthleticMatches(fetch),
+		poolMatches: await getAllPoolMatches(fetch),
+		institutes: await getAllInstitutes(fetch),
+		allSports: await getAllSports(fetch)
 	};
 };

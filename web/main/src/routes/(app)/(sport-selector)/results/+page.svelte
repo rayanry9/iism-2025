@@ -28,5 +28,9 @@
 		{/await}
 	{/await}
 {:else}
-	<PastMatches poolMatches={data.poolMatches} />
+	<PastMatches
+		poolMatchData={data.matchData}
+		poolMatches={data.poolMatches}
+		institutes={data.institutes}
+	/>
 {/if}

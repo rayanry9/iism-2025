@@ -1,7 +1,7 @@
 tmp
 .env
 app
-output-image.tar.xz
+output-image*
 backup-*
 images/
 reg_cli

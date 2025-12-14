@@ -22,7 +22,7 @@
 		participants
 	}: {
 		sportId: number;
-		startTime: string;
+		startTime: Date;
 		subCTA: Snippet;
 		matchData: GetPoolMatchDataById;
 		team1: IITNames;
@@ -68,7 +68,7 @@
 		<div class="flex w-1/2 flex-col items-center justify-center gap-y-2 py-4">
 			<div class="flex flex-col items-center">
 				<p class="text-custom-orange">Started At</p>
-				<h2>{startTime}</h2>
+				<h2>{startTime.toLocaleTimeString().toUpperCase().replace(':00 ', ' ')}</h2>
 			</div>
 
 			{@render subCTA()}
@@ -112,7 +112,7 @@
 				<div class="flex items-center gap-x-1">
 					<div class="flex flex-col items-center">
 						<div class="text-custom-orange title-text">
-							{matchData.team1Score}-{matchData.team1Wickets}
+							{matchData.team1Score[0] ?? 0}-{matchData.team1Wickets ?? 0}
 						</div>
 						<div class="flex flex-col">
 							Over {Math.floor(
@@ -125,7 +125,7 @@
 
 					<div class="flex flex-col items-center">
 						<div class="text-custom-orange title-text">
-							{matchData.team2Score}-{matchData.team2Wickets}
+							{matchData.team2Score[0] ?? 0}-{matchData.team2Wickets ?? 0}
 						</div>
 						<div class="flex flex-col">
 							Over {Math.floor(

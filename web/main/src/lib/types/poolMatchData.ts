@@ -1,5 +1,6 @@
 interface GetPoolMatchDataById {
 	id: number;
+	matchId: number;
 	team1Score: number[];
 	team1Balls: number;
 	team1Wickets: number;

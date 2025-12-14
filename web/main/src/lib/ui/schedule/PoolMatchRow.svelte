@@ -90,7 +90,7 @@
 				{#if matchData.status == MatchStatus.MatchPending}
 					Pending
 				{:else if matchData.status == MatchStatus.MatchConcluded}
-					Concluded
+					Done
 				{:else if matchData.status == MatchStatus.MatchOngoing && matchData.liveStreamLink != null}
 					<a
 						href={matchData.liveStreamLink}
@@ -98,7 +98,7 @@
 						>LIVE ↗</a
 					>
 				{:else}
-					Ongoing {matchData.liveStreamLink}
+					Ongoing
 				{/if}
 			</span>
 		</div>
