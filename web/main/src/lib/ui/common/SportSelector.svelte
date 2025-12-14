@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { globals } from '$lib/state.svelte';
 	import type { Sports } from '$lib/types/sports';
 	import { getSportsAll } from '$lib/utility/sport';
@@ -31,8 +32,10 @@
 		>
 			{#if sports[i]}
 				{sports[i]}
-			{:else}
+			{:else if page.url.pathname != '/live-score'}
 				Overall
+			{:else}
+				ALL MATCHES
 			{/if}
 		</Button>
 	{/each}

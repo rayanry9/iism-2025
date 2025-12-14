@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import { globals } from '$lib/state.svelte.js';
+	import type { GetLeaderBoardDataResponse } from '$lib/types/leaderboard.js';
 	import type { Sports } from '$lib/types/sports';
 	import OverallLeaderboard from '$lib/ui/results/OverallLeaderboard.svelte';
 	import PastMatches from '$lib/ui/results/PastMatches.svelte';
@@ -27,5 +28,5 @@
 		{/await}
 	{/await}
 {:else}
-	<PastMatches />
+	<PastMatches poolMatches={data.poolMatches} />
 {/if}

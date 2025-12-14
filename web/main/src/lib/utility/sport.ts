@@ -116,7 +116,7 @@ export function getSportFromSportId(id: number): Sports | null {
 		case 59:
 			return 'Chess';
 		default:
-			return null;
+			return 'Athletics';
 	}
 }
 

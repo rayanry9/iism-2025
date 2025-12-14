@@ -1,4 +1,4 @@
-interface GetLeaderBoardDataResponse {
+export interface GetLeaderBoardDataResponse {
 	instituteId: number;
 	hostingIIT: number;
 	points: number;
