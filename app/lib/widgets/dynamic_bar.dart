@@ -41,7 +41,7 @@ class DynamicNavbar extends StatelessWidget implements PreferredSizeWidget {
           Positioned(
             top: -20,
             left: -10,
-            right: 0,
+            right: -20,
             child: Transform.rotate(
               angle: -0.05, // adjust tilt here 🔥
               child: Container(
@@ -57,6 +57,7 @@ class DynamicNavbar extends StatelessWidget implements PreferredSizeWidget {
             left: 0,
             right: 0,
             child: SizedBox(
+              width: double.infinity,
               height: preferredSize.height,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(

@@ -105,8 +105,8 @@
 		</div>
 	</div>
 	<div class="hidden"></div>
-	<div class="relative grid shrink-0 grid-cols-[1fr_auto_1fr] px-3 py-5 max-xl:w-full xl:w-1/2">
-		{#if matchData != null}
+	{#if matchData != null}
+		<div class="relative grid shrink-0 grid-cols-[1fr_auto_1fr] px-3 py-5 max-xl:w-full xl:w-1/2">
 			<div class="flex flex-col items-center justify-center gap-y-1 xl:gap-y-2">
 				<img
 					src={getIITImgSrc(institutes.find((i) => i.id == matchData.team1Id)!.name as IITNames)}
@@ -177,46 +177,72 @@
 				{matchData.matchName}
 				<div class="h-full w-1/3"></div>
 			</div>
-		{:else if athleticMatchData != null}
-			<div class="flex w-full flex-col items-center px-8 py-6">
-				<div class="button-text text-custom-blue">
-					{sports.find((s) => s.id == athleticMatchData.sportId)!.name.toUpperCase()}
-				</div>
-				<div class="flex flex-wrap gap-3">
-					{#each athleticMatchData.participants as parti (parti)}
-						<img
-							src={getIITImgSrc(institutes.find((i) => i.id == parti)!.name as IITNames)}
-							alt={institutes.find((i) => i.id == parti)!.name}
-							class="size-4"
-						/>
-					{/each}
-				</div>
-			</div>
-		{/if}
-		<a href={(matchData ?? athleticMatchData)!.liveStreamLink} target="_blank" class="xl:hidden">
-			<button
-				class="absolute {(matchData ?? athleticMatchData)!.liveStreamLink
-					? 'bg-custom-orange'
-					: 'bg-custom-gray'} right-0 bottom-0 left-0 mx-auto flex w-fit translate-y-1/2 items-center gap-x-3 rounded-full px-4 py-3 text-white"
-			>
-				<svg
-					width="14"
-					height="16"
-					viewBox="0 0 14 16"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
+
+			<a href={(matchData ?? athleticMatchData)!.liveStreamLink} target="_blank" class="xl:hidden">
+				<button
+					class="absolute {(matchData ?? athleticMatchData)!.liveStreamLink
+						? 'bg-custom-orange'
+						: 'bg-custom-gray'} right-0 bottom-0 left-0 mx-auto flex w-fit translate-y-1/2 items-center gap-x-3 rounded-full px-4 py-3 text-white"
 				>
-					<path
-						d="M0 14.314V1.00167C0 0.233265 0.830617 -0.248033 1.49728 0.134081L13.068 6.7661C13.737 7.1496 13.7385 8.11411 13.0707 8.49971L1.5 15.18C0.833333 15.5649 0 15.0838 0 14.314Z"
-						fill="white"
+					<svg
+						width="14"
+						height="16"
+						viewBox="0 0 14 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M0 14.314V1.00167C0 0.233265 0.830617 -0.248033 1.49728 0.134081L13.068 6.7661C13.737 7.1496 13.7385 8.11411 13.0707 8.49971L1.5 15.18C0.833333 15.5649 0 15.0838 0 14.314Z"
+							fill="white"
+						/>
+					</svg>
+					{#if (matchData ?? athleticMatchData)!!.liveStreamLink}
+						WATCH
+					{:else}
+						N/A
+					{/if}
+				</button>
+			</a>
+		</div>
+	{:else if athleticMatchData != null}
+		<div class="relative flex w-full flex-col items-center gap-y-3 px-8 py-6">
+			<div class="title-text text-custom-blue">
+				{sports.find((s) => s.id == athleticMatchData.sportId)!.name.toUpperCase()}
+			</div>
+			<div class="flex flex-wrap justify-center gap-3">
+				{#each athleticMatchData.participants as parti (parti)}
+					<img
+						src={getIITImgSrc(institutes.find((i) => i.id == parti)!.name as IITNames)}
+						alt={institutes.find((i) => i.id == parti)!.name}
+						class="size-5 md:size-7 2xl:size-8"
 					/>
-				</svg>
-				{#if (matchData ?? athleticMatchData)!!.liveStreamLink}
-					WATCH
-				{:else}
-					N/A
-				{/if}
-			</button>
-		</a>
-	</div>
+				{/each}
+			</div>
+			<a href={(matchData ?? athleticMatchData)!.liveStreamLink} target="_blank" class="xl:hidden">
+				<button
+					class="absolute {(matchData ?? athleticMatchData)!.liveStreamLink
+						? 'bg-custom-orange'
+						: 'bg-custom-gray'} right-0 bottom-0 left-0 mx-auto flex w-fit translate-y-1/2 items-center gap-x-3 rounded-full px-4 py-3 text-white"
+				>
+					<svg
+						width="14"
+						height="16"
+						viewBox="0 0 14 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M0 14.314V1.00167C0 0.233265 0.830617 -0.248033 1.49728 0.134081L13.068 6.7661C13.737 7.1496 13.7385 8.11411 13.0707 8.49971L1.5 15.18C0.833333 15.5649 0 15.0838 0 14.314Z"
+							fill="white"
+						/>
+					</svg>
+					{#if (matchData ?? athleticMatchData)!!.liveStreamLink}
+						WATCH
+					{:else}
+						N/A
+					{/if}
+				</button>
+			</a>
+		</div>
+	{/if}
 </div>

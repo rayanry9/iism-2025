@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rayanry9/iism-2025/backend/internal/db"
@@ -67,27 +66,32 @@ func Login(c *gin.Context) {
 	}
 
 	if os.Getenv("GIN_MODE") == "debug" {
-		http.SetCookie(c.Writer, &http.Cookie{
-			Name:     "jwt",
-			Value:    token,
-			MaxAge:   int((time.Hour * 5)),
-			Path:     "/",
-			Secure:   false,
-			HttpOnly: true,
-			SameSite: http.SameSiteLaxMode,
-		})
+		c.SetSameSite(http.SameSiteLaxMode)
+		c.SetCookie("jwt", token, 60*60*5, "/", "", true, true)
+		// http.SetCookie(c.Writer, &http.Cookie{
+		// 	Name:     "jwt",
+		// 	Value:    token,
+		// 	MaxAge:   60 * 60 * 5,
+		// 	Path:     "/",
+		// 	Secure:   false,
+		// 	HttpOnly: true,
+		// 	SameSite: http.SameSiteLaxMode,
+		// })
 	} else {
-		http.SetCookie(c.Writer, &http.Cookie{
-			Name:     "jwt",
-			Value:    token,
-			MaxAge:   int((time.Hour * 5)),
-			Path:     "/",
-			Domain:   strings.Split(os.Getenv("FRONTEND_URL"), "://")[1],
-			Secure:   true,
-			HttpOnly: true,
-			SameSite: http.SameSiteLaxMode,
-		})
+		c.SetSameSite(http.SameSiteLaxMode)
+		c.SetCookie("jwt", token, 60*60*5, "/", strings.Split(os.Getenv("FRONTEND_URL"), "://")[1], true, true)
+		// http.SetCookie(c.Writer, &http.Cookie{
+		// 	Name:     "jwt",
+		// 	Value:    token,
+		// 	MaxAge:   60 * 60 * 5,
+		// 	Path:     "/",
+		// 	Domain:   strings.Split(os.Getenv("FRONTEND_URL"), "://")[1],
+		// 	Secure:   true,
+		// 	HttpOnly: true,
+		// 	SameSite: http.SameSiteLaxMode,
+		// })
 	}
+	c.Status(http.StatusOK)
 }
 
 func Logout(c *gin.Context) {

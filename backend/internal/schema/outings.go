@@ -7,7 +7,7 @@ type OutingRequest struct {
 	EntryTime time.Time `json:"entryTime"`
 	ExitTime  time.Time `json:"exitTime"`
 }
-type OutingData struct {
+type GetOutingDataResponse struct {
 	OutingId  int       `json:"outingId"`
 	Reason    string    `json:"reason"`
 	EntryTime time.Time `json:"entryTime"`

@@ -36,7 +36,7 @@
 
 	let filteredAthleticMatches = $derived(
 		athleticMatches.filter(
-			(val) => val.status == 2 && (selectedSport == undefined || selectedSport == 'Athletics')
+			(val) => val.status == 3 && (selectedSport == undefined || selectedSport == 'Athletics')
 		)
 	);
 </script>

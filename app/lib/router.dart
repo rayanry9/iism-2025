@@ -16,6 +16,7 @@ import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/services/auth.dart';
+import 'package:iism_2025/viewmodel/approve_outing_view_model.dart';
 import 'package:iism_2025/viewmodel/common_data_view_model.dart';
 import 'package:iism_2025/viewmodel/matches_view_model.dart';
 import 'package:iism_2025/viewmodel/teams_view_model.dart';
@@ -78,8 +79,8 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
               path: "/logindetails",
               builder: (BuildContext context, GoRouterState state) {
                 return LogindetailsScreen(
+                  authStatus: context.read(),
                   apiService: context.read(),
-                  auth: context.read(),
                 );
               },
             ),
@@ -118,11 +119,12 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
                     return teams;
                   },
                 ),
-                FutureProvider(
-                  create: (context) async {
-                    return CommonDataViewModel.init(context.read());
+                ChangeNotifierProvider(
+                  create: (context) {
+                    final vm = CommonDataViewModel(api: context.read());
+                    vm.init();
+                    return vm;
                   },
-                  initialData: CommonDataViewModel.base(context.read()),
                 ),
                 ChangeNotifierProvider(create: (_) => MatchesViewModel()),
               ],
@@ -219,9 +221,17 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
               path: "/approve-request",
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return NoTransitionPage(
-                  child: ApproveRequestScreen(
-                    api: context.read(),
-                    user: context.read(),
+                  child: ChangeNotifierProvider(
+                    create: (context) {
+                      final vm = ApproveOutingViewModel(context.read());
+                      vm.init();
+                      return vm;
+                    },
+
+                    child: ApproveRequestScreen(
+                      api: context.read(),
+                      user: context.read(),
+                    ),
                   ),
                 );
               },

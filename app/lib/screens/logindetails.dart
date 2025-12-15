@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class LogindetailsScreen extends StatefulWidget {
-  final ApiService _apiService;
-  final AuthStatus _authStatus;
+  final ApiService apiService;
+  final AuthStatus authStatus;
   const LogindetailsScreen({
     super.key,
-    required ApiService apiService,
-    required AuthStatus auth,
-  }) : _apiService = apiService,
-       _authStatus = auth;
+    required this.apiService,
+    required this.authStatus,
+  });
 
   @override
   State<LogindetailsScreen> createState() => _LogindetailsScreenState();
@@ -26,24 +25,21 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void onLoginPressed(BuildContext context) async {
-    setState(() {
-      _requested = true;
-    });
-    bool success = await widget._apiService.login(
+  void onLoginPressed() async {
+    final success = await widget.apiService.login(
       emailController.text.trim(),
       passwordController.text.trim(),
     );
+    print("uyiyiyyiuyui");
+    print(success);
     if (success) {
-      if (context.mounted) {
-        await widget._authStatus.checkLoginState();
-        if (context.mounted) {
-          context.go('/home');
-        }
-      }
-    } else {
-      _requested = false;
+      print("adfadfs");
+      await widget.authStatus.checkLoginState();
     }
+    print("nm,n,mnm,nnm,");
+    setState(() {
+      _requested = false;
+    });
   }
 
   @override
@@ -147,8 +143,11 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
                         ),
                         onPressed: () {
                           if (!_requested) {
-                            onLoginPressed(context);
+                            onLoginPressed();
                           }
+                          setState(() {
+                            _requested = true;
+                          });
                         },
                         child: Transform(
                           transform: Matrix4.skewX(Constants.skewXValue),

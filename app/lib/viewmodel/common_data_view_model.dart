@@ -14,24 +14,21 @@ class CommonDataViewModel extends ChangeNotifier {
   late List<GetLeaderboardDataResponse> _leaderboardData;
   final ApiService _apiService;
 
-  static CommonDataViewModel base(ApiService api) {
-    final vm = CommonDataViewModel._(api: api);
-    vm._sportData = [];
-    vm._athleticMatchesData = [];
-    vm._institutesData = [];
-    vm._poolMatchesData = [];
-    vm._leaderboardData = [];
-    return vm;
-  }
+  CommonDataViewModel({required ApiService api})
+    : _apiService = api,
+      _sportData = [],
+      _athleticMatchesData = [],
+      _institutesData = [],
+      _poolMatchesData = [],
+      _leaderboardData = [];
 
-  static Future<CommonDataViewModel> init(ApiService api) async {
-    final vm = CommonDataViewModel._(api: api);
-    vm._sportData = (await api.getAllSports()) ?? [];
-    vm._institutesData = (await api.getAllInstitutes()) ?? [];
-    vm._poolMatchesData = (await api.getAllPoolMatches()) ?? [];
-    vm._athleticMatchesData = (await api.getAllAthleticMatches()) ?? [];
-    vm._leaderboardData = (await api.getLeaderboardData()) ?? [];
-    return vm;
+  Future<void> init() async {
+    _sportData = (await _apiService.getAllSports()) ?? [];
+    _institutesData = (await _apiService.getAllInstitutes()) ?? [];
+    _poolMatchesData = (await _apiService.getAllPoolMatches()) ?? [];
+    _athleticMatchesData = (await _apiService.getAllAthleticMatches()) ?? [];
+    _leaderboardData = (await _apiService.getLeaderboardData()) ?? [];
+    notifyListeners();
   }
 
   List<GetAllSportsResponse> get sports => _sportData;
@@ -40,8 +37,6 @@ class CommonDataViewModel extends ChangeNotifier {
   List<GetAllAthleticMatchesResponse> get athleticMatches =>
       _athleticMatchesData;
   List<GetLeaderboardDataResponse> get leaderboard => _leaderboardData;
-
-  CommonDataViewModel._({required ApiService api}) : _apiService = api;
 
   Future<void> refetchData() async {
     _poolMatchesData = (await _apiService.getAllPoolMatches()) ?? [];
