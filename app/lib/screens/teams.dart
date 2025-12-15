@@ -122,40 +122,51 @@ class TeamsScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      CustomSlidingSegmentedControl<Gender>(
-                        initialValue: teams.gender,
-                        innerPadding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: BoxBorder.all(
-                            color: CustomColors.gray,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        thumbDecoration: BoxDecoration(
-                          color: CustomColors.blue,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        children: {
-                          Gender.men: Icon(
-                            Icons.male,
-                            color: CustomColors.lightBlue,
-                          ),
-                          Gender.women: Icon(
-                            Icons.female,
-                            color: CustomColors.pink,
-                          ),
-                        },
-                        onValueChanged: (v) {
-                          teams.updateGender(v);
-                        },
-                      ),
+                      getSportIdFromSport(
+                                teams.sport,
+                                1,
+                                _userViewModel.me!.staff,
+                              ) !=
+                              getSportIdFromSport(
+                                teams.sport,
+                                2,
+                                _userViewModel.me!.staff,
+                              )
+                          ? CustomSlidingSegmentedControl<Gender>(
+                              initialValue: teams.gender,
+                              innerPadding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: BoxBorder.all(
+                                  color: CustomColors.gray,
+                                  width: 0.5,
+                                ),
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              thumbDecoration: BoxDecoration(
+                                color: CustomColors.blue,
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              children: {
+                                Gender.men: Icon(
+                                  Icons.male,
+                                  color: CustomColors.lightBlue,
+                                ),
+                                Gender.women: Icon(
+                                  Icons.female,
+                                  color: CustomColors.pink,
+                                ),
+                              },
+                              onValueChanged: (v) {
+                                teams.updateGender(v);
+                              },
+                            )
+                          : SizedBox.shrink(),
                     ],
                   ),
                 ),
 
-                teams.playersData != null
+                teams.playersData != null && teams.playersData!.isNotEmpty
                     ? Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: Constants.screenWidthPadding,
@@ -199,7 +210,15 @@ class TeamsScreen extends StatelessWidget {
                           }).toList(),
                         ),
                       )
-                    : SizedBox.shrink(),
+                    : Center(
+                        child: Text(
+                          "Not Participating",
+                          style: TextStyle(
+                            fontSize: Constants.buttonTextSize,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
               ],
             ),
           );

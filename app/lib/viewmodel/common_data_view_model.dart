@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:iism_2025/models/athletic_match.dart';
 import 'package:iism_2025/models/institute.dart';
+import 'package:iism_2025/models/leaderboard.dart';
 import 'package:iism_2025/models/pool_match.dart';
 import 'package:iism_2025/models/sport.dart';
 import 'package:iism_2025/services/api_service.dart';
@@ -10,6 +11,7 @@ class CommonDataViewModel extends ChangeNotifier {
   late List<GetAllInstitutesResponse> _institutesData;
   late List<GetAllPoolMatchesResponse> _poolMatchesData;
   late List<GetAllAthleticMatchesResponse> _athleticMatchesData;
+  late List<GetLeaderboardDataResponse> _leaderboardData;
   final ApiService _apiService;
 
   static CommonDataViewModel base(ApiService api) {
@@ -18,6 +20,7 @@ class CommonDataViewModel extends ChangeNotifier {
     vm._athleticMatchesData = [];
     vm._institutesData = [];
     vm._poolMatchesData = [];
+    vm._leaderboardData = [];
     return vm;
   }
 
@@ -27,6 +30,7 @@ class CommonDataViewModel extends ChangeNotifier {
     vm._institutesData = (await api.getAllInstitutes()) ?? [];
     vm._poolMatchesData = (await api.getAllPoolMatches()) ?? [];
     vm._athleticMatchesData = (await api.getAllAthleticMatches()) ?? [];
+    vm._leaderboardData = (await api.getLeaderboardData()) ?? [];
     return vm;
   }
 
@@ -35,6 +39,7 @@ class CommonDataViewModel extends ChangeNotifier {
   List<GetAllPoolMatchesResponse> get poolMatches => _poolMatchesData;
   List<GetAllAthleticMatchesResponse> get athleticMatches =>
       _athleticMatchesData;
+  List<GetLeaderboardDataResponse> get leaderboard => _leaderboardData;
 
   CommonDataViewModel._({required ApiService api}) : _apiService = api;
 
@@ -42,5 +47,6 @@ class CommonDataViewModel extends ChangeNotifier {
     _poolMatchesData = (await _apiService.getAllPoolMatches()) ?? [];
     _athleticMatchesData = (await _apiService.getAllAthleticMatches()) ?? [];
     notifyListeners();
+    _leaderboardData = (await _apiService.getLeaderboardData()) ?? [];
   }
 }

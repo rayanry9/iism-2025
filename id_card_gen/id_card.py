@@ -76,7 +76,7 @@ def make_circle_avatar(img, diameter):
 
     return avatar
 
-with open('./data-updated.csv', "r") as data:
+with open('./data-new.csv', "r") as data:
     lines = data.readlines()
     for idx in range(len(lines)):
         if idx ==0 :

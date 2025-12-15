@@ -6,6 +6,7 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/models/athletic_match.dart';
 import 'package:iism_2025/models/institute.dart';
+import 'package:iism_2025/models/leaderboard.dart';
 import 'package:iism_2025/models/pool_match.dart';
 import 'package:iism_2025/models/sport.dart';
 import 'package:iism_2025/models/user.dart';
@@ -131,6 +132,18 @@ class ApiService {
       }).toList();
     } catch (e) {
       log("Failed to fetch all athletic matches", name: "Api Service");
+    }
+    return null;
+  }
+
+  Future<List<GetLeaderboardDataResponse>?> getLeaderboardData() async {
+    try {
+      final res = (await dio.get('/api/get-leaderboard')).data;
+      return (res as List).map((elem) {
+        return GetLeaderboardDataResponse.fromJson(elem);
+      }).toList();
+    } catch (e) {
+      log("Failed to fetch all athletic matches $e", name: "Api Service");
     }
     return null;
   }

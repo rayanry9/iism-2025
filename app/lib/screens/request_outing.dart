@@ -5,6 +5,7 @@ import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/viewmodel/user.dart';
+import 'package:intl/intl.dart';
 
 class RequestOutingScreen extends StatefulWidget {
   final UserViewModel _userViewModel;
@@ -84,7 +85,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
       DateTime entryTime = DateTime(
         now.year,
         now.month,
-        now.day,
+        now.day + (_isEntryNextDay ? 1 : 0),
         entryTOD.hour,
         entryTOD.minute,
       );
@@ -108,7 +109,10 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
             content: Text("Outing request submitted successfully"),
           ),
         );
-        setState(() => showNewRequest = false);
+        setState(() {
+          showNewRequest = false;
+          _isSubmitting = false;
+        });
       }
     } catch (e) {
       print("Outing error: $e");
@@ -125,6 +129,8 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
   String? selectedEntryTime;
 
   late final List<String> timeSlots = _generateTimeSlots();
+  bool _isEntryNextDay = false;
+  bool _isSubmitting = false;
 
   List<Map<String, dynamic>> pastRequests = [];
   bool pastRequestsLoading = true;
@@ -176,11 +182,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
   }
 
   String _formatTileTime(DateTime dt) {
-    final t = TimeOfDay.fromDateTime(dt);
-    final hour = (t.hour % 12 == 0) ? 12 : t.hour % 12;
-    final min = t.minute.toString().padLeft(2, '0');
-    final period = t.period == DayPeriod.am ? "AM" : "PM";
-    return "$hour:$min $period";
+    return DateFormat("dd/MM/yy hh:mm a").format(dt);
   }
 
   @override
@@ -250,7 +252,22 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
           _dropdownTime("Select Exit Time", selectedExitTime, (val) {
             setState(() => selectedExitTime = val);
           }),
+
           const SizedBox(height: 20),
+          Row(
+            spacing: 8,
+            children: [
+              Text("Entry Next Day?"),
+              Checkbox(
+                value: _isEntryNextDay,
+                onChanged: (v) {
+                  setState(() {
+                    _isEntryNextDay = v!;
+                  });
+                },
+              ),
+            ],
+          ),
           _dropdownTime("Select Expected Entry Time", selectedEntryTime, (val) {
             setState(() => selectedEntryTime = val);
           }),
@@ -260,10 +277,12 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
               transform: Matrix4.skewX(-0.2), // button skew
               child: ElevatedButton(
                 onPressed: () {
-                  print("Reason: ${reasonController.text}");
-                  print("Exit: $selectedExitTime");
-                  print("Entry: $selectedEntryTime");
-                  submitOutingRequest();
+                  setState(() {
+                    _isSubmitting = true;
+                  });
+                  if (!_isSubmitting) {
+                    submitOutingRequest();
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF227B80),
@@ -283,19 +302,29 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "SUBMIT FOR APPROVAL",
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                      SizedBox(width: 5),
-                      Transform.translate(
-                        offset: Offset(0, -2), // (x, y) → adjust manually
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 17,
-                          color: Colors.white,
-                        ),
-                      ),
+                      ...(!_isSubmitting
+                          ? [
+                              Text(
+                                "SUBMIT FOR APPROVAL",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Transform.translate(
+                                offset: Offset(
+                                  0,
+                                  -2,
+                                ), // (x, y) → adjust manually
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 17,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ]
+                          : [CircularProgressIndicator(color: Colors.white)]),
                     ],
                   ),
                 ),

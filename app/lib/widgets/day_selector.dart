@@ -70,10 +70,10 @@ class DaySelector extends StatelessWidget {
                           transform: Matrix4.skewX(-Constants.skewXValue),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: _selectedDate == elem.$2
+                              backgroundColor: _selectedDate.day == elem.$2.day
                                   ? CustomColors.teal
                                   : Colors.white,
-                              foregroundColor: _selectedDate == elem.$2
+                              foregroundColor: _selectedDate.day == elem.$2.day
                                   ? Colors.white
                                   : Colors.black,
                               padding: EdgeInsetsGeometry.symmetric(
@@ -83,7 +83,7 @@ class DaySelector extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 side: BorderSide(
-                                  color: _selectedDate == elem.$2
+                                  color: _selectedDate.day == elem.$2.day
                                       ? Colors.transparent
                                       : CustomColors.lightGray,
                                 ),

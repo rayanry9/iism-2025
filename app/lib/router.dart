@@ -17,6 +17,7 @@ import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/services/auth.dart';
 import 'package:iism_2025/viewmodel/common_data_view_model.dart';
+import 'package:iism_2025/viewmodel/matches_view_model.dart';
 import 'package:iism_2025/viewmodel/teams_view_model.dart';
 import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
@@ -37,7 +38,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/schedule",
+  initialLocation: "/matches",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -123,6 +124,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
                   },
                   initialData: CommonDataViewModel.base(context.read()),
                 ),
+                ChangeNotifierProvider(create: (_) => MatchesViewModel()),
               ],
               child: MyTabBar(
                 child: Scaffold(
@@ -171,14 +173,14 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
                   const NoTransitionPage(child: GalleryScreen()),
             ),
             GoRoute(
-              path: "/home",
-              pageBuilder: (context, _) =>
-                  const NoTransitionPage(child: HomeScreen()),
-            ),
-            GoRoute(
               path: "/matches",
               pageBuilder: (_, _) =>
                   const NoTransitionPage(child: MatchesScreen()),
+            ),
+            GoRoute(
+              path: "/home",
+              pageBuilder: (_, _) =>
+                  const NoTransitionPage(child: HomeScreen()),
             ),
             GoRoute(
               path: "/schedule",

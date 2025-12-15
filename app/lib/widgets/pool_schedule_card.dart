@@ -196,7 +196,9 @@ class PoolScheduleCard extends StatelessWidget {
                             : "",
                         style: TextStyle(
                           fontSize: Constants.buttonTextSize,
-                          decoration: data.status == MatchStatus.ongoing
+                          decoration:
+                              data.status == MatchStatus.ongoing &&
+                                  data.liveStreamLink != null
                               ? TextDecoration.underline
                               : null,
                           fontWeight: FontWeight.w600,

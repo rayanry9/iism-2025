@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
+import 'package:iism_2025/viewmodel/matches_view_model.dart';
 import 'package:iism_2025/viewmodel/teams_view_model.dart';
 import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/dynamic_bar.dart';
@@ -219,12 +220,14 @@ class _TopBarState extends State<TopBar> {
     }
 
     if (route == '/matches') {
+      final matchesVM = context.watch<MatchesViewModel>();
+
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 18),
         child: Align(
           alignment: Alignment.center,
           child: CustomSlidingSegmentedControl<bool>(
-            initialValue: _liveMatches,
+            initialValue: matchesVM.isLiveMatchScreen,
             innerPadding: EdgeInsets.all(2),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -241,7 +244,9 @@ class _TopBarState extends State<TopBar> {
                 child: Text(
                   "LIVE MATCHES",
                   style: TextStyle(
-                    color: _liveMatches ? Colors.white : Colors.black,
+                    color: matchesVM.isLiveMatchScreen
+                        ? Colors.white
+                        : Colors.black,
                     fontSize: Constants.buttonTextSize,
                     fontWeight: FontWeight.w600,
                   ),
@@ -252,7 +257,9 @@ class _TopBarState extends State<TopBar> {
                 child: Text(
                   "RESULTS",
                   style: TextStyle(
-                    color: !_liveMatches ? Colors.white : Colors.black,
+                    color: !matchesVM.isLiveMatchScreen
+                        ? Colors.white
+                        : Colors.black,
                     fontSize: Constants.buttonTextSize,
                     fontWeight: FontWeight.w600,
                   ),
@@ -260,9 +267,7 @@ class _TopBarState extends State<TopBar> {
               ),
             },
             onValueChanged: (v) {
-              setState(() {
-                _liveMatches = v;
-              });
+              matchesVM.changeScreen(v);
             },
           ),
         ),

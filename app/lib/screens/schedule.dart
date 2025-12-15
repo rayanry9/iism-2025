@@ -24,8 +24,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   void initState() {
     super.initState();
     _selectedDate = context.read<UserViewModel>().me!.staff
-        ? DateTime(2025, 12, 23)
-        : DateTime(2025, 12, 13);
+        ? DateTime.now().isBefore(DateTime(2025, 12, 29))
+              ? DateTime.now()
+              : DateTime(2025, 12, 29)
+        : DateTime.now().isBefore(DateTime(2025, 12, 21))
+        ? DateTime.now()
+        : DateTime(2025, 12, 21);
     _selectedSport = null;
   }
 
@@ -52,21 +56,23 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           }),
     ];
 
-    final List<DateTime> uniqueTimeValues = possibleTimeValues.indexed
-        .where((elem) {
-          return possibleTimeValues.indexWhere(
-                (d) =>
-                    d.day == elem.$2.day &&
-                    d.hour == elem.$2.hour &&
-                    d.minute == elem.$2.minute &&
-                    d.day == _selectedDate.day,
-              ) ==
-              elem.$1;
-        })
-        .map((elem) {
-          return elem.$2;
-        })
-        .toList();
+    final List<DateTime> uniqueTimeValues =
+        possibleTimeValues.indexed
+            .where((elem) {
+              return possibleTimeValues.indexWhere(
+                    (d) =>
+                        d.day == elem.$2.day &&
+                        d.hour == elem.$2.hour &&
+                        d.minute == elem.$2.minute &&
+                        d.day == _selectedDate.day,
+                  ) ==
+                  elem.$1;
+            })
+            .map((elem) {
+              return elem.$2;
+            })
+            .toList()
+          ..sort((a, b) => a.compareTo(b));
 
     return RefreshIndicator(
       onRefresh: () async {
