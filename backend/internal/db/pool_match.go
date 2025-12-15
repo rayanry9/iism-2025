@@ -33,7 +33,13 @@ func GetAllPoolMatches(c *gin.Context) (*[]schema.GetAllPoolMatchesResponse, err
 		pm.venue,
 		pm.type,
 		pm.match_name,
-		pm.live_stream_link
+		pm.live_stream_link,
+		pm.team1_score, 
+		pm.team1_balls, 
+		pm.team1_wickets, 
+		pm.team2_score, 
+		pm.team2_balls, 
+		pm.team2_wickets 
 	FROM 
 		pool_matches pm
 	`)

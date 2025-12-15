@@ -6,32 +6,23 @@
 	import menSvg from '$lib/assets/icons/men.svg';
 	import womenSvg from '$lib/assets/icons/female.svg';
 	import type { Snippet } from 'svelte';
-	import pinImg from '$lib/assets/icons/pin.svg';
+	import type { GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
+	import type { GetAllAthleticMatchesResponse } from '$lib/types/athleticMatch';
+	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
+	import type { GetAllSportsResponse } from '$lib/types/sports';
 
 	let {
-		sportId,
-		startTime,
 		subCTA,
 		matchData,
-		team1,
-		team2,
-		pool,
-		liveStreamLink,
-		isSportAthletic = false,
-		athleticSportName,
-		participants
+		athleticMatchData,
+		institutes,
+		sports
 	}: {
-		sportId: number;
-		startTime: Date;
 		subCTA: Snippet;
-		matchData: GetPoolMatchDataById;
-		team1: IITNames;
-		team2: IITNames;
-		pool: string;
-		liveStreamLink: string | null;
-		isSportAthletic?: boolean;
-		athleticSportName?: string;
-		participants?: IITNames[];
+		matchData?: GetAllPoolMatchesResponse;
+		athleticMatchData?: GetAllAthleticMatchesResponse;
+		institutes: GetAllInstitutesResponse[];
+		sports: GetAllSportsResponse[];
 	} = $props();
 </script>
 
@@ -51,16 +42,21 @@
 				style="clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 0% 100%);"
 			></div>
 			<div class="z-20 my-4 flex gap-x-2 text-center text-white">
-				{getSportFromSportId(sportId)?.toUpperCase()}
+				{getSportFromSportId((matchData ?? athleticMatchData)!.sportId)?.toUpperCase()}
 				<div class="flex">
-					<img src={isSportFemale(sportId) ? womenSvg : menSvg} alt="gender" />
-					{#if isSportMixed(sportId)}
+					<img
+						src={isSportFemale((matchData ?? athleticMatchData)!.sportId) ? womenSvg : menSvg}
+						alt="gender"
+					/>
+					{#if isSportMixed((matchData ?? athleticMatchData)!.sportId)}
 						<img src={womenSvg} alt="gender" />
 					{/if}
 				</div>
 			</div>
 			<img
-				src={getSportImageSrc(getSportFromSportId(sportId) ?? 'Athletics')}
+				src={getSportImageSrc(
+					getSportFromSportId((matchData ?? athleticMatchData)!.sportId) ?? 'Athletics'
+				)}
 				alt="sport"
 				class="absolute -bottom-2/5 z-20 h-full max-xl:-ml-[40%] xl:-ml-[60%] 2xl:-ml-[50%]"
 			/>
@@ -68,13 +64,22 @@
 		<div class="flex w-1/2 flex-col items-center justify-center gap-y-2 py-4">
 			<div class="flex flex-col items-center">
 				<p class="text-custom-orange">Started At</p>
-				<h2>{startTime.toLocaleTimeString().toUpperCase().replace(':00 ', ' ')}</h2>
+				<h2>
+					{(matchData ?? athleticMatchData)!.startTime
+						.toLocaleTimeString()
+						.toUpperCase()
+						.replace(':00 ', ' ')}
+				</h2>
 			</div>
 
 			{@render subCTA()}
-			<a href={liveStreamLink} target="_blank" class="hidden xl:block">
+			<a
+				href={(matchData ?? athleticMatchData)!.liveStreamLink}
+				target="_blank"
+				class="hidden xl:block"
+			>
 				<button
-					class="{liveStreamLink
+					class="{(matchData ?? athleticMatchData)!.liveStreamLink
 						? 'bg-custom-orange'
 						: 'bg-custom-gray'} flex w-fit items-center gap-x-3 rounded-full px-6 py-1.5 text-white"
 				>
@@ -90,7 +95,7 @@
 							fill="white"
 						/>
 					</svg>
-					{#if liveStreamLink}
+					{#if (matchData ?? athleticMatchData)!.liveStreamLink}
 						WATCH
 					{:else}
 						N/A
@@ -101,14 +106,20 @@
 	</div>
 	<div class="hidden"></div>
 	<div class="relative grid shrink-0 grid-cols-[1fr_auto_1fr] px-3 py-5 max-xl:w-full xl:w-1/2">
-		{#if !isSportAthletic}
+		{#if matchData != null}
 			<div class="flex flex-col items-center justify-center gap-y-1 xl:gap-y-2">
-				<img src={getIITImgSrc(team1)} alt={team1} class="size-16 xl:size-20 2xl:size-24" />
+				<img
+					src={getIITImgSrc(institutes.find((i) => i.id == matchData.team1Id)!.name as IITNames)}
+					alt={institutes.find((i) => i.id == matchData.team1Id)!.name}
+					class="size-16 xl:size-20 2xl:size-24"
+				/>
 				<div class="button-text block text-center">
-					IIT{getIITShortCode(team1).toUpperCase()}
+					IIT{getIITShortCode(
+						institutes.find((i) => i.id == matchData.team1Id)!.name as IITNames
+					).toUpperCase()}
 				</div>
 			</div>
-			{#if getSportFromSportId(sportId) == 'Cricket'}
+			{#if getSportFromSportId(matchData.sportId) == 'Cricket'}
 				<div class="flex items-center gap-x-1">
 					<div class="flex flex-col items-center">
 						<div class="text-custom-orange title-text">
@@ -134,7 +145,7 @@
 						</div>
 					</div>
 				</div>
-			{:else if getSportFromSportId(sportId) == 'Volleyball'}
+			{:else if getSportFromSportId(matchData.sportId) == 'Volleyball'}
 				<div class="text-custom-orange my-4 grid grid-cols-[1fr_auto_1fr] gap-x-3">
 					{#each [0, 1, 2, 3, 4] as idx}
 						<p class="">{matchData.team1Score[idx] ?? 0}</p>
@@ -148,31 +159,43 @@
 				</h1>
 			{/if}
 			<div class="flex flex-col items-center justify-center gap-y-1 xl:gap-y-2">
-				<img src={getIITImgSrc(team2)} alt={team2} class="size-16 xl:size-20 2xl:size-24" />
+				<img
+					src={getIITImgSrc(institutes.find((i) => i.id == matchData.team1Id)!.name as IITNames)}
+					alt={institutes.find((i) => i.id == matchData.team1Id)!.name}
+					class="size-16 xl:size-20 2xl:size-24"
+				/>
 				<div class="button-text block text-center">
-					IIT{getIITShortCode(team2).toUpperCase()}
+					IIT{getIITShortCode(
+						institutes.find((i) => i.id == matchData.team1Id)!.name as IITNames
+					).toUpperCase()}
 				</div>
 			</div>
 			<div
 				class="border-t-custom-gray absolute right-0 left-0 mx-auto w-fit border-t py-2 max-xl:top-0 xl:bottom-0"
 			>
 				<div class="h-full w-1/3"></div>
-				{pool}
+				{matchData.matchName}
 				<div class="h-full w-1/3"></div>
 			</div>
-		{:else}
+		{:else if athleticMatchData != null}
 			<div class="flex w-full flex-col items-center px-8 py-6">
-				<div class="button-text text-custom-blue">{athleticSportName}</div>
+				<div class="button-text text-custom-blue">
+					{sports.find((s) => s.id == athleticMatchData.sportId)!.name.toUpperCase()}
+				</div>
 				<div class="flex flex-wrap gap-3">
-					{#each participants as parti (parti)}
-						<img src={getIITImgSrc(parti)} alt={parti} class="size-4" />
+					{#each athleticMatchData.participants as parti (parti)}
+						<img
+							src={getIITImgSrc(institutes.find((i) => i.id == parti)!.name as IITNames)}
+							alt={institutes.find((i) => i.id == parti)!.name}
+							class="size-4"
+						/>
 					{/each}
 				</div>
 			</div>
 		{/if}
-		<a href={liveStreamLink} target="_blank" class="xl:hidden">
+		<a href={(matchData ?? athleticMatchData)!.liveStreamLink} target="_blank" class="xl:hidden">
 			<button
-				class="absolute {liveStreamLink
+				class="absolute {(matchData ?? athleticMatchData)!.liveStreamLink
 					? 'bg-custom-orange'
 					: 'bg-custom-gray'} right-0 bottom-0 left-0 mx-auto flex w-fit translate-y-1/2 items-center gap-x-3 rounded-full px-4 py-3 text-white"
 			>
@@ -188,7 +211,7 @@
 						fill="white"
 					/>
 				</svg>
-				{#if liveStreamLink}
+				{#if (matchData ?? athleticMatchData)!!.liveStreamLink}
 					WATCH
 				{:else}
 					N/A

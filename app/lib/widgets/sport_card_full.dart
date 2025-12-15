@@ -38,6 +38,13 @@ class SportCardFull extends StatelessWidget {
                       ),
                     ),
                     ClipPath(
+                      clipper: _ClipperBlue(),
+                      child: Container(
+                        color: CustomColors.blue,
+                        width: double.infinity,
+                      ),
+                    ),
+                    ClipPath(
                       clipper: _ClipperDarkBlue(),
                       child: Container(
                         color: CustomColors.darkBlue,
@@ -128,8 +135,26 @@ class _ClipperLightBlue extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
     path.moveTo(0, 0);
-    path.lineTo(size.width * 0.9, 0);
+    path.lineTo(size.width * 0.87, 0);
     path.lineTo(size.width * 0.98, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
+
+class _ClipperBlue extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width * 0.91, 0);
+    path.lineTo(size.width * 0.90, size.height);
     path.lineTo(0, size.height);
     path.close();
     return path;

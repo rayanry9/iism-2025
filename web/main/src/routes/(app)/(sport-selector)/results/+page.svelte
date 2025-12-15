@@ -29,7 +29,7 @@
 	{/await}
 {:else}
 	<PastMatches
-		poolMatchData={data.matchData}
+		sports={data.allSports}
 		poolMatches={data.poolMatches}
 		institutes={data.institutes}
 	/>

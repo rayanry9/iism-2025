@@ -1,7 +1,6 @@
 import { getAllAthleticMatches } from '$lib/api/athleticMatches';
 import { getAllInstitutes } from '$lib/api/institutes';
 import { getAllPoolMatches } from '$lib/api/poolMatches';
-import { getAllPoolTeams } from '$lib/api/pools';
 import { getAllSports } from '$lib/api/sports';
 import type { LayoutLoad } from './$types';
 

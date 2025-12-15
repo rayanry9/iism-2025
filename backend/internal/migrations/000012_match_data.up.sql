@@ -51,3 +51,22 @@ begin
 	);
 end;
 $$;
+
+create or replace function add_volleyball_match_data(
+	p_match_id int,
+	p_team1_score int,
+	p_team2_score int,
+	p_set int
+) returns void 
+language plpgsql
+as $$
+begin
+	IF NOT EXISTS (
+		SELECT 1 from pool_matches_data where match_id = p_match_id
+	) THEN 
+		INSERT INTO pool_matches_data (match_id) values (p_match_id);
+	END IF;
+
+	update pool_matches_data set team1_score[p_set] = p_team1_score, team2_score[p_set] = p_team2_score where match_id = p_match_id;
+end;
+$$;

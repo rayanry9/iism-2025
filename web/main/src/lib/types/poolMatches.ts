@@ -31,4 +31,10 @@ export interface GetAllPoolMatchesResponse {
 	type: number;
 	matchName: string | null;
 	liveStreamLink: string | null;
+	team1Score: number[];
+	team1Balls: number;
+	team1Wickets: number;
+	team2Score: number[];
+	team2Balls: number;
+	team2Wickets: number;
 }

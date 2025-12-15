@@ -54,5 +54,4 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.POST("/save-fcm-token", middlewares.AuthJWT(), controller.SaveFcmToken)
 
 	r.GET("/get-leaderboard", controller.GetLeaderboardData)
-	r.GET("/get-pool-match-data-by-id", controller.GetPoolMatchDataById)
 }

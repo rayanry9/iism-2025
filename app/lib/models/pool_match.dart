@@ -51,6 +51,12 @@ class GetAllPoolMatchesResponse {
   final PoolMatchType type;
   final String? matchName;
   final String? liveStreamLink;
+  final List<int> team1Score;
+  final int team1Balls;
+  final int team1Wickets;
+  final List<int> team2Score;
+  final int team2Balls;
+  final int team2Wickets;
 
   GetAllPoolMatchesResponse({
     required this.id,
@@ -67,6 +73,12 @@ class GetAllPoolMatchesResponse {
     required this.type,
     this.matchName,
     this.liveStreamLink,
+    required this.team1Score,
+    required this.team1Balls,
+    required this.team1Wickets,
+    required this.team2Score,
+    required this.team2Balls,
+    required this.team2Wickets,
   });
 
   factory GetAllPoolMatchesResponse.fromJson(Map<String, dynamic> json) {
@@ -85,6 +97,12 @@ class GetAllPoolMatchesResponse {
       type: PoolMatchType.fromJson(json["type"]),
       matchName: json["matchName"],
       liveStreamLink: json["liveStreamLink"],
+      team1Score: List<int>.from(json["team1Score"]),
+      team1Balls: json["team1Balls"],
+      team1Wickets: json["team1Wickets"],
+      team2Score: List<int>.from(json["team2Score"]),
+      team2Balls: json["team2Balls"],
+      team2Wickets: json["team2Wickets"],
     );
   }
 
