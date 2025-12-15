@@ -29,6 +29,7 @@
 	{/await}
 {:else}
 	<PastMatches
+		athleticMatches={data.athleticMatches}
 		sports={data.allSports}
 		poolMatches={data.poolMatches}
 		institutes={data.institutes}

@@ -19,15 +19,34 @@
 					val.sportId == getSportIdOfSport(selectedSport!, 2, globals.staff))
 		)
 	);
+	let filteredAthleticMatches = $derived(
+		data.athleticMatches.filter(
+			(val) => val.status == 2 && (selectedSport == undefined || selectedSport == 'Athletics')
+		)
+	);
 </script>
 
 <main class="h-full w-full">
 	<div class="flex w-full flex-col justify-center gap-y-8 max-xl:items-center max-xl:px-8">
 		<h2>LIVE MATCHES</h2>
 		<div class="grid w-full grid-cols-1 items-center justify-center gap-12">
-			{#if filteredPoolMatches.length}
+			{#if filteredPoolMatches.length || filteredAthleticMatches.length}
 				{#each filteredPoolMatches as match (match.id)}
 					<MatchCard matchData={match} institutes={data.institutes} sports={data.allSports}>
+						{#snippet subCTA()}
+							<span
+								class="button-text border-custom-gray flex h-fit w-fit items-center gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic lg:inline-flex lg:pt-2 lg:pb-1.5 xl:pt-2 xl:pb-1.5"
+								><img
+									src={pinImg}
+									class="text-custom-orange -mt-1 inline xl:h-4"
+									alt="pin"
+								/>{match.venue}</span
+							>
+						{/snippet}
+					</MatchCard>
+				{/each}
+				{#each filteredAthleticMatches as match (match.id)}
+					<MatchCard athleticMatchData={match} institutes={data.institutes} sports={data.allSports}>
 						{#snippet subCTA()}
 							<span
 								class="button-text border-custom-gray flex h-fit w-fit items-center gap-x-2 rounded-3xl border px-4 pt-2.5 pb-2 align-top leading-none not-italic lg:inline-flex lg:pt-2 lg:pb-1.5 xl:pt-2 xl:pb-1.5"
