@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
+import 'package:intl/intl.dart';
 
 class DaySelector extends StatelessWidget {
   final bool _isStaff;
@@ -96,7 +97,9 @@ class DaySelector extends StatelessWidget {
                               transform: Matrix4.skewX(Constants.skewXValue),
                               alignment: Alignment.center,
                               child: Text(
-                                "DAY ${elem.$1} - ${elem.$2.day}/${elem.$2.month}/${elem.$2.year}",
+                                DateFormat(
+                                  'dd MMM',
+                                ).format(elem.$2).toUpperCase(),
                                 style: TextStyle(
                                   fontSize: Constants.buttonTextSize,
                                 ),

@@ -19,7 +19,6 @@ class SportCardFull extends StatelessWidget {
     return Container(
       clipBehavior: Clip.none,
       height: 120,
-      width: double.infinity,
       decoration: BoxDecoration(
         border: BoxBorder.all(color: CustomColors.lightGray, width: 1),
       ),
@@ -94,7 +93,7 @@ class SportCardFull extends StatelessWidget {
                             left: 0,
                             right: constraints.maxWidth * 0.2,
                             child: Image.asset(
-                              getSportImageSrc(getSportFromSportId(sportId!)!)!,
+                              getSportImageSrc(getSportFromSportId(sportId!))!,
                               fit: BoxFit.contain,
                               height: constraints.maxHeight,
                             ),

@@ -30,7 +30,7 @@
 </script>
 
 <section
-	class="flex flex-row gap-y-4 *:mx-2 max-xl:overflow-scroll xl:flex-wrap"
+	class="flex w-full flex-row gap-y-4 *:mx-2 max-xl:overflow-scroll xl:flex-wrap"
 	style="scrollbar-width: none;"
 >
 	{#each days as day, i}
@@ -45,7 +45,8 @@
 			data-umami-event="Day selector used"
 			data-umami-event-day={currentDate}
 		>
-			DAY {i} - {day.getDate()}/{day.getMonth() + 1}/{day.getFullYear()}
+			{day.getDate()}
+			{day.toLocaleString('en-IN', { month: 'short' })}
 		</Button>
 	{/each}
 </section>

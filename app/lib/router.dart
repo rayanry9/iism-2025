@@ -38,7 +38,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/matches",
+  initialLocation: "/approve-request",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -134,7 +134,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
                   ), // <— your dynamic top bar
                   backgroundColor: Colors.white,
                   body: child,
-                  floatingActionButton: showFab
+                  floatingActionButton: false && showFab
                       ? Material(
                           elevation: 6,
                           color: CustomColors.orange,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
@@ -64,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         backgroundImage:
                             widget._userViewModel.me!.profilePic != null
                             ? NetworkImage(
-                                widget._userViewModel.me!.profilePic!,
+                                '${dotenv.env["API_URL"]}/api/profile-pic/${widget._userViewModel.me!.profilePic!}.webp',
                               )
                             : null,
                         child: widget._userViewModel.me!.profilePic == null

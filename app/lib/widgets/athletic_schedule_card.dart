@@ -95,7 +95,7 @@ class AthleticScheduleCard extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     border: BoxBorder.fromLTRB(
-                      left: BorderSide(color: CustomColors.gray),
+                      right: BorderSide(color: CustomColors.gray),
                     ),
                   ),
                   padding: EdgeInsets.symmetric(

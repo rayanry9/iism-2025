@@ -160,13 +160,13 @@
 			{/if}
 			<div class="flex flex-col items-center justify-center gap-y-1 xl:gap-y-2">
 				<img
-					src={getIITImgSrc(institutes.find((i) => i.id == matchData.team1Id)!.name as IITNames)}
-					alt={institutes.find((i) => i.id == matchData.team1Id)!.name}
+					src={getIITImgSrc(institutes.find((i) => i.id == matchData.team2Id)!.name as IITNames)}
+					alt={institutes.find((i) => i.id == matchData.team2Id)!.name}
 					class="size-16 xl:size-20 2xl:size-24"
 				/>
 				<div class="button-text block text-center">
 					IIT{getIITShortCode(
-						institutes.find((i) => i.id == matchData.team1Id)!.name as IITNames
+						institutes.find((i) => i.id == matchData.team2Id)!.name as IITNames
 					).toUpperCase()}
 				</div>
 			</div>

@@ -238,7 +238,9 @@ class PoolMatchCard extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                  backgroundColor: CustomColors.orange,
+                  backgroundColor: _elem.liveStreamLink != null
+                      ? CustomColors.orange
+                      : CustomColors.gray,
                 ),
 
                 child: Row(

@@ -77,7 +77,7 @@
 	});
 </script>
 
-<main class="2xl:h-full">
+<main class="w-full 2xl:h-full">
 	<h2 class="hidden xl:block">FULL SCHEDULE</h2>
 
 	<section class="flex flex-col xl:pt-12">

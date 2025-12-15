@@ -24,7 +24,7 @@ class AthleticMatchCard extends StatelessWidget {
     return Column(
       children: [
         SportCardFull(
-          sportId: _elem.sportId,
+          sportId: -1,
           role: 2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -72,9 +72,11 @@ class AthleticMatchCard extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(
-                horizontal: Constants.screenWidthPadding,
-                vertical: 28,
+              padding: EdgeInsets.fromLTRB(
+                Constants.screenWidthPadding,
+                20,
+                Constants.screenWidthPadding,
+                28,
               ),
               decoration: BoxDecoration(
                 border: BoxBorder.fromLTRB(
@@ -133,7 +135,9 @@ class AthleticMatchCard extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                  backgroundColor: CustomColors.orange,
+                  backgroundColor: _elem.liveStreamLink != null
+                      ? CustomColors.orange
+                      : CustomColors.gray,
                 ),
 
                 child: Row(

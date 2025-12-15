@@ -1,5 +1,6 @@
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
@@ -46,35 +47,37 @@ class _TopBarState extends State<TopBar> {
 
   Widget? _buildChild(String route) {
     if (route.contains("/home")) {
-      return Row(
-        spacing: 12,
-        children: [
-          CircleAvatar(
-            radius: 18,
-            backgroundImage: (widget._userViewModel.me?.profilePic) != null
-                ? NetworkImage(widget._userViewModel.me!.profilePic!)
-                : null,
-            child: widget._userViewModel.me?.profilePic == null
-                ? const Icon(Icons.person, color: Colors.white)
-                : null,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Welcome Back",
-                style: TextStyle(
-                  fontSize: Constants.buttonTextSize,
-                  color: CustomColors.lightGray,
-                  height: 0.9,
+      return GestureDetector(
+        onTap: () {
+          context.push('/profile');
+        },
+        child: Row(
+          spacing: 12,
+          children: [
+            CircleAvatar(
+              radius: 18,
+              backgroundImage: (widget._userViewModel.me?.profilePic) != null
+                  ? NetworkImage(
+                      '${dotenv.env["API_URL"]}/api/profile-pic/${widget._userViewModel.me!.profilePic!}.webp',
+                    )
+                  : null,
+              child: widget._userViewModel.me?.profilePic == null
+                  ? const Icon(Icons.person, color: Colors.white)
+                  : null,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome Back",
+                  style: TextStyle(
+                    fontSize: Constants.buttonTextSize,
+                    color: CustomColors.lightGray,
+                    height: 0.9,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  context.push('/profile');
-                },
-                child: Row(
+                Row(
                   children: [
                     Text(
                       widget._userViewModel.me?.firstName ?? '',
@@ -86,10 +89,10 @@ class _TopBarState extends State<TopBar> {
                     Icon(Icons.expand_more, color: Colors.white),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       );
     }
     if (route == '/profile' ||

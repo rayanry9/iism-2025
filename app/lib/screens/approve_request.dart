@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/viewmodel/user.dart';
+import 'package:intl/intl.dart';
 
 class ApproveRequestScreen extends StatefulWidget {
   final UserViewModel _userViewModel;
@@ -80,12 +83,12 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
           final String createdTimeLabel = _formatTime(
             TimeOfDay.fromDateTime(createdAt),
           );
-          final String entryLabel = _formatTime(
-            TimeOfDay.fromDateTime(entryTime),
-          );
-          final String exitLabel = _formatTime(
-            TimeOfDay.fromDateTime(exitTime),
-          );
+          final String entryLabel = DateFormat(
+            "dd MMM\nhh:mm a",
+          ).format(entryTime);
+          final String exitLabel = DateFormat(
+            "dd MMM\nhh:mm a",
+          ).format(exitTime);
 
           if (status == 0) {
             newPending.add({
@@ -272,7 +275,6 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
       right: Radius.circular(30),
     );
     return Container(
-      width: 110,
       padding: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -280,6 +282,8 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
         border: Border.all(color: Color(0xffD9D9D9), width: 1),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: 42,
@@ -345,7 +349,7 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
                 Text(
                   req["time"],
                   style: const TextStyle(
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF6C7A89),
                   ),
@@ -354,25 +358,53 @@ class _ApproveRequestScreenState extends State<ApproveRequestScreen> {
                 Text(
                   req["name"],
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: Constants.titlesTextSize,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                Text(req["title"], style: const TextStyle(fontSize: 14)),
+                Text(req["title"], style: const TextStyle(fontSize: 16)),
                 const SizedBox(height: 10),
                 Row(
+                  spacing: 32,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Exit Time -"),
-                        Text("${req["exit"]}"),
+                        const Text(
+                          "Exit Time",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: CustomColors.blue,
+                            fontSize: Constants.buttonTextSize,
+                          ),
+                        ),
+                        Text(
+                          "${req["exit"]}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: Constants.titlesTextSize,
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 15),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Entry Time -"),
-                        Text("${req["entry"]}"),
+                        const Text(
+                          "Entry Time",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: CustomColors.blue,
+                            fontSize: Constants.buttonTextSize,
+                          ),
+                        ),
+                        Text(
+                          "${req["entry"]}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: Constants.titlesTextSize,
+                          ),
+                        ),
                       ],
                     ),
                   ],

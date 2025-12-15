@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
-import 'package:iism_2025/constants/iit.dart';
 import 'package:iism_2025/constants/sport.dart';
 import 'package:iism_2025/models/pool_match.dart';
 import 'package:iism_2025/viewmodel/common_data_view_model.dart';
@@ -9,11 +7,8 @@ import 'package:iism_2025/viewmodel/matches_view_model.dart';
 import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/athletic_match_card.dart';
 import 'package:iism_2025/widgets/pool_match_card.dart';
-import 'package:iism_2025/widgets/sport_card_full.dart';
 import 'package:iism_2025/widgets/sport_selector.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MatchesScreen extends StatelessWidget {
   const MatchesScreen({super.key});
@@ -36,6 +31,7 @@ class MatchesScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 12),
           child: Column(
+            spacing: 16,
             children: [
               SportSelector(
                 isStaff: context.read<UserViewModel>().me!.staff,
@@ -54,6 +50,7 @@ class MatchesScreen extends StatelessWidget {
                   horizontal: Constants.screenWidthPadding,
                 ),
                 child: Column(
+                  spacing: 48,
                   children: [
                     ...commonDataVM.poolMatches
                         .where(

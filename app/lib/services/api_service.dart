@@ -77,7 +77,7 @@ class ApiService {
           {"sportId": 6, "name": "Tennis", "staff": false, "type": 1},
         ];
         instance.assignedId = '1';
-        instance.role = 2; // Forces the outing card to appear
+        instance.role = 6; // Forces the outing card to appear
       }
       return instance;
     } catch (e) {
