@@ -1,0 +1,1 @@
+Official platform for participants of the Inter-IIT Sports Meet 2025. View event schedules, teams, scorecards, live scores, leaderboards, and essential event updates, along with profiles and contact details to support smooth coordination throughout the tournament.
