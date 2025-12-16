@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/models/athletic_match.dart';
 import 'package:iism_2025/models/institute.dart';
@@ -83,8 +82,18 @@ class ApiService {
         data: {"email": email, "password": password},
       );
       return response.statusCode == 200;
-    } on DioException catch (e) {
-      print(e);
+    } on DioException catch (_) {
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> logout() async {
+    try {
+      final response = await dio.post("/api/logout");
+      return response.statusCode == 200;
+    } on DioException catch (_) {
       return false;
     } catch (e) {
       return false;
@@ -94,6 +103,9 @@ class ApiService {
   Future<Me?> getMyData() async {
     try {
       final response = await dio.get('/api/me');
+      if (response.data == null) {
+        return null;
+      }
 
       var instance = Me.fromJson(response.data);
 
@@ -106,6 +118,7 @@ class ApiService {
       }
       return instance;
     } catch (e) {
+      print(e);
       log("Failed to fetch my data", name: "Api Service");
     }
     return null;

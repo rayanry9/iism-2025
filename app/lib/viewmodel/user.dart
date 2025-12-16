@@ -19,10 +19,11 @@ class UserViewModel extends ChangeNotifier {
     var me = await _apiService.getMyData();
     if (me == null) {
       isLoggedIn = false;
+      this.me = null;
     } else {
       isLoggedIn = true;
       this.me = me;
-      notifyListeners();
     }
+    notifyListeners();
   }
 }

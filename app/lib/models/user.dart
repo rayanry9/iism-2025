@@ -41,7 +41,7 @@ class Me {
   String? contactNo;
   String? emergencyContactNo;
   String? bloodGroup;
-  int? jerseyNo;
+  String? jerseyNo;
   String? designation;
   String? foodPreference;
   String? hostel;

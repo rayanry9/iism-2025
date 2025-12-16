@@ -5,6 +5,8 @@ import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
 import 'package:iism_2025/constants/mess_menu.dart';
 import 'package:iism_2025/constants/sport.dart';
+import 'package:iism_2025/services/api_service.dart';
+import 'package:iism_2025/services/auth.dart';
 import 'package:iism_2025/viewmodel/user.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       CircleAvatar(
                         radius: 60,
                         backgroundImage:
-                            widget._userViewModel.me!.profilePic != null
+                            widget._userViewModel.me?.profilePic != null
                             ? NetworkImage(
                                 '${dotenv.env["API_URL"]}/api/profile-pic/${widget._userViewModel.me!.profilePic!}.webp',
                               )
@@ -107,6 +109,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontSize: Constants.buttonTextSize,
                               color: CustomColors.darkGray,
                             ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 6,
+                                horizontal: 18,
+                              ),
+                              foregroundColor: Colors.white,
+                              backgroundColor: CustomColors.darkGray,
+                            ),
+                            onPressed: () async {
+                              await context.read<ApiService>().logout();
+                              if (context.mounted) {
+                                await context
+                                    .read<AuthStatus>()
+                                    .checkLoginState();
+                              }
+                              if (context.mounted) {
+                                await context
+                                    .read<UserViewModel>()
+                                    .refetchData();
+                              }
+                            },
+                            child: Text("LOGOUT"),
                           ),
                         ],
                       ),
