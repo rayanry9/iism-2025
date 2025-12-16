@@ -23,7 +23,7 @@
 		return getSportsAll(globals.staff);
 	});
 	let activeSport = $state<Sports | undefined>('Athletics');
-	let activeIIT = $state<IITNames | undefined | ''>();
+	let activeIIT = $state<IITNames | undefined | ''>('');
 	let activeGender = $state<'MEN' | 'WOMEN' | undefined>('MEN');
 	$effect(() => {
 		activeSport;
@@ -177,48 +177,43 @@
 						</ToggleTabs.Root>
 					{/key}
 				</div>
-				<section class="flex flex-wrap justify-center gap-y-4">
+				<section class="flex flex-wrap justify-center gap-4 pt-6 sm:gap-8">
 					{#if playerData.length == 0 && globals.staff}
 						<h2 class="mt-12">Team has not been decided yet</h2>
 					{:else if playerData.length == 0}
 						<h2 class="mt-12">Not Participating</h2>
 					{:else}
 						{#each playerData as player (player.profilePic)}
-							<div class="relative my-1 flex w-min flex-col">
-								<div
-									class="relative"
-									style=" 
-									clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
-							"
-								>
-									<img
-										alt="profile"
-										class="z-20 min-h-40 min-w-40 -translate-x-3 object-cover sm:min-h-64 sm:min-w-64 xl:min-h-80 xl:min-w-80"
-										src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
-									/>
-									<div
-										class="absolute bottom-0 -z-10 h-3/5 w-full"
-										style="background-color: {getJerseyFromIITName(
-											activeIIT ?? 'Hyderabad',
-											globals.staff
-										).major};
-									"
-									>
-										<div
-											class="h-full mask-cover mask-bottom mask-repeat"
-											style="mask-image: url({playerBgImg}); background-color: {getJerseyFromIITName(
-												activeIIT ?? 'Hyderabad',
-												globals.staff
-											).minor}"
-										></div>
-									</div>
-								</div>
-								<span class="title-text mt-4 w-[calc(100%-2rem)] font-bold xl:mt-8">
+							<div
+								class="xl:w-[] relative my-1 flex w-[85%] flex-col items-center sm:w-[18rem] xl:w-[16rem] 2xl:w-[20rem]"
+							>
+								<img
+									alt="profile"
+									class="z-20 w-full object-cover"
+									src={PUBLIC_API_URL + '/profile-pic/' + (player.profilePic ?? 'tmp') + '.webp'}
+								/>
+								<!-- <div -->
+								<!-- 	class="absolute bottom-0 -z-10 h-3/5 w-full" -->
+								<!-- 	style="background-color: {getJerseyFromIITName( -->
+								<!-- 		activeIIT ?? 'Hyderabad', -->
+								<!-- 		globals.staff -->
+								<!-- 	).major}; -->
+								<!-- " -->
+								<!-- > -->
+								<!-- 	<div -->
+								<!-- 		class="h-full mask-cover mask-bottom mask-repeat" -->
+								<!-- 		style="mask-image: url({playerBgImg}); background-color: {getJerseyFromIITName( -->
+								<!-- 			activeIIT ?? 'Hyderabad', -->
+								<!-- 			globals.staff -->
+								<!-- 		).minor}" -->
+								<!-- 	></div> -->
+								<!-- </div> -->
+								<span class="title-text mt-4 w-full font-bold xl:mt-8">
 									{player.firstName.trim()}
 									{player.middleName?.trim() ?? ''}
 									{player.lastName?.trim() ?? ''}
 								</span>
-								<p class="mt-1 w-[calc(100%-2rem)] xl:mt-2">{player.extra?.trim()}</p>
+								<p class="mt-1 w-full xl:mt-2">{player.extra?.trim()}</p>
 							</div>
 						{/each}
 					{/if}

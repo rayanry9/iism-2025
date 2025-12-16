@@ -8,3 +8,10 @@ export interface GetPoolsBySportIdResponse {
 	name: string;
 	teams: Array<GetPoolsBySportIdResponseTeamData>;
 }
+
+export interface GetAllPoolTeamsResponse {
+	id: number;
+	tempName: string;
+	instituteId: number | null;
+	poolId: number;
+}

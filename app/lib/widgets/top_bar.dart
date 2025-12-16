@@ -1,17 +1,22 @@
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/constants/iit.dart';
+import 'package:iism_2025/viewmodel/matches_view_model.dart';
+import 'package:iism_2025/viewmodel/teams_view_model.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/dynamic_bar.dart';
-import 'package:iism_2025/services/user_cache.dart';
-import 'package:iism_2025/services/user_loader.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String route;
+  final UserViewModel _userViewModel;
 
-  const TopBar({super.key, required this.route});
+  const TopBar({super.key, required this.route, required UserViewModel user})
+    : _userViewModel = user;
 
   @override
   State<TopBar> createState() => _TopBarState();
@@ -24,63 +29,58 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 // 🔥 This MUST be outside TopBar class
 // --------------------------------------------------------
 class _TopBarState extends State<TopBar> {
-  bool loading = true;
-  String? selectedInstituteTeamPage;
-
   @override
   void initState() {
     super.initState();
-    load();
-  }
-
-  Future<void> load() async {
-    await loadUserData();
-    loading = false;
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    context.watch<UserViewModel>();
     return DynamicNavbar(
       background: CustomColors.darkBlue,
       child: _buildChild(widget.route),
     );
   }
 
+  bool _liveMatches = true;
+
   Widget? _buildChild(String route) {
     if (route.contains("/home")) {
-      return Row(
-        spacing: 12,
-        children: [
-          CircleAvatar(
-            radius: 18,
-            backgroundImage: UserCache().profilePic != null
-                ? NetworkImage(UserCache().profilePic!)
-                : null,
-            child: UserCache().profilePic == null
-                ? const Icon(Icons.person, color: Colors.white)
-                : null,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Welcome Back",
-                style: TextStyle(
-                  fontSize: Constants.buttonTextSize,
-                  color: CustomColors.lightGray,
-                  height: 0.9,
+      return GestureDetector(
+        onTap: () {
+          context.push('/profile');
+        },
+        child: Row(
+          spacing: 12,
+          children: [
+            CircleAvatar(
+              radius: 18,
+              backgroundImage: (widget._userViewModel.me?.profilePic) != null
+                  ? NetworkImage(
+                      '${dotenv.env["API_URL"]}/api/profile-pic/${widget._userViewModel.me!.profilePic!}.webp',
+                    )
+                  : null,
+              child: widget._userViewModel.me?.profilePic == null
+                  ? const Icon(Icons.person, color: Colors.white)
+                  : null,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome Back",
+                  style: TextStyle(
+                    fontSize: Constants.buttonTextSize,
+                    color: CustomColors.lightGray,
+                    height: 0.9,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  context.push('/profile');
-                },
-                child: Row(
+                Row(
                   children: [
                     Text(
-                      UserCache().firstName ?? "",
+                      widget._userViewModel.me?.firstName ?? '',
                       style: TextStyle(
                         fontSize: Constants.heading2TextSize,
                         color: Colors.white,
@@ -89,10 +89,10 @@ class _TopBarState extends State<TopBar> {
                     Icon(Icons.expand_more, color: Colors.white),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       );
     }
     if (route == '/profile' ||
@@ -152,6 +152,7 @@ class _TopBarState extends State<TopBar> {
     }
 
     if (route == '/teams') {
+      context.watch<TeamsViewModel>();
       return Container(
         margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
         decoration: BoxDecoration(
@@ -185,12 +186,91 @@ class _TopBarState extends State<TopBar> {
               );
             }).toList(),
             dropdownColor: Colors.white,
-            value: context.read<TeamPageState>().selectedCollege,
+            value: context.read<TeamsViewModel>().institute,
             onChanged: (value) {
-              setState(() {
-                selectedInstituteTeamPage = value;
-                context.read<TeamPageState>().setCollege(value);
-              });
+              context.read<TeamsViewModel>().updateInstitute(value!);
+            },
+          ),
+        ),
+      );
+    }
+
+    if (route == "/schedule") {
+      return Align(
+        alignment: AlignmentGeometry.centerLeft,
+        child: Text(
+          "FULL SCHEDULE",
+          style: TextStyle(
+            fontSize: Constants.heading2TextSize,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      );
+    }
+    if (route == '/gallery') {
+      return Align(
+        alignment: AlignmentGeometry.centerLeft,
+        child: Text(
+          "GALLERY",
+          style: TextStyle(
+            fontSize: Constants.heading2TextSize,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      );
+    }
+
+    if (route == '/matches') {
+      final matchesVM = context.watch<MatchesViewModel>();
+
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 18),
+        child: Align(
+          alignment: Alignment.center,
+          child: CustomSlidingSegmentedControl<bool>(
+            initialValue: matchesVM.isLiveMatchScreen,
+            innerPadding: EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: BoxBorder.all(color: CustomColors.gray, width: 0.5),
+              borderRadius: BorderRadius.circular(40),
+            ),
+            thumbDecoration: BoxDecoration(
+              color: CustomColors.orange,
+              borderRadius: BorderRadius.circular(40),
+            ),
+            children: {
+              true: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Text(
+                  "LIVE MATCHES",
+                  style: TextStyle(
+                    color: matchesVM.isLiveMatchScreen
+                        ? Colors.white
+                        : Colors.black,
+                    fontSize: Constants.buttonTextSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              false: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                child: Text(
+                  "RESULTS",
+                  style: TextStyle(
+                    color: !matchesVM.isLiveMatchScreen
+                        ? Colors.white
+                        : Colors.black,
+                    fontSize: Constants.buttonTextSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            },
+            onValueChanged: (v) {
+              matchesVM.changeScreen(v);
             },
           ),
         ),

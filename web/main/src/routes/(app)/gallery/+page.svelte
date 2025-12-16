@@ -10,7 +10,7 @@
 	let numberOfPages = $state<number>(1);
 	let images = $state<string[]>([]);
 	let isMobile = $state<boolean>(false);
-	
+
 	$effect(() => {
 		const check = () => {
 			isMobile = window.innerWidth < 768;
@@ -43,7 +43,6 @@
 			});
 	});
 
-
 	let prevIsMobile = $state<boolean>(false);
 
 	$effect(() => {
@@ -63,10 +62,7 @@
 			prevIsMobile = isMobile;
 		}
 
-		const safePage = Math.min(
-			Math.max(activePage, 1),
-			numberOfPages
-		);
+		const safePage = Math.min(Math.max(activePage, 1), numberOfPages);
 
 		const startIndex = (safePage - 1) * perPage + 1;
 		const endIndex = Math.min(startIndex + perPage - 1, totalImages);
@@ -75,70 +71,63 @@
 
 		const newImages: string[] = [];
 		for (let i = startIndex; i <= endIndex; i++) {
-			newImages.push(`${base}/${i}.webp?v=${safePage}-${perPage}`);
+			newImages.push(`${base}/${i}.jpeg?v=${safePage}-${perPage}`);
 		}
 
 		images = newImages;
 	});
-
-
-
 </script>
-
 
 {#if true}
 	<main class="flex w-full flex-col items-center">
-
 		<!-- ================= MOBILE HEADER ================= -->
-		<div class="w-full flex flex-col items-center gap-4 py-4 md:hidden mb-6">
+		<div class="mb-6 flex w-full flex-col items-center gap-4 py-4 md:hidden">
 			<h1 class="text-2xl font-semibold">GALLERY</h1>
 
-			<div class="bg-custom-orange flex h-[3rem] w-[14rem] -skew-x-12 flex-row items-center justify-center gap-[1rem] p-[0.5rem]">
+			<div
+				class="bg-custom-orange flex h-[3rem] w-[14rem] -skew-x-12 flex-row items-center justify-center gap-[1rem] p-[0.5rem]"
+			>
 				<img src={cameraIcon} alt="" class="w-[2rem] skew-x-12" />
 				<span class="skew-x-12 text-white">GET YOUR PHOTOS</span>
 			</div>
-
 		</div>
 
 		<!-- ================= MOBILE IMAGES ================= -->
-	<div class="w-[92%] grid grid-cols-1 grid-rows-[auto_auto_auto_auto_auto] gap-6 md:hidden">
+		<div class="grid w-[92%] grid-cols-1 grid-rows-[auto_auto_auto_auto_auto] gap-6 md:hidden">
+			<!-- Image 1 -->
+			{#if images[0]}
+				<div class="overflow-hidden">
+					<img src={images[0]} class="h-auto w-full object-cover" alt="" />
+				</div>
+			{/if}
 
-		<!-- Image 1 -->
-		{#if images[0]}
-			<div class="overflow-hidden">
-				<img src={images[0]} class="w-full h-auto object-cover" alt="" />
-			</div>
-		{/if}
+			<!-- Image 2 -->
+			{#if images[1]}
+				<div class="overflow-hidden">
+					<img src={images[1]} class="h-auto w-full object-cover" alt="" />
+				</div>
+			{/if}
 
-		<!-- Image 2 -->
-		{#if images[1]}
-			<div class="overflow-hidden">
-				<img src={images[1]} class="w-full h-auto object-cover" alt="" />
-			</div>
-		{/if}
+			<!-- Image 3 (DOUBLE HEIGHT ✅) -->
+			{#if images[2]}
+				<div class="row-span-2 overflow-hidden">
+					<img src={images[2]} class="h-full w-full object-cover" alt="" />
+				</div>
+			{/if}
 
-		<!-- Image 3 (DOUBLE HEIGHT ✅) -->
-		{#if images[2]}
-			<div class="row-span-2 overflow-hidden">
-				<img src={images[2]} class="w-full h-full object-cover" alt="" />
-			</div>
-		{/if}
-
-		<!-- Image 4 -->
-		{#if images[3]}
-			<div class="overflow-hidden">
-				<img src={images[3]} class="w-full h-auto object-cover" alt="" />
-			</div>
-		{/if}
-
-	</div>
-
+			<!-- Image 4 -->
+			{#if images[3]}
+				<div class="overflow-hidden">
+					<img src={images[3]} class="h-auto w-full object-cover" alt="" />
+				</div>
+			{/if}
+		</div>
 
 		<!-- ================= MOBILE PAGINATION ================= -->
 		<div class="flex items-center gap-4 py-8 md:hidden">
 			<Button
 				onclick={() => activePage > 1 && activePage--}
-				class="border border-custom-light-blue w-10 h-10 flex items-center justify-center"
+				class="border-custom-light-blue flex h-10 w-10 items-center justify-center border"
 			>
 				<img src={arrowLeft} class="h-4" alt="" />
 			</Button>
@@ -147,20 +136,18 @@
 
 			<Button
 				onclick={() => activePage < numberOfPages && activePage++}
-				class="border border-custom-light-blue w-10 h-10 flex items-center justify-center"
+				class="border-custom-light-blue flex h-10 w-10 items-center justify-center border"
 			>
 				<img src={arrowLeft} class="h-4 rotate-180" alt="" />
 			</Button>
 		</div>
 
 		<!-- ================= DESKTOP HEADER ================= -->
-		<div class="hidden md:flex h-[10rem] w-[95%] flex-row items-center justify-between">
-
+		<div class="hidden h-[10rem] w-[95%] flex-row items-center justify-between md:flex">
 			<div class="flex flex-row items-center gap-[3rem]">
 				<span class="text-4xl font-semibold">GALLERY</span>
 
 				<div class="flex flex-row items-center gap-[0.5rem]">
-
 					<Button
 						onclick={() => activePage > 1 && activePage--}
 						class="border-custom-light-blue flex size-11 items-center justify-center rounded-sm border-1 p-1.5"
@@ -168,7 +155,9 @@
 						<img src={arrowLeft} class="h-4" alt="" />
 					</Button>
 
-					<div class="border-custom-light-blue flex size-11 -skew-x-12 items-center justify-center rounded-sm border-1 p-1.5">
+					<div
+						class="border-custom-light-blue flex size-11 -skew-x-12 items-center justify-center rounded-sm border-1 p-1.5"
+					>
 						<span class="skew-x-12 text-xl">
 							{activePage}/{numberOfPages}
 						</span>
@@ -180,70 +169,66 @@
 					>
 						<img src={arrowLeft} class="h-4 rotate-180" alt="" />
 					</Button>
-
 				</div>
 			</div>
 
-			<div class="bg-custom-orange flex h-[3rem] w-[14rem] -skew-x-12 flex-row items-center justify-center gap-[1rem] p-[0.5rem]">
+			<div
+				class="bg-custom-orange flex h-[3rem] w-[14rem] -skew-x-12 flex-row items-center justify-center gap-[1rem] p-[0.5rem]"
+			>
 				<img src={cameraIcon} alt="" class="w-[2rem] skew-x-12" />
 				<span class="skew-x-12 text-white">GET YOUR PHOTOS</span>
 			</div>
-
 		</div>
 
 		<!-- ================= DESKTOP GRID ================= -->
-		<div class="hidden md:grid w-[95%] grid-cols-5 grid-rows-3 gap-4 pb-10">
-
+		<div class="hidden w-[95%] grid-cols-5 grid-rows-3 gap-4 pb-10 md:grid">
 			{#if images[0]}
-				<div class="col-start-1 col-span-2 row-start-1 row-span-2 overflow-hidden">
-					<img src={images[0]} class="w-full h-full object-cover" alt="" />
+				<div class="col-span-2 col-start-1 row-span-2 row-start-1 overflow-hidden">
+					<img src={images[0]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
 
 			{#if images[1]}
 				<div class="col-start-3 row-start-1 overflow-hidden">
-					<img src={images[1]} class="w-full h-full object-cover" alt="" />
+					<img src={images[1]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
 
 			{#if images[2]}
 				<div class="col-start-4 row-start-1 overflow-hidden">
-					<img src={images[2]} class="w-full h-full object-cover" alt="" />
+					<img src={images[2]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
 
 			{#if images[3]}
 				<div class="col-start-5 row-start-1 overflow-hidden">
-					<img src={images[3]} class="w-full h-full object-cover" alt="" />
+					<img src={images[3]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
 
 			{#if images[4]}
-				<div class="col-start-3 row-start-2 row-span-2 overflow-hidden">
-					<img src={images[4]} class="w-full h-full object-cover" alt="" />
+				<div class="col-start-3 row-span-2 row-start-2 overflow-hidden">
+					<img src={images[4]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
 
 			{#if images[5]}
-				<div class="col-start-4 col-span-2 row-start-2 row-span-2 overflow-hidden">
-					<img src={images[5]} class="w-full h-full object-cover" alt="" />
+				<div class="col-span-2 col-start-4 row-span-2 row-start-2 overflow-hidden">
+					<img src={images[5]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
 
 			{#if images[6]}
 				<div class="col-start-1 row-start-3 overflow-hidden">
-					<img src={images[6]} class="w-full h-full object-cover" alt="" />
+					<img src={images[6]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
 
 			{#if images[7]}
 				<div class="col-start-2 row-start-3 overflow-hidden">
-					<img src={images[7]} class="w-full h-full object-cover" alt="" />
+					<img src={images[7]} class="h-full w-full object-cover" alt="" />
 				</div>
 			{/if}
-
 		</div>
-
 	</main>
-
 {/if}

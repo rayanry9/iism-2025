@@ -4,4 +4,5 @@ class Constants {
   static const double titlesTextSize = 20;
   static const double heading2TextSize = 24;
   static const double screenWidthPadding = 24;
+  static const double heading1TextSize = 40;
 }

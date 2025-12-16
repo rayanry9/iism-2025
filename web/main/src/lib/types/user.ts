@@ -23,8 +23,8 @@ export interface UserDetails {
 }
 
 export interface GetPlayers {
-	userId: string;
-	profilePic: string;
+	userId: number;
+	profilePic: string | null;
 	firstName: string;
 	middleName: string | null;
 	lastName: string | null;

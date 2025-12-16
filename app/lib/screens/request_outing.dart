@@ -1,9 +1,21 @@
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:iism_2025/constants/colors.dart';
+import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/services/api_service.dart';
+import 'package:iism_2025/viewmodel/user.dart';
+import 'package:intl/intl.dart';
 
 class RequestOutingScreen extends StatefulWidget {
-  const RequestOutingScreen({super.key});
+  final UserViewModel _userViewModel;
+  final ApiService _apiService;
+  const RequestOutingScreen({
+    super.key,
+    required UserViewModel user,
+    required ApiService api,
+  }) : _userViewModel = user,
+       _apiService = api;
 
   @override
   State<RequestOutingScreen> createState() => _RequestOutingScreenState();
@@ -73,7 +85,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
       DateTime entryTime = DateTime(
         now.year,
         now.month,
-        now.day,
+        now.day + (_isEntryNextDay ? 1 : 0),
         entryTOD.hour,
         entryTOD.minute,
       );
@@ -82,7 +94,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
       final formattedEntry = _formatRFC3339(entryTime);
 
       String apiUrl = dotenv.env['API_URL']!;
-      final response = await dio.post(
+      final response = await widget._apiService.dio.post(
         apiUrl + "/api/outing/create",
         data: {
           "reason": reasonController.text,
@@ -97,7 +109,10 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
             content: Text("Outing request submitted successfully"),
           ),
         );
-        setState(() => showNewRequest = false);
+        setState(() {
+          showNewRequest = false;
+          _isSubmitting = false;
+        });
       }
     } catch (e) {
       print("Outing error: $e");
@@ -114,18 +129,20 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
   String? selectedEntryTime;
 
   late final List<String> timeSlots = _generateTimeSlots();
+  bool _isEntryNextDay = false;
+  bool _isSubmitting = false;
 
   List<Map<String, dynamic>> pastRequests = [];
+  bool pastRequestsLoading = true;
 
-  Future<void> loadMyPastOutings() async {
+  Future<List<Map<String, dynamic>>> loadMyPastOutings() async {
     try {
-      String apiUrl = dotenv.env['API_URL']!;
-      final response = await dio.get(apiUrl + "/api/outing/mine");
+      final response = await widget._apiService.dio.get("/api/outing/mine");
 
       if (response.statusCode == 200) {
         final data = List<Map<String, dynamic>>.from(response.data);
 
-        pastRequests = data.map((o) {
+        return data.map((o) {
           final exit = DateTime.parse(o["exitTime"]);
           final entry = DateTime.parse(o["entryTime"]);
           final created = DateTime.parse(o["createdAt"]);
@@ -138,12 +155,11 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
             "status": o["status"],
           };
         }).toList();
-
-        setState(() {});
       }
     } catch (e) {
       print("Error loading outings: $e");
     }
+    return [];
   }
 
   String _monthName(int m) {
@@ -166,84 +182,54 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
   }
 
   String _formatTileTime(DateTime dt) {
-    final t = TimeOfDay.fromDateTime(dt);
-    final hour = (t.hour % 12 == 0) ? 12 : t.hour % 12;
-    final min = t.minute.toString().padLeft(2, '0');
-    final period = t.period == DayPeriod.am ? "AM" : "PM";
-    return "$hour:$min $period";
+    return DateFormat("dd/MM/yy hh:mm a").format(dt);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              _buildTabs(),
-              const SizedBox(height: 20),
-
-              Expanded(
-                child: showNewRequest
-                    ? _buildNewRequestForm()
-                    : _buildPastRequests(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // ----------------------------------------------------------
-  // NEW TABS (MATCH ApproveRequestScreen)
-  // ----------------------------------------------------------
-  Widget _buildTabs() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: const Color(0xffD9D9D9), width: 1),
-      ),
-      padding: const EdgeInsets.all(3),
-      child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(Constants.screenWidthPadding),
+      child: Column(
         children: [
-          _tabButton("NEW REQUEST", showNewRequest, true),
-          _tabButton("PAST REQUESTS", !showNewRequest, false),
-        ],
-      ),
-    );
-  }
-
-  Widget _tabButton(String text, bool selected, bool isLeft) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() => showNewRequest = isLeft);
-          if (!isLeft) loadMyPastOutings();
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: selected
-              ? BoxDecoration(
-                  color: const Color(0xFFE2F3F4),
-                  borderRadius: BorderRadius.circular(20),
-                )
-              : null,
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: selected ? const Color(0xFF2E7E81) : Colors.grey,
-                fontWeight: FontWeight.w600,
-              ),
+          CustomSlidingSegmentedControl<bool>(
+            initialValue: showNewRequest,
+            innerPadding: EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: BoxBorder.all(color: CustomColors.gray, width: 0.5),
+              borderRadius: BorderRadius.circular(40),
             ),
+            thumbDecoration: BoxDecoration(
+              color: CustomColors.pastelBlue,
+              borderRadius: BorderRadius.circular(40),
+            ),
+            children: {
+              true: Container(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                child: Text("NEW REQUEST"),
+              ),
+              false: Container(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                child: Text("PAST REQUESTS"),
+              ),
+            },
+            onValueChanged: (v) {
+              setState(() {
+                showNewRequest = v;
+                if (!v) {
+                  loadMyPastOutings();
+                }
+              });
+            },
           ),
-        ),
+          const SizedBox(height: 20),
+
+          Expanded(
+            child: showNewRequest
+                ? _buildNewRequestForm()
+                : _buildPastRequests(),
+          ),
+        ],
       ),
     );
   }
@@ -266,7 +252,22 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
           _dropdownTime("Select Exit Time", selectedExitTime, (val) {
             setState(() => selectedExitTime = val);
           }),
+
           const SizedBox(height: 20),
+          Row(
+            spacing: 8,
+            children: [
+              Text("Entry Next Day?"),
+              Checkbox(
+                value: _isEntryNextDay,
+                onChanged: (v) {
+                  setState(() {
+                    _isEntryNextDay = v!;
+                  });
+                },
+              ),
+            ],
+          ),
           _dropdownTime("Select Expected Entry Time", selectedEntryTime, (val) {
             setState(() => selectedEntryTime = val);
           }),
@@ -276,10 +277,12 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
               transform: Matrix4.skewX(-0.2), // button skew
               child: ElevatedButton(
                 onPressed: () {
-                  print("Reason: ${reasonController.text}");
-                  print("Exit: $selectedExitTime");
-                  print("Entry: $selectedEntryTime");
-                  submitOutingRequest();
+                  setState(() {
+                    _isSubmitting = true;
+                  });
+                  if (!_isSubmitting) {
+                    submitOutingRequest();
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF227B80),
@@ -299,19 +302,29 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "SUBMIT FOR APPROVAL",
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                      SizedBox(width: 5),
-                      Transform.translate(
-                        offset: Offset(0, -2), // (x, y) → adjust manually
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 17,
-                          color: Colors.white,
-                        ),
-                      ),
+                      ...(!_isSubmitting
+                          ? [
+                              Text(
+                                "SUBMIT FOR APPROVAL",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Transform.translate(
+                                offset: Offset(
+                                  0,
+                                  -2,
+                                ), // (x, y) → adjust manually
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 17,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ]
+                          : [CircularProgressIndicator(color: Colors.white)]),
                     ],
                   ),
                 ),
@@ -382,10 +395,18 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
   // NEW PAST REQUEST TILE (MATCH ApproveRequestScreen)
   // -------------------------------------------------
   Widget _buildPastRequests() {
-    return ListView.builder(
-      padding: const EdgeInsets.only(bottom: 16),
-      itemCount: pastRequests.length,
-      itemBuilder: (ctx, i) => _pastTile(pastRequests[i]),
+    return FutureBuilder(
+      future: loadMyPastOutings(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator.adaptive());
+        }
+        return ListView.builder(
+          padding: const EdgeInsets.only(bottom: 16),
+          itemCount: snapshot.data?.length,
+          itemBuilder: (ctx, i) => _pastTile(snapshot.data?.elementAt(i) ?? {}),
+        );
+      },
     );
   }
 

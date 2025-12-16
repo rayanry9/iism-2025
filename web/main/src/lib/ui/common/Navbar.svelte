@@ -30,7 +30,7 @@
 		>
 	{/if}
 	<div
-		class="button-text ml-auto hidden flex-row items-center gap-x-5 *:hover:cursor-pointer lg:flex 2xl:gap-x-12"
+		class="button-text ml-auto hidden flex-row items-center gap-x-5 *:hover:cursor-pointer xl:flex 2xl:gap-x-12"
 	>
 		<a class={`${page.url.pathname == '/' ? 'text-custom-orange ' : ''} `} href="/">HOME</a>
 		<a class={`${page.url.pathname == '/schedule' ? 'text-custom-orange ' : ''} `} href="/schedule"
@@ -98,5 +98,5 @@
 		{/if}
 	</div>
 
-	<NavScreenMobile class={`ml-auto h-fit leading-0 text-black lg:hidden`} />
+	<NavScreenMobile class={`ml-auto h-fit leading-0 text-black xl:hidden`} />
 </nav>

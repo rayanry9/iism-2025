@@ -22,6 +22,19 @@
 	let history: any[] = $state([]);
     let showWicketPopup = $state(false)
     let showFielderPopup = $state(false)
+    let showOutPopup = $state(false)
+    let showInPopup = $state(false)
+    let showWidePopup = $state(false)
+    let showNBPopup = $state(false)
+    let showByePopup = $state(false)
+    let showLegByePopup = $state(false)
+    let showMenuPopup = $state(false)
+    let fromSubstitute = $state(false);
+
+    let showBowlerPopup = $state(false);
+    let pendingNewOver = $state(false)
+
+
     let dismissalType = $state<string | null>(null)
     let fielders = [
         "J. Bumrah",
@@ -48,17 +61,27 @@
 	}
 
 	function addBallLabel(label: string) {
-		thisOver.push(label);
-		if (thisOver.length === 6) thisOver = [];
+		if (pendingNewOver) {
+            thisOver = []
+            pendingNewOver = false
+        }
+
+        thisOver.push(label)
 	}
 
 	function incrementBall() {
-		overs.ball++;
-		if (overs.ball === 6) {
-			overs.over++;
-			overs.ball = 0;
-			rotateStrike();
-		}
+		overs.ball++
+        if (overs.ball === 6) {
+            overs.over++
+            overs.ball = 0
+            rotateStrike()
+
+            // mark that a new over will begin — keep the old over visible until the first ball of next over
+            pendingNewOver = true
+
+            // show bowler chooser
+            showBowlerPopup = true
+        }
 	}
 
 	function scoreRuns(r: number) {
@@ -72,32 +95,22 @@
 
 	function wide() {
 		saveState();
-		score.runs += 1;
-		addBallLabel("WD");
-	}
+        showWidePopup = true;
+    }
 
 	function noBall() {
 		saveState();
-		score.runs += 1;
-		addBallLabel("NB");
+		showNBPopup = true;
 	}
 
 	function bye(r: number) {
 		saveState();
-		score.runs += r;
-		striker.balls++;
-		addBallLabel("B");
-		incrementBall();
-		if (r % 2 === 1) rotateStrike();
+		showByePopup = true;
 	}
 
 	function legBye(r: number) {
 		saveState();
-		score.runs += r;
-		striker.balls++;
-		addBallLabel("LB");
-		incrementBall();
-		if (r % 2 === 1) rotateStrike();
+		showLegByePopup =  true;
 	}
 
 	function wicket() {
@@ -150,7 +163,12 @@
                     IIT MADRAS <span class="text-gray-500 font-normal">[Batting]</span>
                 </span>
             </div>
-            <div class="text-gray-700 text-xl leading-none">⋮</div>
+            <button 
+                class="text-gray-700 text-xl leading-none cursor-pointer"
+                onclick={() => showMenuPopup = true}
+                >
+                ⋮
+            </button>
         </div>
 
         <!-- SCORE + OVERS row -->
@@ -355,12 +373,227 @@
             onSelect={(fielder:string) => {
                 console.log("Out:", dismissalType, "by", fielder)
                 showFielderPopup = false
-                wicket()
+                showOutPopup = true
             }}
             onClose={() => showFielderPopup = false}
         />
     </div>
 {/if}
+{#if showOutPopup}
+    <div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+        <PopoverBox
+            title="Who is going Out ?"
+            buttons={fielders}
+            color = "black"
+            onSelect={(outPlayer: string) => {
+                console.log("Outgoing:", outPlayer)
+                showOutPopup = false
+                showInPopup = true
+            }}
+            onClose={() => showOutPopup = false}
+        />
+    </div>
+{/if}
+{#if showInPopup}
+    <div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+        <PopoverBox
+            title="Who is Coming In ?"
+            buttons={fielders}
+            color = "black"
+            onSelect={(inPlayer: string) => {
+                console.log("Incoming:", inPlayer)
+                showInPopup = false
+
+                // Replace striker with selected new player
+                if(!fromSubstitute)
+                striker = { name: inPlayer, runs: 0, balls: 0 }
+
+                // Finally register wicket
+                if(!fromSubstitute)
+                wicket()
+            }}
+            onClose={() => showInPopup = false}
+        />
+    </div>
+{/if}
+{#if showWidePopup}
+<div class="fixed p-4 inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+
+  <div class="bg-white  shadow-lg w-full border border-gray-300 overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="flex justify-between items-center px-3 py-2 border-b border-black-300">
+      <span class="font-semibold text-gray-800 text-xl">Select Runs</span>
+      <button 
+        onclick={() => showWidePopup = false} 
+        class="text-gray-600 text-lg font-bold"
+      >×</button>
+    </div>
+
+    <!-- BUTTON ROW (HORIZONTAL EXACTLY LIKE IMAGE) -->
+    <div class="flex gap-1 px-1 py-3 justify-center">
+      {#each [1,2,3,4,5,6,7] as r}
+        <button
+          onclick={() => {
+            score.runs += r;
+            addBallLabel("WD");
+            showWidePopup = false;
+          }}
+          class="w-[55px] h-[52px]  bg-[#F3F3F3]
+                 border border-gray-300 text-gray-800 font-medium 
+                 flex items-center justify-center"
+        >
+          {r}
+        </button>
+      {/each}
+    </div>
+
+  </div>
+
+</div>
+{/if}
+{#if showBowlerPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+
+    <PopoverBox
+        title="Choose Next Bowler"
+        buttons={fielders}
+        color="#283891"
+        onSelect={(name: string) => {
+            bowler = { name, runs: 0, wickets: 0 };
+            showBowlerPopup = false;
+        }}
+        onClose={() => showBowlerPopup = false}
+    />
+
+</div>
+{/if}
+{#if showNBPopup}
+<div class="fixed p-4 inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+  <div class="bg-white shadow-lg w-full border border-gray-300 overflow-hidden">
+
+    <div class="flex justify-between items-center px-3 py-2 border-b border-black-300">
+      <span class="font-semibold text-gray-800 text-xl">Select Runs (NB)</span>
+      <button onclick={() => showNBPopup = false} class="text-gray-600 text-lg font-bold">×</button>
+    </div>
+
+    <div class="flex gap-1 px-1 py-3 justify-center">
+      {#each [1,2,3,4,5,6,7] as r}
+      <button
+        onclick={() => {
+          score.runs += r + 1;      // NB = 1 run + extras
+          addBallLabel("NB");
+          showNBPopup = false;
+        }}
+        class="w-[55px] h-[52px] bg-[#F3F3F3] border border-gray-300 text-gray-800 font-medium flex items-center justify-center"
+      >{r}</button>
+      {/each}
+    </div>
+
+  </div>
+</div>
+{/if}
+{#if showByePopup}
+<div class="fixed p-4 inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+  <div class="bg-white shadow-lg w-full border border-gray-300 overflow-hidden">
+
+    <div class="flex justify-between items-center px-3 py-2 border-b border-black-300">
+      <span class="font-semibold text-gray-800 text-xl">Select Runs (Bye)</span>
+      <button onclick={() => showByePopup = false} class="text-gray-600 text-lg font-bold">×</button>
+    </div>
+
+    <div class="flex gap-1 px-1 py-3 justify-center">
+      {#each [1,2,3,4,5,6] as r}
+      <button
+        onclick={() => {
+          score.runs += r;
+          striker.balls++;
+          addBallLabel("B");
+          incrementBall();
+          if (r % 2 === 1) rotateStrike();
+          showByePopup = false;
+        }}
+        class="w-[55px] h-[52px] bg-[#F3F3F3] border border-gray-300 text-gray-800 font-medium flex items-center justify-center"
+      >{r}</button>
+      {/each}
+    </div>
+
+  </div>
+</div>
+{/if}
+{#if showLegByePopup}
+<div class="fixed p-4 inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+  <div class="bg-white shadow-lg w-full border border-gray-300 overflow-hidden">
+
+    <div class="flex justify-between items-center px-3 py-2 border-b border-black-300">
+      <span class="font-semibold text-gray-800 text-xl">Select Runs (Leg Bye)</span>
+      <button onclick={() => showLegByePopup = false} class="text-gray-600 text-lg font-bold">×</button>
+    </div>
+
+    <div class="flex gap-1 px-1 py-3 justify-center">
+      {#each [1,2,3,4,5,6] as r}
+      <button
+        onclick={() => {
+          score.runs += r;
+          striker.balls++;
+          addBallLabel("LB");
+          incrementBall();
+          if (r % 2 === 1) rotateStrike();
+          showLegByePopup = false;
+        }}
+        class="w-[50px] h-[52px] bg-[#F3F3F3] border border-gray-300 text-gray-800 font-medium flex items-center justify-center"
+      >{r}</button>
+      {/each}
+    </div>
+
+  </div>
+</div>
+{/if}
+{#if showMenuPopup}
+<div class="fixed inset-0 bg-black/30 backdrop-blur-[5px] flex items-center justify-center z-50">
+
+  <div class="bg-white w-[200px] border border-black-300 shadow-lg rounded-md overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="flex justify-end items-center px-3 py-2 border-b border-black-300">
+      <button 
+        onclick={() => showMenuPopup = false}
+        class="text-gray-700 text-xl font-bold"
+      >×</button>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="flex flex-col p-2 gap-2">
+
+      <button
+        onclick={() => {
+          console.log("Add Substitute");
+          showMenuPopup = false;
+          fromSubstitute = true;
+          showOutPopup = true;
+        }}
+        class="py-3 text-gray-700 font-medium bg-[#F3F3F3] border-b border-gray-300"
+      >
+        Add Substitute
+      </button>
+
+      <button
+        onclick={() => {
+          console.log("End Inning");
+          showMenuPopup = false;
+        }}
+        class="py-3 text-gray-700 font-medium bg-[#F3F3F3] w-full"
+      >
+        End Inning
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+{/if}
+
 
 
 </div>

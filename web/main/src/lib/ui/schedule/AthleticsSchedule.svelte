@@ -44,7 +44,7 @@
 			}) as day, idx}
 			<div class="flex flex-col gap-y-1 pb-8">
 				<div class="button-text">
-					<span class="text-custom-teal">{day.date}/{day.month}/2025</span> - DAY {idx + 1}
+					<span class="text-custom-teal">{day.date}/{day.month + 1}/2025</span> - DAY {idx + 1}
 				</div>
 				<AthleticsScheduleDesktop
 					{allSports}

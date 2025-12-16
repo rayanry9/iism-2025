@@ -89,7 +89,7 @@ func UpdateOutingStatus(c *gin.Context, outingId int, newStatus int) error {
 
 	return nil
 }
-func GetAllOutings(c *gin.Context, instituteId int) ([]schema.OutingData, error) {
+func GetAllOutings(c *gin.Context, instituteId int) ([]schema.GetOutingDataResponse, error) {
 	rows, err := config.DB.Query(c, `
         SELECT
             o.id,
@@ -111,10 +111,10 @@ func GetAllOutings(c *gin.Context, instituteId int) ([]schema.OutingData, error)
 	}
 	defer rows.Close()
 
-	outings := []schema.OutingData{}
+	outings := []schema.GetOutingDataResponse{}
 
 	for rows.Next() {
-		var o schema.OutingData
+		var o schema.GetOutingDataResponse
 		err := rows.Scan(
 			&o.OutingId,
 			&o.Reason,
@@ -133,7 +133,7 @@ func GetAllOutings(c *gin.Context, instituteId int) ([]schema.OutingData, error)
 
 	return outings, nil
 }
-func GetUserOutings(c *gin.Context, userId int) ([]schema.OutingData, error) {
+func GetUserOutings(c *gin.Context, userId int) ([]schema.GetOutingDataResponse, error) {
 
 	rows, err := config.DB.Query(c, `
         SELECT
@@ -156,10 +156,10 @@ func GetUserOutings(c *gin.Context, userId int) ([]schema.OutingData, error) {
 	}
 	defer rows.Close()
 
-	outings := []schema.OutingData{}
+	outings := []schema.GetOutingDataResponse{}
 
 	for rows.Next() {
-		var o schema.OutingData
+		var o schema.GetOutingDataResponse
 		err := rows.Scan(
 			&o.OutingId,
 			&o.Reason,

@@ -1,17 +1,12 @@
 <script lang="ts">
 	import type { IITNames } from '$lib/types/iitNames';
 	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
-	import { MatchStatus, type GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
+	import { MatchStatus } from '$lib/types/poolMatches';
 	import { getIITImgSrc, getIITShortCode } from '$lib/utility/iitLogoImgSrc';
 	import { getSportImageSrc } from '$lib/utility/sportImgSrc';
 	import menSvg from '$lib/assets/icons/men.svg';
 	import womenSvg from '$lib/assets/icons/female.svg';
-	import {
-		getSportFromSportId,
-		getSportIdOfSport,
-		isSportFemale,
-		isSportMixed
-	} from '$lib/utility/sport';
+	import { isSportFemale, isSportMixed } from '$lib/utility/sport';
 	import { AthleticMatchType, type GetAllAthleticMatchesResponse } from '$lib/types/athleticMatch';
 	import type { GetAllSportsResponse } from '$lib/types/sports';
 	import chevronUpSvg from '$lib/assets/icons/chevron-up.svg';
@@ -98,13 +93,15 @@
 					{#if matchData.status == MatchStatus.MatchPending}
 						Pending
 					{:else if matchData.status == MatchStatus.MatchConcluded}
-						Concluded
-					{:else if matchData.status == MatchStatus.MatchOngoing}
+						Done
+					{:else if matchData.status == MatchStatus.MatchOngoing && matchData.liveStreamLink != null}
 						<a
 							href={matchData.liveStreamLink}
 							class="text-custom-orange cursor-pointer font-bold underline underline-offset-4"
 							>LIVE ↗</a
 						>
+					{:else}
+						Ongoing
 					{/if}
 				</span>
 			</div>

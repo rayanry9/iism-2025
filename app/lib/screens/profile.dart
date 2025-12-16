@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
+import 'package:iism_2025/constants/iit.dart';
+import 'package:iism_2025/constants/mess_menu.dart';
 import 'package:iism_2025/constants/sport.dart';
-import 'package:iism_2025/services/user_cache.dart';
-import 'package:iism_2025/services/user_loader.dart';
-import 'package:iism_2025/widgets/sbs.dart';
+import 'package:iism_2025/services/api_service.dart';
+import 'package:iism_2025/services/auth.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iism_2025/widgets/sport_card_full.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final UserViewModel _userViewModel;
+  const ProfileScreen({super.key, required UserViewModel userViewModel})
+    : _userViewModel = userViewModel;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -22,34 +29,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    load();
-    //    print("yo");
-    // print(sportImage);
-  }
+    if (widget._userViewModel.me!.sports != null) {
+      if ((widget._userViewModel.me!.sports as List<dynamic>).isNotEmpty) {
+        final firstSport = widget._userViewModel.me!.sports![0];
 
-  Future<void> load() async {
-    await loadUserData();
-
-    if (UserCache().sports != null && UserCache().sports!.isNotEmpty) {
-      //       print("FIRST SPORT ENTRY: ${UserCache().sports![0]}");
-      // print("TYPE: ${UserCache().sports![0].runtimeType}");
-      final firstSport = UserCache().sports![0];
-
-      final sportId = firstSport["sportId"];
-      sportEnum = getSportFromSportId(sportId);
-      sportImage = getSportImageSrc(sportEnum);
+        final sportId = firstSport["sportId"];
+        sportEnum = getSportFromSportId(sportId);
+        sportImage = getSportImageSrc(sportEnum);
+      }
     }
-    setState(() {
-      loading = false; // set once, AFTER async load
-    });
+    loading = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-
-      body: loading
+    context.watch<UserViewModel>();
+    return SingleChildScrollView(
+      child: loading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(Constants.screenWidthPadding),
@@ -62,20 +58,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // PROFILE HEADER (TOP)
                   // --------------------------
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 16,
                     children: [
                       // Avatar
                       CircleAvatar(
-                        radius: 35,
-                        backgroundImage: UserCache().profilePic != null
-                            ? NetworkImage(UserCache().profilePic!)
+                        radius: 60,
+                        backgroundImage:
+                            widget._userViewModel.me?.profilePic != null
+                            ? NetworkImage(
+                                '${dotenv.env["API_URL"]}/api/profile-pic/${widget._userViewModel.me!.profilePic!}.webp',
+                              )
                             : null,
-                        child: UserCache().profilePic == null
+                        child: widget._userViewModel.me!.profilePic == null
                             ? const Icon(
                                 Icons.person,
                                 color: Colors.white,
-                                size: 40,
+                                size: 60,
                               )
                             : null,
                       ),
@@ -87,18 +86,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Row(
                             children: [
                               Text(
-                                (UserCache().firstName ?? "") +
-                                    " " +
-                                    (UserCache().lastName ?? ""),
+                                '${widget._userViewModel.me?.firstName} ${widget._userViewModel.me?.lastName ?? " "}',
                                 style: TextStyle(
                                   fontSize: Constants.titlesTextSize,
                                   color: Colors.black,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],
                           ),
                           Text(
-                            UserCache().email ?? "",
+                            widget._userViewModel.me?.email ?? "",
                             style: const TextStyle(
                               fontSize: Constants.buttonTextSize,
                               color: CustomColors.darkGray,
@@ -106,11 +104,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            "IIT " + (UserCache().institute ?? ""),
+                            "IIT ${widget._userViewModel.me!.institute}",
                             style: const TextStyle(
                               fontSize: Constants.buttonTextSize,
                               color: CustomColors.darkGray,
                             ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 6,
+                                horizontal: 18,
+                              ),
+                              foregroundColor: Colors.white,
+                              backgroundColor: CustomColors.darkGray,
+                            ),
+                            onPressed: () async {
+                              await context.read<ApiService>().logout();
+                              if (context.mounted) {
+                                await context
+                                    .read<AuthStatus>()
+                                    .checkLoginState();
+                              }
+                              if (context.mounted) {
+                                await context
+                                    .read<UserViewModel>()
+                                    .refetchData();
+                              }
+                            },
+                            child: Text("LOGOUT"),
                           ),
                         ],
                       ),
@@ -119,15 +141,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   const SizedBox(height: 24),
 
-                  UserRow(
-                    title:
-                        (UserCache().sports != null &&
-                            UserCache().sports!.isNotEmpty)
-                        ? sportEnum?.name ?? "NULL"
-                        : "NULL",
-                    gender: UserCache().gender ?? "No name",
-                    imageUrl: sportImage,
-                    right: Text("View"),
+                  SportCardFull(
+                    role: widget._userViewModel.me!.role,
+                    sportId: widget._userViewModel.me?.sports != null
+                        ? ((widget._userViewModel.me?.sports as List<dynamic>)
+                                  .isNotEmpty
+                              ? (widget
+                                    ._userViewModel
+                                    .me
+                                    ?.sports?[0]["sportId"])
+                              : null)
+                        : null,
+                    child: Column(
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          getIITImgSrcFromName(
+                            widget._userViewModel.me!.institute,
+                          ),
+                          height: 58,
+                        ),
+                        Text(
+                          "IIT ${widget._userViewModel.me!.institute}",
+                          style: TextStyle(
+                            fontSize: Constants.titlesTextSize,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                   const SizedBox(height: 24),
@@ -154,11 +198,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
 
                         // 🔥 Barcode 128 using assignedId
-                        if (UserCache().assignedId != null)
+                        if (widget._userViewModel.me!.assignedId != null)
                           Expanded(
                             child: BarcodeWidget(
                               barcode: Barcode.code128(),
-                              data: UserCache().assignedId.toString(),
+                              data: widget._userViewModel.me!.assignedId
+                                  .toString(),
                               width: null,
                               height: 56,
                               drawText: false,
@@ -169,11 +214,123 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
+                  const SizedBox(width: 24, height: 16),
+
+                  ExpansionTile(
+                    expandedAlignment: Alignment.centerLeft,
+                    tilePadding: EdgeInsets.symmetric(
+                      horizontal: Constants.screenWidthPadding,
+                    ),
+                    title: Text(
+                      "TODAYS MESS MENU",
+                      style: TextStyle(
+                        fontSize: Constants.buttonTextSize,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    backgroundColor: CustomColors.lightGray,
+                    collapsedBackgroundColor: CustomColors.lightGray,
+                    children: [
+                      ExpansionTile(
+                        title: Text(
+                          "Breakfast",
+                          style: TextStyle(fontSize: Constants.buttonTextSize),
+                        ),
+                        childrenPadding: EdgeInsetsGeometry.symmetric(
+                          horizontal: Constants.screenWidthPadding,
+                          vertical: 12,
+                        ),
+                        tilePadding: EdgeInsets.symmetric(
+                          horizontal: Constants.screenWidthPadding,
+                        ),
+                        subtitle: Text(
+                          "07:30 AM to 09:30 AM",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: CustomColors.darkGray,
+                          ),
+                        ),
+                        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                        children: getMessMenuByDayTime(DateTime.now().day)[0]
+                            .indexed
+                            .map((item) {
+                              return Text(
+                                '${item.$1 + 1}. ${item.$2}',
+                                style: TextStyle(fontSize: 14),
+                                textAlign: TextAlign.left,
+                              );
+                            })
+                            .toList(),
+                      ),
+                      ExpansionTile(
+                        title: Text(
+                          "Lunch",
+                          style: TextStyle(fontSize: Constants.buttonTextSize),
+                        ),
+                        childrenPadding: EdgeInsetsGeometry.symmetric(
+                          horizontal: Constants.screenWidthPadding,
+                          vertical: 12,
+                        ),
+                        tilePadding: EdgeInsets.symmetric(
+                          horizontal: Constants.screenWidthPadding,
+                        ),
+                        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                        subtitle: Text(
+                          "12:30 PM to 2:30 PM",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: CustomColors.darkGray,
+                          ),
+                        ),
+                        children: getMessMenuByDayTime(DateTime.now().day)[1]
+                            .indexed
+                            .map((item) {
+                              return Text(
+                                '${item.$1 + 1}. ${item.$2}',
+                                style: TextStyle(fontSize: 14),
+                                textAlign: TextAlign.left,
+                              );
+                            })
+                            .toList(),
+                      ),
+                      ExpansionTile(
+                        title: Text(
+                          "Dinner",
+                          style: TextStyle(fontSize: Constants.buttonTextSize),
+                        ),
+                        childrenPadding: EdgeInsetsGeometry.symmetric(
+                          horizontal: Constants.screenWidthPadding,
+                          vertical: 12,
+                        ),
+                        tilePadding: EdgeInsets.symmetric(
+                          horizontal: Constants.screenWidthPadding,
+                        ),
+                        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                        subtitle: Text(
+                          "07:30 PM to 09:30 PM",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: CustomColors.darkGray,
+                          ),
+                        ),
+                        children: getMessMenuByDayTime(DateTime.now().day)[2]
+                            .indexed
+                            .map((item) {
+                              return Text(
+                                '${item.$1 + 1}. ${item.$2}',
+                                style: TextStyle(fontSize: 14),
+                                textAlign: TextAlign.left,
+                              );
+                            })
+                            .toList(),
+                      ),
+                    ],
+                  ),
 
                   // -----------------------------
                   // OUTING CARDS BASED ON ROLE
                   // -----------------------------
-                  if (UserCache().role == 2)
+                  if (widget._userViewModel.me!.role == 2)
                     GestureDetector(
                       onTap: () {
                         context.push("/request-outing");
@@ -182,7 +339,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: double.infinity,
                         margin: const EdgeInsets.only(top: 20),
                         padding: const EdgeInsets.symmetric(
-                          vertical: 14,
+                          vertical: 16,
                           horizontal: Constants.screenWidthPadding,
                         ),
                         decoration: BoxDecoration(
@@ -203,14 +360,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   "REQUEST FOR OUTING",
                                   style: TextStyle(
                                     fontSize: Constants.heading2TextSize,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                     color: CustomColors.darkTeal,
                                   ),
                                 ),
                                 Text(
                                   "Request campus outing approval here.",
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     color: CustomColors.darkTeal,
                                   ),
                                 ),
@@ -225,7 +382,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
 
-                  if (UserCache().role == 6)
+                  if (widget._userViewModel.me!.role == 6)
                     GestureDetector(
                       onTap: () {
                         context.push("/approve-request");
@@ -234,15 +391,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: double.infinity,
                         margin: const EdgeInsets.only(top: 20),
                         padding: const EdgeInsets.symmetric(
-                          vertical: 22,
-                          horizontal: 16,
+                          vertical: 16,
+                          horizontal: Constants.screenWidthPadding,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE3F7F7),
-                          borderRadius: BorderRadius.circular(14),
+                          color: CustomColors.pastelBlue,
+                          borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: Color(0xFF0A6C70),
-                            width: 1.5,
+                            color: CustomColors.teal,
+                            width: 1,
                           ),
                         ),
                         child: Row(
@@ -254,25 +411,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Text(
                                   "OUTING REQUESTS",
                                   style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF0A3B3D),
+                                    fontSize: Constants.heading2TextSize,
+                                    fontWeight: FontWeight.w600,
+                                    color: CustomColors.darkTeal,
                                   ),
                                 ),
-                                SizedBox(height: 4),
                                 Text(
                                   "Approve the Outing Requests here.",
                                   style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.black54,
+                                    fontSize: 16,
+                                    color: CustomColors.darkTeal,
                                   ),
                                 ),
                               ],
                             ),
                             Icon(
                               Icons.double_arrow,
-                              color: Color(0xFF0A3B3D),
-                              size: 28,
+                              color: CustomColors.darkTeal,
                             ),
                           ],
                         ),

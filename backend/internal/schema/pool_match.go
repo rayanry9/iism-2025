@@ -51,6 +51,12 @@ type PoolMatchDB struct {
 	SportId        int           `db:"sport_id"`
 	MatchName      *string       `db:"match_name"`
 	LiveStreamLink *string       `db:"live_stream_link"`
+	Team1Score     []int         `db:"team1_score"`
+	Team1Balls     int           `db:"team1_balls"`
+	Team1Wickets   int           `db:"team1_wickets"`
+	Team2Score     []int         `db:"team2_score"`
+	Team2Balls     int           `db:"team2_balls"`
+	Team2Wickets   int           `db:"team2_wickets"`
 }
 
 type GetAllPoolMatchesResponse struct {
@@ -68,4 +74,10 @@ type GetAllPoolMatchesResponse struct {
 	Type           PoolMatchType `json:"type"`
 	MatchName      *string       `json:"matchName"`
 	LiveStreamLink *string       `json:"liveStreamLink"`
+	Team1Score     []int         `json:"team1Score"`
+	Team1Balls     int           `json:"team1Balls"`
+	Team1Wickets   int           `json:"team1Wickets"`
+	Team2Score     []int         `json:"team2Score"`
+	Team2Balls     int           `json:"team2Balls"`
+	Team2Wickets   int           `json:"team2Wickets"`
 }

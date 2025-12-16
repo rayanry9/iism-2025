@@ -169,61 +169,65 @@
 			<FlairedTitle
 				class="3xl:!w-[110rem] 3xl:-translate-x-[30rem] !w-full lg:!w-[50rem] lg:-translate-x-[13rem] xl:!w-[70rem] xl:-translate-x-[17.5rem] 2xl:!w-[90rem] 2xl:-translate-x-[20rem]"
 			>
-				<div
-					class="*:inline-flex *:max-w-12 *:min-w-12 *:flex-col *:items-center 2xl:*:max-w-16 2xl:*:min-w-16 **:[span]:inline-flex **:[span]:max-w-3 **:[span]:min-w-3 **:[span]:justify-center 2xl:**:[span]:max-w-4 2xl:**:[span]:min-w-4"
-				>
-					<div>
+				{#if globals.staff}
+					<div
+						class="*:inline-flex *:max-w-12 *:min-w-12 *:flex-col *:items-center 2xl:*:max-w-16 2xl:*:min-w-16 **:[span]:inline-flex **:[span]:max-w-3 **:[span]:min-w-3 **:[span]:justify-center 2xl:**:[span]:max-w-4 2xl:**:[span]:min-w-4"
+					>
 						<div>
-							{#if remDays >= 10}
-								<span>{remDays.toString().at(0)}</span>
-								<span>{remDays.toString().at(1)}</span>
-							{:else}
-								<span>0</span>
-								<span>{remDays.toString().at(0)}</span>
-							{/if}
+							<div>
+								{#if remDays >= 10}
+									<span>{remDays.toString().at(0)}</span>
+									<span>{remDays.toString().at(1)}</span>
+								{:else}
+									<span>0</span>
+									<span>{remDays.toString().at(0)}</span>
+								{/if}
+							</div>
+							<p class="leading-none">Days</p>
 						</div>
-						<p class="leading-none">Days</p>
-					</div>
-					:
-					<div>
+						:
 						<div>
-							{#if remHours >= 10}
-								<span>{remHours.toString().at(0)}</span>
-								<span>{remHours.toString().at(1)}</span>
-							{:else}
-								<span>0</span>
-								<span>{remHours.toString().at(0)}</span>
-							{/if}
+							<div>
+								{#if remHours >= 10}
+									<span>{remHours.toString().at(0)}</span>
+									<span>{remHours.toString().at(1)}</span>
+								{:else}
+									<span>0</span>
+									<span>{remHours.toString().at(0)}</span>
+								{/if}
+							</div>
+							<p class="leading-none">Hrs</p>
 						</div>
-						<p class="leading-none">Hrs</p>
-					</div>
-					:
-					<div>
+						:
 						<div>
-							{#if remMinutes >= 10}
-								<span>{remMinutes.toString().at(0)}</span>
-								<span>{remMinutes.toString().at(1)}</span>
-							{:else}
-								<span>0</span>
-								<span>{remMinutes.toString().at(0)}</span>
-							{/if}
+							<div>
+								{#if remMinutes >= 10}
+									<span>{remMinutes.toString().at(0)}</span>
+									<span>{remMinutes.toString().at(1)}</span>
+								{:else}
+									<span>0</span>
+									<span>{remMinutes.toString().at(0)}</span>
+								{/if}
+							</div>
+							<p class="leading-none">Mins</p>
 						</div>
-						<p class="leading-none">Mins</p>
-					</div>
-					:
-					<div>
+						:
 						<div>
-							{#if remSeconds >= 10}
-								<span>{remSeconds.toString().at(0)}</span>
-								<span>{remSeconds.toString().at(1)}</span>
-							{:else}
-								<span>0</span>
-								<span>{remSeconds.toString().at(0)}</span>
-							{/if}
+							<div>
+								{#if remSeconds >= 10}
+									<span>{remSeconds.toString().at(0)}</span>
+									<span>{remSeconds.toString().at(1)}</span>
+								{:else}
+									<span>0</span>
+									<span>{remSeconds.toString().at(0)}</span>
+								{/if}
+							</div>
+							<p class="leading-none">Sec</p>
 						</div>
-						<p class="leading-none">Sec</p>
 					</div>
-				</div>
+				{:else}
+					<div class="text-custom-orange">Ongoing</div>
+				{/if}
 			</FlairedTitle>
 		</div>
 

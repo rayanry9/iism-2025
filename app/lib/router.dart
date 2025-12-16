@@ -16,6 +16,11 @@ import 'package:iism_2025/screens/teams.dart';
 import 'package:iism_2025/screens/splash.dart';
 import 'package:iism_2025/screens/logindetails.dart';
 import 'package:iism_2025/services/auth.dart';
+import 'package:iism_2025/viewmodel/approve_outing_view_model.dart';
+import 'package:iism_2025/viewmodel/common_data_view_model.dart';
+import 'package:iism_2025/viewmodel/matches_view_model.dart';
+import 'package:iism_2025/viewmodel/teams_view_model.dart';
+import 'package:iism_2025/viewmodel/user.dart';
 import 'package:iism_2025/widgets/tab_bar.dart';
 import 'package:iism_2025/widgets/top_bar.dart';
 import 'package:iism_2025/screens/request_outing.dart';
@@ -26,13 +31,15 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
   refreshListenable: auth,
   redirect: (context, state) {
     if (auth.isLoggedIn && (state.uri.path.contains('/login'))) {
+      context.read<UserViewModel>().refetchData();
       return '/home';
     } else if (!auth.isLoggedIn && !(state.uri.path.contains('/login'))) {
+      context.read<UserViewModel>().refetchData();
       return '/login';
     }
     return null;
   },
-  initialLocation: "/teams",
+  initialLocation: "/home",
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -71,7 +78,10 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
             GoRoute(
               path: "/logindetails",
               builder: (BuildContext context, GoRouterState state) {
-                return const LogindetailsScreen();
+                return LogindetailsScreen(
+                  authStatus: context.read(),
+                  apiService: context.read(),
+                );
               },
             ),
           ],
@@ -94,20 +104,39 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
           builder: (BuildContext context, GoRouterState state, Widget child) {
             final hideFabScreens = {
               "/chat",
+              "/campus-map",
               // add more screens here
             };
 
             final showFab = !hideFabScreens.contains(state.uri.path.toString());
-            return ChangeNotifierProvider(
-              create: (_) => TeamPageState(),
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProxyProvider<UserViewModel, TeamsViewModel>(
+                  create: (_) =>
+                      TeamsViewModel(user: context.read(), api: context.read()),
+                  update: (context, user, teams) {
+                    teams!.updateUserViewModel(user);
+                    return teams;
+                  },
+                ),
+                ChangeNotifierProvider(
+                  create: (context) {
+                    final vm = CommonDataViewModel(api: context.read());
+                    vm.init();
+                    return vm;
+                  },
+                ),
+                ChangeNotifierProvider(create: (_) => MatchesViewModel()),
+              ],
               child: MyTabBar(
                 child: Scaffold(
                   appBar: TopBar(
                     route: state.uri.path.toString(),
+                    user: context.read(),
                   ), // <— your dynamic top bar
                   backgroundColor: Colors.white,
                   body: child,
-                  floatingActionButton: showFab
+                  floatingActionButton: false && showFab
                       ? Material(
                           elevation: 6,
                           color: CustomColors.orange,
@@ -146,49 +175,73 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
                   const NoTransitionPage(child: GalleryScreen()),
             ),
             GoRoute(
-              path: "/home",
-              pageBuilder: (context, _) =>
-                  const NoTransitionPage(child: HomeScreen()),
-            ),
-            GoRoute(
               path: "/matches",
               pageBuilder: (_, _) =>
                   const NoTransitionPage(child: MatchesScreen()),
             ),
             GoRoute(
-              path: "/schedule",
+              path: "/home",
               pageBuilder: (_, _) =>
+                  const NoTransitionPage(child: HomeScreen()),
+            ),
+            GoRoute(
+              path: "/schedule",
+              pageBuilder: (context, _) =>
                   const NoTransitionPage(child: ScheduleScreen()),
             ),
             GoRoute(
               path: "/teams",
               pageBuilder: (context, _) {
-                return const NoTransitionPage(child: TeamsScreen());
+                return NoTransitionPage(
+                  child: TeamsScreen(user: context.read()),
+                );
               },
             ),
             GoRoute(
               path: "/profile",
-              pageBuilder: (_, _) {
-                return NoTransitionPage(child: const ProfileScreen());
+              pageBuilder: (context, _) {
+                return NoTransitionPage(
+                  child: ProfileScreen(userViewModel: context.read()),
+                );
               },
             ),
             GoRoute(
               path: "/request-outing",
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return NoTransitionPage(child: const RequestOutingScreen());
+                return NoTransitionPage(
+                  child: RequestOutingScreen(
+                    api: context.read(),
+                    user: context.read(),
+                  ),
+                );
               },
             ),
 
             GoRoute(
               path: "/approve-request",
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return NoTransitionPage(child: const ApproveRequestScreen());
+                return NoTransitionPage(
+                  child: ChangeNotifierProvider(
+                    create: (context) {
+                      final vm = ApproveOutingViewModel(context.read());
+                      vm.init();
+                      return vm;
+                    },
+
+                    child: ApproveRequestScreen(
+                      api: context.read(),
+                      user: context.read(),
+                    ),
+                  ),
+                );
               },
             ),
             GoRoute(
               path: '/chat',
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return NoTransitionPage(child: const AskSimhiScreen());
+                return NoTransitionPage(
+                  child: AskSimhiScreen(user: context.read()),
+                );
               },
             ),
             GoRoute(

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iism_2025/constants/colors.dart';
 import 'package:iism_2025/constants/constants.dart';
 import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class LogindetailsScreen extends StatefulWidget {
-  const LogindetailsScreen({super.key});
+  final ApiService apiService;
+  final AuthStatus authStatus;
+  const LogindetailsScreen({
+    super.key,
+    required this.apiService,
+    required this.authStatus,
+  });
 
   @override
   State<LogindetailsScreen> createState() => _LogindetailsScreenState();
@@ -15,36 +21,25 @@ class LogindetailsScreen extends StatefulWidget {
 
 class _LogindetailsScreenState extends State<LogindetailsScreen> {
   bool _obscure = true;
+  bool _requested = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  Future<bool> login(String email, String password) async {
-    try {
-      final response = await dio.post(
-        "/api/login",
-        data: {"email": email, "password": password},
-      );
-      return response.statusCode == 200;
-    } on DioException catch (e) {
-      return false;
-    } catch (e) {
-      return false;
-    }
-  }
 
-  void onLoginPressed(BuildContext context) async {
-    bool success = await login(
+  void onLoginPressed() async {
+    final success = await widget.apiService.login(
       emailController.text.trim(),
       passwordController.text.trim(),
     );
-
+    print("uyiyiyyiuyui");
+    print(success);
     if (success) {
-      if (context.mounted) {
-        await auth.checkLoginState();
-        if (context.mounted) {
-          context.go('/home');
-        }
-      }
+      print("adfadfs");
+      await widget.authStatus.checkLoginState();
     }
+    print("nm,n,mnm,nnm,");
+    setState(() {
+      _requested = false;
+    });
   }
 
   @override
@@ -79,7 +74,7 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
                       ),
                       SizedBox(height: 32),
                       Text(
-                        "Registered Email",
+                        "Registered Email/Id",
                         style: TextStyle(
                           fontSize: Constants.titlesTextSize,
                           fontWeight: FontWeight.w600,
@@ -147,17 +142,24 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
                           ),
                         ),
                         onPressed: () {
-                          onLoginPressed(context);
+                          if (!_requested) {
+                            onLoginPressed();
+                          }
+                          setState(() {
+                            _requested = true;
+                          });
                         },
                         child: Transform(
                           transform: Matrix4.skewX(Constants.skewXValue),
                           alignment: Alignment.center,
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              fontSize: Constants.buttonTextSize,
-                            ),
-                          ),
+                          child: _requested
+                              ? CircularProgressIndicator(color: Colors.white)
+                              : Text(
+                                  "LOGIN",
+                                  style: TextStyle(
+                                    fontSize: Constants.buttonTextSize,
+                                  ),
+                                ),
                         ),
                       ),
                     ),

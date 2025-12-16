@@ -7,6 +7,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:iism_2025/services/api_service.dart';
 import 'package:iism_2025/services/auth.dart';
 import 'package:iism_2025/services/notification.dart';
+import 'package:iism_2025/viewmodel/user.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -18,26 +20,36 @@ Future<void> main() async {
   //   UserCache().role = 2;
   // }
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  await configureAPIService();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  auth = AuthStatus();
-  await auth.checkLoginState();
-  await NotificationService.initialize();
 
-  runApp(MyApp(auth: auth));
+  final ApiService apiService = await ApiService.init();
+  final AuthStatus auth = await AuthStatus.init(apiService: apiService);
+  final NotificationService notificationService =
+      await NotificationService.init(apiService);
+  final UserViewModel user = await UserViewModel.init(apiService);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider.value(value: apiService),
+        ChangeNotifierProvider.value(value: auth),
+        Provider.value(value: notificationService),
+        ChangeNotifierProvider.value(value: user),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  final AuthStatus auth;
-
-  const MyApp({super.key, required this.auth});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: router(auth: auth),
+      routerConfig: router(auth: context.read()),
       theme: ThemeData(fontFamily: 'Optima Nova LT Pro'),
     );
   }
