@@ -4,8 +4,9 @@ app
 output-image*
 backup-*
 images/
-reg_cli
+*_cli
 data.csv
 data2.csv
 img.zip
 sql-runs/
+data*.txt

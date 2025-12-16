@@ -39,7 +39,7 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     }
     return null;
   },
-  initialLocation: "/approve-request",
+  initialLocation: "/home",
   routes: [
     ShellRoute(
       builder: (context, state, child) {

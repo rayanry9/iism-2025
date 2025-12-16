@@ -74,7 +74,7 @@ class _LogindetailsScreenState extends State<LogindetailsScreen> {
                       ),
                       SizedBox(height: 32),
                       Text(
-                        "Registered Email",
+                        "Registered Email/Id",
                         style: TextStyle(
                           fontSize: Constants.titlesTextSize,
                           fontWeight: FontWeight.w600,
