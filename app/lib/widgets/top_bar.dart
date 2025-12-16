@@ -43,7 +43,7 @@ class _TopBarState extends State<TopBar> {
     );
   }
 
-  bool _liveMatches = true;
+  final bool _liveMatches = true;
 
   Widget? _buildChild(String route) {
     if (route.contains("/home")) {

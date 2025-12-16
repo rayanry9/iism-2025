@@ -91,13 +91,13 @@ class HomeScreen extends StatelessWidget {
                                   elem.$1 == 0
                                       ? Constants.screenWidthPadding
                                       : 0,
-                                  24,
+                                  12,
                                   Constants.screenWidthPadding,
                                   32,
                                 ),
                                 width:
                                     constraints.maxWidth -
-                                    Constants.screenWidthPadding * 2,
+                                    Constants.screenWidthPadding ,
                                 child: PoolMatchCard(
                                   pm: elem.$2,
                                   cm: commonDataVM,
