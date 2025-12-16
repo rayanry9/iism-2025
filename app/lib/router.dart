@@ -44,10 +44,12 @@ GoRouter router({required AuthStatus auth}) => GoRouter(
     ShellRoute(
       builder: (context, state, child) {
         return AnnotatedRegion<SystemUiOverlayStyle>(
-          value: const SystemUiOverlayStyle(
+          value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.light,
+            statusBarBrightness: Theme.of(context).platform ==TargetPlatform.iOS? Brightness.dark: Brightness.light,
             statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: Colors.transparent,
+            systemNavigationBarIconBrightness: Brightness.light
           ),
           child: child,
         );

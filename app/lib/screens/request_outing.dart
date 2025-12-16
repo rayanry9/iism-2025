@@ -52,7 +52,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
 
       DateTime now = DateTime.now();
 
-      String _formatRFC3339(DateTime dt) {
+      String formatRFC3339(DateTime dt) {
         dt = dt.toLocal();
 
         final offset = dt.timeZoneOffset;
@@ -72,7 +72,7 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
         final min = dt.minute.toString().padLeft(2, '0');
         final s = dt.second.toString().padLeft(2, '0');
 
-        return "${y}-${m}-${d}T${h}:${min}:${s}${offsetString}";
+        return "$y-$m-${d}T$h:$min:$s$offsetString";
       }
 
       DateTime exitTime = DateTime(
@@ -90,12 +90,12 @@ class _RequestOutingScreenState extends State<RequestOutingScreen> {
         entryTOD.minute,
       );
 
-      final formattedExit = _formatRFC3339(exitTime);
-      final formattedEntry = _formatRFC3339(entryTime);
+      final formattedExit = formatRFC3339(exitTime);
+      final formattedEntry = formatRFC3339(entryTime);
 
       String apiUrl = dotenv.env['API_URL']!;
       final response = await widget._apiService.dio.post(
-        apiUrl + "/api/outing/create",
+        "$apiUrl/api/outing/create",
         data: {
           "reason": reasonController.text,
           "exitTime": formattedExit,

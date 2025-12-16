@@ -25,6 +25,7 @@ class SportCardFull extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
+            flex: 12,
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return Stack(
@@ -53,7 +54,7 @@ class SportCardFull extends StatelessWidget {
                     Positioned(
                       top: constraints.maxHeight * 0.1,
                       left: 0,
-                      right: constraints.maxWidth * 0.2,
+                      right: constraints.maxWidth,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -104,7 +105,7 @@ class SportCardFull extends StatelessWidget {
               },
             ),
           ),
-          Expanded(child: child),
+          Expanded(flex: 10,child: child),
         ],
       ),
     );
