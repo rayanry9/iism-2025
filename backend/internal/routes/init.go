@@ -25,7 +25,7 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 
 	r.POST("/login", controller.Login)
 	r.POST("/logout", middlewares.AuthJWT(), controller.Logout)
-	r.GET("/me", middlewares.AuthJWT(), middlewares.CacheHTTP(60*5), controller.Me)
+	r.GET("/me", middlewares.AuthJWT(), middlewares.CacheHTTP(5), controller.Me)
 	r.POST("/register", middlewares.AuthJWT(), controller.RegisterPlayer)
 	r.POST("/register-edit", middlewares.AuthJWT(), controller.RegisterPlayerEdit)
 	r.POST("/register-coach", middlewares.AuthJWT(), controller.RegisterCoach)
@@ -56,4 +56,5 @@ func SetupApiRoutes(r *gin.RouterGroup) {
 	r.GET("/get-leaderboard", controller.GetLeaderboardData)
 
 	r.POST("/gate")
+	r.POST("/update-pool-match", middlewares.AuthJWT(), controller.UpdatePoolMatch)
 }

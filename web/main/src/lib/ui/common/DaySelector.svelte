@@ -2,6 +2,7 @@
 	import { globals } from '$lib/state.svelte';
 	import Button from '../components/Button.svelte';
 
+	let { currentDate = $bindable(new Date(2025, 11, 13)) }: { currentDate: Date } = $props();
 	let days = $derived(
 		globals.staff
 			? [
@@ -25,8 +26,7 @@
 					new Date(2025, 11, 21)
 				]
 	);
-	let activeDate = $state(0);
-	let { currentDate = $bindable() }: { currentDate: Date } = $props();
+	let activeDate = $state(days.findIndex((v) => v.getDate() == currentDate.getDate()));
 </script>
 
 <section

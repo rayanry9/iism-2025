@@ -594,3 +594,8 @@ func SaveFcmToken(c *gin.Context, req schema.SaveFcmTokenRequest, userId int) er
 	_, err := config.DB.Exec(c, `update users set fcm_token = $1 where id = $2`, req.Token, userId)
 	return err
 }
+
+func GetUserRole(c *gin.Context, userId int) (role schema.UserRole, err error) {
+	err = config.DB.QueryRow(c, `select role from users where id = $1`, userId).Scan(&role)
+	return
+}
