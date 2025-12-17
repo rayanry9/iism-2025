@@ -8,7 +8,7 @@ export const load: LayoutServerLoad = async ({ cookies, url, fetch }) => {
 	if (!cookies.get('jwt') && url.pathname != '/register/login') {
 		throw redirect(307, '/register/login');
 	}
-	const res = await fetch(`${PUBLIC_API_URL}/me`);
+	const res = await fetch(`${PUBLIC_API_URL}/me`, { credentials: 'include' });
 	let me = null;
 	if (res.status == 200) {
 		me = (await res.json()) as UserDetails | null;

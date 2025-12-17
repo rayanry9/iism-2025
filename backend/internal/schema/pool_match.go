@@ -81,3 +81,16 @@ type GetAllPoolMatchesResponse struct {
 	Team2Balls     int           `json:"team2Balls"`
 	Team2Wickets   int           `json:"team2Wickets"`
 }
+
+type UpdatePoolMatchRequest struct {
+	Id             int          `form:"id"`
+	Status         *MatchStatus `form:"status"`
+	Result         *int         `form:"result"`
+	LiveStreamLink *string      `form:"liveStreamLink"`
+	Team1Score     *[]int       `form:"team1Score"`
+	Team1Balls     *int         `form:"team1Balls"`
+	Team1Wickets   *int         `form:"team1Wickets"`
+	Team2Score     *[]int       `form:"team2Score"`
+	Team2Balls     *int         `form:"team2Balls"`
+	Team2Wickets   *int         `form:"team2Wickets"`
+}

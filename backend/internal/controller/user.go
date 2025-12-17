@@ -23,40 +23,36 @@ func Login(c *gin.Context) {
 	}
 
 	id, password, exists, canLogin, isStaff, err := db.GetUserDetailFromEmailOrAssignedId(c, req.Email)
-	if os.Getenv("GIN_MODE") != "debug" {
 
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
-			slog.Error("Failed getting user detail", "error", err)
-			return
-		}
-		if !exists {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
-			slog.Info("User does not exist", "req", req)
-			return
-		}
-		if !canLogin {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "User cannot login"})
-			slog.Info("User cannot login", "req", req)
-			return
-		}
-		if password == nil {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
-			return
-		}
-		match, err := utility.VerifyHashWithPassword(*password, req.Password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
+		slog.Error("Failed getting user detail", "error", err)
+		return
+	}
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
+		slog.Info("User does not exist", "req", req)
+		return
+	}
+	if !canLogin {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "User cannot login"})
+		slog.Info("User cannot login", "req", req)
+		return
+	}
+	if password == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "User does not exists"})
+		return
+	}
+	match, err := utility.VerifyHashWithPassword(*password, req.Password)
 
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
-			slog.Error("Failed getting user detail", "error", err)
-			return
-		}
-		if !match {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "Wrong Password"})
-			return
-		}
-	} else {
-		id = 1
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error on our end"})
+		slog.Error("Failed getting user detail", "error", err)
+		return
+	}
+	if !match {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Wrong Password"})
+		return
 	}
 
 	token, err := utility.CreateToken(id, isStaff)
@@ -66,32 +62,31 @@ func Login(c *gin.Context) {
 	}
 
 	if os.Getenv("GIN_MODE") == "debug" {
-		c.SetSameSite(http.SameSiteLaxMode)
-		c.SetCookie("jwt", token, 60*60*5, "/", "", true, true)
-		// http.SetCookie(c.Writer, &http.Cookie{
-		// 	Name:     "jwt",
-		// 	Value:    token,
-		// 	MaxAge:   60 * 60 * 5,
-		// 	Path:     "/",
-		// 	Secure:   false,
-		// 	HttpOnly: true,
-		// 	SameSite: http.SameSiteLaxMode,
-		// })
+		// c.SetSameSite(http.SameSiteLaxMode)
+		// c.SetCookie("jwt", token, 60*60*5, "/", "", true, true)
+		http.SetCookie(c.Writer, &http.Cookie{
+			Name:     "jwt",
+			Value:    token,
+			MaxAge:   60 * 60 * 5,
+			Path:     "/",
+			Secure:   false,
+			HttpOnly: true,
+			SameSite: http.SameSiteLaxMode,
+		})
 	} else {
-		c.SetSameSite(http.SameSiteLaxMode)
-		c.SetCookie("jwt", token, 60*60*5, "/", strings.Split(os.Getenv("FRONTEND_URL"), "://")[1], true, true)
-		// http.SetCookie(c.Writer, &http.Cookie{
-		// 	Name:     "jwt",
-		// 	Value:    token,
-		// 	MaxAge:   60 * 60 * 5,
-		// 	Path:     "/",
-		// 	Domain:   strings.Split(os.Getenv("FRONTEND_URL"), "://")[1],
-		// 	Secure:   true,
-		// 	HttpOnly: true,
-		// 	SameSite: http.SameSiteLaxMode,
-		// })
+		// c.SetSameSite(http.SameSiteLaxMode)
+		// c.SetCookie("jwt", token, 60*60*5, "/", strings.Split(os.Getenv("FRONTEND_URL"), "://")[1], true, true)
+		http.SetCookie(c.Writer, &http.Cookie{
+			Name:     "jwt",
+			Value:    token,
+			MaxAge:   60 * 60 * 5,
+			Path:     "/",
+			Domain:   strings.Split(os.Getenv("FRONTEND_URL"), "://")[1],
+			Secure:   true,
+			HttpOnly: true,
+			SameSite: http.SameSiteLaxMode,
+		})
 	}
-	c.Status(http.StatusOK)
 }
 
 func Logout(c *gin.Context) {

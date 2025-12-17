@@ -57,6 +57,7 @@
 				<a href="/teams" class="tags-text">TEAMS & PLAYERS</a>
 				<a href="/contact" class="tags-text">CONTACT</a>
 				<a href="/live-score" class="tags-text">LIVE SCORES</a>
+				<a href="/privacy-policy" class="tags-text">PRIVACY POLICY</a>
 			</div>
 			<div>
 				<SocialButtons />
