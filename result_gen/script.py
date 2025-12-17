@@ -113,7 +113,7 @@ for (sport, gender, date), group in groups:
 
     # GENDER (left aligned)
     if sport=="VOLLEYBALL":
-        draw.text((left_margin+10, y_gender+y_margin), gender, fill="white",
+        draw.text((left_margin+10, y_gender+y_margin), gender.upper(), fill="white",
             font=title_font, anchor="ls")
         y_schedule+=190
     
@@ -123,7 +123,7 @@ for (sport, gender, date), group in groups:
     if sport=="FOOTBALL": x_margin=0
     if sport=="VOLLEYBALL": x_margin=15
     # SCHEDULE (left aligned)
-    draw.text((left_margin+x_margin, y_schedule+y_margin), "Results - Day 2", fill="white",
+    draw.text((left_margin+x_margin, y_schedule+y_margin+20), "Results - Day 3", fill="white",
             font=subtitle_font, anchor="ls")
 
     # ------------------------------------------------------------
