@@ -123,7 +123,7 @@ for (sport, gender, date), group in groups:
     if sport=="FOOTBALL": x_margin=0
     if sport=="VOLLEYBALL": x_margin=15
     # SCHEDULE (left aligned)
-    draw.text((left_margin+x_margin, y_schedule+y_margin+20), "Results - Day 3", fill="white",
+    draw.text((left_margin+x_margin, y_schedule+y_margin+20), "Results - Day 4", fill="white",
             font=subtitle_font, anchor="ls")
 
     # ------------------------------------------------------------
@@ -153,7 +153,8 @@ for (sport, gender, date), group in groups:
     # DRAW TABLE CONTENT
     # ------------------------------------------------------------
     # Adjust coordinates based on your table image design
-    x_pool = 235
+    # x_pool = 235
+    x_pool = 185
     x_match = 345
     x_time = 1475
     y_start = 1090

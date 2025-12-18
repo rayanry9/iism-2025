@@ -1,0 +1,61 @@
+Sport,Gender,Date,Pool,Match,Score,Winner
+CRICKET,Men,16/12/2025,B,IIT Madras VS IIT Roorkee,83/10(16.1) - 140/9(20.0),IIT Roorkee
+CRICKET,Men,16/12/2025,D,IIT Delhi VS IIT Dharwad,86/3(15.2) - 82/10(18.1),IIT Delhi
+CRICKET,Men,16/12/2025,E,IIT Kanpur VS IIT Patna,202/5(20.0) - 89/10(14.0),IIT Kanpur
+CRICKET,Men,16/12/2025,F,IIT Guwahati VS IIT Bhubaneswar,168/7(20.0) - 134/5(20.0),IIT Guwahati
+CRICKET,Men,16/12/2025,C,IIT Hyderabad VS IIT Mandi,89/3(10.3) - 88/10(17.2),IIT Hyderabad
+CRICKET,Men,16/12/2025,A,IIT (BHU) Varanasi VS IIT Jodhpur,82/1(11.1) - 78/10(18.3),IIT (BHU) Varanasi
+CRICKET,Men,16/12/2025,G,IIT Kharagpur VS IIT Tirupati,181/3(20.0) - 159/9(20.0),IIT Kharagpur
+CRICKET,Men,16/12/2025,H,IIT Bombay VS IIT Palakkad,205/4(20.0) - 67/10(17.4),IIT Bombay
+FOOTBALL,Men,16/12/2025,B,IIT Ropar VS IIT Bhilai,1 - 2,IIT Bhilai
+FOOTBALL,Men,16/12/2025,C,IIT (BHU) Varanasi VS IIT Palakkad,1 - 0,IIT (BHU) Varanasi
+FOOTBALL,Men,16/12/2025,D,IIT Jammu VS IIT Patna,0 - 1,IIT Patna
+FOOTBALL,Men,16/12/2025,E,IIT Madras VS IIT Bhubaneswar,0 - 0,Draw
+FOOTBALL,Men,16/12/2025,F,IIT Hyderabad VS IIT Indore,1 - 1,Draw
+FOOTBALL,Men,16/12/2025,G,IIT Tirupati VS IIT Jodhpur,0 - 7,IIT Jodhpur
+HOCKEY,Men,16/12/2025,A,IIT Mandi VS IIT Hyderabad,2 - 0,IIT Mandi
+HOCKEY,Men,16/12/2025,D,IIT (ISM) Dhanbad VS IIT Kanpur,1 - 3,IIT Kanpur
+HOCKEY,Men,16/12/2025,C,IIT Roorkee VS IIT Guwahati,2 - 2,Draw
+HOCKEY,Men,16/12/2025,D,IIT (BHU) Varanasi VS IIT Ropar,1 - 0,IIT (BHU) Varanasi
+VOLLEYBALL,Men,16/12/2025,A,IIT Gandhinagar VS IIT Kanpur,3 - 1,IIT Kanpur
+VOLLEYBALL,Men,16/12/2025,B,IIT Bombay VS IIT Palakkad,3 - 0,IIT Bombay
+VOLLEYBALL,Men,16/12/2025,C,IIT Tirupati VS IIT Mandi,3 - 0,IIT Tirupati
+VOLLEYBALL,Men,16/12/2025,D,IIT Guwahati VS IIT Dharwad,3 - 0,IIT Guwahati
+VOLLEYBALL,Men,16/12/2025,E,IIT (ISM) Dhanbad VS IIT Patna,3 - 0,IIT (ISM) Dhanbad
+VOLLEYBALL,Men,16/12/2025,F,IIT Indore VS IIT Delhi,0 - 3,IIT Delhi
+VOLLEYBALL,Men,16/12/2025,G,IIT Ropar VS IIT Goa,3 - 0,IIT Ropar
+VOLLEYBALL,Women,16/12/2025,B,IIT Tirupati VS IIT Patna,0 - 3,IIT Patna
+VOLLEYBALL,Women,16/12/2025,C,IIT Guwahati VS IIT Bhilai,3 - 0,IIT Guwahati
+VOLLEYBALL,Women,16/12/2025,E,IIT Dharwad VS IIT Jammu,0 - 3,IIT Jammu
+VOLLEYBALL,Women,16/12/2025,F,IIT Palakkad VS IIT (ISM) Dhanbad,0 - 3,IIT (ISM) Dhanbad
+VOLLEYBALL,Women,16/12/2025,G,IIT Indore VS IIT Gandhinagar,3 - 1,IIT Indore
+VOLLEYBALL,Women,16/12/2025,D,IIT Kharagpur VS IIT Mandi,3 - 2,IIT Kharagpur
+
+FOOTBALL,Men,17/12/2025,A,IIT Kharagpur VS IIT (ISM) Dhanbad,2 - 0,IIT Kharagpur
+FOOTBALL,Men,17/12/2025,B,IIT Kanpur VS IIT Ropar,6 - 0,IIT Kanpur
+FOOTBALL,Men,17/12/2025,C,IIT Bombay VS IIT (BHU) Varanasi,1 - 0,IIT Bombay
+FOOTBALL,Men,17/12/2025,D,IIT Roorkee VS IIT Jammu,1 - 0,IIT Roorkee
+FOOTBALL,Men,17/12/2025,E,IIT Delhi VS IIT Madras,0 - 0,Draw
+FOOTBALL,Men,17/12/2025,G,IIT Mandi VS IIT Tirupati,1 - 2,IIT Tirupati
+FOOTBALL,Men,17/12/2025,F,IIT Gandhinagar VS IIT Hyderabad,0 - 1,IIT Hyderabad
+FOOTBALL,Men,17/12/2025,H,IIT Guwahati VS IIT Dharwad,3 - 0,IIT Guwahati
+HOCKEY,Men,17/12/2025,D,IIT (BHU) Varanasi VS IIT (ISM) Dhanbad,0 - 0,Draw
+HOCKEY,Men,17/12/2025,B,IIT Bombay VS IIT Madras,0 - 4,IIT Madras
+HOCKEY,Men,17/12/2025,C,IIT Roorkee VS IIT Kharagpur,3 - 0,IIT Roorkee
+HOCKEY,Men,17/12/2025,D,IIT Kanpur VS IIT Ropar,5 - 2,IIT Kanpur
+VOLLEYBALL,Men,17/12/2025,E,IIT Jammu VS IIT (ISM) Dhanbad,3 - 1,IIT Jammu
+VOLLEYBALL,Men,17/12/2025,F,IIT Jodhpur VS IIT Indore,1 - 3,IIT Indore
+VOLLEYBALL,Men,17/12/2025,G,IIT Kharagpur VS IIT Ropar,2 - 3,IIT Ropar
+VOLLEYBALL,Men,17/12/2025,H,IIT (BHU) Varanasi VS IIT Bhilai,3 - 0,IIT (BHU) Varanasi
+VOLLEYBALL,Men,17/12/2025,C,IIT Bhubaneswar VS IIT Tirupati,0 - 3,IIT Tirupati
+VOLLEYBALL,Men,17/12/2025,D,IIT Madras VS IIT Guwahati,3 - 0,IIT Madras
+VOLLEYBALL,Men,17/12/2025,A,IIT Roorkee VS IIT Gandhinagar,3 - 1,IIT Roorkee
+VOLLEYBALL,Men,17/12/2025,B,IIT Hyderabad VS IIT Bombay,1 - 3,IIT Bombay
+VOLLEYBALL,Women,17/12/2025,B,IIT Delhi VS IIT Tirupati,3 - 0,IIT Delhi
+VOLLEYBALL,Women,17/12/2025,G,IIT Bhubaneswar VS IIT Indore,0 - 3,IIT Indore
+VOLLEYBALL,Women,17/12/2025,D,IIT Roorkee VS IIT Kharagpur,3 - 0,IIT Roorkee
+VOLLEYBALL,Women,17/12/2025,F,IIT Madras VS IIT Palakkad,3 - 0,IIT Madras
+VOLLEYBALL,Women,17/12/2025,C,IIT Jodhpur VS IIT Guwahati,0 - 3,IIT Guwahati
+VOLLEYBALL,Women,17/12/2025,H,IIT Bombay VS IIT Hyderabad,3 - 0,IIT Bombay
+VOLLEYBALL,Women,17/12/2025,E,IIT Kanpur VS IIT Dharwad,3 - 0,IIT Kanpur
+VOLLEYBALL,Women,17/12/2025,A,IIT (BHU) Varanasi VS IIT Ropar,3 - 0,IIT (BHU) Varanasi

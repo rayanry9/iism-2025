@@ -180,10 +180,19 @@ for idx, row in df.iterrows():
                 font=font_text
             )
 
-    # ---------- Save ----------
-    safe_name = name.replace(" ", "_")
-    output_path = os.path.join(OUTPUT_DIR, f"{safe_name}.png")
+        # ---------- Save (avoid overwriting) ----------
+    safe_name = re.sub(r"[^a-zA-Z0-9_]", "", name.replace(" ", "_"))
+
+    base_path = os.path.join(OUTPUT_DIR, safe_name)
+    output_path = f"{base_path}.png"
+
+    counter = 1
+    while os.path.exists(output_path):
+        output_path = f"{base_path}{counter}.png"
+        counter += 1
+
     img.save(output_path)
+
 
     print(f"Generated: {output_path}")
 
