@@ -17,6 +17,16 @@ pictogram_folder = "../schedule_gen/Pictograms/"
 
 def get_pictogram_from_id(id: int):
     match id:
+        case 16 | 17:
+            return "Badminton"
+        case 18:
+            return "Basketball"
+        case 21:
+            return "Squash"
+        case 22:
+            return "Tennis"
+        case 23|24:
+            return "TableTennis"
         case 5 | 19:
             return "Cricket"
         case 6 :
@@ -76,7 +86,7 @@ def make_circle_avatar(img, diameter):
 
     return avatar
 
-with open('./data-new.csv', "r") as data:
+with open('./data-staff-id.csv', "r") as data:
     lines = data.readlines()
     for idx in range(len(lines)):
         if idx ==0 :
@@ -92,7 +102,7 @@ with open('./data-new.csv', "r") as data:
         barcodeText = data[7].strip(" ")
         photo = data[8].strip(" \n")
 
-        with Image.open('./ID_Student_Front.png') as bg:
+        with Image.open('./ID_Staff_Front.png') as bg:
             # barcode 
             rv = BytesIO()
             draw = ImageDraw.Draw(bg)
