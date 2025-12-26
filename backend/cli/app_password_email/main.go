@@ -19,8 +19,9 @@ import (
 var mailHtml []byte
 
 type EmailData struct {
-	Name     string
-	Password string
+	AssignedId string
+	Name       string
+	Password   string
 }
 
 func main() {
@@ -41,8 +42,7 @@ func main() {
 	var emails []*gomail.Message
 	for str := range strings.SplitSeq(string(data), "\n") {
 		var emailData EmailData
-		var id string
-		fmt.Sscanf(str, "Id: %s  Pwd: %s", &id, &emailData.Password)
+		fmt.Sscanf(str, "Id: %s  Pwd: %s", &emailData.AssignedId, &emailData.Password)
 
 		var email string
 
@@ -50,7 +50,7 @@ func main() {
 			trim (trim ( 
 				trim(first_name) ||' ' || trim(coalesce(middle_name, ''))
 			) || ' ' ||
-			trim(coalesce(last_name, ''))),email from users where assigned_id ilike $1`, id).Scan(&emailData.Name, &email)
+			trim(coalesce(last_name, ''))),email from users where assigned_id ilike $1`, emailData.AssignedId).Scan(&emailData.Name, &email)
 		if err != nil {
 			fmt.Printf("Error at Id: %s and error being %v\n", str, err)
 			continue
@@ -66,7 +66,7 @@ func main() {
 		m.SetHeader("To", email)
 		// m.SetHeader("Cc", "ma24btech11018@iith.ac.in")
 		// m.SetHeader("Cc", "interiit.convenor@iith.ac.in")
-		m.SetHeader("Subject", "Login Details for IISM25 Mobile App")
+		m.SetHeader("Subject", "Login Details for IISSM25 Mobile App")
 
 		var finalEmail bytes.Buffer
 		if err := eml.Execute(&finalEmail, emailData); err != nil {
@@ -74,12 +74,11 @@ func main() {
 		}
 
 		m.SetBody("text/html", finalEmail.String())
+		emails = append(emails, m)
+		fmt.Printf("\nAppended to emails user Data: email: %v id: %v  emailid:%v\n password: %v\n", email, emailData.AssignedId, m, emailData.Password)
+		count++
 
-		if count < 20 {
-			emails = append(emails, m)
-			fmt.Printf("\nAppended to emails user Data: email: %v id: %v  emailid:%v\n password: %v", email, id, m, emailData.Password)
-			count++
-		} else {
+		if count > 20 {
 			dialer := gomail.NewDialer("smtp.gmail.com", 587, "interiit.oc@iith.ac.in", os.Getenv("SMTP_PASSWORD"))
 			if err := dialer.DialAndSend(emails...); err != nil {
 				fmt.Printf("\nFailed to send emails with error: %v\nUser Data: %v\n", err, emails)
@@ -92,5 +91,14 @@ func main() {
 		}
 
 	}
+
+	dialer := gomail.NewDialer("smtp.gmail.com", 587, "interiit.oc@iith.ac.in", os.Getenv("SMTP_PASSWORD"))
+	if err := dialer.DialAndSend(emails...); err != nil {
+		fmt.Printf("\nFailed to send emails with error: %v\nUser Data: %v\n", err, emails)
+	} else {
+		fmt.Printf("Sucessfully sent emails to last batch\n")
+	}
+	emails = []*gomail.Message{}
+	count = 0
 
 }

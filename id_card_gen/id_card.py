@@ -86,7 +86,7 @@ def make_circle_avatar(img, diameter):
 
     return avatar
 
-with open('./data-staff-id.csv', "r") as data:
+with open('./data-staff-updated-id.csv', "r") as data:
     lines = data.readlines()
     for idx in range(len(lines)):
         if idx ==0 :
@@ -102,7 +102,7 @@ with open('./data-staff-id.csv', "r") as data:
         barcodeText = data[7].strip(" ")
         photo = data[8].strip(" \n")
 
-        with Image.open('./ID_Staff_Front.png') as bg:
+        with Image.open('./ID_Student_Front.png') as bg:
             # barcode 
             rv = BytesIO()
             draw = ImageDraw.Draw(bg)

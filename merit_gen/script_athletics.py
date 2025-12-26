@@ -6,7 +6,7 @@ import re
 # ===================== CONFIG =====================
 BACKGROUND_IMAGE = "athletics.png"
 CSV_FILE = "athletics_data.csv"
-OUTPUT_DIR = "output_certificates"
+OUTPUT_DIR = "output_certificates/Athletics"
 
 # Certificate text positions (tweak if needed)
 NAME_Y = 1162
@@ -120,7 +120,8 @@ for idx, row in df.iterrows():
         font=font_text
     )
         # ---------- Save (avoid overwriting) ----------
-    safe_name = re.sub(r"[^a-zA-Z0-9_]", "", name.replace(" ", "_"))
+    # safe_name = re.sub(r"[^a-zA-Z0-9_]", "", name.replace(" ", "_"))
+    safe_name = f"{sport}_{place}"
 
     base_path = os.path.join(OUTPUT_DIR, safe_name)
     output_path = f"{base_path}.png"

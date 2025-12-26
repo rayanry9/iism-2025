@@ -110,8 +110,9 @@ for idx, row in df.iterrows():
         # ---------- Save (avoid overwriting) ----------
     safe_name = re.sub(r"[^a-zA-Z0-9_]", "", name.replace(" ", "_"))
 
-    base_path = os.path.join(OUTPUT_DIR, safe_name)
+    base_path = os.path.join(OUTPUT_DIR,sport,str(place), safe_name)
     output_path = f"{base_path}.png"
+    os.makedirs(os.path.join(OUTPUT_DIR,sport,str(place)), exist_ok=True)
 
     counter = 1
     while os.path.exists(output_path):

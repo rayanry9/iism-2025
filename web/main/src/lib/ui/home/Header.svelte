@@ -169,7 +169,7 @@
 			<FlairedTitle
 				class="3xl:!w-[110rem] 3xl:-translate-x-[30rem] !w-full lg:!w-[50rem] lg:-translate-x-[13rem] xl:!w-[70rem] xl:-translate-x-[17.5rem] 2xl:!w-[90rem] 2xl:-translate-x-[20rem]"
 			>
-				{#if globals.staff}
+				{#if false}
 					<div
 						class="*:inline-flex *:max-w-12 *:min-w-12 *:flex-col *:items-center 2xl:*:max-w-16 2xl:*:min-w-16 **:[span]:inline-flex **:[span]:max-w-3 **:[span]:min-w-3 **:[span]:justify-center 2xl:**:[span]:max-w-4 2xl:**:[span]:min-w-4"
 					>
@@ -225,8 +225,10 @@
 							<p class="leading-none">Sec</p>
 						</div>
 					</div>
-				{:else}
+				{:else if globals.staff}
 					<div class="text-custom-orange">Ongoing</div>
+				{:else}
+					<div class="text-custom-orange">Concluded</div>
 				{/if}
 			</FlairedTitle>
 		</div>

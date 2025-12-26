@@ -341,7 +341,7 @@
 				{#if getSportFromSportId(parseInt(athleticSubSportArr[idx]!))}
 					<CustomInput
 						required
-						value={isEditRegister ? data.playerData?.sports[idx].extra : null}
+						value={isEditRegister ? (data.playerData?.sports?.at(idx)?.extra ?? null) : null}
 						name="extra_{idx + (parseInt(sportId!) > 0 ? 2 : 1)}">POSITION IN SPORT *</CustomInput
 					>
 				{:else}

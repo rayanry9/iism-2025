@@ -116,7 +116,7 @@ export function getSportFromSportId(id: number): Sports | null {
 		case 59:
 			return 'Chess';
 		default:
-			return 'Athletics';
+			return null;
 	}
 }
 
@@ -234,13 +234,13 @@ export function isSportFemale(id: number) {
 export function getSportMaxRegistrants(sportId: number): number {
 	switch (sportId) {
 		case -11:
-			return 2;
+			return 10;
 		case -10:
 			return 20;
 		case -4:
-			return 7 * 3 + 1 * 6;
+			return 7 * 3 + 1 * 6 + 2;
 		case -3:
-			return 12 * 3 + 1 * 6;
+			return 12 * 3 + 1 * 6 + 4;
 		case -2:
 			return 6;
 		case -1:

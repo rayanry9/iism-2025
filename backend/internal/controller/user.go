@@ -67,7 +67,7 @@ func Login(c *gin.Context) {
 		http.SetCookie(c.Writer, &http.Cookie{
 			Name:     "jwt",
 			Value:    token,
-			MaxAge:   60 * 60 * 5,
+			MaxAge:   60 * 60 * 1,
 			Path:     "/",
 			Secure:   false,
 			HttpOnly: true,
@@ -79,7 +79,7 @@ func Login(c *gin.Context) {
 		http.SetCookie(c.Writer, &http.Cookie{
 			Name:     "jwt",
 			Value:    token,
-			MaxAge:   60 * 60 * 5,
+			MaxAge:   60 * 60 * 24 * 20,
 			Path:     "/",
 			Domain:   strings.Split(os.Getenv("FRONTEND_URL"), "://")[1],
 			Secure:   true,
