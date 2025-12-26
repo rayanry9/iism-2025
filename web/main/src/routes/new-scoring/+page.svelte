@@ -56,6 +56,9 @@
 	let givenBalls2 = $derived(selectedMatch?.team2Balls);
 	let updatingBalls2 = $state(false);
 
+	let givenLiveLink = $derived(selectedMatch?.liveStreamLink);
+	let updatingLiveLink = $state(false);
+
 	function updatePoolMatchDataAfterUpdate(data: GetAllPoolMatchesResponse) {
 		let idx = poolMatchesData.findIndex((p) => p.id == selectedMatch!.id);
 		let tempSelectedSet1 = selectedSet1;
@@ -222,6 +225,36 @@
 			.finally(() => {
 				updatingWickets1 = false;
 				updatingWickets2 = false;
+			});
+	}
+
+	function poolMatchLiveLinkUpdate() {
+		updatingLiveLink = true;
+		fetch(PUBLIC_API_URL + '/update-pool-match', {
+			method: 'POST',
+			credentials: 'include',
+			headers: [['Content-Type', 'application/json']],
+			body: JSON.stringify({
+				id: selectedMatch!.id,
+				liveStreamLink: givenLiveLink
+			})
+		})
+			.then((res) => {
+				if (res.status == 200) {
+					res.json().then((val) => {
+						updatePoolMatchDataAfterUpdate(val);
+					});
+				} else {
+					res.json().then((val) => {
+						alert(JSON.stringify(val));
+					});
+				}
+			})
+			.catch((e) => {
+				alert(e);
+			})
+			.finally(() => {
+				updatingLiveLink = false;
 			});
 	}
 </script>
@@ -449,7 +482,7 @@
 					<button
 						disabled={updatingWickets2}
 						onclick={() => {
-							poolMatchWicketsUpdate(1);
+							poolMatchWicketsUpdate(2);
 						}}
 						class="bg-custom-orange disabled:bg-custom-gray px-6 py-2 text-white">Submit</button
 					>
@@ -457,4 +490,21 @@
 			{/if}
 		</div>
 	{/if}
+
+	<div class="border p-2">
+		<label class="flex flex-col">
+			Live Stream link<input
+				bind:value={givenLiveLink}
+				type="text"
+				class="bg-gray my-4 border p-2"
+			/></label
+		>
+		<button
+			disabled={updatingLiveLink}
+			onclick={() => {
+				poolMatchLiveLinkUpdate();
+			}}
+			class="bg-custom-orange disabled:bg-custom-gray px-6 py-2 text-white">Submit</button
+		>
+	</div>
 </section>
