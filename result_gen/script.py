@@ -104,7 +104,7 @@ for (sport, gender, date), group in groups:
     y_date = y_schedule + 460
     y_margin=0
 
-    if sport=="VOLLEYBALL": y_margin=30
+    if sport=="TABLE TENNIS" or sport=="BADMINTON": y_margin=30
     else: y_margin=100
 
     # SPORT NAME (left aligned)
@@ -112,18 +112,19 @@ for (sport, gender, date), group in groups:
             font=title_font, anchor="ls")
 
     # GENDER (left aligned)
-    if sport=="VOLLEYBALL":
+    if sport=="BADMINTON" or sport=="TABLE TENNIS":
         draw.text((left_margin+10, y_gender+y_margin), gender.upper(), fill="white",
             font=title_font, anchor="ls")
         y_schedule+=190
     
     x_margin=0
     if sport=="CRICKET": x_margin=13
-    if sport=="HOCKEY": x_margin=5
+    if sport=="HOCKEY" or sport=="SQUASH" or sport=="TENNIS": x_margin=5
     if sport=="FOOTBALL": x_margin=0
-    if sport=="VOLLEYBALL": x_margin=15
+    if sport=="VOLLEYBALL" or sport=="BADMINTON" or sport=="BASKETBALL": x_margin=15
+    if sport=="TABLE TENNIS": x_margin=20
     # SCHEDULE (left aligned)
-    draw.text((left_margin+x_margin, y_schedule+y_margin+20), "Results - Day 4", fill="white",
+    draw.text((left_margin+x_margin, y_schedule+y_margin+20), "Results - Day 2", fill="white",
             font=subtitle_font, anchor="ls")
 
     # ------------------------------------------------------------
@@ -153,10 +154,10 @@ for (sport, gender, date), group in groups:
     # DRAW TABLE CONTENT
     # ------------------------------------------------------------
     # Adjust coordinates based on your table image design
-    # x_pool = 235
-    x_pool = 185
-    x_match = 345
-    x_time = 1475
+    x_pool = 235
+    # x_pool = 165
+    x_match = 335
+    x_time=1475 
     y_start = 1090
     row_height = 145
 
@@ -168,6 +169,8 @@ for (sport, gender, date), group in groups:
         score = str(row["Score"]).strip()
         winner= str(row["Winner"]).strip()
         # Align "VS" in the same vertical column
+        if score=="Shoot Out": x_time = 1400
+
         if "VS" in match:
             team1, team2 = match.split("VS")
             # pad to align VS column roughly
@@ -212,11 +215,7 @@ for (sport, gender, date), group in groups:
 
         # - team2 left starts at: x_vs_center + vs_w/2 + gap
         x_team2 = x_vs_center + vs_w / 2 + gap
-        # print(winner)
-        # print(team1)
-        # print(team2)
-        # print(winner.strip()==team1.strip())
-        # print(winner.strip()==team2.strip())
+        
         # Draw text
         y_offset=200
         if winner.strip()==team1.strip(): draw.text((x_team1, y+y_offset), team1_text, font=table_font_bold, fill="white")
@@ -231,6 +230,19 @@ for (sport, gender, date), group in groups:
 
         draw.text((x_pool, y+y_offset), pool, fill="white", font=table_font)
         # draw.text((x_match, y), match_display, fill="white", font=table_font)
+        # pool_col_width = x_match - x_pool
+
+        # # Width of the pool text
+        # text_w = draw.textlength(pool, font=table_font)
+
+        # # Center horizontally inside the column
+        # x_text = x_pool + (pool_col_width - text_w) / 2
+
+        # # Vertical position as it already is
+        # y_center = y 
+
+        # # Draw centered text (manual centering—no anchor needed)
+        # draw.text((x_text, y+y_offset), pool, fill="white", font=table_font)
 
         x_offset=225
         if sport!="CRICKET": draw.text((x_time-25+x_offset, y+y_offset), score, fill="white", font=table_font_bold)

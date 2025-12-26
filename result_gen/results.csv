@@ -1,9 +1,8 @@
 Sport,Gender,Date,Pool,Match,Score,Winner
-CRICKET,Men,17/12/2025,PQF1,IIT Ropar VS IIT Mandi,111/10(17.5) - 162/10(19.4),IIT Mandi
-CRICKET,Men,17/12/2025,PQF2,IIT Roorkee VS IIT Delhi,112/7(20.0) - 114/8(19.5),IIT Delhi
-CRICKET,Men,17/12/2025,PQF3,IIT Hyderabad VS IIT (BHU) Varanasi,132/6(17.3) - 129/9(20.0),IIT Hyderabad
-CRICKET,Men,17/12/2025,PQF4,IIT Jammu VS IIT Madras,117/9(20.0) - 175/7(20.0),IIT Madras
-CRICKET,Men,17/12/2025,PQF5,IIT Kanpur VS IIT Indore,128/10(19.4) - 129/4(20.0),IIT Indore
-CRICKET,Men,17/12/2025,PQF6,IIT (ISM) Dhanbad VS IIT Palakkad,159/5(20.0) - 139/6(20.0),IIT (ISM) Dhanbad
-CRICKET,Men,17/12/2025,PQF7,IIT Kharagpur VS IIT Patna,77/2(11.2) - 75/10(15.4),IIT Kharagpur
-CRICKET,Men,17/12/2025,PQF8,IIT Bombay VS IIT Guwahati,86/7(15.4) - 82/10(16.5),IIT Bombay
+SQUASH,Men,25/12/2025,A,IIT Madras VS IIT Patna,IIT Madras
+SQUASH,Men,25/12/2025,B,IIT Hyderabad VS IIT Indore,IIT Indore
+SQUASH,Men,25/12/2025,C,IIT Bombay VS IIT (BHU) Varanasi,IIT Bombay
+SQUASH,Men,25/12/2025,D,IIT Jammu VS IIT Mandi,IIT Jammu
+SQUASH,Men,25/12/2025,B,IIT Kanpur VS IIT Guwahati,IIT Kanpur
+SQUASH,Men,25/12/2025,C,IIT Kharagpur VS IIT (ISM) Dhanbad,IIT Kharagpur
+SQUASH,Men,25/12/2025,D,IIT Gandhinagar VS IIT Roorkee,IIT Gandhinagar

@@ -22,7 +22,7 @@ def make_icon_white(img):
 # ------------------------------------------------------------
 # CONFIGURATION
 # ------------------------------------------------------------
-csv_path = "matches.csv"
+csv_path = "matches1.csv"
 background_path = "../background.png"  # background image
 table_folder = "Tables"  # folder containing all "<n>_rows.png" tables
 output_folder = "final_outputs"
@@ -154,7 +154,7 @@ for (sport, gender, date), group in groups:
     # DRAW TABLE CONTENT
     # ------------------------------------------------------------
     # Adjust coordinates based on your table image design
-    x_pool = 300
+    x_pool = 265
     x_match = 400
     x_time = 1700
     y_start = 1060
@@ -237,7 +237,22 @@ for (sport, gender, date), group in groups:
         # Slightly space out colon for visual alignment
         # time_aligned = time.replace(":", " : ")
 
-        draw.text((x_pool, y+y_offset), pool, fill="white", font=table_font)
+        # draw.text((x_pool, y+y_offset), pool, fill="white", font=table_font)
+        # DRAW TEXT
+        # Width of the POOL column
+        pool_col_width = x_match - x_pool
+
+        # Width of the pool text
+        text_w = draw.textlength(pool, font=table_font)
+
+        # Center horizontally inside the column
+        x_text = x_pool + (pool_col_width - text_w) / 2
+
+        # Vertical position as it already is
+        y_center = y 
+
+        # Draw centered text (manual centering—no anchor needed)
+        draw.text((x_text, y+y_offset), pool, fill="white", font=table_font)
         # draw.text((x_match, y), match_display, fill="white", font=table_font)
         draw.text((x_time-25, y+y_offset), time, fill="white", font=table_font)
 
