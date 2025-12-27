@@ -52,10 +52,10 @@ for idx, row in df.iterrows():
     place=row.get("position","")
     performance=row.get("performance","").strip()
 
-    if place==1: place="1st Place"
-    elif place==2: place="2nd Place"
-    elif place==3: place="3rd Place"
-    elif place==4: place="4th Place"
+    if place==1: place="1st"
+    elif place==2: place="2nd"
+    elif place==3: place="3rd"
+    elif place==4: place="4th"
 
     # Create a fresh copy for each certificate
     img = bg.copy()

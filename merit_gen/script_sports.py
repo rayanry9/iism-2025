@@ -51,10 +51,10 @@ for idx, row in df.iterrows():
     sport = clean_sports(row.get("sport", ""))
     place=row.get("position","")
 
-    if place.upper()=="FIRST": place="1st Place"
-    elif place.upper()=="SECOND": place="2nd Place"
-    elif place.upper()=="THIRD": place="3rd Place"
-    elif place.upper()=="FOURTH": place="4th Place"
+    if place.upper()=="FIRST": place="1st"
+    elif place.upper()=="SECOND": place="2nd"
+    elif place.upper()=="THIRD": place="3rd"
+    elif place.upper()=="FOURTH": place="4th"
 
     # Create a fresh copy for each certificate
     img = bg.copy()
