@@ -1,0 +1,121 @@
+event,position,name,institute,performance
+Mens 100M Run,1,SHANU CHOPRA,IIT Roorkee,12.20 sec
+Mens 100M Run,2,VISHNU S N,IIT Bombay,12.30 sec
+Mens 100M Run,3,SRIDHAR M P,IIT Madras,12.70 sec
+Mens 100M Run,4,VISHNU DETH,IIT Jammu,12.80 sec
+Mens 200M Run,1,VISHNU S N,IIT Bombay,25.10 sec
+Mens 200M Run,2,SHANU CHOPRA,IIT Roorkee,25.30 sec
+Mens 200M Run,3,APU DAS,IIT (ISM) Dhanbad,25.60 sec
+Mens 200M Run,4,ASHOK M,IIT Madras,25.90 sec
+Mens 400M Run,1,BUDHURAM KISKU,IIT Patna,58.50 sec
+Mens 400M Run,2,AKHLESH MISHRA,IIT Jodhpur,59.50 sec
+Mens 400M Run,3,SUNIL SHETTY,IIT Jammu,1:00.92 min
+Mens 400M Run,4,NAGENDRAN C,IIT Tirupati,1:01.00 min
+Mens 800M Run,1,NIRMAL KUMAR R,IIT Madras,2:17.80 min
+Mens 800M Run,2,SACHIN KUMAR SEN,IIT Madras,2:21.80 min
+Mens 800M Run,3,ABHASH KUMAR JH,IIT (BHU) Varanasi,2:26.90 min
+Mens 800M Run,4,MANISH SINGH,IIT Patna,2:27.10 min
+Mens 1500M Run,1,NIRMAL KUMAR R,IIT Madras,4:57.00 min
+Mens 1500M Run,2,SACHIN KUMAR SEN,IIT Madras,4:59.20 min
+Mens 1500M Run,3,ABHASH KUMAR JH,IIT (BHU) Varanasi,5:12.10 min
+Mens 1500M Run,4,MANISH SAHU,IIT Kanpur,5:28.00 min
+Mens 5000M Run,1,NIRMAL KUMAR R,IIT Madras,19:12.50 min
+Mens 5000M Run,2,SACHIN KUMAR SEN,IIT Madras,19:17.30 min
+Mens 5000M Run,3,ABHASH KUMAR JH,IIT (BHU) Varanasi,20:07.60 min
+Mens 5000M Run,4,ANUP SINGH,IIT Delhi,21:02.00 min
+Mens High Jump,1,ANURAG SINGH,IIT Bhilai,1.62 m
+Mens High Jump,2,PROVASH DAS,IIT Kharagpur,1.62 m
+Mens High Jump,3,VASUDEV RAO VARANASI,IIT Madras,1.60 m
+Mens High Jump,4,HARISH NAIK MALOTH,IIT Hyderabad,1.54 m
+Mens Long Jump,1,PRANAB KR SARKAR,IIT Kharagpur,5.43 m
+Mens Long Jump,2,PROVASH DAS,IIT Kharagpur,5.38 m
+Mens Long Jump,3,VAIBHAV,IIT Mandi,5.28 m
+Mens Long Jump,4,SANTHOSH S,IIT Madras,5.17 m
+Mens Shot Put,1,SHANU CHOPRA,IIT Roorkee,11.00 m
+Mens Shot Put,2,ANIL KUMAR KUSHWAHA,IIT Hyderabad,10.90 m
+Mens Shot Put,3,RAJIB LOCHAN GOGOI,IIT Guwahati,9.55 m
+Mens Shot Put,4,TARUN VERMA,IIT Mandi,9.16 m
+Mens Hammer Throw,1,RISHI PRAKASH D DAGAR,IIT DELHI,26.36 m
+Mens Hammer Throw,2,ANAND SANSANWAL,IIT DELHI, 24.92 m
+Mens Hammer Throw,3,ANINDYA SUNDAR PAL CHOUDHURY,IIT KHARAGPUR,24.76 m
+Mens Hammer Throw,4,DEEPAK DHANOWA,IIT KANPUR,24.32 m
+Mens Discus Throw,1,HARDEEP ANTIL,IIT Hyderabad,30.36 m
+Mens Discus Throw,2,RAJIB LOCHAN GOGOI,IIT Guwahati,29.94 m
+Mens Discus Throw,3,SANDEEP KUMAR SAMAL,IIT Bhubaneswar,29.43 m
+Mens Discus Throw,4,ANIL KUMAR KUSHWAHA,IIT Hyderabad,27.97 m
+Mens Javelin Throw,1,SRINIVAS VALUVALA,IIT Kharagpur,48.91 m
+Mens Javelin Throw,2,BIPIN KUMAR RAI,IIT (BHU) Varanasi,46.04 m
+Mens Javelin Throw,3,RAMESHWAR DOHARE,IIT Indore,45.96 m
+Mens Javelin Throw,4,CHANDRA KANTA BORO,IIT Guwahati,45.29 m
+Mens 100m Run 55+,1,KALYAN KUMAR BHATTACHARJEE,IIT DHARWAD,15.00 sec
+Mens 100m Run 55+,2,ABDUL  JABB MD.,IIT GUWAHATI,15.80 sec
+Mens 100m Run 55+,3,DEBOPAM  DAS,IIT KANPUR,16.00 sec
+Mens 100m Run 55+,4,RANA PRATAP YAD,IIT (BHU) VARANASI,16.03 sec
+Mens 5000m Run 50+,1,BHARATH KUMAR K,IIT TIRUPATI,23:56.50 min
+Mens 5000m Run 50+,2,KINGSHOOK BHATTACHARYA,IIT KHARAGPUR,25:08.10 min
+Mens 5000m Run 50+,3,VIJAIANAND S K,IIT KANPUR,25:21.10 min
+Mens 5000m Run 50+,4,DHIREN CHANDRA SARMAH,IIT GUWAHATI,25:48.7 min
+Womens 100M Run,1,HEMA KORANGA,IIT Roorkee,15.70 sec
+Womens 100M Run,2,PRIYANKA,IIT (BHU) Varanasi,15.80 sec
+Womens 100M Run,3,SWATHI S,IIT Madras,16.10 sec
+Womens 100M Run,4,SHREYASI ATTA,IIT Kharagpur,16.20 sec
+Womens 200M Run,1,HEMA KORANGA,IIT Roorkee,32.50 sec
+Womens 200M Run,2,PRIYANKA,IIT (BHU) Varanasi,32.90 sec
+Womens 200M Run,3,SWATHI S,IIT Madras,33.60 sec
+Womens 200M Run,4,SHREYASI ATTA,IIT Kharagpur,35.00 sec
+Womens 400M Run,1,PRIYANKA,IIT (BHU) Varanasi,1:18.10 min
+Womens 400M Run,2,DEEKSHITHA MURALI KM,IIT Madras,1:24.40 min
+Womens 400M Run,3,SHREYASI ATTA,IIT Kharagpur,1:24.90 min
+Womens 400M Run,4,KANCHNA NHATROLA,IIT Roorkee,1:27.00 min
+Womens Shot Put,1,PURVA GANESHRAO KHERKAR,IIT Hyderabad,10.00 m
+Womens Shot Put,2,ANJANI DUBEY,IIT Kanpur,8.24 m
+Womens Shot Put,3,LAXMI HARINI,IIT Gandhinagar,8.15 m
+Womens Shot Put,4,SUCHITRA RAHI,IIT Roorkee,7.74 m
+Womens Discus Throw,1,ANJANI DUBEY,IIT Kanpur,33.03 m
+Womens Discus Throw,2,PURVA GANESHRAO KHERKAR,IIT Hyderabad,32.70 m
+Womens Discus Throw,3,SUCHITRA RAHI,IIT Roorkee,24.93 m
+Womens Discus Throw,4,RUCHI YADAV,IIT Hyderabad,22.91 m
+Womens Javelin Throw,1,PURVA GANESHRAO KHERKAR,IIT Hyderabad,25.85 m
+Womens Javelin Throw,2,ANJANI DUBEY,IIT Kanpur,25.21 m
+Womens Javelin Throw,3,RENU VERMA,IIT Kanpur,23.09 m
+Womens Javelin Throw,4,RUCHI YADAV,IIT Hyderabad,20.44 m
+Womens Long Jump,1,SWATHI S,IIT Madras,3.97 m
+Womens Long Jump,2,HEMA KORANGA,IIT Roorkee,3.62 m
+Womens Long Jump,3,TULIKA BHARALI,IIT Guwahati,3.53 m
+Womens Long Jump,4,RENU VERMA,IIT Kanpur,3.21 m
+Womens 100M Run 50+,1,GEETA D SHEWDE,IIT Bombay,19.24 sec
+Womens 100M Run 50+,2,GEETHA KP,IIT Madras,20.18 sec
+Womens 100M Run 50+,3,DIMPLE HINDWANI,IIT Delhi,22.68 sec
+Womens 100M Run 50+,4,HIMADRI RAJBONGSHI,IIT Guwahati,23.45 sec
+Mens 4x100M Relay,1,IYAPPAN I,IIT Tirupati,50.20 sec
+Mens 4x100M Relay,1,ITHIH JOY,IIT Tirupati,50.20 sec
+Mens 4x100M Relay,1,NAGENDRAN C,IIT Tirupati,50.20 sec
+Mens 4x100M Relay,1,ABIJITH P M,IIT Tirupati,50.20 sec
+Mens 4x100M Relay,2,MANISH SINGH,IIT Patna,50.60 sec
+Mens 4x100M Relay,2,NAWAB GHOSH,IIT Patna,50.60 sec
+Mens 4x100M Relay,2,ANUP DAS,IIT Patna,50.60 sec
+Mens 4x100M Relay,2,BUDHURAM KISKU,IIT Patna,50.60 sec
+Mens 4x100M Relay,3,LAXMAN SINGH YADAV,IIT Roorkee,50.90 sec
+Mens 4x100M Relay,3,ABHISHEK TEWARI,IIT Roorkee,50.90 sec
+Mens 4x100M Relay,3,SHUBHAM CHOUDHARY,IIT Roorkee,50.90 sec
+Mens 4x100M Relay,3,SHANU CHOPRA,IIT Roorkee,50.90 sec
+Mens 4x100M Relay,4,PRAVEEN KUMAR,IIT Kanpur,55.10 sec
+Mens 4x100M Relay,4,SURENDRA,IIT Kanpur,55.10 sec
+Mens 4x100M Relay,4,MANISH SAHU,IIT Kanpur,55.10 sec
+Mens 4x100M Relay,4,R SAMADDER,IIT Kanpur,55.10 sec
+Womens 4x100M Relay,1,POORNIMA NAGARAJAN,IIT Madras,1:07.90 min
+Womens 4x100M Relay,1,DEEKSITHA MURALI KM,IIT Madras,1:07.90 min
+Womens 4x100M Relay,1,RANJANI P,IIT Madras,1:07.90 min
+Womens 4x100M Relay,1,SWATHI S,IIT Madras,1:07.90 min
+Womens 4x100M Relay,2,RAVITA LAMBA,IIT Roorkee,1:10.80 min
+Womens 4x100M Relay,2,HEMA PANT,IIT Roorkee,1:10.80 min
+Womens 4x100M Relay,2,KANCHNA NHATROLA,IIT Roorkee,1:10.80 min
+Womens 4x100M Relay,2,HEMA KORANGA,IIT Roorkee,1:10.80 min
+Womens 4x100M Relay,3,SUDESH KUMARI,IIT Kanpur,1:11.80 min
+Womens 4x100M Relay,3,MANISHA RANI PAUL,IIT Kanpur,1:11.80 min
+Womens 4x100M Relay,3,POOJA BALIYAN,IIT Kanpur,1:11.80 min
+Womens 4x100M Relay,3,RENU VERMA,IIT Kanpur,1:11.80 min
+Womens 4x100M Relay,4,GEETA D SHEWDE,IIT Bombay,1:12.10 min
+Womens 4x100M Relay,4,S MISHRA,IIT Bombay,1:12.10 min
+Womens 4x100M Relay,4,CHHAYA K BHAMB,IIT Bombay,1:12.10 min
+Womens 4x100M Relay,4,ZUBEIDA BEGAM,IIT Bombay,1:12.10 min
