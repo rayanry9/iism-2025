@@ -63,13 +63,13 @@
 				}}
 				href="/teams">TEAMS AND PLAYERS</a
 			>
-			<a
-				class={`${page.url.pathname == '/live-score' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`}
-				onclick={() => {
-					showMenu = false;
-				}}
-				href="/live-score">LIVE SCORE</a
-			>
+			<!-- <a -->
+			<!-- 	class={`${page.url.pathname == '/live-score' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`} -->
+			<!-- 	onclick={() => { -->
+			<!-- 		showMenu = false; -->
+			<!-- 	}} -->
+			<!-- 	href="/live-score">LIVE SCORE</a -->
+			<!-- > -->
 			<a
 				class={`${page.url.pathname == '/results' ? 'text-custom-yellow border-l-custom-yellow ' : 'border-transparent'} border-l-4`}
 				onclick={() => {

@@ -225,8 +225,6 @@
 							<p class="leading-none">Sec</p>
 						</div>
 					</div>
-				{:else if globals.staff}
-					<div class="text-custom-orange">Ongoing</div>
 				{:else}
 					<div class="text-custom-orange">Concluded</div>
 				{/if}

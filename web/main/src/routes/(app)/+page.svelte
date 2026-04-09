@@ -1,14 +1,12 @@
 <script>
+	import { topStoriesData } from '$lib/data/home';
 	import DownloadBanner from '$lib/ui/home/DownloadBanner.svelte';
 	import FeaturedEvents from '$lib/ui/home/FeaturedEvents.svelte';
 	import Header from '$lib/ui/home/Header.svelte';
 	import InfoBanner from '$lib/ui/home/InfoBanner.svelte';
 	import ParticipatingIiTs from '$lib/ui/home/ParticipatingIITs.svelte';
-	import Schedule from '$lib/ui/home/Schedule.svelte';
 	import SportsToPlay from '$lib/ui/home/SportsToPlay.svelte';
 	import TopStories from '$lib/ui/home/TopStories.svelte';
-
-	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -20,9 +18,7 @@
 </svelte:head>
 
 <Header />
-{#if data.topStories.length}
-	<TopStories topStories={data.topStories} />
-{/if}
+<TopStories topStories={topStoriesData} />
 <!-- <Schedule /> -->
 <InfoBanner />
 <FeaturedEvents />

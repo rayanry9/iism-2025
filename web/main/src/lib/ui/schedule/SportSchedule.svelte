@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getPoolsBySportId } from '$lib/api/pools';
 	import { globals } from '$lib/state.svelte';
 	import type { GetAllInstitutesResponse } from '$lib/types/insitutes';
 	import type { GetAllPoolMatchesResponse } from '$lib/types/poolMatches';
@@ -13,6 +12,7 @@
 	import { untrack } from 'svelte';
 	import SportScheduleMatchesMobile from './SportScheduleMatchesMobile.svelte';
 	import SportScheduleMatchDesktop from './SportScheduleMatchDesktop.svelte';
+	import { allPoolsData } from '$lib/data/pool';
 
 	let {
 		sport,
@@ -25,7 +25,9 @@
 	} = $props();
 	let sportType = $state<SportType>('Male');
 	let poolData = $derived.by(() => {
-		return getPoolsBySportId(getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff));
+		return allPoolsData.filter(
+			(v) => v.sportId == getSportIdOfSport(sport, sportType == 'Male' ? 1 : 2, globals.staff)
+		);
 	});
 	$effect(() => {
 		sport;
@@ -50,9 +52,9 @@
 			</h2>
 
 			<p>
-				{sportType == 'Male' ? 'Men' : sportType == 'Female' ? 'Women' : ''} - {#await poolData then dat}
-					{dat.flatMap((val) => val.teams).length}
-				{/await} Teams
+				{sportType == 'Male' ? 'Men' : sportType == 'Female' ? 'Women' : ''} -
+				{poolData.flatMap((val) => val?.teams).length}
+				Teams
 			</p>
 		</div>
 		{#key sport}
@@ -86,22 +88,9 @@
 
 	<!-- <section class="grid w-full grid-flow-col grid-rows-2 gap-12"> -->
 	<section class="flex w-full flex-wrap justify-center gap-8 md:justify-start 2xl:gap-12">
-		{#await poolData}
-			{#each [1, 2, 3, 4, 5, 6, 7, 8] as key}
-				<SchedulePoolCard
-					poolName="A"
-					teamData={[
-						{ id: 1, tempName: 'A', name: null },
-						{ id: 1, tempName: 'A', name: null },
-						{ id: 1, tempName: 'A', name: null }
-					]}
-				/>
-			{/each}
-		{:then awaitedData}
-			{#each awaitedData.sort((a, b) => a.name.localeCompare(b.name)) as pool}
-				<SchedulePoolCard poolName={pool.name} teamData={pool.teams} />
-			{/each}
-		{/await}
+		{#each poolData.sort((a, b) => a.name.localeCompare(b.name)) as pool}
+			<SchedulePoolCard poolName={pool.name} teamData={pool.teams} />
+		{/each}
 	</section>
 
 	<section class="mt-12 flex flex-col gap-y-6">

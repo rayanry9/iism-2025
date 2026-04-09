@@ -4,15 +4,13 @@
 	import iithLogoFull from '$lib/assets/iith-logo-full.png';
 	import footerLogo from '$lib/assets/footer-logo.webp';
 	import arrowUpRight from '$lib/assets/icons/diag-up-right-arrow.svg';
-	import 'toastify-js/src/toastify.css';
 	import Navbar from '$lib/ui/common/Navbar.svelte';
 	import { globals } from '$lib/state.svelte';
-	import { invalidateAll } from '$app/navigation';
 
-	let { children, data } = $props();
+	let { children } = $props();
 </script>
 
-<Navbar isLoggedIn={data.isLoggedIn} />
+<Navbar />
 
 {@render children()}
 
@@ -33,7 +31,6 @@
 					class="bg-custom-blue my-auto border border-white px-6 py-3 text-white 2xl:px-8"
 					onclick={() => {
 						globals.staff = !globals.staff;
-						invalidateAll();
 						localStorage.setItem('staff', globals.staff.toString());
 						setTimeout(() => {
 							scrollTo({ behavior: 'smooth', top: 0 });

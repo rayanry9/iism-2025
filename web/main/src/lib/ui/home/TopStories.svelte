@@ -50,7 +50,7 @@
 		{#each topStories as story}
 			<div class="relative flex min-w-80 flex-col overflow-hidden rounded-xl bg-white md:min-w-120">
 				<img
-					src={PUBLIC_API_URL + '/gallery/' + story.imgSrc}
+					src={story.imgSrc}
 					alt="post"
 					class="h-60 w-80 rounded-t-xl object-cover object-center md:h-100 md:w-120 md:min-w-120"
 				/>
